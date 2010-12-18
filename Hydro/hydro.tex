@@ -1,0 +1,1694 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+\newcommand{\bbar}[1]{\underline{\underline{#1}}}
+\newcommand{\txt}[1]{\textrm{#1}}
+\newcommand{\lam}{\lambda}
+\newcommand{\der}[3][]{\frac{\ud^{#1} #2}{\ud #3^{#1}}}
+\newcommand{\derp}[3]{\frac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newcommand{\Derp}[3][]{\frac{\textrm{D}^{#1} #2}{\textrm{D} #3^{#1}}}
+\newcommand{\ud}{\textrm{d}}
+\newcommand{\grad}{\vec{\textrm{grad}}}
+\newcommand{\rot}{\vec{\textrm{rot}}}
+\renewcommand{\div}{\textrm{div}}
+\newenvironment{matrice}{ \left[ \begin{array} }{\end{array} \right]}
+\newcommand{\moy}{\left\langle \right\rangle}
+
+\title{Hydrodynamique}
+
+% 5 séances D.Quéré, 4 P. Gondret, 5 C. Clanet
+
+%2 séances -> Navier-Stockes - 4 séances Bas reynolds - 8 séances entremêlées hauts reynolds/écoulement interfaciaux
+
+
+\begin{document}
+
+\tableofcontents \newpage
+
+\part{Vers l'équation de Navier-Stokes}
+\section{Introduction}
+
+A insérer Tableau de S. Dalì (la gare de perpignan) : la mécanique des fluides est au centre du monde.
+
+\section{Qu'est-ce qu'un fluide ? }
+
+\subsection{Une assemblée \emph{désordonnée} de molécules}
+
+On fait une diffraction aux rayons X sur un liquide, on ne voit pas de réseau ordonné, mais quand même une taille caractéristique qui est la distance entre molécules. 
+
+La distance typique entre molécule est de l'ordre de 3 $\dot{A}$. Les molécules bougent avec l'agitation thermique : $$ c = \sqrt{\frac{kT}{m}} \approx 500 - 1000 \txt{m/s}$$. Les molécules rentrent en collision à peu près tout les $\tau_c = \frac{l}{c} \approx 10^{-12}s$
+
+\subsection{Comment décrire cette assemblée : Dynamique moléculaire (1957)}
+
+On peut tout simplement tenter de résoudre les équations du mouvement pour tout notre système. C'est long, et ça ne permet de pas de prédire grand chose en général. 
+
+Pour chaque molécule, on résoud : $$m \der{v_i}{t} = F_i$$.
+
+Si on prend un bocal d'une dizaine de centimètres, on a $N \approx 10^{26}$. $i$ varie donc entre 1 et $10^{26}$.
+
+On utilise une approche potentiel pour $$F_i= - \grad_{r_i} V(r_1, \cdots, r_N)$$. Le potentiel $V$ est choisi en général comme la superposition d'interactions de paires : 
+$$V(r_1,\cdots, r_N) = \sum_i \sum_{j>i} \Phi |r_i-r_j|$$
+
+On choisi pour $\Phi$ en général le potentiel de Lennard-Jones : $$\Phi_{LJ}(r) = 4U[\underbrace{(\frac{r_0}{r})^{12}}_{\txt{exclusion de Pauli}} - \underbrace{(\frac{r_0}{r})^6]}_{\txt{interactions faibles électrostatiques}}$$
+
+$$F_{LJ}(r) = \derp{}{\Phi_{LJ}}{r} = \frac{24U}{r_0}[2(\frac{r_0}{r})^{13} - (\frac{r_0}{r})^{7}] = 0 \txt{ si } \frac{r_e}{r_0} = 2^{1/6}$$
+
+Lorsque les molécules se rappochent à une distance comparable à leur taille, elle gagnent une énergie $-U$ par rapport à si elles étaient séparées d'une distance infinie. 
+
+\begin{figure}%
+\includegraphics[width=7cm]{LJ.pdf}%
+\caption{}%
+\label{}%
+\end{figure}
+
+Les différents états de la matière : 
+
+\begin{figure}%
+\includegraphics[width=\columnwidth]{etats.pdf}%
+\caption{}%
+\label{}%
+\end{figure}
+ 
+ 
+\subsection{Milieux continus (L. Euler, 1757, "Sur le mouvement des fluides")}
+
+Présentation de l'idée : parabole du glaçon. 
+
+On prend un glaçon, de taille $L = 10^{-2}$, contenant $10^{26}$ molécules. Si on se place à une échelle $\mathcal{L}$ grande devant $L$, on peut décrire le mouvement du glaçon (par exemple sa chute)avec la mécanique du point : $$m_G \der{v_G}{t} \approx mg$$
+
+Si on veut décrire la fonte du glaçon, on aura $\mathcal{L}\approx L$. On coince le glaçon entre deux parois chaudes. 
+
+\begin{figure}%
+\includegraphics[width=7cm]{glacon.pdf}%
+\caption{}%
+\label{}%
+\end{figure}
+
+$$\rho S \Delta x \derp{}{U_y}{t} = \rho S \Delta x g + \txt{ effet des voisins}$$
+
+Effet des voisins : forces de surfaces : $$\sigma(x+ \frac{\Delta x}{2},t) S = \txt{ force exercée par rouge sur bleu}$$
+Comme l'interface est considérée sans masse, on a une symétrie des forces exercées aux interfaces : 
+$$ - \sigma(x + \frac{\Delta x}{2}) S = \txt{force exercée par bleu sur rouge}$$
+
+On a donc : 
+
+$$ \rho S \Delta x \derp{}{U_y}{t} = \rho S \Delta x g + \sigma(x+ \frac{\Delta x}{2}, t) S - \sigma(x- \frac{\Delta x}{2}, t) S$$
+
+$$\rho = \derp{}{U_y}{t} = \rho g + \derp{}{\sigma}{x}$$
+
+\'Equation générale : $$\rho \frac{\txt{D} U }{\txt{D}t} = F + \div \sigma $$ Cette équation doit être complétée par une relation phénoménologique $\sigma(U)$
+
+On voit que l'avantage des milieux continus est de réduire grandement le nombre d'équations à résoudre. 
+
+Remarque : On a fait l'hypothèse que $\sigma$ était continu et différenciable. On ne doit pas avoir de discontinuités. Les régions où se trouvent les discontinuités doivent être traitées comme des conditions aux limites. 
+
+\paragraph{Qu'est-ce que la continuité d'un milieu discontinu ? }
+
+\begin{figure}%
+\includegraphics[width=7cm]{reseau.pdf}
+\includegraphics[width=7cm]{g(r).pdf}%
+\caption{}%
+\label{}%
+\end{figure}
+
+\begin{align}
+	m(r) = \txt{masse contenue dans le carré de côté }r \\
+	\rho(r) = \frac{m(r)}{r^2} = \frac{n^{(r)}m_0}{r^2} \\
+	\bar{\rho} = \frac{m_0}{r^2_e} \\
+	g(r) = \frac{\rho(r)}{\rho} = n (\frac{r_e}{r})^2 \\
+\end{align}
+
+Avant environ $n=10$, on doit utiliser la dynamique moléculaire. Au-delà, on peut utiliser les milieux continus. Pour décider, on utilise le nombre de Knudsen : $K_n = \frac{r}{r_e}$. Lorsque ce nombre très grand devant 1, on peut utiliser les milieux continus, s'il est inférieur à 10, on doit utiliser la dynamique moléculaire. 
+
+On considère que les mouvements à l'échelle moléculaire permettent d'assurer la continuité. 
+
+\paragraph{A la recherche de la relation $\sigma(U)$}
+
+Une phase condensée à l'équilibre : On considère des petites briques cubiques de taille $r_0$ qui forment un parallèlépipède cubique de surface $\Sigma$ et de volume $\Omega$. A chaque fois que deux briques s'assemblent, on gagne une énergie $-U$ ($\frac{-U}{2}$ par surface).
+
+$$\Delta E_{total} = \frac{\Omega}{r_e^3} 6 (\frac{-U}{2}) + \frac{\Sigma}{r_e^2} 1 (\frac{U}{2}) = \frac{-3U}{r_e^3} \Omega + \frac{U}{2 r_e^2} \Sigma $$
+
+Le premier terme est cohésif, le second terme est le terme d'énergie surfacique (d'où on tire : $\gamma = \frac{U}{2r_e^2}$ la tension de surface). 
+
+Ordre de grandeur de la tension de surface : $[\gamma] = \frac{m}{T^2} \approx 0,02 N/m$
+
+On cherche à vérifier à partir de quelle taille on sent le champ extérieur de gravité : 
+$$ \gamma \mathcal{L}^2 \approx \rho \mathcal{L}^4 g \quad \mathcal{L} \approx \sqrt{\frac{\gamma}{\rho g}} = \kappa^{-1}$$
+
+On considère ensuite une perturbation d'équilibre. 
+
+On part du potentiel $$\Phi_{LJ}(r) = 4U[(\frac{r_0}{r})^{12} - (\frac{r_0}{r})^6]$$ et on le perturbe.
+
+$$ \Phi_{LJ}(r_e + \delta r) = -U + 0 + \frac{1}{2} (\delta r )^2 \derp{2}{ \Phi_{LJ}}{r} \quad k_0 \approx \frac{U}{r_0^2}$$ où $k_0$ est la raideur du ressort qui modélise le lien entre deux molécules. 
+
+Remarque sur l'agitation thermique. $$\delta r_{kT} \approx \sqrt{kT \frac{r_0^2}{U}} \quad \frac{\delta r_{kT}}{r_0} = \sqrt{\frac{kT}{U}}$$
+
+On voit donc que si $U \gg kT$, $\frac{\delta r_{kT}}{r_0} \ll 1$ et si $U \approx kT$ on a $\frac{\delta r_{kT}}{r_0} \approx 1$. 
+
+Résultats expérimentaux pour des solides élastiques :
+
+\begin{figure}%
+\includegraphics[width=\columnwidth]{ductiles.pdf}%
+\caption{}%
+\label{}%
+\end{figure}
+
+\begin{table}%
+\caption{Résultats donnés par la loi de Hooke sur les contraintes limites (en $10^7$Pa)}
+\begin{tabular}{l|c|c|c}
+			 & Limite d'élasticité & rupture & module d'Young \\
+			 Fer & 17 & 35 & 20 000 \\
+			 Acier & 20-100 & 40-200 & 20 000 \\
+			 Alu & 6 & 10-20 & 7 000 \\
+			 Cuivre & 0,5 - 12 & 1-40 & 11 000 \\
+			 Argent & 15 & 30 & 7500 \\
+		\end{tabular}
+\end{table}
+		
+On considère un solide comme un réseau de ressorts. On peut considérer qu'un plan est un ensemble de ressorts en parallèle : $$ k_{//} = \frac{S}{r_e^2}k_0$$. On considère alors les plans comme des ressorts en série : 
+$$ k_{eff} = \frac{k_{//}}{L/r_e}$$
+
+Avec ce modèle moléculaire, on aura : $$F \approx k_{eff} \Delta L  = \frac{S}{r_e^2}k_0 \frac{r_e}{L} \Delta L$$
+D'où la relation : 
+
+$$ \frac{F}{S} \approx \frac{k_0}{r_e} \frac{\Delta L}{L} = \sigma = \frac{1}{E} \epsilon$$
+
+d'où $E = \frac{U}{r_0^3}$. Le module d'Young fait le lien entre l'échelle moléculaire et ce qu'il en découle à l'échelle macroscopique. C'est la même chose que $\gamma$, la tension de surface. Ce sera aussi le cas pour $\eta$, la viscosité, qui cachera aussi des termes d'interaction moléculaire. 
+
+En ce qui concerne les liquides : 
+
+$\tau_c = \frac{r_e}{c} \approx 10^{-12}$s. Tant que le liquide ne s'est pas réorganisé, il se comporte comme un solide élastique : 
+
+$$F \approx k_{eff} (v \tau_c) \approx \frac{S}{r_e^2} k_0 \frac{r_e}{L} v \tau_c $$
+Cette vision naïve est la vision Newtonienne. On a alors : 
+$$ \frac{F}{S} \approx (\frac{U}{r_0^3}\tau_c)(\frac{\dot{\Delta L}}{L}) \quad \eta = \frac{U}{r_0^3}\tau_c$$ où l'on voit apparaître la viscosité.
+
+Ordre de grandeur de la viscosité : $\eta \approx 10^{-3}$Pa.s pour l'eau par exemple. 
+
+On a ici discuté de l'origine moléculaire des trois paramètres $E, \eta, \gamma$, qui cachent le niveau microscopique lorsqu'on considère des échelles macroscopiques. On mesurera ces paramètres au lieu de les calculer depuis le modèle microscopique.
+
+\section{Comment décrire son mouvement ?}
+
+
+\subsection{Tenseur taux de déformation}
+
+\begin{figure}%
+\includegraphics[width=7cm]{tenseur_taux_deformation.png}%
+\caption{}%
+\label{tenseur_taux_deformation}%
+\end{figure}
+
+Sur la figure \ref{tenseur_taux_deformation}, on peut voir que : 
+$$ \ud x + U(x+\ud x,t) \delta t = U(x,t) \delta t + \ud x' $$
+$$ \ud x' = \ud x + \grad U \ud x \delta t$$
+
+On appelle $\grad U $ le tenseur taux de déformation. 
+
+Remarque : Il faut veiller à prendre un $\delta t$ suffisamment petit pour que la vitesse soit identique tout le long. 
+
+\subsection{Utilisation sur les variations de volume}
+
+On définit un parallélogramme avec les vecteurs $\vec{a} \vec{b} \vec{c}$, de volume $\Omega$ (figure \ref{variation_de_volume}). 
+\begin{align}
+	\Omega &= (\vec{a} \wedge \vec{b})\vec{c} = abc \\
+	 \Omega(t+\delta t ) &= (\vec{a}' \wedge \vec{b}') \vec{c}' \\
+	 \vec{a}' &= \vec{a} + \grad U \cdot \vec{a} \delta t \quad \rightarrow a' = \begin{matrice}{c}
+		a \\ 0 \\ 0 
+	\end{matrice} + \begin{matrice}{ccc}
+		\derp{}{U_1}{x_1} & \derp{}{U_1}{x_2} & \derp{}{U_1}{x_3} \\
+			\derp{}{U_2}{x_1} & \derp{}{U_2}{x_2} & \derp{}{U_2}{x_3} \\
+				\derp{}{U_3}{x_1} & \derp{}{U_3}{x_2} & \derp{}{U_3}{x_3} 
+		\end{matrice} \begin{matrice}{c}
+		a \\ 0 \\ 0  
+	\end{matrice} \delta t = \begin{matrice}{c}
+		(1 + \derp{}{U_1}{x_1}) \delta t a \\ \derp{}{U_2}{x_1} \delta t a \\ \derp{}{U_3}{x_1} \delta t a
+	\end{matrice}
+\end{align}
+
+$$(\vec{a}' \wedge \vec{b}') \vec{c}' = abc[1 + Tr[\grad U] \delta t + o(\delta t^2 ]$$
+
+$$\derp{}{\Omega}{t} = \Omega(t) \div (\vec{U})$$
+
+Variation de volume
+
+\subsection{Approche lagrangienne}
+
+\begin{figure}{h!}%
+\includegraphics[width=\columnwidth]{approche_lagrangienne.png}%
+\caption{}%
+\label{approche_lagrangienne}%
+\end{figure}
+
+
+$$ \derp{}{A}{t} = \frac{A(\vec{x} + \vec{U} \delta t, t + \delta t) - A(\vec{x},t)}{\delta t} =  \frac{A(\vec{x},t) + \grad A \vec{U}\delta t - A (\vec{x},t)}{\delta t}$$
+$$ \Derp{A}{t} = \derp{}{A}{t} + \grad A \vec{U}$$
+où $\Derp{A}{t}$ est la dérivée lagrangienne (utile pour les lois de conservation), $\derp{}{A}{t}$ est le terme instationnaire, et $ \grad A \vec{U}$ est le terme convectif.
+
+\begin{figure}%
+\includegraphics[width=\columnwidth]{exemple_3.3.png}%
+\caption{Si on aspire l'air par le cône.}%
+\label{exemple_3.3.png}%
+\end{figure}
+
+$$ \Derp{U}{t} = \frac{U(x + \ud x ) ( U(x)}{\ud x/U} = U \derp{}{U}{x}$$
+
+\paragraph{Conservation de la masse} 
+
+\begin{align}
+	A = \rho \Omega \quad \Derp{ \rho \Omega}{t} &= 0 \txt{ loi de conservation} \\
+	\rho \Derp{\Omega}{t} + \Omega \Derp{\rho}{t} &= 0 \\
+	\rho \Omega \div \vec{U} + \Omega \Derp{\rho}{t} &= 0 \\
+	\derp{}{\rho}{t} + \grad \rho \vec{U} + \rho \div \vec{U} = 0 \\
+	\derp{}{\rho}{t} + \div ( \rho \vec{U}) &= 0 
+\end{align}
+
+\paragraph{\'Evolution de l'impulsion}
+
+\begin{align}
+\vec{A} &= \rho \Omega \vec{U} \\
+\Derp{\rho \Omega \vec{U}}{t} &= \vec{F} \txt{ loi de conservation} \\
+\rho \Omega \Derp{\vec{U}}{t} + \Derp{\rho \Omega}{t} &= \vec{F} \\
+\Derp{\rho \Omega}{t} = 0 \txt{ conservation de la masse} \\
+\rho \Derp{\vec{U}}{t} = \frac{\vec{F}}{\Omega} \\	
+\end{align}
+
+
+$$\rho \derp{}{\vec{u}}{t} + \rho \bbar{grad} \vec{U} \vec{U} = \vec{f} + \div \bbar{\sigma} $$
+On définit alors une relation phénoménologique pour $\bbar{\sigma} (\vec{U})$
+
+\subsection{Les déformations qui changent les distances}
+
+\begin{align}
+	\ud \vec{x}' &= \ud x + \bbar{grad} \vec{U} \ud \vec{x} \delta t \\
+	\bbar{grad U) &= \frac{1}{2}( \bbar{grad U} + ^t \bbar{grad U }) + \frac{1}{2} \bbar{grad U - ^t \bbar{grad U }}\\
+	&= \bbar{E} + \bbar{R}	
+\end{align}
+		
+$\bbar{E}$ représente l'extension, $\bbar{R}$ représente la rotation. 
+
+Pour $\bbar{R} $ : 
+\begin{align}
+	\vec{\omega_r}\wedge \vec{a} &= \begin{matrice}{c} \omega_{r1} \\ \omega_{r2} \\ \omega_{r3} \end{matrice} \wedge \begin{matrice}{c} a_1 \\ a_2 \\ a_3 \end{matrice} \\
+	&= \begin{matrice}{c} \omega_{r2}a_3 - \omega_{r3}a_é \\ \omega_{r3} a_1 - \omega_{r1}a_3 \\ \omega_{r1}a_2 - \omega_{r2}a_1 \end{matrice} \\
+	\bbar{R} \vec{a} &= \begin{matrice}{ccc} 0 & - \omega_{r3} & \omega_{r2} \\ \omega_{r3} & 0 & - \omega_{r1} \\ - \omega_{r2} & \omega_{r1} & 0 \end{matrice} \begin{matrice}{c} a_1 \\ a_2 \\ a_3 \end{matrice} \\
+	&=  \begin{matrice}{c} \omega_{r2}a_3 - \omega_{r3}a_é \\ \omega_{r3} a_1 - \omega_{r1}a_3 \\ \omega_{r1}a_2 - \omega_{r2}a_1 \end{matrice}
+\end{align}
+
+donc
+$$ \vec{\omega_r} = \frac{1}{2} \rot \vec{U}$$
+
+On définit la notation : 
+
+$$ U_{ij} = \derp{}{U_i}{x_j}\delta t$$
+
+En deux dimensions : 
+
+\begin{align}
+	\ud \vec{x}' &= \begin{matrice}{c} \ud x'_1 \\ \ud x'^2 \end{matrice} = \begin{matrice}{c} (1+U_{11}) \ud x_1 + U_{12} \ud x_2 \\ U_{21} \ud x_1 + (1+U_{22}) \ud x_2 \end{matrice} \\
+	\ud x'^2 &=\ud x'^2_1 + \ud x'^2_2 = (1+2U_{11}) \ud x^2_1 + 2 U_{12} \ud x_1 \ud x_2 + (1+2U_{22}) \ud x^2_2 + 2 U_{21} \ud x_1 \ud x_2 \\
+	&= \ud x^2 + 2 \left[ U_{11} \ud x^2_1 + (U_{12} + U_{21}) \ud x_1 \ud x_2 + U_{22} \ud x_2^2 \right] \\
+	&+ \begin{matrice}{cc} U_{11} & \frac{1}{2} (U_{12} + U{21}) \\ \frac{1}{2}(U_{12} + U_{21}) & U_{22}) \end{matrice} \begin{matrice}{cc} \ud x_1^2 & \ud x_1 \ud x_2  \\ \ud x_2 \ud x_1 & \ud x_2^2 \end{matrice}
+\end{align}
+
+Pour l'extension en 2D :  
+ $$	\bbar{E} = \frac{1}{2} Tr[\bbar{1}] + (\bbar{E} - \frac{1}{2}Tr[\bbar{1}]$$
+ Pour l'extension en 3D : 
+ $$ \bbar{E} = \frac{1}{3} Tr[\bbar{1}] + ( \bbar{E} - \frac{1}{3} Tr[\bbar{1}])  $$
+ 
+ \paragraph{exemple}
+ 
+ \begin{figure}%
+\includegraphics[width=\columnwidth]{exemple_3.4_dilate.png}%
+\includegraphics[width=\columnwidth]{exemple_3.4_deforme.png}
+\caption{}%
+\label{exemple_3.4}%
+\end{figure}
+
+Pour la dilatation
+\begin{align}
+	\ud \vec{x'_1} &= \ud \vec{x} + \begin{matrice}{cc} \alpha Tr & 0 \\ 0 & \alpha Tr \end{matrice} \ud \vec{x} \\
+	\ud x'_1 &= (1 + \alpha Tr) \ud x_1 \\
+	\ud x'_2 &= (1 + \alpha Tr) \ud x_2 \\
+\end{align}
+	
+	Pour la déformation :
+
+\begin{align}
+		\ud \vec{x'_1} &= \begin{matrice}{c} \ud x'_{11} \\ x'_{12} \end{matrice} \\
+		&= \begin{matrice}{c} \ud x_1 \\ 0 \end{matrice} + \begin{matrice}{cc} B & E_{12} \\ E_{12} & -B \end{matrice} \begin{matrice}{c} \ud x_1 \\ 0 \end{matrice} \\
+		&= \begin{matrice}{c} (1 + B)\ud x_1 \\ E_{12}\ud x_1 \\
+		\ud \vec{x'_2}\begin{matrice}{c} \ud x'_{21} \\ x'_{22} \end{matrice} \\
+		&= \begin{matrice}{c} 0 \\ \ud x_2 \end{matrice} + \begin{matrice}{cc} B & E_{12} \\ E_{12} & -B \end{matrice} \begin{matrice}{c} 0 \\ \ud x_2 \end{matrice} \\
+		&= \begin{matrice}{c}E_{12}\ud x_2  \\(1 + B)\ud x_2  \end{matrice} 
+\end{align}
+
+
+\subsection{Relation phénoménologique de Navier}
+
+\begin{equation}
+\bbar{sigma} = \kappa \div \vec{U} \bbar{1} + 2 \eta \bbar{E_0}
+\label{eq:RpN}
+\end{equation}
+
+Elle remplace la relation qui ne fonctionne pas $$\bbar{\sigma} = \alpha \bbar{E}$$
+
+L'équation \ref{eq:RpN} est définie aussi pour l'élasticité dans les solides (les deux coefficients pour les solides sont les coefficients de Lamé, qui sont construits à partir du module d'Young et du coefficient de Poisson), elle ne prend pas en compte la réorganisation qui a lieu dans les liquides. On va pour tenir compte de la spécificité des liquides en ajoutant un terme pour les chocs : $-p \bbar{1}$. La loi phénoménologie de Navier est donc tirée de celle utilisée pour les solides élastiques, mais avec un terme correctif qui tient compte de la particularité des liquides.
+
+$\eta$ est la viscosité dynamique, $\kappa$ est la seconde viscosité, qui n'intervient qu'en cas de changement de volume. 
+
+\subsection{\'Equation de Navier-Stokes}
+
+\begin{equation}
+\rho \derp{}{\vec{u}}{t} + \rho (\bbar{grad U}) \vec{U} = \vec{f} + \div \bbar{sigma}
+\label{eq:NS}
+\end{equation}
+
+\begin{equation}
+\bbar{\sigma} = (\kappa \div \vec{U} - p) \bbar{1} + 2 \eta \bbar{E_0}
+\label{eq:RpN}
+\end{equation}
+
+\begin{align}
+	\div \bbar{\sigma} &= - \grad P + \kappa \grad(\div \vec{U}) + 2 \eta \div \bbar{E_0}\\
+	\bbar{E_0} &= \bbar{E} - \frac{1}{3} \div \vec{U} \bbar{1} \\
+	\bbar{E} &= \frac{1}{2}(\bbar{grad U } + ^t \bbar{grad U }) \\
+	\div \bbar{E_0} &= \div \div \bbar{E} - \frac{1}{3} \grad \div \vec{U} \\
+	&= \frac{1}{2} \Delta \vec{U} + \frac{1}{2} \grad \div \vec{U} - \frac{1}{3} \grad \div \vec{U} \\
+	2 \eta \div \bbar{E_0} &= \eta \Delta \vec{U} + \frac{1}{3} \eta \grad \div \vec{U}
+\end{align}
+
+D'où une réécriture de l'équation de Navier-Stokes : 
+
+\begin{equation}
+\rho \derp{}{\vec{U}}{t} + \rho \bbar{grad U } \vec{U} = \vec{f} - \grad p + \eta \Delta \vec{U} + (\kappa + \frac{\eta}{3}) \grad \div \vec{U}
+\label{eq:NS2}
+\end{equation}
+
+Cette équation remplace les $10^{26}$ équations de l'approche dynamique moléculaire.
+
+On lui ajoute la conservation de la masse : 
+\begin{equation}
+\derp{}{\rho}{t} + \div (\rho \vec{U}) = 0 
+\label{eq:CM}
+\end{equation}
+
+\subsection{La limite incompressible}
+$$C^2 = \left( \derp{}{p}{\rho}\right)_s \quad \Rightarrow \quad \delta p \approx \frac{1}{C^2}\delta p $$
+$$\delta p \approx \rho U^2$$
+donc $$\frac{\delta \rho}{\rho} \approx \left(\frac{U}{C}\right)^2 = M_a^2$$
+où $M_a = \frac{U}{C}$ est le nombre de Mach. 
+
+Comme on a $$C = \sqrt{\frac{kT}{m}}$$ on peut en déduire : $$ M_a = \sqrt{\frac{mU^2}{kT}}$$
+
+
+Si $M_a \ll 1$ (ce qui est le cas le plus commun), $$\frac{\delta \rho}{\rho} \ll 1 \Rightarrow \rho \approx \moy{\rho}$$
+
+C'est ce qu'on appelle la limite incompressible. Cela simplifie la conservation de la masse en : 
+$$ \div \vec{U} = 0$$
+
+Et l'équation de Navier-Stokes se simplifie en : $$ \rho \derp{}{\vec{U}}{t} + \rho \bbar{grad U }\vec{U} = \vec{f} - \grad P + \eta \Delta \vec{U}$$
+
+\part{\'Ecoulements visqueux}
+
+\'Equation de Navier-Stokes : 
+$$ \rho \left[ \derp{}{\vec{u}}{t} + (\vec{u}\nabla)\vec{u} \right] = - \nabla p + \eta \Delta \vec{u}$$
+
+Conditions aux limites : 
+\begin{itemize}
+	\item sur la vitesse (condition de non-glissement de Navier) $$\vec{u}_{\txt{fluide/paroi}} = \vec{v}_{\txt{paroi}}$$
+	Exceptions : les écoulements de gaz dilué (il peut y avoir glissement à la paroi), polymères, fluides non mouillants
+	\item sur les contraintes (à la traversée d'une interface entre deux fluides, on doit écrire la continuité de la contrainte de cisaillement) : $$ \eta_1 \derp{}{u_{1x}}{y} = \eta_2 \derp{}{u_{2x}}{y}$$ Cas particulier d'une surface libre $$\left( \derp{}{u_{libre}}{y}\right)_{\txt{interface}}=0$$
+	\item Saut de pression et de contrainte normale à la traversée d'une interface courbe (équation de Laplace). 
+\end{itemize}
+
+\section{\'Ecoulements parallèles}
+
+Définition : écoulement unidirectionnel qui ne dépend pas de la direction de l'écoulement : $$\vec{u} = \begin{matrice}{c} u_x(y,z,t) \\ u_y \\ u_z \end{matrice} $$
+
+Conséquence : l'équation de Navier-Stokes est grandement simplifiée. 
+
+$$ \rho \derp{}{u_x}{t} + 0 = - \derp{}{p}{x} + \eta \left( \derp{2}{u_x}{y} + \derp{2}{u_x}{z} \right)$$
+
+Exemples d'écoulements : 
+
+\paragraph{Démarrage d'un plaque plane} 
+
+$$ \derp{}{u_x}{t} = \nu \derp{2}{u_x}{y} \quad \nu = \frac{\eta}{\rho}$$
+
+En ordre de grandeur, $\frac{U}{t}\approx \nu \frac{U}{\delta^2}$ où $\delta$ est l'épaisseur de la zone où existe le gradient de vitesse. $\nu$ est alors un coefficient de diffusion.
+
+
+\paragraph{\'Ecoulement de Couette plan}
+
+l'équation de Navier-Stokes devient : $$\eta \derp{2}{u_x}{y} = 0$$ avec les conditions aux limites $u_x(0) = 0$ et $\sigma = \eta \frac{U}{h}$
+
+\paragraph{Poiseuille plan}
+
+$$0 = - \derp{}{p}{x} + \eta \derp{2}{u_x}{y}$$
+
+conditions aux limites :$u_x(\pm \frac{h}{2})=0$
+
+d'où les solutions $$u_x(y) = \frac{\Delta p}{2 \eta L}(y^2 - \frac{h^2}{4})$$
+
+Longueur d'établissement : 
+
+$$\delta = \sqrt{\nu t} \quad x = ut \quad \delta = \sqrt{\frac{\nu x}{U}}$$
+donc
+$$ \delta = R = \sqrt{\frac{\nu x}{U}} \quad \frac{R^2 U}{\nu} = L_e$$
+
+\paragraph{\'Ecoulement de film liquide sur le plan incliné}
+
+$$0 = \eta \derp{2}{u_x}{y} + \rho g \sin \beta $$
+
+conditions aux limites : $$u_x(y=0) = 0 \quad \derp{}{u_x}{y}=0 $$
+
+$$u_x(y) = \frac{\rho g \sin \beta}{\eta} y(2h -y) $$ 
+$$\bar{u} = \frac{g}{h} = \frac{\rho g \sin \beta h^2}{3\eta}$$
+
+\section{\'Ecoulements quasi-parallèles : approximation de lubrification et couche limite}
+
+\subsection{Approximation de lubrification}
+
+L'écoulement est stationnaire, laminaire et faiblement non parallèle. Les lignes de courant suivent les parois, il n'y a pas de décollement. 
+
+\begin{figure}[h!]%
+\includegraphics[width=\columnwidth]{al.png}%
+\caption{}%
+\label{a.png}%
+\end{figure}
+
+$$\theta = \der{h}{x} \ll 1  \approx \frac{\Delta h}{L} \qquad u_y \approx \theta u_x \ll 1 $$
+
+L'incompressibilité s'écrit : 
+\begin{align}
+	\div \vec{u} &= 0 = \derp{}{u_x}{x} + \derp{}{u_y}{y} = 0 \\
+	 \derp{}{u_y}{y} & \approx \frac{u_y}{h} \approx \frac{\theta U}{h} \\
+	 \derp{}{u_x}{x} & \approx \frac{\theta U}{h} \\
+	 \derp{}{}{y} & \approx \frac{1}{h} \\
+	 \derp{}{}{x} & \approx \frac{\theta}{h} \\
+	 \txt{NS suivant }x & \\
+	 u_x \derp{}{u_x}{x} + u_y \derp{}{u_x}{y} = - \frac{1}{\rho }\derp{}{p}{x} + \nu \left( \derp{2}{u_x}{x} + \derp{2}{u_x}{y} \right)\\
+\end{align}
+
+A quelle condition peut-on négliger les termes inertiaux devant les termes visqueux ? 
+\begin{align}
+	\frac{U^2 \theta}{h} & \ll \frac{\nu U}{h^2} \\
+	\frac{Uh}{\nu} & \ll \frac{1}{\theta} \\
+	Re_h & \ll \frac{1}{\theta} 
+\end{align}
+
+NS Suivant $y$ : 
+\begin{align}
+	u_x \derp{}{u_y}{x} + u_y \derp{}{u_y}{y}  &= - \frac{1}{\rho} \derp{}{p}{y} + \nu \left( \derp{2}{u_y}{x} + \derp{2}{u_y}{y} \right) \\
+	u_y & \ll u_x \\
+	\derp{}{p}{y} & \ll \derp{}{p}{x} \\
+	\derp{}{p}{y} & \approx 0 
+\end{align}
+
+Bilan : Dans les approx lubrifications, l'équation de NS se réduit à  :
+\begin{align}
+	0 &= - \derp{}{p}{x} + \nu \derp{2}{u_x}{y} \\
+	0 &= \derp{}{p}{y}
+\end{align}
+Tant que $Re_h \ll \frac{1}{\theta}$. 
+
+\paragraph{Effets d'instationnarité}
+
+On considère un écoulement instationnaire qui varie avec un temps typique $T$. A quelle condition peutèon négliger le terme instationnaire ? 
+
+\begin{align}
+	\left| \derp{}{}{u_x}{t} \right| \ll \left| \nu \derp{2}{u_x}{y} \right| \\
+	\frac{U}{T} \ll \nu \frac{U}{h^2} \\
+	T \gg \frac{h^2}{\nu}
+\end{align}
+où $\frac{h^2}{\nu} = \tau$ temps de diffusion visqueuse sur $h$. 
+
+
+\paragraph{Exemple de la feuille qui glisse sur une table}
+
+\begin{figure}%
+\includegraphics[width=\columnwidth]{feuille.png}%
+\caption{}%
+\label{feuille.png}%
+\end{figure}
+
+$$h(x) = h_1 + \theta x $$ avec $\theta = \frac{h_2 - h_1}{L} $ avec $\theta \ll 1 $. On est donc dans le cadre de l'approximation de lubrification. Les équations de Navier-Stokes se réduisent à : 
+\begin{align}
+	0 &= \frac{-1}{\rho} \derp{}{p}{x} + \nu \derp{2}{u_x}{y} \\
+	0 &=  \frac{-1}{\rho} \derp{}{p}{y} \\
+	\derp{2}{u_x}{y} &= \frac{1}{\eta} \derp{}{p}{x} \\
+	u_x(y=0) &= -U \\
+	u_x(y=h) &= 0 \\
+	U_x(y) &= \frac{-1}{2 \eta} \derp{}{p}{x} y (h-y) - \frac{U y}{h} \\
+	q &= \int_0^h u_x(y) = \frac{-h^3}{12 \eta} \derp{}{p}{x} - \frac{Uh}{2} \\
+	\Rightarrow \quad \derp{}{p}{x} &= - \frac{12 \eta}{h^3}(q + \frac{Uh}{2}) \\
+	\Rightarrow \quad \derp{}{p}{h} &= \derp{}{p}{x} \derp{}{h}{x} = \frac{1}{\theta} \derp{}{p}{x} = \frac{-12 y}{\theta h^3}(q + \frac{Uh}{2})\\
+	p &= \frac{6 \eta}{\theta h^2}(q + \frac{U_h}{2}) + cste \\	
+\end{align}
+On a deux inconnues : $q$ et la constante. Elles sont déterminées par les deux conditions aux limites : 
+\begin{align}
+	p(h=h_1) &= p_{atm} \\
+	p(h=h_2) &= p_{atm} \\
+	p(h) &= p_{atm} + \frac{6 \eta U}{\theta} \frac{(h_2 - h)(h-h_1)}{h_2(h_1 + h_2)} > p_{atm} \\
+	q&= \frac{-h_1h_2}{h_1+h_2}U \\
+	\Rightarrow \quad q + \frac{Uh}{2} &= 0 \Rightarrow \quad h_x = \frac{-2q}{U} = \frac{2 h_1 h_2}{h_1 + h_2} \\
+\end{align}
+
+
+\begin{figure}[h!]%
+\includegraphics[width=\columnwidth]{vitesse_pression.png}%
+\caption{}%
+\label{vitesse_pression}%
+\end{figure}
+
+Force de portance : 
+
+\begin{align}
+	F_p &= \int_0^L (p(x) - p_{atm}) \ud x \\
+	&= \frac{1}{\theta} \int_{h_1}^{h_2} (p(h) - p_{atm}) \ud h \\
+	&= \frac{6 \eta U}{\theta^2} \int_{h_1}^{h_2} \frac{(h_2 - h)(h - h_1)}{h^2(h_1+h_2)}\ud h \\
+	F_p & \propto \frac{\eta U }{\theta^2}
+\end{align}
+avec $\theta$ petit, donc $F_p$ est importante. 
+
+Force de traînée : 
+\begin{align}
+	F_T &= \int_0^L  \eta \derp{}{u_x}{y} \ud x \\
+	&= \frac{\eta U}{\theta} \left[ 2 \ln \frac{h_2}{h_1}  - \frac{3(h_2 - h_1)}{h_1+h_2} \right]
+	F_T & \propto \frac{\eta \nu}{\theta} 
+\end{align}
+Il y a donc un fracteur $\theta$ entre la force de traînée et la force de portance. 
+
+Cet effet est à la base des palliés lubrifiés (comme une roue lubrifiée dans un axe). 
+
+\subsection{\'Equation de Reynolds}
+
+\begin{figure}[h!]%
+\includegraphics[width=\columnwidth]{Reynolds.png}%
+\caption{}%
+\label{Reynolds.png}%
+\end{figure}
+
+L'écoulement dans le film liquide est la superposition d'un écoulement de couette et d'un écoulement de Poiseuille. 
+
+Débit par unité de largeur (suivant $z$). 
+
+$$ q= \frac{-h^3}{12 \eta} \derp{}{p}{x} + \frac{Uh}{2} $$
+
+Conservation de la masse dans une tranche de fluide de longueur $\ud x$ . 
+
+Pendant $\ud t$ 
+\begin{align}
+	\left[ q(x) - x(x+\ud x) \right]\ud t &= \ud h \ud x  \\
+	\der{q}{x} &= - \derp{}{h}{t} \\
+	- \derp{}{}{x} \left( \frac{h^3}{12 \eta} \derp{}{p}{x} \right) + \frac{h}{2} \derp{}{U}{x} + \frac{U}{2} \derp{}{h}{x} + \derp{}{h}{t} &= 0 \\ 
+	\end{align}
+Qui est l'équation de Reynolds. $\derp{}{U}{x} = 0$ en général, sauf si la paroi est étirable.
+
+Attention : $\derp{}{h}{t}$ est lié à $V$ et à $U$ via $\derp{}{h}{x}$. 
+$$ \derp{}{h}{t} = V - U \derp{}{h}{x} $$
+
+\subsection{Couche limite}
+
+ \subsubsection{\'Equation de la couche limite}
+
+\'Ecoulement 2D au voisinage d'un plaque plane et d'un bord d'attaque. 
+
+\begin{figure}%
+\includegraphics[width=\columnwidth]{couche_limite.png}%
+\caption{}%
+\label{couche_limite.png}%
+\end{figure}
+
+Compétition entre la diffusion ($ \delta \approx \sqrt{\nu t}$) et l'advection ($ x \approx Ut$). $$\delta \approx \sqrt{\frac{\nu x}{U}}$$
+
+$\theta$ angle de non parallélisme. 
+
+$$\theta = \der{\delta}{x} \approx \left(  \frac{\nu}{U_x }\right) \approx \frac{\delta}{x} $$
+
+Suffisamment loin du bord d'attaque : $\theta \ll 1$. 
+
+Par incompressibilité : 
+\begin{align}
+	\derp{}{u_x}{x} + \derp{}{u_y}{y} &= 0 \\
+	\derp{}{u_x}{x} & \approx \derp{}{u_x \theta}{y} \\
+	\derp{}{}{x} & \approx \frac{\theta}{\delta} \approx \frac{1}{x}
+\end{align}
+
+On peut écrire les équations de NS : 
+\begin{align}
+	u_x \derp{}{u_x}{x} + u_y \derp{}{u_x}{y} &= \frac{-1}{\rho} \derp{}{p}{x} + \nu \derp{2}{_x}{y} \\
+	\derp{}{p}{y} &= 0 \\
+\end{align}
+
+A l'intérieur de la couche limite, les effets visqueux dominent. \`A l'extérieur, les effets intertiels dominent. \`A la frontière, ils sont du même ordre de grandeur.
+
+On applique Bernouilli à l'extérieure de la couche limite : 
+\begin{align}
+	p + \frac{\rho U^2}{2} &= cste \\
+	\derp{}{p}{x} &= - \rho U \derp{}{U}{x} \\
+	u_x \derp{}{u_x}{x} + u_y \derp{}{u_x}{y} &= U \derp{}{U}{x} + \nu \derp{2}{u_x}{y} \\
+\end{align}
+\'Equation de Prandl (1904)
+
+\subsubsection{Cas d'un écoulement uniforme}
+
+$$U = cste \quad \Rightarrow \quad \derp{}{U}{x} = 0 $$
+
+L'équation de Prandl se réduit à : 
+
+\begin{align}
+	u_x \derp{}{u_x}{x} + u_y \derp{}{u_x}{y} &= \nu \derp{2}{u_x}{y} \\
+	x &= x_0 \tilde{x} \\
+	y &= \delta_0 \tilde{y} \\
+	\partial_{x_0} &= \sqrt{\frac{U_{x_0}}{U}} \\
+	\tilde{u_x} \derp{}{\tilde{u_x}}{\tilde{x}} + \tilde{u_y}\derp{}{\tilde{u_x}}{\tilde{y}} = \derp{2}{\tilde{u_x}}{\tilde{y}}
+\end{align}
+On peut la résoudre numériquement : 
+$$ u_x = U f(\xi) \quad \xi = \frac{y}{\delta_0} \qquad u_y = U \theta g(\xi) $$
+
+Contrainte de cisaillement à la paroi : 
+
+\begin{align}
+	\sigma_{xy} &= \eta \derp{}{u_x}{y}_{y=0} = \eta \derp{}{u_x}{\xi}(\xi =0) \derp{}{\xi}{y} \\
+	&= \eta \frac{U}{\delta_0}f'(0) \\
+	&= \frac{\eta U}{\sqrt{\frac{\nu x}{U}}}f'(0) \\
+	&= \sqrt{\frac{\eta \rho U}{x}}U f'(0) \\
+	\sigma_{xy} \propto \sqrt{\rho\eta U }U 
+\end{align}
+
+Force de traînée sur la plaque :
+
+\begin{align}
+	F_T &= \int_0^L \sigma_{xy}(y=0) \ud x \\
+	& \propto \sqrt{\rho \eta U L} U 
+\end{align}
+par unité de largeur toujours. 
+
+\subsubsection{Cas d'écoulements non uniformes}
+
+$$\derp{}{U}{x}<0 \quad \derp{}{p}{x}>0 $$
+
+U décroît quand x augmente. $\delta \approx \sqrt{\frac{\nu x}{U}}$ $\delta$ s'épaissit plus vite qu'en racine de $x$.
+Il y a décollement de la couche limite. 
+
+\subsection{Cas de couche limite d'épaisseur constante}
+
+\paragraph{Premier cas : écoulement élongationnel d'un jet sur une plaque}
+
+\begin{align}
+ u_x &= \gamma x \\
+ u_y &= - \gamma y \\
+ \delta &= \sqrt{\frac{\nu x}{U}} \\
+ &= \sqrt{\frac{\nu x }{\gamma x}} = \sqrt{\frac{\nu}{\gamma}} = cste \\
+ \derp{}{U_x}{x} = \gamma >0 
+\end{align}
+
+\paragraph{\'Ecoulement au voisinage d'une plaque aspirée}
+
+On suppose que $U_x$ et $U_y$ ne dépendent que de $y$, ce qui implique que $U_y$ est une constante. 
+
+L'équation de NS : 
+\begin{align}
+	u_x \derp{}{u_x}{x} + u_y \derp{}{u_x}{y} &= - \derp{}{p}{x} \frac{1}{\rho} - U \derp{2}{u_x}{y} \\
+	- U \derp{}{u_x}{y} &= U \derp{2}{u_x}{y} \\
+	U_x(y) &= U(1-e^{- \frac{y}{\delta}}) \qquad \delta &= \frac{\nu}{V}
+\end{align}
+
+\section{\'Equation de Stokes}
+
+\section{\'Ecoulements de fluides non-newtoniens}
+
+Rappel : pour un fluide newtonien, on a $$\sigma'_{ij} = 2 \eta e_{ij} = \eta \left( \derp{}{u_i}{x_j} + \derp{}{u_j}{x_i} \right)$$ où $e_{ij}$ est la partie symétrique du tenseur des déformations. 
+
+Avec $$\sigma_{ij} = \sigma'_{ij} - p \delta_{ij}$$ avec $\sigma$ le tenseur des contraintes, $\sigma'$ la partie visqueuse du tenseur des contraintes, et $p \delta_{ij}$ la partie pression. 
+
+Pour les fluides non-newtonien, la relation n'est plus linéaire. 
+
+\subsection{\'Equation du mouvement}
+
+Pour un fluide non-newtonien, l'équation de Navier-Sotkes n'est plus valide. L'équation du mouvement est : 
+$$ \rho \left( \derp{}{\vec{u}}{t} + (\vec{u}\vec{\nabla}) \right)\vec{u} = - \vec{\nabla} p + \div \bbar{\sigma}' (+ f_{vol})$$
+
+\subsection{Fluides visqueux non-newtonien}
+
+ \subsubsection{Relations constitutives}
+ 
+ \paragraph{Fluides rhéofluidifiants}
+ 
+ $\eta$ diminue lorsque la contrainte de cisaillement $\dot{\gamma}$ augmente (linéairement ou avec un palier). Par exemple : $$ \eta = K \dot{\gamma}^{- \alpha} \qquad \alpha>0$$ On a alors la relation : 
+ $$ \sigma = \eta(\dot{\gamma}) \dot{\gamma} = K \dot{\gamma}^{1-\alpha}$$ 
+ 
+ Cette propriété est recherchée dans les peintures, qui doivent être fluides lorsqu'on leur applique une contrainte de cisaillement avec le pinceau, et ne pas couler au repos. 
+ 
+ \paragraph{Fluides rhéoépaississants}
+ 
+ La viscosité augmente lorsque la contrainte de cisaillement augmente. Par exemple $$\eta = K \dot{\gamma}^{-\alpha} \qquad \alpha<0$$
+ 
+ Cette propriété se retrouve par exemple dans la farine de maïs.
+ 
+ \paragraph{Fluides à seuil}
+ 
+ Il existe une contrainte seuil en dessous de laquelle aucun écoulement se produit. Il en existe deux sortes, les fluides de Bingham : 
+ $$ \sigma = \sigma_c + \eta \dot{\gamma}$$ qui sont simplement des fluides newtoniens avec un seuil, et les fluides de Herschel-Bulkley : 
+ $$ \sigma = \sigma_c + K \dot{\gamma}^{- \alpha} \qquad \alpha>0$$
+ 
+ Exemple : le dentifrice en pâte (pas en gel).
+ 
+ \paragraph{Fluides thixotropes}
+ 
+ Fluides dont $\eta$ dépend du temps à $\dot{\gamma}$ constante. Par exemple le Ketchup.
+
+\subsubsection{\'Ecoulement de fluides visqueux non-newtonien en conduite}
+
+\'Ecoulement entre deux parois planes parallèles induit par un gradient de pression. On cherche une solution d'écoulement parallèle. On appelle $x$ la direction du gradient de pression et $y$ la direction normale aux plans, $b$ la distance entre les deux plans. 
+
+On a alors : $$\vec{u} = u_x(y) \vec{x}$$
+
+On a alors comme équation de mouvement : 
+$$ 0 + 0 + 0 = - \derp{}{p}{x} + \derp{}{\sigma'_{xx}}{x} + \derp{}{\sigma'_{xy}}{y} $$
+$\derp{}{\sigma'_{xx}}{x}=0$ car $\sigma'_{xx}$ ne dépend pas de $x$.
+
+Donc 
+\begin{align}
+	 \derp{}{\sigma'_{xy}}{y} &= \derp{}{p}{x} \\
+	 \sigma'_{xy} &= \derp{}{p}{x} y + cste \\
+	 \sigma'_{xy} &= \derp{}{p}{x}y \txt{ car par symétrie } cste=0 
+\end{align}
+
+Donc $\sigma'_{xy}(y=0)=0$ et $\sigma'_{xy}$ est maximale en $y=\pm \frac{b}{2}$ (la contrainte la plus forte s'exerce au niveau des parois). 
+
+Quel est le champ de vitesse entre les parois ? Pour le trouver, il faut pour la relation constitutive caractéristique du fluide considéré. Par exemple, supposons $$\eta = K \derp{}{u_x}{y}^{- \alpha}$$
+\begin{align}
+	\sigma_{xy} &= \eta \derp{}{u_x}{y} = K \derp{}{u_x}{y}^{1-\alpha} \\
+	&= \derp{}{p}{x}y \\
+	\derp{}{u_x}{y} &= \frac{1}{K} \left( \derp{}{p}{x}y \right)^{\frac{1}{1- \alpha}} \\
+	\txt{CAL }& u_x (\pm \frac{b}{2}) = 0 \\
+	\frac{u_x}{\moy{u}} &= \frac{3-2\alpha}{2- \alpha} [1 - \left( \frac{2y}{b}\right)^{\frac{2 - \alpha}{1 - \alpha}}] 
+\end{align}
+
+\subsection{Fluides visco-élastiques}
+
+Ce sont des fluides dont le comportement est à la fois visqueux ($\sigma \approx \eta \dot{\gamma}$) et élastique ($ \sigma \approx E \gamma$). 
+
+\subsubsection{Régime linéaire à petite déformation}
+
+On peut définir une viscosité complexe : 
+$$ \eta(\omega) = \eta' (\omega) + i \eta''(\omega)$$ où $\eta'$ est la partie réelle visqueuse et $\eta''$ la partie imaginaire élastique. 
+
+Réponse harmonique : 
+$$ \gamma = \gamma_0 e^{i \omega t} \qquad \sigma = \sigma_0 e^{i \omega t + i \delta} $$
+où $\delta$ est l'angle de pertes : $$\tan \delta = \frac{\eta'}{\eta''}$$. Par exemple $\delta=0$ pour un solide élastique, et $\delta = \frac{\pi}{2}$ pour un fluide visqueux.
+
+\paragraph{Modèle de Maxwell}
+
+Un ressort et un piston en série. 
+
+\begin{align}
+	\dot{\gamma} = \dot{\gamma}_E + \dot{\gamma}_V \\
+	&= \frac{1}{E} \der{\sigma}{t} + \frac{\sigma}{\eta} \\
+	\eta \dot{\gamma} &= \sigma + \frac{\eta}{E} \der{\sigma}{t} \qquad \frac{\eta}{E} = \tau 
+\end{align}
+$\tau$ est le temps de relaxation. Pour des temps caractéristiques inférieurs à $\tau$, on a une réponse élastique, pour des temps supérieurs, le comportement est visqueux. Lorsque la fréquence de déformation est proche de $\frac{1}{\tau}$, les deux réponses sont mélangées. 
+
+\subsubsection{Régime non-linéaire à grande déformation}
+
+\paragraph{Expérience de cisaillement simple}
+
+Cisaillement entre eux plaques parallèles dans le plan (même situation que précédemment, sauf qu'à la place d'un gradient de pression, on a un déplacement dans des directions opposées des deux plaques). 
+
+Observations : apparition d'une force normale sur les plaques suivant $y$.
+
+\'Equation du mouvement : 
+sur x
+$$ 0 + 0 + 0 = - \derp{}{p}{x} + \derp{}{\sigma'_{xx}}{x} + \derp{}{\sigma'_{xy}}{y}$$ 
+$\derp{}{\sigma'_{xx}}{x} = 0 $ et $\derp{}{p}{x}=0$ 
+
+sur y : 
+$$ 0+0+0= - \derp{}{p}{y} + \derp{}{\sigma'_{xy}}{x} + \derp{}{\sigma'_{yy}}{y} $$
+$\derp{}{\sigma'_{xy}}{x} =0$ 
+
+On obtient donc : 
+$$ \sigma'_{xy} = cste \quad \derp{}{-p + \sigma'_{yy}}{y} = 0 \quad \Rightarrow \quad - p + \sigma'_{yy} = cste$$
+
+Il faut exercer sur la plaque une force par unité de surface pour maintenir les deux plaques à la même distance. 
+
+$$ \frac{F}{S} = p - \sigma'_{yy} - p_{atm}$$
+
+A bout de l'échantillon de fluide on a $p - \sigma'_{xx} = p_{atm}$ à la surface libre. 
+
+$$\frac{F}{S} = p - \sigma'_{yy} - (p- \sigma'_{xx}) $$
+$$\frac{F}{S} = \sigma'_{xx} - \sigma'_{yy}$$ 
+Première différence des contraintes normales. 
+
+\paragraph{Différences de contraintes normales}
+
+Dans un fluide visco-élastique soumis à des grandes déformations apparaissent des différences de contraintes normales : 
+$$ N_1 = \sigma'_{xx} - \sigma'_{yy} \qquad N_2 = \sigma'_{yy} - \sigma'_{zz}$$
+
+Ces différences de contraintes normales ne dépendent pas du sens de l'écoulement, ce sont des fonctions paires de $\dot{\gamma}$. Le plus simple est de poser : $$ N_1 = \Phi_1 \dot{\gamma}^2 \qquad N_2 = \Phi_2 \dot{\gamma}^2$$ avec $\Phi$ les coefficients de contraintes normales. 
+
+On peut mesurer $N_1$ avec un rhéomètre cône plan. $N_1 = \frac{2F}{\pi R^2}$ 
+
+\paragraph{Mise en évidence de $N_2$}
+
+\'Ecoulement dans une rigole-fente inclinée d'angle $\beta$. Régime stationnaire $\derp{}{}{t} = 0$ \'Ecoulement parallèle ($\derp{}{}{x} = 0$) $b \ll 1$ donc $\derp{}{}{z} \ll \derp{}{}{y}$. Cisaillement essentiellement dans le plan $xy$. 
+
+\'Equations du mouvement :
+\begin{align}
+	0 + 0 + 0 +0 &= - \derp{}{p}{x} + \derp{}{\sigma'_{xx}}{x} + \derp{}{\sigma'_{xy}}{y} + \derp{}{\sigma'_{xz}}{z} + \rho g \sin \beta \\
+	0+0+0+0 &= - \derp{}{p}{y} + \derp{}{\sigma'_{xy}}{x} + \derp{}{\sigma'_{yy}}{y} + \derp{}{\sigma'_{yz}}{z} \\
+	 0+0+0+0 &= - \derp{}{p}{z} + \derp{}{\sigma'_{xz}}{x} + \derp{}{\sigma'_{yz}}{y} + \derp{}{\sigma'_{zz}}{z} - \rho g \cos \beta 
+\end{align}
+
+En négligeant selon les modalités prédéfinies : 
+\begin{align}
+	\sigma'_{xy} = -  \rho \sin (\beta) y \\
+	 \derp{}{-p + \sigma'_{yy}}{y} = 0 \qquad -p + \sigma'_{yy} = cste(z) \\
+	 - \derp{}{p}{z} &= \rho g \cos \beta \quad p = - _rho g \cos (\beta) z + cste(y) \\
+	 p &= \sigma'_{yy} - \rho g z \cos \beta + cste
+\end{align}
+
+\'A la surface libre, au milieu de la rigole, on a $$p  - \sigma'_{zz} = p_{atm} \quad \sigma'_{yy} - \sigma'_{zz} = 0$$ car pas de cisaillement. 
+
+$$p_{atm} = - \rho g h \cos \beta + cste \quad h = \frac{cste - p_{atm}}{\rho g \cos \beta}$$
+
+A la surface libre, et au bout de la goulotte $$p_{atm} = (\sigma'_{yy} - \sigma'_{zz}) + cste  = N_2 + cste $$
+donc $$h = \frac{-N_2}{\rho g \cos \beta}$$
+
+\paragraph{Viscosité élongationelle}
+
+Pour un fluide visco-élastique, on définit  pour un écoulement élongationel la viscosité élongationelle par : 
+$$ \eta_e = \frac{\sigma'_{xx} - \sigma'_{yy}}{\dot{\epsilon}}$$
+
+\'Ecoulement élongationel : 
+$$u_x = 2 \dot{\epsilon}x \quad u_y = - \dot{\epsilon} y \quad u_z = \dot{\epsilon} z $$
+
+Pour un fluide newtonien, on a un tenseur des contraintes diagonal $(2 \eta \dot{\epsilon}, - \eta \dot{\epsilon},- \eta \dot{\epsilon})$ d'où $\eta_e = 3 \eta$. 
+
+Pour un fluide visco-élastique  $\eta_e \gg 3\eta $
+
+$$ \eta_e \dot{\epsilon} \approx \frac{\gamma}{R} \quad \dot{\epsilon} \der{R}{t} \quad \eta_e \approx \frac{\gamma}{\der{R}{t}}$$
+
+
+\part{Hauts Reynolds}
+
+\section{Glissement aux parois}
+
+On considère un bassin circulaire de rayon $L$, entouré d'un mur qui se déplace à une certaine vitesse $U$. On trace un trait à l'encre sur la surface du fluide. On voit apparaître la couche limite d'épaisseur $\delta \approx \sqrt{\nu t}$. On appelle $\tau_{dif}$ le temps tel que $\delta(\tau_{dif}) = L$ pour lequel tout le fluide est en mouvement. $\tau_{dif} \approx \frac{L^2}{\nu}$. Le temps de convection $\tau_{conv}$ est le temps pour lequel on a fait un tour : $\tau_{conv}\approx \frac{L}{U}$. En comparant ces deux temps, on définit le nombre de Reynolds : 
+$$ Re = \frac{\tau_{dif}}{\tau_{conv}} = \frac{UL}{\nu} = \frac{\rho UL}{\eta}$$
+
+Lorsque $Re \ll 1$, le temps de diffusion est très faible devant le temps de convection. La ligne que l'on a tracée sur le fluide ne se déforme pas. Lorsque $Re \gg 1$, seule la couche la plus extérieure du fluide, d'épaisseur très petite devant $L$, bouge avec le mur. Pour le reste du fluide, c'est comme si on avait un glissement au mur. 
+
+\section{Les équations d'Euler}
+
+Conservation de la masse :
+$$ \derp{}{\rho}{t} + \div (\rho \vec{v}) = 0 $$
+
+Dans le cas des petits nombre de Mach,
+$$\frac{\delta \rho}{\rho} = Ma^2 = (\frac{v^2}{c^2})\ll 1$$
+l'équation de conservation de la masse devient : 
+$$\div \vec{v} = 0$$
+
+Conservation de l'impulsion : 
+$$ \rho \derp{}{\vec{v}}{t} + \rho \bbar{\txt{grad}} \vec{v} \cdot \vec{v} = \rho \vec{f} - \grad p + \eta \Delta \vec{v}$$
+
+$$Re =  \left| \frac{\rho \bbar{\txt{grad}} \vec{v} \cdot \vec{v}}{\eta \Delta \vec{v}}  \right| = \frac{\rho UL}{\eta} \gg 1$$
+
+L'équation de Navier-Stokes devient l'équation d'Euler :
+$$ \rho \derp{}{\vec{v}}{t} + \rho \bbar{\txt{grad}} \vec{v} \cdot \vec{v} = \rho \vec{f} - \grad p$$
+
+\section{Conservation de la circulation : Théorême de Kelvin}
+
+On considère un contour $C$ d'abscisse curviligne $x$. Après $\delta t$, ce contour s'est transformé. 
+$$\Gamma(t) = \oint_{C} \vec{U}(\vec{x},t) \ud x $$
+
+\begin{align}
+	\Gamma(t+\delta t) &= \oint \vec{U'} \ud \vec{x'} \\
+	\ud \vec{x'} &= \ud x + \bbar{grad} U \ud \vec{x} \delta t \\
+	\vec{U'} &= \vec{U}(\vec{x} + \vec{U} \delta t, t + \delta t) \\
+	&= \vec{U}(\vec{x},t) + \delta t \left[ \derp{}{\vec{u}}{t} + \bbar{grad} \vec{U} \right] \\
+	\Gamma (t + \delta t) &= \int \left[ \vec{U}(\vec{x},t) + \delta (\derp{}{\vec{U}}{t} + \bbar{grad} \vec{U} \cdot \vec{U})\right] \left[ \ud \vec{x} + \bbar{grad}\vec{U} \cdot \ud \vec{x} \delta t \right] \\
+	&= \int \vec{U} \ud \vec{x} + \delta t \left[ \int \Derp{\vec{U}}{t} \ud \vec{x} + \int \vec{U}(\bbar{grad} \vec{U} \cdot \ud \vec{x}) \right] + \mathcal{O}((\delta t)^2) \\
+	\int \vec{U}(\bbar{grad} \vec{U} \ud \vec{x}) &= \int \begin{matrice}{cc} \derp{}{U_1}{x_1} & \derp{}{U_2}{x_2} \\ \derp{}{U_2}{x_1} & \derp{}{U_2}{x_2} \end{matrice} \begin{matrice}{c} \ud x_1 \\ \ud x_2 \end{matrice} \\
+	&= \int U_1 \ud U_1 + U_2 \ud U_2 = \int \frac{1}{2} (\ud U_1^2 + \ud U_2^2) = \frac{1}{2} \int \ud U^2 = 0 \\
+	\int \Derp{\vec{U}}{t} \ud \vec{x} &= \int (\vec{f} - \frac{1}{\rho} \grad p) \ud \vec{x} \txt{ si équation d'Euler} \\
+	&= \int \grad (\Phi_F è \frac{p}{\rho}) \ud \vec{x} \txt{ si }\vec{f} - \grad \Phi_F \\
+	&= \int \ud (\Phi_{F} - \frac{p}{\rho}) = 0 \\
+	\Gamma(t + \delta t) = \Gamma (t) \qquad \Derp{\Gamma}{t} = 0 
+\end{align}
+
+\section{\'Ecoulements potentiels et équation de Bernouilli}
+
+$$\Gamma = \oint_{C} \vec{U} \ud \vec{x} = \int_S \rot \vec{U} \vec{n} \ud s = \int_s \vec{\omega} \vec{n} \ud s$$
+avec $C$ un contour délimitant une surface $S$ de normale $n$. 
+
+Si $\vec{\omega} = 0$ à $t=0$, alors $\Gamma =0$. Mais comme $\Derp{\Gamma}{t} = 0 $. Le flux de vorticité va rester nul à tout temps. Comme $\vec{\omega} = \rot \vec{U} = 0$ on peut considérer un potentiel pour cet écoulement : $$ \vec{U} = \grad \Phi$$
+
+Exemple : un jet vertical sur une plaque horizontale. On a les conditions de symétrie suivantes : 
+$$U_x(-x) = U_x(x) \qquad U_y(-x) )= U_y(x) $$ 
+
+\begin{align}
+	U_x(x,y) &= ax + by +O(x^2,y^2,yx) \qquad b=0\\
+	U_y(x,y) &= cx + dy + O(x^2,y^2,xy) \qquad c=0 \\
+\end{align}
+
+\begin{align}
+	\div \vec{v} &= 0 \\
+	\rho \derp{}{\vec{v}}{t} + \rho \bbar{grad} \vec{U} \cdot \vec{U} &= \rho \vec{f} - \grad p \\
+	\vec{v} =& \grad \Phi \\
+	\div \grad \Phi &= 0 \\
+	\rho \derp{}{\grad \Phi}{t} + \rho \grad \vec{\frac{U^2}{2}} + \rho \vec{\omega} \wedge \vec{U} &= - \grad \rho \Phi_F - \grad p 
+\end{align}
+Si $\Phi$ est continue (ce qui est le cas dans les milieux continus), on peut intervertir les dérivées temporelles et spatiales : 
+$$	\grad( \rho \derp{}{\Phi}{t} + \rho \frac{U^2}{2} + \rho \Phi_F + p ) = 0 $$
+
+Pour deux points A et B du milieu continu fluide : 
+$$ \forall t \qquad \left[ \rho \derp{}{\Phi}{t} + \rho \frac{U^2}{2} + \rho \Phi_F + p \right]_A^B = 0$$
+qui est l'équation de Bernouilli.
+
+\section{Dynamique d'effondrement d'une bulle de cavitation}
+
+On considère une bulle de rayon $R$ dans un fluide, avec une pression $p_v \ll p_{\infty}$. Initialement, on a $R(0) = R_0$ et $\der{R}{t}(0) = 0$. On cherche à évaluer le temps pour lequel $R=0$, en loi d'échelle. 
+
+On a une énergie volumique en $\Delta P R^3$, et on aura une énergie cinétique en $\rho R^3 U^2$. On évalue alors la vitesse caractéristique $$U \approx \sqrt{\frac{\Delta P }{\rho}}$$ et donc un temps caractéristique : $$ \tau \approx \frac{R_0}{U} \approx \sqrt{\frac{\rho R_0^2}{\Delta P}}$$
+
+\'Evaluation du nombre de Reynolds : 
+\begin{align}
+	U & \approx 4 \frac{10^{-2}}{10^{-3}} \approx 40m/s \\
+	Ma & \approx (\frac{40}{1000}) = 4.10^{-2} \\
+	\frac{\delta \rho}{\rho} & \approx 10^{-3} \qquad \div \vec{v} =0 \\
+	Re & \approx \frac{10^3 40 10^{-2}}{10^{-3}} \approx 4.10^{5} \\
+	\vec{U} &= \grad \Phi \quad \rightarrow \quad \Delta \Phi = 0 \\
+	 & \txt{+ symétrie sphérique} \\
+	\frac{1}{r^2}\derp{}{}{r}(r^2 \derp{}{\Phi}{r}) &= 0 \\
+	r^2 \derp{}{\Phi}{r} &= f(t) = R^2 \dot{R} \quad \Rightarrow \quad \derp{}{\Phi}{r} = \frac{R^2}{r^2}\dot{R} \\
+	& \Rightarrow \quad \Phi(r,t) = - \frac{R^2 \dot{R}}{r^2} 
+\end{align}
+
+Dynamique de l'effondrement : on utilise l'équation de Bernouilli
+
+$$	\rho \derp{}{\Phi}{t} + \rho \frac{U^2}{2} + \rho \Phi_F + p ]_A^B = 0 $$
+
+On choisit B à l'infini, et A à la surface de la bulle. $P_B = p_{\infty}$ et $p_A = p_v - \frac{2 \gamma}{R}$. Problème : on considère l'effondrement, $R$ tend vers 0. Ici on va négliger le terme capillaire, qui sera en réalité à l'origine d'un rebond qu'on n'étudie pas ici. 
+
+\begin{align}
+	\derp{}{\Phi}{t} &= - \frac{2 R \dot{R}^2}{r} - \frac{R^2 \ddot{R}}{r} \\
+	\derp{}{\Phi}{t}(A) &= - 2 \dot{R}^2 - R \ddot{R} \\
+	\derp{}{\Phi}{t}(B) &= 0 \\
+	\rho(- 2 \dot{R} - R \ddot{R}) + \frac{\rho}{2} \dot{R}^2 + p_A &= 0 + 0 + p_B \\
+	p_B \gg p_A \qquad \frac{3}{2} \dot{R}^2 + R \ddot{R} &= - \frac{p_B}{\rho} \\
+	\dot{R}^2 &= 2 R \dot{R} \\
+	\ddot{R}^2 &= 2 \dot{R}^2 + 2 R \ddot{R} \\
+	R \ddot{R} = \frac{1}{2} \ddot{R}^2 - \dot{R}^2 \\
+	\ddot{R}^2 + \dot{R}^2 = - \frac{2 p_B}{\rho}\\
+	\dot{R}^2 &= 0 - \frac{2 p_B}{\rho}t \\
+	R^2 = R_0^2 - \frac{2 p_B}{\rho}t^2 \\
+	\left( \frac{R}{R_0} \right)^2 + \left( \frac{t}{\tau} \right)^2 = 1 \\
+	\tau &= \sqrt{\frac{\rho R_0^2}{p_B}} \\ 
+	\end{align}
+
+\section{Ondes capillo-gravitaires}
+
+Une onde se propage selon $x$, avec une modification de hauteur $\zeta(x,t)$ selon $y$. On se place dans la limite des faibles pentes : $\der{\zeta}{x} \ll 1$
+
+$$\zeta(x,t) = \frac{\epsilon}{k} \sin(kx - \omega t) \qquad \der{\zeta}{x} = \epsilon \cos(kx - \omega t) \approx \epsilon \ll 1 $$
+
+$\omega(k)$ en loi d'échelle : 
+$$ E_{pot} \approx \rho \lam \zeta^2 g + \gamma \Delta \Sigma $$
+
+\begin{align}
+	\Delta \Sigma &= Lb - \frac{\lam}{2} b  \\
+	(\frac{\lam}{2})^2 + \zeta^2 &= L^2 \\
+	(L- \frac{\lam}{2}(L + \frac{\lam}{2})) &= \zeta^2 \\
+	L - \frac{\lam}{2} &= \frac{\zeta^2}{\lam} \\
+	E_{pot} & \approx \rho \lam  \zeta^2 + \gamma \frac{\zeta^2}{\lam} \\
+	& \approx \rho g \lam zeta^2 (1 + \frac{\gamma}{\rho g \lam^2}) \\
+	E_K & \approx M (\zeta \omega)^2 \approx \rho \lam^2 \omega^2 \zeta^2 \\
+	\omega^2 & \approx \frac{g}{\lam} + \frac{\gamma}{\rho \lam^3} \\
+	c_{\phi} &= \frac{\omega}{k} \\
+	c_{min} &= \sqrt{2}(\frac{\gamma_g}{\rho})^{1/4} \approx 23cm/s
+\end{align}
+
+On cherche maintenant des solutions écoulement potentiel.
+
+\begin{align}
+	\zeta(x,t) &= \frac{\epsilon}{k} \sin (kx - \omega t) \\
+	\Phi(x,y,t) &= A e^{ky} \cos(kx - \omega t) \\
+\end{align}
+ 
+Condition cinématique à l'interface
+
+\begin{align}
+	 & \zeta(x + U \delta t , t + \delta t) = \zeta(x,t) + v \delta t \\
+	 & \derp{}{\zeta}{t} + U \derp{}{\zeta}{x} = v \\
+	 & \derp{}{\zeta}{t} + \derp{}{\Phi}{x}(\zeta)\derp{}{\zeta}{x} = \derp{}{\Phi}{y}(\zeta) \\
+	& \derp{}{\Phi}{x}(\zeta) \approx -Ak e^{k \zeta} \sin(kx-\omega t) \epsilon \cos(kx-\omega t) \approx \epsilon Ak \\
+	& \derp{}{\Phi}{y}(\zeta) \approx Ak \cos(kx- \omega t)e^{k \zeta} \approx Ak \\
+	& \derp{}{\Phi}{x}(\zeta) \ll \derp{}{\Phi}{y}(\zeta) \\
+	& \derp{}{\Phi}{y}(\zeta) \approx \derp{}{\zeta}{t} 	
+\end{align}
+
+\begin{align}
+	Ak e^{k \zeta} \cos(kx - \omega t) & \approx - \frac{\epsilon \omega}{k} \cos(lx - \omega t) \\
+	Ak e^{\epsilon \sin(kx - \omega t)} & \approx - \frac{\epsilon \omega}{k} \\
+	\txt{à l'ordre } \epsilon \qquad A \approx - \frac{\epsilon \omega}{k^2} + o(\epsilon^3) \\
+	\Phi(x,y,t) &= -  \frac{\epsilon \omega}{k^2} e^{ky} \cos(kx - \omega t)
+\end{align}
+
+\'Equation du mouvement : 
+\begin{align}
+	\rho \derp{}{\Phi}{t} + \frac{1}{2} \rho U^2 + p + \rho g y ]_A^B =& 0 \\
+	\rho \derp{}{\Phi}{t} &= - \rho \frac{\epsilon \omega^2}{k} e^{ky} \sin(kx - \omega t) \\
+	&= - \rho \frac{\omega^2}{k} \zeta + o(\epsilon^3) \\
+	\frac{1}{2} \rho \left[ \left( \derp{}{\Phi}{x} \right)^2 + \left( \derp{}{\Phi}{y}\right)^2 \right] &= \frac{1}{2} \rho \left[ \left( \frac{\epsilon \omega}{k} \right)^2 \sin^2(kx - \omega t) + \left( \frac{\epsilon \omega}{k} \right)^2 \cos^2(kx - \omega t) \right] \\
+	&= \frac{1}{2} \rho \left( \frac{\epsilon \omega}{k} \right)^2 \approx \epsilon^2 \\
+	p &= P_0 - \gamma \zeta_{xx} = P_0 + \gamma \epsilon k \sin(kx -  \omega t) \\
+	&= P_0 + \gamma k^2 \zeta(x,t) \\
+	- \rho \frac{\omega^2}{k} \zeta + 0 + P_0  + \gamma k^2 \zeta + \rho g \zeta &= 0 + 0 + P_0 + 0 \\
+	\omega^2(k) &= kg + \frac{\gamma}{\rho}k^3 \approx \frac{g}{\lam} + \frac{\gamma}{\rho \lam^3}
+\end{align}
+
+Remarque sur Rayleigh-Taylor : 
+\begin{align}
+	g \rightarrow \quad -g \qquad \omega^2 &= - kg + \frac{\gamma}{\rho}k^3 <0 \\
+	e^{i \omega t} &= e^{- i \omega_r t} e^{\omega_i t} \\
+	- \omega_i^2 &= - \frac{1}{\tau^2} = - kg + \frac{\gamma}{\rho}k^3 \\
+	\der{\frac{1}{\tau^2}}{k} &= g - \frac{3 \gamma }{\rho}k^2 = 0 \txt{ si } ak = \frac{1}{\sqrt{3}} \\
+	\frac{1}{\tau_{max}^2} &= \frac{g}{a \sqrt{3}} \frac{2}{3} \\
+\end{align}
+
+ où $a$ est l'inverse du $k$ tel que $\frac{1}{\tau^2}$ est maximal. 
+ 
+Remarque sur le Reynolds : 
+$$Re \approx \frac{\grad \rho \derp{}{\Phi}{t}}{\eta \Delta U} \approx \frac{k \rho \epsilon \frac{\omega^2}{k^2}}{\eta \epsilon \frac{\omega}{k} k^2 } $$
+
+\begin{align}
+	Re & = \frac{\rho  \omega^2}{k \eta \omega k } \\
+	&= \frac{\rho \omega }{\eta k^2} \\
+	&= \omega \tau_{\eta} \gg 1 \\
+	\frac{1}{\tau_{\eta}} &= \frac{\eta k^2}{\rho} &= \nu k^2 \\
+	\omega^2 &= kg [1 + (ak)^2] 
+\end{align}
+
+Remarque sur les eaux qui ne sont pas profondes : 
+
+\begin{align}
+	\omega^2 &= kg + \frac{\gamma}{\rho} k^3 \th(kh)
+\end{align}
+	
+
+		\begin{tabular}{c|c|c}
+			 & gravitaire & capillaire  \\ \hline
+			 eaux profondes & $\omega^2 = kg \qquad c_g = \frac{1}{2} c_{\phi}$ & $\omega^2 = \frac{\gamma}{\rho}k^3 \qquad c_g = \frac{2}{3} c_{\phi} $ \\ \hline
+			 eaux peu profondes & $\omega^2 = gh k^2 \qquad c_g = c_{\phi} $ & $ \omega^2 \frac{\gamma h}{\rho} k^2 \qquad c_g = 2 c_{\phi} $  
+		\end{tabular}
+
+Angle de Mach et angle de Kelvin.
+
+remarque sur la condition de stationnarité. 
+
+Si $c_{\phi} = 2 c_g $ 
+\begin{align}
+	U \cos \theta &= \frac{\omega}{k}  = \sqrt{\frac{g}{k}}\\
+	\vec{U}\vec{k} &= \omega \\
+	\frac{\omega}{k} &= \sqrt{\frac{g}{k} + \frac{\gamma}{\rho}k} \\
+	k^2 &= \frac{g}{U^2 \cos \theta} \\
+	\sin \alpha &= \frac{1}{3} \qquad \alpha = 19° \\
+\end{align}
+
+Si $c_g = c_{\phi}$ alors $\frac{\omega}{k} = cste = \sqrt{gh}$ et la fonction de stationnarité implique $$\cos \theta^* = \frac{\frac{\omega}{k}}{U}$$ 
+
+\section{Un gros problème : le paradoxe de d'Alembert}
+
+\'Ecoulement autour d'une sphère. On va supperposer deux écoulements potentiels : l'écoulement uniforme sans sphère et un dipôle puit/source.
+
+L'écoulement uniforme : 
+\begin{align}
+	\Phi_0(r, \theta) & \qquad u_r = U_0 \cos \theta = \derp{}{\Phi_0}{r} \\
+	& u_{\theta} &= - U_0 \sin \theta &= \frac{1}{r}\derp{}{\Phi_0}{\theta} \\
+	& \Phi_0(r,\theta) = U_0 r \cos \theta \\
+\end{align}
+
+L'écoulement puit/source : 
+\begin{align}
+	Q_s &= 4 \pi r^2 U_r \Rightarrow \quad U_r &= \derp{}{\Phi_s}{r} = \frac{Q_s}{4 \pi r^2} \\
+	\Phi(s)(r) &= - \frac{Q_s}{4 \pi r} \quad \Phi_p(r) &= \frac{Q_p}{4 \pi r} 
+\end{align}
+
+Dipôle :
+\begin{align}
+	\Phi_d(r, \theta) &= \Phi_s + \Phi_p = - \frac{Q_s}{4 \pi r_s} + \frac{Q}{4 \pi r_p} \\
+	&=  \frac{Q}{4\pi} \left( \frac{1}{r - \epsilon \cos \theta} - \frac{1}{r + \epsilon \cos \theta} \right) \\
+	&= \frac{Q}{4 \pi r} \frac{2 \epsilon}{r} \cos \theta 
+\end{align}
+
+\'Ecoulement potentiel autour de la sphère : 
+\begin{align}
+	\Phi(r, \theta)&= \frac{\mu \cos \theta}{r^2} + U_0 r \cos \theta \\
+\end{align}
+
+$\mu$ doit être choisi tel que $u_r(r=R)=0$.
+
+\begin{align}
+	u_r = \derp{}{\Phi}{r}(R) &= (U_0 - \frac{2 \mu}{R^3}) \cos \theta = 0 \quad r=R \forall \theta  \\
+	\mu &= \frac{U_0 R^3}{2} \\
+	\Phi(r, \theta) &= U_0 r \cos \theta [1 + \frac{1}{2} \left( \frac{R}{r} \right)^3] 
+\end{align}
+
+On voit que la perturbation liée à la présence de la sphère est en $\frac{1}{r^3}$. \`A bas Reynolds, on avait une perturbation en $\frac{1}{r}$. 
+
+Calcul de la traînée : 
+
+à bas Reynolds : $D = F_z = 6 \rho \eta U_0 R $ traînée de Stokes. 
+
+à haut Reynolds : 
+\begin{align}
+	D &= \vec{F} \vec{e_z} \\
+	\delta^2 \vec{F} &= \bbar{\sigma} \vec{n} \ud S \\
+	\bbar{\sigma} &= - p \bbar{I} + \eta (\bbar{\txt{grad}} U + ^t \bbar{\txt{grad}}) \\
+	\delta^2 \vec{F} &= - p \vec{n} \ud S \\
+	\delta^2 D &= -p \cos \theta \ud S  = \delta^2 \vec{F} \vec{e_z} \\
+	 \delta^2 D &= - p  \cos \theta R \ud \theta R  \sin  \theta \ud \phi \\
+	 &= -p R^2 \cos \theta \sin \theta \ud \theta \ud \phi \\
+	 \delta D = \int_{\phi=0}^{\phi=2 \pi} \delta^2 D = - 2 \pi p R^2 \cos \theta \sin \theta \ud \theta \\
+\end{align}
+	
+	
+\begin{align}
+	 \rho \derp{}{\Phi}{t} + \rho \frac{U^2}{2}  + p + 0 ]_A^B \\
+	 p_A &= \rho \frac{U_B^2}{2} + p_B \\
+	 p_B - p_A &= \frac{1}{2} \rho U_{\theta}^2 \\
+	 U_{\theta} = \frac{1}{r} \derp{}{\Phi}{\theta} = -U_0 \sin \theta (1 + \frac{1}{2}) \\
+	 p_B - p_A &= \frac{9}{8} \rho U_0^2 \sin^2 \theta \\
+	 D &= - 2 \pi R^2 \int_0^{\pi} p(\theta) \cos \theta \sin \theta \ud \theta \\
+	 &= 2 \pi R^2 \int_0^{\pi} (p-p_{\theta}) \cos \theta \sin \theta \ud \theta \\
+	 &= 2 \pi R^2 \frac{9}{8} \rho U_0 \int_0^{\pi} \sin^3 \theta \ud (\sin \theta) \\
+	 &= 0
+\end{align}
+ce qui est très ennuyeux ! 	C'est le paradoxe de d'Alembert, qui tiendra assez longtemps.
+
+\section{Une première réponse : la couche limite}
+
+$$C_D = \frac{D}{\frac{1}{2} \rho U_0^2 L b} = \frac{2}{\sqrt{Re}} $$
+
+\begin{align}
+	D &= \int_0^L \delta \vec{F} \vec{e_x} \\
+	&= \int_0^L \eta \derp{}{u}{y}(0) \ud x b \\
+	&= \int_0^L \eta \frac{U_0 }{\delta(x)}  \ud x b \\
+	&= \eta b U_0 \int_0^L \frac{\ud x}{\sqrt{\frac{\nu x}{U_0}}} \\
+	&= \eta U_0 b \frac{\sqrt{U_0}}{\sqrt{\nu}} \\
+	& \propto \rho U_0 b L \sqrt{Re}
+\end{align}
+	
+	\section{Une deuxième réponse : les vortex !}
+	
+Il y a deux points où la vitesse s'annule. En ces deux points, la pression est extrêmale. Sur une couche d'épaisseur $\delta$, la vitesse est faible, et on est à nouveau dans un régime à bas nombre de Reynolds. Tant qu'on est loin de la sphère, l'écoulement se dirige vers la zone de hautes pression en ralentissant. Mais quand on entre dans la zone bas Reynolds, la vitesse doit à nouveau être colinéaire au gradient de pression. A l'arrière de la sphère, on a alors deux sens de circulations opposés, et on forme des vortex. 
+
+Lois d'échelle pour la traînée dominée par les vortex : 
+\begin{align}
+	D& \approx m \frac{\Delta U}{\Delta t} \\
+	D& \approx \rho R^3 \frac{U_0}{\frac{R}{U_0}} \\
+	D& \approx \rho U_0^2 R^2 \\
+	C_D &= \frac{D}{\frac{1}{2} \rho U_0^2 R^2 \pi} = cste \\
+	D_{Re \gg1} &= D_{peau} + D_{forme} \\
+\end{align}
+
+	
+\part{Bas Reynolds}
+
+\section{}
+
+Rappels sur la tension de surface, la longueur capillaire, la forme des gouttes de pluie. Voir la tension de surface comme une énergie ou comme une force. La tension de surface diminue avec la température. Au point critique, elle s'annule même. 
+
+Rappel sur les pressions de Laplace. 
+
+Transition dripping/jetting : on envoie un jet d'un liquide dans un autre liquide. Soit il garde sa forme de jet, soit il se fragmente en gouttes. Pour comprendre ça, on compare les grandeurs en jeu : 
+$$ \frac{\eta V R}{\gamma R}= Ca$$ dans le cas où la viscosité est dominante par rapport à l'inertie. Dans ce cas on s'attend à avec un jet lorsque $Ca>1$.
+
+$$ \frac{\rho V^2 R^2}{\gamma R } = We$$ dans le cas avec l'inertie qui domine. Dans ce cas on a un jet quand $We>1$. 
+
+Un scarabée qui s'accroche à une surface dure à l'aide de ses pattes, qui se déterminent par des dzaines de milliers de filaments. $m=10mg$, $M \approx 2g$, $r=& \mu m$, 
+$$F \approx \gamma 2 \pi r N 6 \approx 20.10^{-3}.6.10^{-6}.10^4.6 \approx 10^{-2}N$$
+
+	
+\section{Ménisque statique et dynamique}
+
+On appelle $h$ l'épaisseur de fluide sur la paroi, $\phi$ l'angle entre la verticale et la surface, $x$ la coordonnée verticale. 
+
+Pour le ménisque statique, on peut écrire l'équilibre entre la pression hydrostatique et la pression de Laplace : 
+\begin{align}
+	 \gamma \mathcal{C} &= - \rho g h \\
+	 \mathcal{C} & \der{\phi}{s} = \frac{1}{R} \\
+	 (\phi,s) & \rightarrow \quad (h,x) \\
+	 \mathcal{C} &= - \frac{\derp{2}{h}{x}}{\left[1 + \left(\derp{}{h}{x}\right)^2\right]^{3/2}} \\
+	 \der{h}{x} &= - \tan \phi \\
+	 - \derp{2}{h}{x} &= \frac{1}{\cos^2 \phi} \der{\phi}{x} \\
+	 \cos \phi\ud \phi &= \frac{1}{\kappa^{-2}} x \ud x \\
+	 1 - \sin \phi &= \frac{x^2}{2 \kappa^{-2}}\\
+	 H &= \sqrt{2} \kappa^{-1} 
+\end{align}
+	
+On trouve la courbure en haut : 
+$$ \mathcal{C}(x=H) &= - \frac{\rho g H}{\gamma} = - \sqrt{2}\kappa$$
+
+On met maintenant la paroi en mouvement. Il ne s'agit pas uniquement d'un équilibre entre la gravité et la viscosité : la surface est courbée, et donc les forces capillaires ont aussi un rôle. Cela donne naissance à la théorie LLD (Landau-Levich-Derjaguin). 
+
+On a trois échelles de longueur: $e$, la taille du ménisque dynamique $\ell$ et $\kappa^{-1}$. La théorie LD fait un certain nombre d'hypothèses : 
+\begin{itemize}
+	\item La capillarité domine sur la gravité : $$\rho g \ll \gamma \frac{e}{l^3}$$ 
+	\item Le film est mince $$e \ll \ell $$
+	\item Le ménisque est perturbé localement $$\ell \ll \kappa^{-1}$$
+	\item On se place en régime visqueux
+\end{itemize}
+
+On écrit l'équation de NS avec ces approximations :
+$$ 0 = \eta  \derp{2}{u}{y} + \gamma \derp{3}{h}{x}$$
+
+On peut l'intégrer par rapport à $y$ : 
+$$\eta \derp{}{u}{y} = - \gamma \derp{3}{h}{x} (y-h) $$
+avec la condition aux limites de contrainte nulle à l'interface. 
+
+On l'intègre encore : 
+$$ u(y) = - \fra{\gamma}{\eta} \derp{3}{h}{x} \left[ \frac{y^2}{2} - h \right] + V $$
+avec la condition de vitesse $V$ à la paroi.
+
+Tout en haut du film, le film est vertical, $\derp{3}{h}{x}$ s'annule, et on a un profil bouchon à $V$. On peut avoir un profil décroissant (en portion de parabole), et même des vitesses négatives (à certains endroit le fluide coule vers le bas).  
+
+On peut écrire le flux pas unité de profondeur : 
+$$Q= \int_0^h u(y) \ud y = \frac{\gamma}{\eta} \derp{3}{h}{x} \frac{h^3}{3} + Vh  = Ve$$
+
+Cela nous permet de déduire le $h$ tel que $u(h)=0$, le point de stagnation : 
+$$u(h) = 0 \quad \Leftrightarrow \quad h=3e$$
+
+On adimensionne $Y=\frac{h}{e}$ et $Ca = \frac{\eta V}{\gamma}$ 
+
+$$Q = \frac{1}{3 Ca} \derp{3}{Y}{\frac{x}{e}} + Y=1 $$
+
+$X = \frac{x}{\ell}$ en définissant $\ell = \frac{e}{Ca^{1/3}}$ 
+
+On peut alors réécrire : 
+$$\derp{3}{Y}{X} = 3 \frac{1-Y}{Y^3}$$
+
+Pour aller plus loin avec cette équation, on doit faire le raccord des pressions avec l'horizontale.
+
+$$- \left( \derp{2}{h}{x} \right) (h^*) = \mathcal{C}(h^*)$$
+
+Pour le membre de droite, $h^*$ est très près de l'horizontale, et donc $h^*\rightarrow 0$. Du point de vue du membre de gauche, $h^*$ est grand, et on voit grâce au profil obtenu que la courbure est à ce moment là presque constante, et donc $h^* \rightarrow \infty$. 
+
+\begin{align}
+	- \derp{2}{h}{x}(h^*\rightarrow \infty) &= \mathcal{C}(h^* \rightarrow 0) \\
+	- \frac{e}{\frac{e^2}{Ca^{2/3}}} \derp{2}{Y}{X}_{\infty} \\
+	e \approx \frac{1,34}{\sqrt{2}} \kappa^{-1} Ca^{2/3}
+\end{align}
+
+ Si on réinjecte ce qu'on a trouvé, on trouve que les trois premières hypothèses sont en fait exactement la même : 
+ $$ Ca^{1/3} \ll 1$$ 
+	
+	On peut retrouver cela en loi d'échelle :  
+	$$ \frac{\eta V}{e^2} \approx \gamma \frac{e}{\ell^3}$$
+	On compare la  viscosité au grandient de pression de Laplace. 
+	
+	Et on écrit la condition de raccord des pressions : 
+	$$ P_0 - \rho g \kappa^{-1}\approx P_0 - \gamma \frac{e}{l^2}$$ 
+	
+	On a une nouvelle relation 
+	$$ l^2 \approx e \kappa^{-1}$$
+	
+	et donc on revient à la loi : 
+	$$ e \approx \kappa^{-1}Ca^{2/3}$$
+	
+
+Une géométrie différente : vidage d'un tube de rayon $r$. On trouve exactement la même situation que précédemment, avec une loi semblable, où $r$ remplace la longueur capillaire. 
+	
+\subsection{Le film est-il plan ?}
+
+On considère une plaque verticale, avec un film vertical liquide dessus, d'épaisseur $e_0$. On appelle $x$ l'axe vertical, orienté vers le bas, et $y$ l'axe horizontal. On appelle $h(x,t)$ l'épaisseur du film à la hauteur $x$ au temps $t$. Les conditions aux limites sont : contrainte nulle à l'interface liquide-air et vitesse nulle à l'interface liquide-solide. 
+
+On est dans l'approximation de lubrification, on écrit donc l'équation : 
+\begin{align}
+	\eta \derp{2}{v}{y} &= - \rho g x \\
+	\eta \derp{}{v}{y} &= - \rho g x (y-h) \\
+	v(y) &= \frac{-\rho g}{\eta} \left[ \frac{y^2}{2} -hy \right] \\
+	Q &= \int_0^{h} \ud y v(y) \\
+	&= \frac{\rho g}{3 \eta}h^3 \\
+	\txt{conservation du flux }& \\
+	Q(x+\u dx) - Q(x) &= ( \ud x \derp{}{h}{t} \\
+	\derp{}{Q}{t} &= - \derp{}{h}{t}\\
+	\frac{\rho g}{\eta}h^2 \derp{}{h}{x} &= - \derp{}{h}{t}\\
+\end{align}
+
+Une solution évidente à cette équation est la solution constante :  $$\forall x,t \quad h(x,t)=e_0$$
+
+On cherche les autres solutions sous la forme : 
+\begin{align}
+	h &= \phi(x)\psi(t)\\
+	\frac{\rho g}{\eta} \phi^2 \psi^2 \psi' \phi' &= - \psi' \phi \\
+	\frac{\rho g}{\eta} \phi \phi' &= - \frac{\psi'}{\psi^3} = K\\
+	\frac{\rho g}{\eta} \phi^2 &= 2 K x \\
+	\frac{1}{\psi^2} &= 2 K t \\
+	\psi \phi &= h(x,t) = \sqrt{\frac{\eta x}{\rho g t}}
+\end{align}
+
+Cette solution a des conditions aux limites étranges quand $x$ devient grand, et quand $t$ devient petit. 
+
+La première solution consiste à dire que la solution parabolique coexiste avec la solution constante : le haut du film est parabolique, et lorsque $h$ atteint $e_0$, on arrive à une zone où le film est d'épaisseur constante. La longueur $L$ de la zone amincie : 
+$$L(t) &= \frac{\rho g e_0^2}{\eta} t $$ 
+On remarque que cette zone s'étend progressivement. On peut calculer la vitesse de progression de la zone amincie : 
+$$V_{\downarrow} = \frac{\rho g }{\eta} e_0^2 <V $$
+
+Cette condition nous redonne la condition précédente ! 
+$$Ca^{1/3}\ll 1$$
+
+\subsection{Les bulles de savon : l'expérience de Frankel}
+
+L'hypothèse de Frankel est que le film de savon entraîne le fluide comme un mur solide. Il trouve alors $e_F = 2e_L$. Mais comment la présence de tensioactif peut permettre des conditions aux limites aussi fortes ? 
+
+Gibbs a postulé que les gradients de tension de surface dans le tensio-actif à l'interface étaient à l'origine de ces conditions aux limites. Cependant, ça n'a jamais été prouvé. 
+
+En ce qui concerne le profil à l'intérieur du film, si la contrainte était nulle à la surface, on aurait un profil bouchon, si la vitesse aux interfaces est nulle, on aura un profil Poiseuille. La condition au limite de vitesse nulle est vérifiée par les expériences de Mysels. 
+
+Avec les phénomènes d'écoulement marginal, on voit que la présence d'un tensioactif dans le liquide complique beaucoup l'écoulement. 
+
+\subsection{Condition de glissement à la paroi}
+
+On appelle $\lambda$ la longueur de l'enfoncement de la parabole dans le solide, qui donne le glissement à la surface. Ces longueurs peuvent aller de 1nm pour des surfaces parfaitement lisses (à l'échelle atomique) à 10$\mu$m pour des surfaces texturées. En ce qui concerne les film de savon, c'est complètement inconnu. 
+
+\begin{align}
+	V & \approx \frac{e^2}{\eta}f + V_S\\
+	\derp{}{V}{y}(0) &\approx \frac{ef}{\eta} \approx \frac{V_S}{\lam}\\
+	V \approx \frac{ef}{\eta}(e-\lam)\\
+	\lam>e\\
+	V & \approx \frac{e \lam f}{\eta} \\
+	\end{align}
+
+La loi de Landau est alors changée ainsi :  
+\begin{align}
+	\frac{\eta V}{e \lam} &\approx f \approx \gamma \frac{e}{\ell^3}\\
+	\ell^2 &\approx e \kappa^{-1} \txt{ reste inchangée }\\
+	\frac{\eta V}{\lam} & \approx \gamma \frac{e^2}{e^{3/2} \kappa^{-3/2}}\\
+	\frac{\eta V}{\lam} & \approx \gamma \frac{e^{1/2}}{\kappa^{-3/2}}\\
+	e & \approx \frac{\kappa^{-3}}{\lam^2}\left( \frac{\eta V}{\gamma} \right)^2 \\
+\end{align}
+
+Pour le drainage : 
+\begin{align}
+	\frac{\eta V}{e \lam} & \approx \rho g \approx \frac{\eta x}{e \lam t}\\
+	e &\approx \frac{\eta x}{\rho g t \lam}
+\end{align}
+Le drainage est plus rapide, et le film en forme de triangle. 
+
+\section{Problème de Landau à vitesse descendante}
+
+On prend le même problème, mais avec $V$ vers le bas. 
+
+L'angle $\theta$^ne dépend que de $Ca$. $$\theta \propto Ca^{1/3}$$ 
+
+Bilan de forces projeté sur la verticale. 
+\begin{align}
+	F_{/cm} & \approx \gamma - \gamma \cos \theta \\
+	& \approx \frac{1}{2}\gamma \theta^2\\
+	F_{\eta} & \approx \int_{coin} \ud x \derp{}{V}{y}\\
+	& \approx \int_0^{\kappa^{-1}} \frac{\eta V}{\theta x}\\
+\end{align}
+Le problème est que cette expression est pathologique : $y$ est aussi petit qu'on veut, et donc ça diverge. 
+De Gennes propose alors : 
+$$F_{\eta} & \approx \frac{\eta V}{\theta }\int_0^{\kappa^{-1}}\frac{\ud x}{x} = \frac{\eta V}{\theta} \ln \frac{\kappa^{-1}}{a}$$
+
+A l'équilibre : 
+\begin{align}
+	F_{\eta} & \approx F_{\gamma} \\
+	\gamma \theta^1 \approx \frac{\eta V}{\theta}\ln \\
+	\theta^3 & \approx  \frac{ \eta V}{\gamma} \ln \frac{\kappa^{-1}}{a} \approx Ca \ln \frac{\kappa^{-1}}{a}
+\end{align}
+
+On considère ensuite une goutte de rayon $R$ sur une surface inclinée. Elle se déplace plus lentement que ce à quoi on s'attendrait, à cause des coins. 
+
+\begin{align}
+	\frac{\etaV}{R^2} & \approx \rho g \\
+	V & \approx  \frac{\rho \theta}{\eta} R^2\\
+	\frac{\eta V}{\theta} \ln R & \approx \rho g R^3 \\
+	V & \approx \frac{\rho g}{\eta} R^2 \theta_0 \frac{1}{\ln \frac{\kappa^{-1}}{a}}
+\end{align}
+
+Le facteur $\theta_0 \frac{1}{\ln \frac{\kappa^{-1}}{a}} \propto 100$ explique les vitesses. 
+
+A propos de l'entraînement d'air dans le liquide. 
+
+Expérience E.Lorenceau : un jet d'huile dans de l'huile : à basse vitesse, on a une déformation de la surface. À grande vitesse, de l'air est entraîné ave le jet, un tore d'air qui se dissipe au bout d'un moment. Il apparaît à la surface un ménisque \emph{statique} : la viscosité de l'air étant très faible, le mouvement du jet n'est pas transmis au bain de fluide. La forme est exactement l'inverse de la forme du Landau classique. 
+
+\section{Montée dans un capillaire}
+
+Au contact avec le tube, le liquide a un angle $\theta$. Il a alors la forme d'une calotte sphérique inversée, et donc il règne dans le fluide une dépression de Laplace.
+
+Le force qui fait monter le liquide dans le tube : 
+$$ F = \frac{2 \gamma \cos \theta }{r} \pi r^2  = 2 \pi r \gamma \cos \theta_0$$
+
+Si on écrit un classique équilibre avec la force visqueuse $-8 \pi \eta Vz$, la gravité $- \rho \pi r^2 g z$, et le terme intertiel $\rho \pi r^2 \derp{}{z \dot{z}}{t}$ :
+
+$$ \rho _pi r^2 \derp{}{z \dot{z}}{t} &= 2 \pi \gamma r - \rho \pi r^2 g z - 8 \pi \eta z \dot{z}$$
+
+On peut souvent négliger le terme de gravité, quand $z<h_0$ ou quand on est pas à la verticale. On réécrit aux dimensions : 
+Le terme intertiel : $$ \frac{\rho r^2 z^2}{t^2}$$
+Le terme visqueux : $$ 8 \pi \eta \frac{z^2}{t}$$
+
+Donc pour des temps grands : $$t> \frac{\rho r^2}{\eta} \approx 1s$$ on peut alors négliger le terme inertiel. On a alors une dynamique : 
+$$ z \dot{z} = \frac{1}{4} \frac{\gamma}{\eta}r \qquad z^2 \approx \frac{1}{2} \frac{\gamma}{\eta} r t$$
+
+Une autre géométrie : deux plaques qui forment un coin vertical. On approxime ça par une série de tube de diamètres croissants. 
+
+En loi d'échelle : 
+\begin{align}
+	\frac{\gamma}{rz} &\approx \frac{\eta \dot{z}}{r^2} + \rho g \\
+	z(r,t) & \approx \sqrt{\frac{\gamma rt}{\eta}} - \frac{\rho g r^2 t}{\eta} 
+\end{align}
+ 
+ Cherchons un maximum de $z(r,t)$ à un instant donné. 
+ 
+ $$ \derp{}{z}{r} = 0 \qquad r_L = \left( \frac{\eta \gamma}{\rho^2g^2 t}^{1/3}$$
+ On voit bien la bosse, qui se déplace vers le coin ($r \rightarrow 0$). 
+ 
+ $$z(t) \proptot^{1/3}$$
+ 
+ Aux temps courts $t < \frac{\rho r^2}{\eta}$, on obtient : 
+ $$\rho \pi r^2 \derp{}{z \dot{z}}{t} = 2 \pi r \gamma $$
+  On voit alors apparaître des solutions extrêmement simple : $z = ct$, avec $c = \sqrt{\frac{2 \gamma}{\rho r}}$. 
+  
+  La montée du liquide suit d'abord un régime linéaire, puis à $t = \frac{\rho r^2}{\eta}$, on passe en régime en racine de $t$. 
+  
+Une autre approche consiste à faire un bilan d'énergie : 
+\begin{align}
+	\frac{1}{2} \rho \pi r^2 z V^2 &= 2 \pi r z \gamma \\
+	\frac{1}{2} \rho r V^2 &= 2 \gamma \\
+	V &= \sqrt{2} c
+\end{align}
+On voit qu'on a pas besoin de viscosité pour dissiper de l'énergie. 
+  
+\section{Dynamiques anormales}
+
+\subsection{Introduction : dynamique normale}
+
+On considère un coin liquide. On a vu que la friction visqueuse diverge (mais pas trop vite) dans ce coin, et que l'existence du coin est alors un grand frein au mouvement. 
+
+$$ F_{\eta/cm} \approx \frac{\eta V}{\theta} \ln $$
+
+Cette dynamique est standard pour les liquides, car elle existe dès qu'il y a une ligne de contact. Pour obtenir une dynamique plus rapide, il va falloir se débarasser de cet effet. 
+
+À propos de l'étalement d'une goutte : 
+
+Une goutte mouillante sur un solide s'étale en $r \approx t^{1/10}$ (loi de Tanner). La goutte s'étale très vite au début, puis très très lentement par la suite. L'influence du coin est déterminante, car non seulement le pourtour est de plus en plus grand, mais surtout parce que l'angle $\theta$ est de plus en plus faible. 
+	
+	On aurait tendance à dire que les forces motrices sont les forces de surface qui tend à remplacer le solide sec par le solide mouillé. Cependant, on remarque que la nature du fluide n'influe pas sur le coefficient de la loi de Tanner, tant que les fluides ont la même viscosité. 
+	
+	La situation réelle est qu'un film moléculaire a avancé avant la goutte (ce qui fait que la goutte ressemble à un chapeau). C'est Hardy qui a résolu ce problème. L'étalement de la goutte macroscopique se fait sur un film de fluide, et non sur le solide. Cependant, on a perdu en chemin notre force motrice \dots 
+	
+	La réponse vient de Huppart, et peut être expliquée de deux manières : on peut voir qu'il existe une surpression de Laplace dans la goutte, ce qui a tendance à l'étaler,  on peut aussi voir qu'on minimise la surface en applatissant la zone bombée. 
+	
+	
+\begin{align}
+	F_{\gamma} &= \gamma - \gamma \cos \theta \\
+	& \approx \frac{1}{2} \gamma \theta^2 \\
+	\frac{\eta V}{\theta} \ln & \approx \gamma \theta^2 \\
+	V & \approx \frac{\gamma}{\eta} \theta^3 \frac{1}{\ln} \\
+	&= \frac{\gamma}{\eta} \frac{\Omega^3}{r^9} \frac{1}{\ln}\\
+\end{align}
+
+de Gennes 1985 
+
+\begin{align}
+	 \Omega &= \frac{\pi}{3}r^3[2 + \cos \theta][1-\cos \theta]^2 \\
+	 r &= R \sin \theta \\
+	 \Omega &= \frac{\pi}{3} \frac{r^3}{\theta^}3 \frac{\theta h}{4} \\
+	 &= \frac{\pi}{4}\theta r^3 \\
+	 r & \approx \left( \frac{\gamma}{\eta} \Omega^3 \frac{1}{\ln} t	\right)^{1/10}\\
+	 	F_{\gamma} &= \gamma \frac{h^2}{r^2}r \approx \frac{\gamma h^2}{r}\\
+\end{align}
+
+On peut comparer avec la gravité : 
+\begin{align}
+	F_g & \approx \rho g \frac{h}{r} h r^2 \\
+	& \approx \rho g r h^2
+\end{align}
+
+On voit que la comparaison est indépendante de $h$. 
+
+$$\frac{F_{\gamma}}{F_g} \approx \frac{\gamma h^2}{r} \frac{1}{\rho g h^2 r} = \frac{\gamma}{\rho g r^2}$$
+
+\subsection{Comment aller vite : supprimer la ligne}
+
+\subsubsection{La goutte de Leidenfrost}
+
+Il s'agit d'une goutte suspendue au-dessus d'une plaque solide très chaude. Lorsque la goutte s'approche du solide, elle s'évapore, et forme un film d'air sous la goutte. La goutte est alors sur un coussin d'air, elle n'a pas de coin, et donc elle se déplace très vite par rapport à une goutte qui serait posée. 
+
+On va appeler $R$ le rayon de la goutte, $l$ le rayon de la partie plane sous la goutte. 
+
+Dans le cas d'une petite goutte : $R < \kappa^{-1}$
+
+On va calculer la pression dans le film d'air. 
+\begin{align}
+	\frac{\gamma}{R} &\approx \frac{\rho g R^3}{l^2}\\
+	l & \approx \frac{r^2}{\kappa^{-1}} < R \\
+\end{align}
+
+Dans le cas $R > \kappa^{-1}$, on appelle $H$ la hauteur de la goutte. 
+
+\begin{align}
+	\Omega \approx H R^2 \\
+	E_g \approx \frac{\pi}{2}\rho g H^2 R^2 \\
+	E_{\gamma} \approx 2 \pi R^2 \gamma \\
+	E &= \frac{1}{2} \rho g H\Omega + 2 \frac{\gamma \Omega}{H} \\
+	H &= 2 \kappa^{-1} \\
+	Q_{in} & \approx K \frac{\Delta T}{e}R^2 \\
+	Q_{out}& \approx  2 \pi R \frac{e^3}{\eta} \frac{\rho g \kappa^{-1}}{R} \\
+	e& \approx \sqrt{aR} \\
+\end{align}
+L'épaisseur du film d'air dépend de la taille de la goutte (alors que la hauteur n'en dépend pas ). 
+
+Un cas plus extrême : $R \gg \kappa^{-1}$
+
+Le film n'arrive plus à s'échapper uniquement par les cotés, et il est suffisant pour déformer la surface, et la goutte prend une forme d'oeuf au plat. On se retrouve dans une situation très similaire à cette du film exploré dans la partie précédente. 
+  
+\subsubsection{La goutte rebondissante (Y. Couder)}
+
+Une goutte visqueuse s'approche d'un film du même liquide, qui est mis en vibration à haute fréquence. La goutte ne tombe alors pas dans le liquide, car lorsqu'elle s'en approche, il se crée une couche d'air entre la goutte et le film qui fait rebondir la goutte. 
+
+\subsubsection{La goutte sur plan en mouvement }
+
+On fait tomber une goutte sur un plan en mouvement (36m/s au moins), le plan entraîne une couche limite d'air. Comme dans l'effet Leidenfrost, la couche d'air en mouvement empêche la goutte de tomber, et elle flotte au-dessus de la surface. 
+
+\subsubsection{Goutte chaude sur un plan froid}
+
+La goutte est un peu chauffée par un laser, et posée sur un plan froid. La différence de tension de surface entre la zone froide, en bas, et la zone chaude, en haut, crée un écoulement de surface, de la zone chaude vers la zone froide. Un peu d'air est entraîné par la goutte, et crée donc un film entre la goutte et le plan solide. 
+
+\subsection{Une autre stratégie : les billes liquides}
+
+Cela consiste à recouvrir une goutte de billes de taille micrométrique hydrophobes. La bille à la surface du liquide, en rentrant dans le liquide, passe par tous les angles possibles, et rencontre donc l'angle d'équilibre. 
+
+\subsection{Solide texturés}
+
+Avec les surfaces texturées, on peut créer des surfaces super-hydrophobes. On peut ainsi passer d'un angle de contact de 90°, à un angle de l'ordre de 160°. On est dans une situation un peu moins favorable que dans les cas précédents, car il y a quand même mouillage. 
+
+$$\cos \theta^* = r \cos \theta $$(Wenzel)
+
+On peut relier l'angle à la densité de plots à la surface texturée : 
+$$ \cos \theta^* = -1 + \Phi_s(1 + \cos \theta)$$(Cassie)
+
+Au sommet des plots, le coin n'est pas parfaitement pointu. La goutte s'installe alors avec l'angle $\theta$. En théorie, on peut aussi fixer des liquide mouillants, avec des surplombs dans les plots. 
+
+La surface la plus hydrophobe naturelle est créée par un petit insecte qui vit dans la terre, et qui a une surface texturée très sophistiquée, afin d'être la moins mouillante possible. 
+
+\subsection{Dynamiques}
+
+On avait obtenu les résultats suivants : 
+$R < \kappa^{-1}$ : $l \approx \frac{R^2}{\kappa^{-1}}$ 
+
+$R > \kappa^{-1}$ : $H  \approx \kappa^{-1}$
+
+Caléfaction : $e \approx R^{1/2}$
+
+Dévalement : 
+La force motrice est la gravité : $$ \rho g \sin \alpha R^2 \kappa^{-1}$$
+La viscosité freine le mouvement : $$\frac{\eta V}{\kappa^{-1}}R^2 $$
+
+On obtient :$$ V_0 \approx \frac{\gamma}{\eta} \alpha$$
+On voit immédiatement que cette dynamique est complètement différente de la dynamique normale, avec les coins. 
+
+Makadevan/Pomeau : la bille roule et elle conserve sa forme dynamique (plate en bas). 
+
+$Re \ll1$ 
+
+\begin{align}
+	\frac{\eta V}{l} \frac{l}{R} l^2 l \approx \rho g R^3 \alpha R \\
+	V & \approx \alpha \frac{\rho g}{\eta} \frac{R^5}{l^3} \\
+	& \approx \frac{V_0 \kappa^{-1}}{R}
+\end{align}
+Curieux : plus les gouttes sont petites, plus elles dévalent vite ! C'est le contraire de ce qu'on voit dans toutes les autres situations. On était dans la situation où plus la goutte était petite, plus elle avait du mal à bouger, et on trouve maintenant une situation inverse. 
+
+Lorsqu'on atteint des vitesses plus grandes, la sphère est déformée. Le nombre de Weber permet de comparer les forces centrifuges dans la sphère et la tension de surface : 
+
+$$We = \frac{\rho V^2 R^3}{R \gamma R} = \frac{\rho V^2 R }{\gamma}$$
+S'il est plus grand que 1, la sphère perd sa forme. Après beaucoup d'arguments de Newton, Laplace, Poincaré, Chandrasekar démontre qu'il existe deux solutions : la cacahuète et la roue. La cachuète, de surface plus faible, est la solution stable. La roue peut se transformer en cacahuète (mais pas l'inverse), sous l'action d'accidents de terrain. 
+
+Pour l'instant, on s'est toujours placé dans le régime visqueux. Que se passe-t-il dans un régime inertiel ? Au début : 
+$$ x = \frac{1}{2} g t^2 \alpha$$ (accélération constante). Ici la bille n'est plus en rotation. 
+
+Plus tard, la bille est freinée par la friction de l'air. 
+$$ \rho_a V^2 R^2 \approx \rho g R^3 \alpha$$
+$$V \approx \sqrt{\frac{\rho g R \alpha}{\rho_a}}$$
+
+Lorsqu'elle se déforme, la goutte se déforme longituinalement (ce qui est contraire à la déformation des gouttes de pluie), et sa queue rebique. Cette forme n'est pas encore très bien expliquée. 
+
+Glissement : rappel, on extrapole la parabole de vitesse, et on obtient $\lam$, la partie de la parabole qui est dans le solide. On va considérer une surface texturée, avec des plots, ce qui va donner un grand $\lam$. On appelle $L$la distance entre les plots, $b$ le diamètre des plots. 
+
+\begin{align}
+	\sigma & \approx \frac{\eta V}{\lam} \\
+	\Phi & \approx \frac{b^2}{L^2} \\
+	\sigma & \approx \frac{\eta V b }{L^2}\\
+	\lam & \approx \frac{L^2}{b}
+\end{align}
+
+La texturation permet de donner aussi des propriétés dynamiques à la surface, ici de permettre le glissement. Cela nous donne des $\lam$ très grands, de l'ordre de 100µm ! Les effet sont alors macroscopiques, on dissipe beaucoup moins d'énergie, et l'écoulement est bien plus rapide. 
+
+A propos du stockage d'énergie dans la surface : 
+$\gamma$ a la dimension d'une constante de raideur, elle stocke de l'énergie dans la surface. On peut alors calculer un temps caractéristique : 
+$$ \tau \approx \sqrt{\frac{\rho R^3}{\gamma}}^{1/2}$$
+
+$\tau \approx 3 ms$
+
+On revient à la goutte en caléfaction, mais cette fois, en mouvement. 
+
+\begin{align}
+	\rho R^3 \frac{V}{L/V} & \approx \rho_a V^2 R^2 \\
+	L & \approx \frac{\rho}{\rho_a R}
+\end{align}
+
+Si on texture la surface avec des écailles, les gouttes progressent toutes seule sur la surface texturée ! Quelle est alors la force motrice ? Est-elle liée à la déformation de la surface ? Non, on peut faire la même expérience avec de la carboglace, qui se sublime à -80°C, et le solide avance lui aussi. C'est donc lié à la couche de vapeur entre le liquide et le solide. 
+
+\begin{align}
+	\dot{M} & \approx K \frac{\Delta T}{e} R^2 \\
+	e & \approx \sqrt{R} \\
+	\dot{M} & \approx R^{3/2} \\
+	\dot{M} & \rho_v R V e \txt{ flux sortant }\\
+\end{align}
+
+La vitesse $V$ est alors indépendante de $R$. 
+
+Maintenant, la surface n'est plus plane, mais à écailles. L'écoulement d'air n'est alors plus isotrope. 
+
+L'asymétrie crée aussi une force de friction originale : 
+$$ F \approx \dot{M}V \approx R^{3/2} \approx 10 \mu m$$
+ce qui est à la fois très petit et très grand. C'est par exemple petit par rapport au poids de la goutte. Mais c'est grand par rapport aux forces de friction naturelles en jeu (d'un facteur 100). 
+
+
+
+
+
+
+
+
+
+  
+\end{document}

@@ -1,0 +1,448 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\newcommand{\bbar}[1]{\underline{\underline{#1}}}
+\newcommand{\txt}[1]{\textrm{#1}}
+\newcommand{\lam}{\lambda}
+\newcommand{\der}[3][]{\frac{\ud^{#1} #2}{\ud #3^{#1}}}
+\newcommand{\derp}[3][]{\frac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newcommand{\Derp}[3][]{\frac{\textrm{D}^{#1} #2}{\textrm{D} #3^{#1}}}
+\newcommand{\ud}{\textrm{d}}
+\newcommand{\grad}{\vec{\textrm{grad}}}
+\newcommand{\rot}{\vec{\textrm{rot}}}
+\renewcommand{\div}{\textrm{div}}
+\newenvironment{matrice}{ \left[ \begin{array} }{\end{array} \right]}
+\newcommand{\moy}{\left\langle \right\rangle}
+
+\title{Hydrodynamique}
+
+% 5 séances D.Quéré, 4 P. Gondret, 5 C. Clanet
+
+%2 séances -> Navier-Stockes - 4 séances Bas reynolds - 8 séances entremêlées hauts reynolds/écoulement interfaciaux
+
+
+\begin{document}
+
+\tableofcontents \newpage
+
+\part{Vers l'équation de Navier-Stokes}
+\section{Introduction}
+
+A insérer Tableau de S. Dalì (la gare de perpignan) : la mécanique des fluyides est au centre du monde.
+
+\section{Qu'est-ce qu'un fluide ? }
+
+\subsection{Une assemblée \emph{désordonnée} de molécules}
+
+On fait une diffraction aux rayons X sur un liquide, on ne voit pas de réseau ordonné, mais quand même une taille caractéristique qui est la distance entre molécules. 
+
+La distance typique entre molécule est de l'ordre de 3 $\dot{A}$. Les molécules bougent avec l'agitation thermique : $$ c = \sqrt{\frac{kT}{m}} \approx 500 - 1000 \txt{m/s}$$. Les molécules rentrent en collision à peu près tout les $\tau_c = \frac{l}{c} \approx 10^{-12}s$
+
+\subsection{Comment décrire cette assemblée : Dynamique moléculaire (1957)}
+
+On peut tout simplement tenter de résoudre les équations du mouvement pour tout notre système. C'est long, et ça ne permet de pas de prédire grand chose en général. 
+
+Pour chaque molécule, on résoud : $$m \der{v_i}{t} = F_i$$.
+
+Si on prend un bocal d'une dizaine de centimètres, on a $N \approx 10^{26}$. $i$ varie donc entre 1 et $10^{26}$.
+
+On utilise une approche potentiel pour $$F_i= - \grad_{r_i} V(r_1, \cdots, r_N)$$. Le potentiel $V$ est choisi en général comme la superposition d'interactions de paires : 
+$$V(r_1,\cdots, r_N) = \sum_i \sum_{j>i} \Phi |r_i-r_j|$$
+
+On choisi pour $\Phi$ en général le potentiel de Lennard-Jones : $$\Phi_{LJ}(r) = 4U[\underbrace{(\frac{r_0}{r})^{12}}_{\txt{exclusion de Pauli}} - \underbrace{(\frac{r_0}{r})^6]}_{\txt{interactions faibles électrostatiques}}$$
+
+$$F_{LJ}(r) = \derp{\Phi_{LJ}}{r} = \frac{24U}{r_0}[2(\frac{r_0}{r})^{13} - (\frac{r_0}{r})^{7}] = 0 \txt{ si } \frac{r_e}{r_0} = 2^{1/6}$$
+
+Lorsque les molécules se rappochent à une distance comparable à leur taille, elle gagnent une énergie $-U$ par rapport à si elles étaient séparées d'une distance infinie. 
+
+\begin{figure}%
+\includegraphics[width=7cm]{LJ.pdf}%
+\caption{}%
+\label{}%
+\end{figure}
+
+Les différents états de la matière : 
+
+\begin{figure}%
+\includegraphics[width=\columnwidth]{etats.pdf}%
+\caption{}%
+\label{}%
+\end{figure}
+ 
+ 
+\subsection{Milieux continus (L. Euler, 1757, "Sur le mouvement des fluides")}
+
+Présentation de l'idée : parabole du glaçon. 
+
+On prend un glaçon, de taille $L = 10^{-2}$, contenant $10^{26}$ molécules. Si on se place à une échelle $\mathcal{L}$ grande devant $L$, on peut décrire le mouvement du glaçon (par exemple sa chute)avec la mécanique du point : $$m_G \der{v_G}{t} \approx mg$$
+
+Si on veut décrire la fonte du glaçon, on aura $\mathcal{L}\approx L$. On coince le glaçon entre deux parois chaudes. 
+
+\begin{figure}%
+\includegraphics[width=7cm]{glacon.pdf}%
+\caption{}%
+\label{}%
+\end{figure}
+
+$$\rho S \Delta x \derp{U_y}{t} = \rho S \Delta x g + \txt{ effet des voisins}$$
+
+Effet des voisins : forces de surfaces : $$\sigma(x+ \frac{\Delta x}{2},t) S = \txt{ force exercée par rouge sur bleu}$$
+Comme l'interface est considérée sans masse, on a une symétrie des forces exercées aux interfaces : 
+$$ - \sigma(x + \frac{\Delta x}{2}) S = \txt{force exercée par bleu sur rouge}$$
+
+On a donc : 
+
+$$ \rho S \Delta x \derp{U_y}{t} = \rho S \Delta x g + \sigma(x+ \frac{\Delta x}{2}, t) S - \sigma(x- \frac{\Delta x}{2}, t) S$$
+
+$$\rho = \derp{U_y}{t} = \rho g + \derp{\sigma}{x}$$
+
+\'Equation générale : $$\rho \frac{\txt{D} U }{\txt{D}t} = F + \div \sigma $$ Cette équation doit être complétée par une relation phénoménologique $\sigma(U)$
+
+On voit que l'avantage des milieux continus est de réduire grandement le nombre d'équations à résoudre. 
+
+Remarque : On a fait l'hypothèse que $\sigma$ était continu et différenciable. On ne doit pas avoir de discontinuités. Les régions où se trouvent les discontinuités doivent être traitées comme des conditions aux limites. 
+
+\paragraph{Qu'est-ce que la continuité d'un milieu discontinu ? }
+
+\begin{figure}%
+\includegraphics[width=7cm]{reseau.pdf}
+\includegraphics[width=7cm]{g(r).pdf}%
+\caption{}%
+\label{}%
+\end{figure}
+
+\begin{align}
+	m(r) = \txt{masse contenue dans le carré de côté }r \\
+	\rho(r) = \frac{m(r)}{r^2} = \frac{n^{(r)}m_0}{r^2} \\
+	\bar{\rho} = \frac{m_0}{r^2_e} \\
+	g(r) = \frac{\rho(r)}{\rho} = n (\frac{r_e}{r})^2 \\
+\end{align}
+
+Avant environ $n=10$, on doit utiliser la dynamique moléculaire. Au-delà, on peut utiliser les milieux continus. Pour décider, on utilise le nombre de Knudsen : $K_n = \frac{r}{r_e}$. Lorsque ce nombre très grand devant 1, on peut utiliser les milieux continus, s'il est inférieur à 10, on doit utiliser la dynamique moléculaire. 
+
+On considère que les mouvements à l'échelle moléculaire permettent d'assurer la continuité. 
+
+\paragraph{A la recherche de la relation $\sigma(U)$}
+
+Une phase condensée à l'équilibre : On considère des petites briques cubiques de taille $r_0$ qui forment un parallèlépipède cubique de surface $\Sigma$ et de volume $\Omega$. A chaque fois que deux briques s'assemblent, on gagne une énergie $-U$ ($\frac{-U}{2}$ par surface).
+
+$$\Delta E_{total} = \frac{\Omega}{r_e^3} 6 (\frac{-U}{2}) + \frac{\Sigma}{r_e^2} 1 (\frac{U}{2}) = \frac{-3U}{r_e^3} \Omega + \frac{U}{2 r_e^2} \Sigma $$
+
+Le premier terme est cohésif, le second terme est le terme d'énergie surfacique (d'où on tire : $\gamma = \frac{U}{2r_e^2}$ la tension de surface). 
+
+Ordre de grandeur de la tension de surface : $[\gamma] = \frac{m}{T^2} \approx 0,02 N/m$
+
+On cherche à vérifier à partir de quelle taille on sent le champ extérieur de gravité : 
+$$ \gamma \mathcal{L}^2 \approx \rho \mathcal{L}^4 g \quad \mathcal{L} \approx \sqrt{\frac{\gamma}{\rho g}} = \kappa^{-1}$$
+
+On considère ensuite une perturbation d'équilibre. 
+
+On part du potentiel $$\Phi_{LJ}(r) = 4U[(\frac{r_0}{r})^{12} - (\frac{r_0}{r})^6]$$ et on le perturbe.
+
+$$ \Phi_{LJ}(r_e + \delta r) = -U + 0 + \frac{1}{2} (\delta r )^2 \derp{ ^2 \Phi_{LJ}}{r^2} \quad k_0 \approx \frac{U}{r_0^2}$$ où $k_0$ est la raideur du ressort qui modélise le lien entre deux molécules. 
+
+Remarque sur l'agitation thermique. $$\delta r_{kT} \approx \sqrt{kT \frac{r_0^2}{U}} \quad \frac{\delta r_{kT}}{r_0} = \sqrt{\frac{kT}{U}}$$
+
+On voit donc que si $U \gg kT$, $\frac{\delta r_{kT}}{r_0} \ll 1$ et si $U \approx kT$ on a $\frac{\delta r_{kT}}{r_0} \approx 1$. 
+
+Résultats expérimentaux pour des solides élastiques :
+
+\begin{figure}%
+\includegraphics[width=\columnwidth]{ductiles.pdf}%
+\caption{}%
+\label{}%
+\end{figure}
+
+\begin{table}%
+\caption{Résultats donnés par la loi de Hooke sur les contraintes limites (en $10^7$Pa)}
+\begin{tabular}{l|c|c|c}
+			 & Limite d'élasticité & rupture & module d'Young \\
+			 Fer & 17 & 35 & 20 000 \\
+			 Acier & 20-100 & 40-200 & 20 000 \\
+			 Alu & 6 & 10-20 & 7 000 \\
+			 Cuivre & 0,5 - 12 & 1-40 & 11 000 \\
+			 Argent & 15 & 30 & 7500 \\
+		\end{tabular}
+\end{table}
+		
+On considère un solide comme un réseau de ressorts. On peut considérer qu'un plan est un ensemble de ressorts en parallèle : $$ k_{//} = \frac{S}{r_e^2}k_0$$. On considère alors les plans comme des ressorts en série : 
+$$ k_{eff} = \frac{k_{//}}{L/r_e}$$
+
+Avec ce modèle moléculaire, on aura : $$F \approx k_{eff} \Delta L  = \frac{S}{r_e^2}k_0 \frac{r_e}{L} \Delta L$$
+D'où la relation : 
+
+$$ \frac{F}{S} \approx \frac{k_0}{r_e} \frac{\Delta L}{L} = \sigma = \frac{1}{E} \epsilon$$
+
+d'où $E = \frac{U}{r_0^3}$. Le module d'Young fait le lien entre l'échelle moléculaire et ce qu'il en découle à l'échelle macroscopique. C'est la même chose que $\gamma$, la tension de surface. Ce sera aussi le cas pour $\eta$, la viscosité, qui cachera aussi des termes d'interaction moléculaire. 
+
+En ce qui concerne les liquides : 
+
+$\tau_c = \frac{r_e}{c} \approx 10^{-12}$s. Tant que le liquide ne s'est pas réorganisé, il se comporte comme un solide élastique : 
+
+$$F \approx k_{eff} (v \tau_c) \approx \frac{S}{r_e^2} k_0 \frac{r_e}{L} v \tau_c $$
+Cette vision naïve est la vision Newtonienne. On a alors : 
+$$ \frac{F}{S} \approx (\frac{U}{r_0^3}\tau_c)(\frac{\dot{\Delta L}}{L}) \quad \eta = \frac{U}{r_0^3}\tau_c$$ où l'on voit apparaître la viscosité.
+
+Ordre de grandeur de la viscosité : $\eta \approx 10^{-3}$Pa.s pour l'eau par exemple. 
+
+On a ici discuté de l'origine moléculaire des trois paramètres $E, \eta, \gamma$, qui cachent le niveau microscopique lorsqu'on considère des échelles macroscopiques. On mesurera ces paramètres au lieu de les calculer depuis le modèle microscopique.
+
+\section{Comment décrire son mouvement ?}
+
+
+\subsection{Tenseur taux de déformation}
+
+\begin{figure}%
+\includegraphics[width=7cm]{tenseur_taux_deformation.png}%
+\caption{}%
+\label{tenseur_taux_deformation}%
+\end{figure}
+
+Sur la figure \ref{tenseur_taux_deformation}, on peut voir que : 
+$$ \ud x + U(x+\ud x,t) \delta t = U(x,t) \delta t + \ud x' $$
+$$ \ud x' = \ud x + \grad U \ud x \delta t$$
+
+On appelle $\grad U $ le tenseur taux de déformation. 
+
+Remarque : Il faut veiller à prendre un $\delta t$ suffisamment petit pour que la vitesse soit identique tout le long. 
+
+\subsection{Utilisation sur les variations de volume}
+
+On définit un parallélogramme avec les vecteurs $\vec{a} \vec{b} \vec{c}$, de volume $\Omega$ (figure \ref{variation_de_volume}). 
+\begin{align}
+	\Omega &= (\vec{a} \wedge \vec{b})\vec{c} = abc \\
+	 \Omega(t+\delta t ) &= (\vec{a}' \wedge \vec{b}') \vec{c}' \\
+	 \vec{a}' &= \vec{a} + \grad U \cdot \vec{a} \delta t \quad \rightarrow a' = \begin{matrice}{c}
+		a \\ 0 \\ 0 
+	\end{matrice} + \begin{matrice}{ccc}
+		\derp{U_1}{x_1} & \derp{U_1}{x_2} & \derp{U_1}{x_3} \\
+			\derp{U_2}{x_1} & \derp{U_2}{x_2} & \derp{U_2}{x_3} \\
+				\derp{U_3}{x_1} & \derp{U_3}{x_2} & \derp{U_3}{x_3} 
+		\end{matrice} \begin{matrice}{c}
+		a \\ 0 \\ 0  
+	\end{matrice} \delta t = \begin{matrice}{c}
+		(1 + \derp{U_1}{x_1}) \delta t a \\ \derp{U_2}{x_1} \delta t a \\ \derp{U_3}{x_1} \delta t a
+	\end{matrice}
+\end{align}
+
+$$(\vec{a}' \wedge \vec{b}') \vec{c}' = abc[1 + Tr[\grad U] \delta t + o(\delta t^2 ]$$
+
+$$\Derp{\Omega}{t} = \Omega(t) \div (\vec{U})$$
+
+Variation de volume
+
+\subsection{Approche lagrangienne}
+
+\begin{figure}{h!}%
+\includegraphics[width=\columnwidth]{approche_lagrangienne.png}%
+\caption{}%
+\label{approche_lagrangienne}%
+\end{figure}
+
+
+$$ \Derp{A}{t} = \frac{A(\vec{x} + \vec{U} \delta t, t + \delta t) - A(\vec{x},t)}{\delta t} =  \frac{A(\vec{x},t) + \grad A \vec{U}\delta t - A (\vec{x},t)}{\delta t}$$
+$$ \Derp{A}{t} = \derp{A}{t} + \grad A \vec{U}$$
+où $\Derp{A}{t}$ est la dérivée lagrangienne (utile pour les lois de conservation), $\derp{A}{t}$ est le terme instationnaire, et $ \grad A \vec{U}$ est le terme convectif.
+
+\begin{figure}%
+\includegraphics[width=\columnwidth]{exemple_3.3.png}%
+\caption{Si on aspire l'air par le cône.}%
+\label{exemple_3.3.png}%
+\end{figure}
+
+$$ \Derp{U}{t} = \frac{U(x + \ud x ) ( U(x)}{\ud x/U} = U \derp{U}{x}$$
+
+\paragraph{Conservation de la masse} 
+
+\begin{align}
+	A = \rho \Omega \quad \Derp{ \rho \Omega}{t} &= 0 \txt{ loi de conservation} \\
+	\rho \Derp{\Omega}{t} + \Omega \Derp{\rho}{t} &= 0 \\
+	\rho \Omega \div \vec{U} + \Omega \Derp{\rho}{t} &= 0 \\
+	\derp{\rho}{t} + \grad \rho \vec{U} + \rho \div \vec{U} = 0 \\
+	\derp{\rho}{t} + \div ( \rho \vec{U}) &= 0 
+\end{align}
+
+\paragraph{\'Evolution de l'impulsion}
+
+\begin{align}
+\vec{A} &= \rho \Omega \vec{U} \\
+\Derp{\rho \Omega \vec{U}}{t} &= \vec{F} \txt{ loi de conservation} \\
+\rho \Omega \Derp{\vec{U}}{t} + \Derp{\rho \Omega}{t} &= \vec{F} \\
+\Derp{\rho \Omega}{t} = 0 \txt{ conservation de la masse} \\
+\rho \Derp{\vec{U}}{t} = \frac{\vec{F}}{\Omega} \\	
+\end{align}
+
+\begin{equation}
+\rho \derp{\vec{u}}{t} + \rho \bbar{\grad \vec{U}} \vec{U} = \vec{f} + \div \bbar{\sigma}
+\label{eq:NS}
+\end{equation}
+
+On définit alors une relation phénoménologique pour $\bbar{\sigma} (\vec{U})$
+
+\subsection{Les déformations qui changent les distances}
+
+\begin{align}
+	\ud \vec{x}' &= \ud x + \bbar{grad U } \ud \vec{x} \delta t \\
+	\bbar{grad U) &= \frac{1}{2}( \bbar{grad U} + ^t \bbar{grad U }) + \frac{1}{2} \bbar{grad U - ^t \bbar{grad U }}\\
+	&= \bbar{E} + \bbar{R}	
+\end{align}
+		
+$\bbar{E}$ représente l'extension, $\bbar{R}$ représente la rotation. 
+
+Pour $\bbar{R} $ : 
+\begin{align}
+	\vec{\omega_r}\wedge \vec{a} &= \begin{matrice}{c} \omega_{r1} \\ \omega_{r2} \\ \omega_{r3} \end{matrice} \wedge \begin{matrice}{c} a_1 \\ a_2 \\ a_3 \end{matrice} \\
+	&= \begin{matrice}{c} \omega_{r2}a_3 - \omega_{r3}a_é \\ \omega_{r3} a_1 - \omega_{r1}a_3 \\ \omega_{r1}a_2 - \omega_{r2}a_1 \end{matrice} \\
+	\bbar{R} \vec{a} &= \begin{matrice}{ccc} 0 & - \omega_{r3} & \omega_{r2} \\ \omega_{r3} & 0 & - \omega_{r1} \\ - \omega_{r2} & \omega_{r1} & 0 \end{matrice} \begin{matrice}{c} a_1 \\ a_2 \\ a_3 \end{matrice} \\
+	&=  \begin{matrice}{c} \omega_{r2}a_3 - \omega_{r3}a_é \\ \omega_{r3} a_1 - \omega_{r1}a_3 \\ \omega_{r1}a_2 - \omega_{r2}a_1 \end{matrice}
+\end{align}
+
+donc
+$$ \vec{\omega_r} = \frac{1}{2} \rot \vec{U}$$
+
+On définit la notation : 
+
+$$ U_{ij} = \derp{U_i}{x_j}\delta t
+
+En deux dimensions : 
+
+\begin{align}
+	\ud \vec{x}' &= \begin{matrice}{c} \ud x'_1 \\ \ud x'^2 \end{matrice} = \begin{matrice}{c} (1+U_{11}) \ud x_1 + U_{12} \ud x_2 \\ U_{21} \ud x_1 + (1+U_{22}) \ud x_2 \end{matrice} \\
+	\ud x'^2 &=\ud x'^2_1 + \ud x'^2_2 = (1+2U_{11}) \ud x^2_1 + 2 U_{12} \ud x_1 \ud x_2 + (1+2U_{22}) \ud x^2_2 + 2 U_{21} \ud x_1 \ud x_2 \\
+	&= \ud x^2 + 2 \left[ U_{11} \ud x^2_1 + (U_{12} + U_{21}) \ud x_1 \ud x_2 + U_{22} \ud x_2^2 \right] \\
+	&+ \begin{matrice}{cc} U_{11} & \frac{1}{2} (U_{12} + U{21}) \\ \frac{1}{2}(U_{12} + U_{21}) & U_{22}) \end{matrice} \begin{matrice}{cc} \ud x_1^2 & \ud x_1 \ud x_2  \\ \ud x_2 \ud x_1 & \ud x_2^2 \end{matrice}
+\end{align}
+
+Pour l'extension en 2D :  
+ $$	\bbar{E} &= \frac{1}{2} Tr[\bbar{1}] + (\bbar{E} - \frac{1}{2}Tr[\bbar{1}]$$
+ Pour l'extension en 3D : 
+ $$ \bbar{E} = \frac{1}{3} Tr[\bbar{1}] + ( \bbar{E} - \frac{1}{3} Tr[\bbar{1}])  $$
+ 
+ \paragraph{exemple}
+ 
+ \begin{figure}%
+\includegraphics[width=\columnwidth]{exemple_3.4_dilate.png}%
+\includegraphics[width=\columnwidth]{exemple_3.4_deforme.png}
+\caption{}%
+\label{exemple_3.4}%
+\end{figure}
+
+Pour la dilatation
+\begin{align}
+	\ud \vec{x'_1} &= \ud \vec{x} + \begin{matrice}{cc} \alpha Tr & 0 \\ 0 & \alpha Tr \end{matrice} \ud \vec{x} \\
+	\ud x'_1 &= (1 + \alpha Tr) \ud x_1 \\
+	\ud x'_2 &= (1 + \alpha Tr) \ud x_2 \\
+\end{align}
+	
+	Pour la déformation :
+
+\begin{align}
+		\ud \vec{x'_1} &= \begin{matrice}{c} \ud x'_{11} \\ x'_{12} \end{matrice} \\
+		&= \begin{matrice}{c} \ud x_1 \\ 0 \end{matrice} + \begin{matrice}{cc} B & E_{12} \\ E_{12} & -B \end{matrice} \begin{matrice}{c} \ud x_1 \\ 0 \end{matrice} \\
+		&= \begin{matrice}{c} (1 + B)\ud x_1 \\ E_{12}\ud x_1 \\
+		\ud \vec{x'_2}\begin{matrice}{c} \ud x'_{21} \\ x'_{22} \end{matrice} \\
+		&= \begin{matrice}{c} 0 \\ \ud x_2 \end{matrice} + \begin{matrice}{cc} B & E_{12} \\ E_{12} & -B \end{matrice} \begin{matrice}{c} 0 \\ \ud x_2 \end{matrice} \\
+		&= \begin{matrice}{c}E_{12}\ud x_2  \\(1 + B)\ud x_2  \end{matrice} 
+\end{align}
+
+
+\subsection{Relation phénoménologique de Navier}
+
+\begin{equation}
+\bbar{sigma} = \kappa \div \vec{U} \bbar{1} + 2 \eta \bbar{E_0}
+\label{eq:RpN}
+\end{equation}
+
+Elle remplace la relation qui ne fonctionne pas $$\bbar{\sigma} = \alpha \bbar{E}$$
+
+L'équation \ref{eq:RpN} est définie aussi pour l'élasticité dans les solides (les deux coefficients pour les solides sont les coefficients de Lamé, qui sont construits à partir du module d'Young et du coefficient de Poisson), elle ne prend pas en compte la réorganisation qui a lieu dans les liquides. On va pour tenir compte de la spécificité des liquides en ajoutant un terme pour les chocs : $-p \bbar{1}$. La loi phénoménologie de Navier est donc tirée de celle utilisée pour les solides élastiques, mais avec un terme correctif qui tient compte de la particularité des liquides.
+
+$\eta$ est la viscosité dynamique, $\kappa$ est la seconde viscosité, qui n'intervient qu'en cas de changement de volume. 
+
+\subsection{\'Equation de Navier-Stokes}
+
+\begin{equation}
+\rho \derp{\vec{u}}{t} + \rho (\bbar{grad U}) \vec{U} = \vec{f} + \div \bbar{sigma}
+\label{eq:NS}
+\end{equation}
+
+\begin{equation}
+\bbar{\sigma} = (\kappa \div \vec{U} - p) \bbar{1} + 2 \eta \bbar{E_0}
+\label{eq:RpN}
+\end{equation}
+
+\begin{align}
+	\div \bbar{\sigma} &= - \grad P + \kappa \grad(\div \vec{U}) + 2 \eta \div \bbar{E_0}\\
+	\bbar{E_0} &= \bbar{E} - \frac{1}{3} \div \vec{U} \bbar{1} \\
+	\bbar{E} &= \frac{1}{2}(\bbar{grad U } + ^t \bbar{grad U }) \\
+	\div \bbar{E_0} &= \div \div \bbar{E} - \frac{1}{3} \grad \div \vec{U} \\
+	&= \frac{1}{2} \Delta \vec{U} + \frac{1}{2} \grad \div \vec{U} - \frac{1}{3} \grad \div \vec{U} \\
+	2 \eta \div \bbar{E_0} &= \eta \Delta \vec{U} + \frac{1}{3} \eta \grad \div \vec{U}
+\end{align}
+
+D'où une réécriture de l'équation de Navier-Stokes : 
+
+\begin{equation}
+\rho \derp{\vec{U}}{t} + \rho \bbar{grad U } \vec{U} = \vec{f} - \grad p + \eta \Delta \vec{U} + (\kappa + \frac{\eta}{3}) \grad \div \vec{U}
+\label{eq:NS2}
+\end{equation}
+
+Cette équation remplace les $10^{26}$ équations de l'approche dynamique moléculaire.
+
+On lui ajoute la conservation de la masse : 
+\begin{equation}
+\derp{\rho}{t} + \div (\rho \vec{U}) = 0 
+\label{eq:CM}
+\end{equation}
+
+\subsection{La limite incompressible}
+$$C^2 = \derp{p}{\rho}\right|_s \quad \Rightarrow \quad \delta p \approx \frac{1}{C^2}\delta p $$
+$$\delta p \approx \rho U^2$$
+donc $$\frac{\delta \rho}{\rho} \approx \left(\frac{U}{C}\right)^2 = M_a^2$$
+où $M_a = \frac{U}{C}$ est le nombre de Mach. 
+
+Comme on a $$C = \sqrt{\frac{kT}{m}}$$ on peut en déduire : $$ M_a = \sqrt{\frac{mU^2}{kT}}$$
+
+
+Si $M_a \ll 1$ (ce qui est le cas le plus commun), $$\frac{\delta \rho}{\rho} \ll 1 \Rightarrow \rho \approx \moy{\rho}$$
+
+C'est ce qu'on appelle la limite incompressible. Cela simplifie la conservation de la masse en : 
+$$ \div \vec{U} = 0$$
+
+Et l'équation de Navier-Stokes se simplifie en : $$ \rho \derp{\vec{U}}{t} + \rho \bbar{grad U }\vec{U} = \vec{f} - \grad P + \eta \Delta \vec{U}$$
+
+\part{\'Ecoulements visqueux}
+
+\'Equation de Navier-Stokes : 
+$$ \rho \left[ \derp{\vec{u}}{t} + (\vec{u}\nabla)\vec{u} \right] = - \nabla p + \eta \Delta \vec{u}$$
+
+Conditions aux limites : 
+\begin{itemize}
+	\item sur la vitesse (condition de non-glissement de Navier) $$\vec{u}_{\txt{fluide/paroi}} = \vec{v}_{\txt{paroi}}$$
+	Exceptions : les écoulements de gaz dilué (il peut y avoir glissement à la paroi), polymères, fluides non mouillants
+	\item sur les contraintes (à la traversée d'une interface entre deux fluides, on doit écrire la continuité de la contrainte de cisaillement : $$ \eta_1 \derp{u_{1x}}{y} = \eta_2 \derp{u_{2x}}{y}$$ Cas particulier d'une surface libre $$\derp{u_{libre}}{y}\right|_{\txt{interface}}=0$$
+	\item Saut de pression et de contrainte normale à la traversée d'une interface courbe (équation de Laplace). 
+\end{itemize}
+
+\section{\'Ecoulements parallèles}
+
+Définition : écoulement unidirectionnel qui ne dépend pas de la direction de l'écoulement : $$\vec{u} = \begin{matrice}{c} u_x(y,z,t) \\ u_y \\ u_z \end{matrice} $$
+
+Conséquence : l'équation de Navier-Stokes est grandement simplifiée. 
+
+$$ \rho \derp{u_x}{t} + 0 = - \derp{p}{x} + \eta \left( \derp{2}{u_x}{y} + \derp{2}{u_x}{z} \right)$$
+
+Exemples d'écoulements : 
+
+\paragraph{Démarrage d'un plaque plane} 
+
+$$ \derp{u_x}{t} = \nu \derp{2}{u_x}{y} \quad \nu = \frac{\eta}{\rho}$$
+
+En ordre de grandeur, $\frac{U}{t}\approx \nu \frac{U}{\delta^2}$ où $\delta$ est l'épaisseur de la zone où existe le gradient de vitesse. $\nu$ est alors un coefficient de diffusion.
+
+
+
+
+\end{document}

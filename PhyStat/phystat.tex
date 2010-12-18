@@ -1,0 +1,1096 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage[colorlinks]{hyperref}
+
+\newcommand{\bra}[1]{\vert #1 \rangle}
+\newcommand{\ket}[1]{\langle #1 \vert}
+\newcommand{\moy}[1]{\langle #1 \rangle}
+\newcommand{\lam}{\lambda}
+\newcommand{\txt}[1]{\textrm{#1}}
+\newcommand{\ud}{\textrm{d}}
+\newcommand{\der}[3][]{\frac{\ud^{#1} #2}{\ud #3^{#1}}}
+\newcommand{\derp}[3]{\frac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newcommand{\Derp}[3][]{\frac{\textrm{D}^{#1} #2}{\textrm{D} #3^{#1}}}
+\newcommand{\bbar}[1]{\bar{\bar{#1}}}
+\newenvironment{matrice}{ \left[ \begin{array} }{\end{array} \right]}
+\renewcommand{\div}{\textrm{div}}
+
+
+
+\begin{document}
+
+Objectif : présenter les idées et les méthodes de la mécanique statistique hors d'équilibre (réponse dynamique, transport). 
+
+\tableofcontents
+
+\section{\'Equation de Langevin pour le mouvement brownien}
+
+Objectif : discuter le sens physique de l'équation de Langevin, dans le cas de fluctuations, discuter la réponse à une force extérieure. Mettre à jour le lien entre fluctuations et dissipations. 
+
+\subsection{Colloïdes et mouvement brownien}
+
+1827 : R. Brown, botaniste, observe des grains de pollen de taille micrométrique au microscope. Il observe que ces objets ont un mouvement erratique et incessant. On observe le même phénomène pour tous les objets dans une certaine gamme de taille  : assez gros par rapport aux molécules du fluide qui les porte, $kT$ comparable à la force de gravité : $\sigma < \left( \frac{kT}{\rho g}^{1/4} \right)$. 
+
+Le domaine colloïdal comprend les objets de taille comprise entre $10^{-8}$m et $10^{-6}$m . (le mot colloïdal vient de T. Graham en 1860)
+
+1905 Einstein article sur le mouvement brownien.
+1907 Confirmation expérimentale par J. Perrin, sur la sédimentation.
+
+Idées déjà présentes dans la thèse de Gaston Bachelier ("thèse de spéculation", sur l'économie) en 1900. En mathématiques, N. Wiener considère les premiers processus stochastiques en 1923. 
+
+
+Ces idées et méthodes sont en fait pertinents dès qu'il y a du bruit. 
+
+\subsection{Le modèle de Langevin (1908)}
+
+Une dimension, on note $x$ la variable de position, $v$ la vitesse. On s'intéresse à une seule particule colloïdale de masse $m$ dans un fluide porteur, à une température $T$.
+
+$$m \der{v}{t} = F_{ext} + \mathcal{F}$$ où $\mathcal{F}$ est une force de collision avec le fluide porteur \emph{à l'équilibre}.
+
+Cette force est a priori compliquée, puisqu'elle dépend des positions et vitesses de toutes les particules de fluides. Pour simplifier le problème, on extrait deux caractéristiques essentielles : un temps de corrélation très faible, $\tau_c \approx 10^{-15}$s et une composante de traînée dans $\mathcal{F}$. 
+
+$$F_{\txt{Stokes}} = 6 \pi \eta \sigma v$$ où $\eta$ est la viscosité dynamique, dans le cas d'un objet solide avec vitesse nulle du fluide au contact avec le solide (le coefficient est changé à $4\pi$ dans le cas d'une bulle dans un fluide). 
+
+L'équation de Langevin : 
+
+$$ m \der{v}{t} = -m \gamma v + R(t) + F_{ext}$$
+
+Pour décrire le fluide, on doit faire appel à des moyennes statistiques sur un grand nombre de molécules de fluide : 
+
+$$ \moy{R(t)} = \frac{1}{N} \sum_{i=1}^N R_i(t)$$
+
+$\moy{}$ commute avec $\der{}{x}$, $\der{}{t}$ \dots
+
+\paragraph{Hypothèses sur la force de Langevin $R(t)$}
+
+\begin{enumerate}
+	\item Fonction de corrélation $\moy{R(t)R(t+t')}$ indépendante de $t$, $\moy{R(t)}$ constante.
+	\item $\moy{R(t)}=0$, $F_{ext} = 0$, $ m \der{\moy{v}}{t} = - \gamma \moy{v} + \moy{R}$; pour avoir $\moy{v} = 0 \quad \Rightarrow \quad \moy{R} = 0$.
+	\item Fonction de corrélation $\mathcal{C} = \moy{R(t)R(t+t')}$ est une fonction paire par stationnarité. De plus $\mathcal{C}(\tau) \leq \mathcal{0}$ car elle a toutes les propriétés d'un produit scalaire.
+	\item On pose : $$\int_0^{\infty} \mathcal{C}(\tau) \ud \tau = \Gamma m^2$$. $tau_c$ est bcp plus faible que tous les autres temps du problème : $$\mathcal{C}(\tau) \propto \delta (\tau) \quad \Rightarrow \quad \mathcal{C}(\tau) = 2 \Gamma m^2 \delta (\tau)$$
+\end{enumerate}
+
+NB : $\mathcal{C}(0) \propto \frac{\Gamma m^2}{\tau_c}$
+NB2 : Il ne faut jamais oublier que $\tau_c >0$, n'est jamais complètement nul. 
+
+\subsection{Diffusion, relaxation, réponse}
+ \subsubsection{\'Evolution de la vitesse}
+ 
+ $F_{ext}=0$ et $\moy{R(t)R(t+t')} \propto \delta(\tau)$. A $t=0$, $v=v_0$.
+ $$m \der{v}{t} = - \gamma m v + R(t)$$ s'intègre par variation de la constante $v = A(t) e^{-\gamma t}$
+ $$ $$
+ $$ $$
+ 
+\begin{align}
+	 m \der{A}{t} e^{-\gamma t} &= R(t)\\
+	 v(t) &= v_0 e^{-\gamma t} + \frac{1}{m} \int_0^{t} R(t') e^{- \gamma (t-t')} \ud t' \\
+	 \rightarrow \moy{v} &= v_0 e^{- \gamma t} + \int \moy{R} = v_0 e^{- \gamma t} \\
+	 \rightarrow \sigma_v^2 &= \moy{v-\moy{v}^2} = \moy{v^2} - \moy{v}^2 \\
+	 &= \frac{1}{m^2} \int_0^t \ud t' \int_0^t \ud t''`\moy{R(t')R(t'')}e^{- \gamma (t-t')}e^{- \gamma (t-t'')} \\
+	 &= 2 \Gamma \int_0^t \ud t' e^{-2 \gamma (t-t')}\\
+	 &= \frac{\Gamma}{\gamma} (1-e^{-2 \gamma t}) 
+\end{align}
+
+
+\begin{itemize}
+	\item A $t=0$ on a $\sigma_v^2=0$ : certitude initiale sur la position. Avec le bruit, $\sigma$ augmente. 
+	\item $t \ll \gamma^{-1}$, $\sigma_v^2 = 2 \gamma t$ : diffusion dans l'espace des vitesses. $\Gamma$ est le coefficient de diffusion.  A cette échelle de temps, la friction est inopérante. 
+	\item $t \gg \gamma^{-1}$ la friction fait saturer $\sigma_v^2$. Marche aléatoire, $x$ à la place de $v$ :$\der{x}{t} =R - kx$ (diffusion + force de rappel). 
+\end{itemize}
+
+\subsubsection{Une première relation de fluctuation-dissipation}
+
+Pour $t \rightarrow \infty$, thermalisation avec le fluide, donc $\moy{v^2} = \frac{kT}{m}$. On remarque que $$\sigma_v^2 \rightarrow_{t \rightarrow \infty} \moy{v^2} \Rightarrow \frac{\Gamma}{\gamma} = \frac{kT}{m} \quad \gamma = \frac{m}{kT}\Gamma$$
+$\gamma$ est lié à la dissipation, $\Gamma$ est lié aux fluctuations. Une même physique est donc à l'oeuvre dans les deux phénomènes. Cette relation se réécrit : 
+
+$$\gamma = \frac{1}{mkT}\int_0^{\infty} \moy{R(0)R(t)}\ud t $$
+
+valable  tant que $\gamma^{-1} \gg \tau_c$ 
+
+\subsubsection{\'Evolution de la position}
+
+$$t=0, quad v=v_0,\quad x=0 \quad x(t)= \frac{v_0}{\gamma} (1 - e^{- \gamma t}) + \frac{1}{m} \int^t_0 \ud t' \int_0^{t'} \ud t'' R(t'')e^{- \gamma (t'-t'')}$$
+
+Exercice : $$x(t) = \frac{v_0}{\gamma}(1-e^{- \gamma t}) + \frac{1}{m \gamma} \int_0^t [1 - e^{- \gamma (t-t')}]R(t') \ud t'$$ en faisant une intégration par parties.
+
+$$\moy{x(t)} = \frac{v_0}{\gamma} (1-e^{- \gamma t})$$
+
+Pour obtenir la variance : 
+\begin{align}
+	\sigma_x^2 &= \moy{x - \moy{x}^2} \\
+	\der{\sigma_x^2}{t} &= 2 \moy{(v-\moy{v})(x-{\moy{x}})} \\
+	&= \frac{2 \Gamma}{\gamma^2}(1 - e{- \gamma t}) \quad \txt{exercice} \\
+	\txt{Et } \sigma_x^2 (t=0) &\quad \Rightarrow \quad \sigma_x^2 = \frac{2\Gamma}{\gamma^2}[t + \frac{1}{2\gamma}(1-e^{-2 \gamma t}) - \frac{2}{\gamma}(1- e{- \gamma t})] \\
+	t \ll \gamma^{-1} &\quad \sigma_x^2 \propto t^3 \Rightarrow \moy{x^2} - \moy{x}^2 \propto t^3 \Rightarrow \moy{x^2} \propto t^2 \txt{ régime balistique}\\
+	t \gg \gamma^{-1} &\quad \sigma_x^2 \approx \frac{2 \Gamma}{\gamma^2} t + o(1) \quad \txt{régime diffusif} \quad D = \frac{\Gamma}{\gamma^2} = \frac{kT}{m \gamma}
+\end{align}
+
+\subsubsection{Limite des grandes frictions (ou des temps longs, c'est pareil)}
+
+Aux temps longs, relaxation, donc l'inertie ne joue plus, on supprime le terme de gauche, on obtient : $$0 = - \gamma m v + R \quad m \gamma \der{x}{t} = R(t)$$ \'Equation de Smoluchowski, étudiée par Einstein. C'est l'équation de la marche aléatoire. 
+
+$$ x(t) = x_0 + \int_0^t \frac{1}{m \gamma} R(t') \ud t' \quad \moy{x^2}= 2 \frac{\Gamma}{\gamma^2}t = Dt$$
+
+C'est immédiatement diffusif (pas d'inertie). C'est une marche aléatoire, on peut donc utiliser une fonction de densité de probabilité : 
+
+$$ \derp{}{P}{t} = D \derp{2}{P}{x}$$
+
+Si on est en dimension quelconque : 
+
+\begin{align}
+	\derp{}{P}{t} &= D \nabla^2 P \quad \der{\moy{r^2}}{t} \\
+	&= \der{}{t} \int r^2 P(\vec{r},t) \ud \vec{r} \\
+	 &= \int r^2 \derp{}{P}{t} \ud \vec{r} \\
+	 &= D \int r^2 \nabla^2 P \ud \vec{r} \\
+	 &= 2 d D \int P(\vec{r},t) \ud \vec{r} \\
+\end{align}
+
+
+Si $R(t)$ est un processus stationnaire gaussien, avec $\mathcal{C}(\tau) \propto \delta(\tau) $, $x(t=)$ est défini par $\der{x}{t} = R$ est appelé processus de Wiener.
+
+Remaque : dans un potentiel harmonique $$m \gamma \der{x}{t} = - kx + R(t)$$
+C'est la même équation que Langevin sur $v$, sans force extérieure, mais avec $x$. C'est le processus d'Ornstein-Uhlenbeck. 
+
+Remarque : limite suramortie. 
+
+$$ \moy{R(t)x(t)} = \frac{1}{\gamma m} \int_0^t \moy{R(t')R(t)} \ud ^t $$
+
+Ici, en tant que physicien, on revient à $\tau_c \neq 0 $ et on corrige l'équation, ce qui nous donne finalement $$\int_0^t \moy{R(t)R(t')} \ud t' = \frac{1}{2} 2 \Gamma m^2$$
+
+$$\moy{R(t)x(t)} = m \frac{\Gamma}{\gamma}$$ fini.
+
+avec l'équation complète (inertie incluse) : 
+$$\moy{R(t)x(t)} \propto \tau_c \Gamma m$$ Cela traduit le fait que l'inertie empêche la particule de suivre instantanément la force fluctuante. 
+
+\subsubsection{Notion de mobilité, relation d'Einstein(1905)}
+
+Langevin inertiel + force extérieur : 
+
+\begin{align}
+	 m \der{v}{t} &= - \gamma m v + F_{ext} + R \\
+	\Rightarrow m \der{\moy{v}}{t} = - \gamma m \moy{v} + F_{ext} \\
+	m i \omega \hat{v} = - \gamma m \hat{v} + \hat{F}_{ext} \\
+	\hat{v} = \frac{1}{m} \frac{1}{i \omega + \gamma} \hat{F} \quad \frac{1}{m (i \omega + \gamma)} \txt{ impédance} \\
+\end{align}
+
+Si la force est constante : 
+$$ \moy{v} = \frac{1}{m \gamma} F_{ext} \Rightarrow \mu = \frac{1}{m \gamma} \Rightarrow D = \mu kT = \frac{kT}{m \gamma}$$
+
+C'est la relation d'Einstein, elle relie $D$ aux fluctuations, et $\mu$  la dissipation.
+
+Raisonnement d'Einstein : 
+On considère des colloïdes dans un potentiel $U_{ext}$, $n(\vec{r},t)$ la densité de particules. 
+$$ \mu (- \vec{\nabla} U_{ext} ) n(\vec{r},t) - D \vec{\nabla} n = \vec{0}$$
+qui s'intègre en $$n = n_0 e^{- \frac{- \mu}{D}U_{ext}}$$
+
+Cette équation doit être compatible avec la loi barométrique de Boltzmann : $$n \propto e^{- \frac{U_{ext}}{kT}}$$
+On doit donc avoir : 
+$$ \frac{\mu}{D} = \frac{1}{kT}$$
+
+Réécriture : 
+$$ - \vec{\nabla} (nkT) - r \vec{\nabla} U_{ext} = \vec{0}$$ \'Equation fondamentale de l'hydrostatique. 
+
+$P = nkT $ représente la pression osmotique dûe à la présence du colloïde. On voit apparaître une loi des gaz parfaits, car tout ce qu'on a fait n'est applicable à des solutions de colloïdes que si elles sont infiniment diluées (il n'y a pas d'interactions entre les colloïdes). 
+
+\subsubsection{Statistique de la vitesse}
+
+$$m \der{v}{t} = - \gamma m v + R$$ On ne fait aucune hypohtèse sur la statistique de $R(t)$. 
+
+$\tau_c \ll \gamma^{-1}$. On va découper l'axe temporel en tranches  de durée $\Delta t$ grandes devant $\tau_c$ et petites devant $\gamma^{-1}$ : $$\tau_c \ll \Delta t \ll \gamma^{-1}$$ 
+
+Comme il y a un grand nombre de bombardements, on n'a pas besoin de savoir exactement comment ils se produisent. 
+
+\begin{align}
+	v(t) &= v_0 e^{-\gamma t} + \frac{1}{n} \int_0^t R(t') e^{- \gamma (t-t')} \ud t' \\
+	&= v_0 e^{- \gamma t} + \frac{1}{m} e^{- \gamma t} \sum_{j=1}^N e^{j \Delta t} \int_{j \Delta t}^{(j+1) \Delta t} R(t') \ud t' \\
+	B(\Delta t) = \int_{j \Delta t}^{(j+1) \Delta t} R(t') \ud t'
+\end{align}
+ 
+$B$ est une somme d'un grand nombre de variables aléatoire indépendantes. Comme on a une gaussienne, on peut appliquer le TCL : 
+
+$v(t) \equiv $somme de variables aléatoires gaussiennes, donc la loi de $v$ est gaussienne, il suffit de connaître $\moy{v} = v_0 e^{- \gamma t}$ et $\sigma_v^2 = \frac{kT}{m}(1-e^{-2 \gamma t})$ .
+
+$$W(v,t | v_0) = [\frac{m}{2 \pi kT (1-e^{- 2 \gamma t})}]^{d/2} e^{- \frac{m(v-v_0 e^{- \gamma t})^2}{2 kT (1- e^{- 2 \gamma t})}}$$
+Loi conditionnelle, celle du processus d'Einstein-Uhlenbeck.
+
+\subsection{Dynamique des fluctuations de vitesse à l'équilibre.}
+
+On voudrait calculer $\moy{\delta v(t) \delta v(t')}$ où $\delta v = v - \moy{v}$ ce qui revient à étudier $\moy{v(t)v(t')}$. 
+
+$$ \der{}{t} \moy{v(t)v(t')} = - \gamma \moy{v(t)v(t')} + \frac{1}{m} \moy{R(t)v(t')} $$
+
+\subsubsection{Corrélations R-v}
+
+\begin{align}
+	v(t) &= \frac{1}{m} \int_{- \infty}^t R(t') e^{- \gamma (t-t')} \ud t' \\
+	 \moy{R(t)v(t')} &= \frac{1}{m} \int_{- \infty}^{t'} \moy{R(t)R(t'')}e^{- \gamma (t'-t'')} \ud t'' \\
+	 &= \frac{1}{m} \int_{-\infty}^{\infty} \moy{R(t)R(t'')} e^{- \gamma (t'-t'')} \theta(t' - t'')
+\end{align}
+
+\begin{itemize}
+	\item cas $t<t'$  (avec $|t-t'| \gg \tau_c$)  $\moy{R(t)v(t')} = 0 $, $v$ déterminée par $R$ aux temps $t<t'$ mais non corrélée à $R$ aux instants ultérieurs
+	\item cas $t>t'$, $\moy{R(t)v(t')} = 2 \Gamma m e^{- \gamma (t-t')}$ vitesse corrélées à la force dans le passé sur une fenêtre $\gamma^{-1}$
+	\item cas $ t \approx t'$ $$\der{\moy{v^2}}{t} = 0 = 2 \moy{v \der{v}{t}} = 2 \moy{v(-\gamma v + \frac{R}{m})} \Rightarrow 0 = - \gamma \moy{v^2} + \frac{1}{m} \moy{R(t)v(t')} \Rightarrow \moy{R(t)v(t')} = \gamma kT$$
+\end{itemize}
+
+\subsubsection{Auto-corrélation de la vitesse}
+
+$$\moy{v(t)v(t')} = \frac{\Gamma}{\gamma}e^{- \gamma |t-t'|}$$ peut se retrouver très vite.
+
+Remarque : on prend $t>t'$, on a : 
+$$\der{}{t} \moy{v(t)v(t')} = - \gamma \moy{v(t)v(t')}$$ qui est la même que $$ \der{\moy{v}}{t} = - \gamma \moy{v}$$
+
+Ici la moyenne dans le premier cas porte sur les variable du bain et sur $v_0$ initial de la particule en équilibre avec le fluide (on a alors deux niveaux de moyenne). Dans le second cas, on a uniquement une moyenne sur le bruit à $v_0$ fixé.
+
+On voit apparaître un lien entre la régression des fluctuations d'équilibre et la loi de relaxation pour un système perturber hors équilibre. Cette relation a été formalisée par Onsager (hypothèse de régression d'Onsager, démontrée 20 ans plus tard). 
+
+ \subsubsection{Une nouvelle relation de fluctuation-dissipation}
+ 
+ Avec $\moy{v(t)v(0)} = \frac{kT}{m} e^{- \gamma |t|}$
+ $$\int_0^{\infty} e^{- i \omega \tau} \moy{v(0)v(\tau)} \ud \tau = \frac{kT}{m} \frac{1}{\gamma + i \omega} = kT\mathcal{A}(\omega)$$
+ $$\mathcal{A}(\omega) = \frac{1}{kT}\int_0^{\infty} e^{i \omega \tau}\moy{v(0)v(\tau)}\ud \tau $$
+ Théorême de fluctuation -dissipation.
+ 
+ Lien statique $\omega \rightarrow 0$ $$\mathcal{A}(0) = \frac{1}{m \gamma} = \frac{D}{kT}$$
+ $$ D = \int_0^{\infty}\moy{v(0)v(t)} \ud t$$
+ 
+ Relation de Green-Kubo, traitée par G.Taylor. 
+
+\subsection{Intégration numérique}
+
+Domaine de Dynamique Brownienne, méthode de simulation à solvant pris en compte implicitement via une force aléatoire de Langevin. C'est beaucoup plus rapide que les méthodes explicites. C'est la dynamique moléculaire. 
+
+$$\der{x}{t} = - \derp{}{V}{x} + R(t) \quad \moy{R(t),R(t+\tau)} = 2 \delta(\tau)$$
+
+On passe en variables adimensionnées : 
+$$ x(t+\Delta t) = x(t) - (\derp{}{V}{x}) \Delta t + \int_t^{t+ \Delta t} R(t') \ud t'$$
+On note $$B(\Delta t) = \int_t^{t+ \Delta t} R(t') \ud t'$$ qui est une somme sur un grand nombre de variables aléatoires décorrélées. $B(\Delta t) $ est une variable aléatoire gaussienne. 
+
+$$ \moy{B} = 0 \quad \moy{B^2} = \int_0^{\Delta t} \ud t' \int_0^{\Delta t} \moy{R(t') R(t'') \ud t''} = 2 \Delta t$$
+d'où
+$$ x(t+\Delta t) = x(t) - \derp{}{V}{x} Delta t + \sqrt{2 \Delta t} b $$ où $b=g(0,1)$ une variable aléatoire gaussienne de moyenne nulle et de variance 1.  $$g(b) = \frac{1}{\sqrt{2 \pi}}e^{- \frac{b^2}{2}}$$ est une densité de probabilité. 
+
+Remarque : il reste à engendrer la variable aléatoire b. Une méthode simple mais très approximative : $$b = (\sum_{i=1}^{12}y_i -6$$ avec $y_i$ qui prend des valeurs aléatoires uniformément sur [0,1]. 
+Une méthode plus exacte, la méthode de Bax-Müller. $$b_1 = \sqrt{-1 \ln(y_1)} \cos (2 \pi y_2) \quad b_2 = \sqrt{_2 \pi \ln y_1} \sin (2 \pi y_2)$$ où les variables aléatoires $b_1$ et $b_2$ suivent une loi gaussienne et sont indépendantes. 
+
+Problème : erreur en $O(\Delta t)$ et pas en $O( \Delta t^2)$ comme usuellement, on passe alors à R.K. 
+
+\subsection{Conclusion}
+
+\subsubsection{Ordres de grandeur}
+
+La modélisation du bruit $\delta$-corrélé suppose $\gamma^{-1} \gg \tau_c $ Soit $\tau_c \approx 10^{-15}$s, pour un colloïde de rayon $\sigma$ $$m \gamma = 6 \pi \eta \sigma$$
+$$ \gamma^{-1} = \frac{\rho \sigma^3}{6 \pi \eta \sigma} \propto \sigma^2$$
+En faisant l'application numérique, on voit que $\gamma^{-1} \approx 10^{-7}$s. 
+
+Ordre de grandeur de $D$ $$ D = \frac{kT}{m \gamma} \approx \frac{kT}{6 \pi \eta \sigma} $$
+
+En prenant $\sigma = 1 \mu$m on a $D = 10^{-12}m^2/s$. 
+
+A comparer au coefficient de petites molécules dans l'eau $D = 10^{-9}m^2/s$, au coefficient de diffusion pour un atome dans le gaz à température ambiante $D = 10^{-5}m^2/s$. 
+
+Combien de temps une particule brownienne met-elle pour diffuser sur un distance observable. $\sigma^2 = D t^*$ et donc $t^* \approx 1s$. 
+
+\subsubsection{Résumé}
+
+$$m \der{v}{t} = - \gamma v + F_{ext} + R \quad \moy{R(t)R(t+\tau)} = 2 mkT \gamma \delta(\tau)$$
+
+Cette équation donne lieu à un comportement diffusif aux temps longs. On a la relation d'Einstein : 
+
+$$ D = \frac{kT}{m \gamma} = \mu kT = \int_0^{\infty} \moy{v(t)v(t+\tau)} \ud \tau $$
+
+En dimension quelconque, on rajoute des flèches : 
+$$ \moy{\vec{R(t)}\vec{R(t+\tau)}} = 2 d m kT \gamma \bbar{I} \delta (\tau)$$
+$$ D = \frac{1}{d} \int_0^{\infty}  \moy{\vec{v}(0)\vec{v}(\tau)}\ud \tau$$
+
+\subsubsection{Généralité de l'approche}
+
+Cette équation dépasse le cadre colloïdal. Dans n'importe quelle situation où le bruit joue un rôle important, elle peut être utilisée. Par exemple avec un circuit RC en charge, on a des dissipations par la résistance R, donc des fluctuations : 
+$$ V_{ext} = \frac{Q}{C} + R \dot{Q} + U(t) \quad \moy{U(0)U(\tau)} = 2 \Gamma \delta(\tau)$$
+$$ \moy{U} = 0 \quad \frac{\moy{Q^2}}{C} = \frac{kT}{2}$$ grâce à l'équipartition de l'énergie. $$\Gamma = kTR$$ indépendant de C. 
+
+Source de bruit de résistance : 
+$$R = \frac{1}{2 kT} \int_{- \infty}^{\infty} \moy{U(t)U(t+\tau)}\ud \tau $$ Théorême de Nyquist.
+
+\subsubsection{L'arnaque dévoilée : l'équation de Langevin généralisée}
+
+La discussion du cas $\tau_C \neq 0 $ récèle une incohérence, parce qu'on a considéré que la force de friction est instantanée, ce qui est faux en fait. On discute le lien entre la position et la vitesse : 
+
+$$v(t) = \int_{-\infty}^{\infty} \chi(t') R(t-t') \ud t' \quad \rightarrow \quad \chi(t) = \theta(t)e^{- \gamma t}$$
+On a donc un temps de montée non-nul. 
+
+Prise en compte de ces effets via l'équation de Langevin  généralisée : 
+$$ m \der{v}{t} = - m \int_{- \infty}^t \tilde{\gamma}(t-t') v(t') \ud t' + R(t) + F_{ext}$$
+
+avec $$\gamma = \int_0^{\infty} \tilde{\gamma}(\tau) \ud \tau $$ et $$\tilde{\gamma}(\tau) \propto \delta(\tau)$$ uniquement pour les $\tau_c \rightarrow 0 $. 
+
+$$ \moy{R(t)R(t')} = \frac{kT}{m}\tilde{\gamma}(t-t')$$
+
+
+\section{Généralités sur les processus stochastiques ($\hbar$ =0)}
+
+Objectif du chapitre : acquérir du vocabulaire %parce que moi j'avais deux ennemis dans la vie : le vocabulaire et les épinards. Maintenant, j'ai la botte secrète, et je mange plus d'épinards.
+et une vue d'ensemble. 
+
+\subsection{Quelques définitions}
+
+\textit{Processus aléatoire} : $y(t)$ fonction dont on a pas de connaissance certaine, décrit par des lois probabilistes. Pour la caractériser entièrement, il faut connaître $W_1(y,t)$ à tous les temps, $W_2(y_1,t_1,y_2,t_2)$ pour tout $t_1$ et pour tout $t_2$ etc \dots
+
+On va ordonner la séquence en commençant par les temps plus petits, même si le jeu de fonctions initial est symétrique.
+
+Exemple :$$\moy{y(t_1)y(t_2)} = \int y_1 y_2 W_2(y_1,t_1,y_2,t_2)\ud y_1 \d y_2 $$ 
+$$ W_2(1,3) = \int \ud (2) W_3(1,2,3) \quad \forall \quad t_2$$
+
+On introduit des probabilités conditionnelles : 
+$$ W_{1|1}(y_2t_2 | y_1 t_1) = \frac{W_2(y_1 t_1 y_2 t_2)}{W(y_1 t_1)}$$
+
+Notation standard, mais pas universelle $p(A|B)=$ probabilité de A sachant B. Le théorême de Bayes nous donne : 
+$$ p(A|B)P(B) = P(A \cap B)  = P(B|A)P(A) $$
+
+Propriété immédiate : $$W_1(y_2t_2) = \int \ud y_1 W_2(1,2) = \int \ud y_1 W_1(1) W_{1|1}(2 |1) = \int \ud y_1 W_1(y_1 t_1)W_{1|1}(y_2 t_2 | y_1 t_1)$$ proba de transition.
+
+Un processus gaussien : si toutes les $W_n$ sont gaussiennes (vectoriel)
+
+$$W(\vec{x}) = \frac{1}{\sqrt{2\pi \det{\bbar{A}^{-1}}}}e^{- \frac{1}{2} \vec{x} \bbar{A} \vec{x}} $$
+
+\subsection{Processus Markoviens}
+
+\subsubsection{Définition et conséquences}
+
+Un processus est markovien si pour $t_1 \leq t_2 \cdots \leq t_n$, on a $$W_{1|n-1}(y_n t_n | y_1,t_1 \cdots y_{n-1}t_{n-1})=W_{1|1}(y_n,t_n | y_{n-1}t_{n-1})$$
+
+Il n'y a donc pas de mémoire. Il est donc simple de tous les calculer en empilant les probabilités de transition. Tout est caractérisé par la donnée des conditions initiales et par la probabilité de transition (un peu comme un récurrence). Si le processus est stationnaire, il existe une limite pour $t \rightarrow \infty$. 
+
+Intégrons sur $\ud y_2$ 
+$$ \int \frac{\ud 2 W_3(1,2,3)}{W_1(1)} = \int \ud y_2 W_{1|1}(3|2)W_{1|1}(2|1)$$
+donc 
+$$ W_{1|1}(y_3,t_3 | y_1 t_1) = \int \ud y_2 W_{1|1}(y_3 t_3 | y_2 t_2) W_{1|1}(y_2 t_2 | y_1 t_1) \quad \forall t_2 $$
+Relation de Chapman-Kolmogorov.
+
+Contrainte sur la probabilité de transition : 
+pour un processus stationnaire : 
+$$ T_{\tau}(y_2|y_1) = W_{1|1}(y_2,t_2|y_1,t_1) \quad \tau =t_2-t_1$$
+
+La relation de C-K peut se voir comme : 
+$$T_{\tau+\tau'} = T_{\tau'}T_{\tau}$$ c'est à dire : $$ T_{\tau + \tau'}(y_3 |y_1) = \int \ud y_2 T_{\tau}(y_3|y_2)T_{\tau'}(y_2|y1)$$ on a $$\int \ud y_2 \psi(y_2)T_{\tau}(y_2|y_1) = \psi(y_1)$$ où $\psi$ est un vecteur propre associé à la valeur propre 1 de la matrice $T_{\tau}$ tel que $\psi T_{\tau} = \psi$ 
+
+$$\int \ud y_1 T_{\tau}(y_2 | y_1) W_1(y_1) = W_1(y_2) $$ donc $$ T_{\tau} W_1 = W_1$$
+
+Donc $T_{\tau}$ est un opérateur ademttant 1 comme caleur propre avec un vecteur propre à gauche $\psi\equiv1$ et un vecteur propre à droite $W_1(y)$. 
+
+NB : Pour un processus stationnaire, $W_{1|1}$ est fonction de $\tau$ et $W_1$ est indépendant de $t_1$.
+
+Si on a uniquement la première condition, on qualifie le processus homogène, ou plutôt de processus à transition stationnaire. 
+
+\subsubsection{Quelques exemples de processus markoviens}
+
+$$W_{1|1}(y_2,t_2|y_1 t_1) = \frac{1}{\sqrt{2 \pi \tau}}e^{- \frac{(y_2-y_1)^2}{2 \tau}}$$
+
+$$W_1(y,t=0) = \delta(y)$$
+
+Processus de Wiener $\dot{x} = R(t)$
+$$W(y,t) = \int \ud y_1 W_1(y_1)W_{1|1}(y,t|y_1) = \frac{1}{\sqrt{2 \pi t}}e^{\frac{-y^2}{2t}}$$
+
+Exemple le plus répandu : processus de Ornstein-Ulhlenbeck : 
+$$W_{1|1}(y_2 t |y_1) = \frac{1}{\sqrt{2\pi(1-e^{-2t})}}e^{\frac{(y_2-y_1e^{-t})^2}{2(1-e^{2t})}} $$
+$$W_{1}(y) = \frac{1}{\sqrt{2 \pi}}e^{\frac{-y^2}{2}}$$
+Rencontré comme solution de l'équation de Langevin : $$\dot{x} = - y + R(t) \quad \rightarrow \quad \moy{y(\tau)y(0)} = e^{- \tau}$$ 
+Ce processus est stationnaire, gaussien et markovien. D'après le théorême de Doob, c'est le seul qui ait ces propriétés. 
+
+Donc si on a un processus stationnaire gaussien, l'autocorrélation est exponentielle. 
+
+Les processus de Poisson
+
+L'algorithme Page Rank de google.
+
+\subsubsection{\'Equation maîtresse}
+
+$$W_{1|1} \rightarrow W \quad W_1 \rightarrow P $$
+On a $$P(y,t+\Delta t) = \int \ud y' P(y',t)W(y,t+\Delta t | y't)$$
+
+Processus stationnaire, équation de diff sur P ? 
+
+$$P(y,t+\Delta t) - P(y) = \int \ud y' P(y',t)W(y \Delta t |y') - \int \ud y'P(y,t)W(y' \Delta t |y) $$
+
+On note $$w(y|y')=\lim_{\Delta t \rightarrow 0} \frac{W(y,\Delta t | y')}{\Delta t}$$
+$$\derp{}{P}{t}(y,t) = \int \ud y' \left[ w(y|y')P(y',t) - w(y'|y)P(y,t) \right] $$
+\'Equation maîtresse (pilote).  C'est un bilan gain-perte.
+
+ça semble général, mais ne concerne que les processus markoviens (il s'agit d'une question de conditions initiales). Normalement l'équation pilote devrait les contenir, mais les processus markoviens n'ont pas de mémoire, donc on n'en a pas besoin. 
+
+A l'équilibre  : $$\int \ud y' w(y|y') P^*(y') = \int \ud y' w(y'|y) P(y) $$
+Equilibre détaillé : $$w(y|y') P^*(y') = w(y'|y) P^*(y)$$
+
+Vrai pour les processus classiques avec Hamiltonien.
+
+\subsubsection{Le cas des chaînes de Markov}
+
+Chaîne simple à temps discret $t_n + W(y,t|y',t')$ stationnaire $\rightarrow f(t-t')$
+
+Si $y$ ne peut prendre qu'un nombre fini de valeurs $N$, la chaîne est finie, donc $\bbar{W}$ la matrice de taux de travail est de dimensions $N*N$. $\vec{P}(t_n)$ vecteur $N$. On a $$\vec{P}(t_n) = \bbar{W}\vec{P}(t_n) = \bbar{W}^{n+1} \vec{P}(t_0)$$
+
+Il s'agit donc d'étudier les puissances de $\bbar{W}$. C'est une matrice stochastique (attention, la matrice n'est pas aléatoire). $$(1 \cdots 1) \bbar{W} = (1 \cdots 1)$$
+
+donc $(1 \cdots 1)$ est un vecteur propre à gauche de $\bbar{W}$. si on transpose, $$\begin{matrice}{c} 1 \\ \vdots 1 \end{matrice}$$ qui est un vecteur propre à droite de $$^t \bbar{W}$$, avec la valeur propre 1. Donc $$\bbar{W}$$ admet un vecteur propre à droite  pour $$^t \bbar{W}$$ avec une valeur propre 1. 
+
+On a donc au moins une solution stationnaire, est-elle unique ? (Remarque : les autres valeurs propres stationnaire sont complexes et de module plus petit que 1)
+
+L'unicité est assurée par le théorême de Perron-Frobenius : 
+
+\textit{Si une matrice réelle a tous les éléments sont positifs alors la plus grande valeur propre est non dégénérée, le vecteur propre associé a tous ses éléments positifs, et les autres vecteurs propres sont de module plus petit. }
+
+Donc la solution stationnaire pour la chaîne de Markov est unique. On sait donc alors que : 
+$$\vec{P}(t_n) = \bbar{W}^{n+1}\vec{P_0} \rightarrow_{n \rightarrow \infty} \vec{P}^* $$
+
+Dans le cas d'une chaîne : $$\der{p_i}{t} = \sum_j W_{ij}P_j - W_{ji}Pi$$
+
+Par exemple, pour une marche aléatoire en dimension 1 :
+
+$$ P_i(t_{n+1}) = \frac{1}{2} [P_{i-1}(t_n) + P_{i+1}(t_n)]$$
+$$ P_{i}(t_{n+1}) - P_i(n) = \frac{1}{2} \frac{1}{2} [P_{i+1}(t_n) + P_{i-1}(t_n) - 2 P_i(t_n)]$$
+C'est un Laplacien discret.
+$$\derp{}{P}{t} = D \nabla^2 P $$
+
+Si $d>1$, c'est immédiat
+
+La marche auto-évitante, que devient la loi $\moy{n^2}^{1/2} \propto \sqrt{t}$ en présence de volume exclus ? 
+
+$\moy{r^2}^{1/2} \propto n$ en dimension 1 $\moy{r^2}^{1/2}\propto n^{3/4}$ en dimension 2, et $\moy{r^2}^{1/2}\propto n^{\nu}$ où $\nu = \frac{3}{d+2}$ (exposant de Flory) pour les 4 premières dimensions. C'est très proche de la valeur exacte qui n'est pas connue, mais que l'on peut approcher numériquement. 
+
+\subsubsection{L'exemple du mouvement brownien}
+
+$$m \der{v}{t} = - \gamma m v + >R(t)$$
+
+Si $R(t)$ n'est pas $\delta$ corrélé, il n'y a pas de mémoire, l'équation différentielle est du premier ordre et donc le processus est Markovien. 
+
+Pour $\tau_c$ fini, ce n'est plus le cas, sauf si on échantillonne avec un $\Delta t \gg \tau_c$. 
+
+Pour la position $x(t)$, l'équation différentielle est du deuxième ordre, ce n'est pas markovien. Cependant, si  on échantillonne $\Delta t \gg \gamma^{-1}$, alors on est markovien dans cette limite. (On peut le retrouver avec le théorême de Doub).
+
+$$ \hat{v} (\omega)= \frac{1}{m(i \omega + \gamma)} \hat{R}(\omega)$$ $\hat{v}$ a les même propriétés que statistiques que $\hat{R}$, donc si $\hat{R}$ est gaussien, $\hat{v}$ aussi, et donc $v(t)$ aussi. 
+
+$$ J_v(\omega) = | v(\omega) |^2 = \frac{1}{m^2(\gamma^2 + \omega^2)}J_R(\omega)$$
+où $J$ est la densité spectrale. Si on veut que le processus soit markovien, il faut d'aptrès Doub que la densité spectrale soit Lorentzienne. $J_R(\omega) =$cste, alors $R$ est $\delta$ corrélé. 
+
+Avec une force : $$ m \der{2}{x}{t} = - \gamma m \der{x}{t} - m \omega^2 x + R(t)$$ le processus n'est pas markovien.
+
+Mais le processus $(x(t),v(t))$  est markovien, parce qu'on a besoin de ne savoir que ces deux données à un instant donné pour savoir la prochaine position. 
+
+Se demander si un phénomène physique est markovien n'a pas vraiment de sens, car ça dépend de la manière dont on le considère. 
+
+\subsection{L'équation de Fokker-Planck}
+
+\subsubsection{Obtention}
+
+\'Equation maîtresse : 
+$$ \derp{}{P}{t}(y,t) = \int \ud (\delta y) [w(y|y-\delta y)P(y-\delta y,t) - w(y - \delta y | y )P(y,t)]$$ où l'on intègre sur l'ensemble des couples position de départ - position d'arrivée. 
+
+Pour $$w(y|y-\delta y ) = \tilde{w}(\delta y , y - \delta y) $$
+
+On fait un DL par rapport au 2e argument de cette fonction $\tilde{w}$ car on s'intéresse aux processus à diffusion lente (le $w$ pour cette transition ne prend de valeur notable que pour les $\delta y $ petits, car macroscopiquement il ne peut y avoir de changement majeur). 
+
+\begin{align}
+	 \derp{}{P}{t} &= \int \ud \delta y \left[ \tilde{w}(\delta y , y - \delta y)P(y - \delta y,t) - \tilde{w}(\delta y , y) P(y,t) \right] \\
+	 &= \sum_{n=1}^{\infty} \int \ud (\delta y) \frac{(- \delta y)^n}{n!} \derp{n}{}{y} [\tilde{w}(\delta y,y)P(y,t)] \\
+	 &= \sum_{n=1}^{\infty} (-1)^n \derp{n}{}{y} [M_n(y)P(y,t)] \\
+	 M_n(y) &= \frac{1}{n!} \int \ud (\delta y) (\delta y)^n \tilde{w}(\delta y,y) \\
+	 &= \lim_{\delta t \rightarrow 0} \frac{1}{n!} \int \ud (\delta y) (\delta y)^n \frac{W(y+\delta y,\delta t |y)}{\delta t} \\
+	 &= \lim_{t \rightarrow 0} \frac{1}{n!} \moy{\frac{(\delta y)^n}{\delta t}} \\
+\end{align}
+
+Théorême de Pawula affirme que si la série ne s'arrête pas après le deuxième terme, alors il comporte un nombre infini de termes. Dans bien des cas, la série s'arrête après le deuxime terme, ce qui nous donne l'équation de Fokker-Planck.
+
+\begin{align}
+	\derp{}{P}{t} &= - \derp{}{}{y}(M_1(y) P(y,t)) + \derp{2}{}{y} (M_2(y) P(y,t)) \\
+	\txt{Dans le cas vectoriel} & \\
+	\derp{}{P}{t} &= - \vec{\nabla}_{\vec{y}}(\vec{M}_1(y)P) + \vec{\nabla}_{\vec{y}}\vec{\nabla}_{\vec{y}}:(\bbar{M_2}(y)P(y,t)) \\
+	& \vec{\nabla}_{\vec{y}}\vec{\nabla}_{\vec{y}}:(\bbar{M_2}(y)P(y,t)) = \sum_{ij} \partial_i \partial_j [(M_2)_{ij}P] \\
+\end{align}
+ 
+ \'Etat stationnaire, une dimension : 
+ 
+ 
+\begin{align}
+	M_1 P + \derp{}{y}(M_2(y)P) &= 0 \\
+	\frac{M_1}{M_2} + \derp{}{}{y}(\ln (M_2)P) = 0 \\
+	P(y) \propto & \frac{1}{M_2(y)} e^{- \int^y \frac{M_1(y)}{M_2(y)}\ud y } 
+\end{align}
+
+\subsubsection{Retour sur le mouvement brownien}
+
+$$m \der{v}{t} = - m \gamma v + R(t) + F_{ext}$$
+
+Quel jeu de variable choisir ? 
+
+\begin{align}
+	\derp{}{P}{t} &= \derp{}{}{x}(M^{(1)}_x P (x,v,t)) - \derp{}{}{v} (M_v^{(1)}P) + \vec{\nabla}\vec{\nabla}:(\bbar{M^{(2)}}P) + \txt{ordres supérieurs} \\
+	\Delta x &= v \delta t + \sigma (\delta t) \\
+	\Delta v &= \left[ - \gamma v + F_{ext} \right] \Delta t + \frac{1}{m} \int_0^{\Delta t} R(t')\ud t' + o(\Delta t) \\
+	\Rightarrow M_x^{(1)} &= \lim_{\Delta t \rightarrow 0} \frac{\moy{\Delta x}}{\Delta t} = v \\
+	M_v^{(1)} &= \lim_{\Delta t \rightarrow 0} \frac{\moy{\Delta v}}{\Delta t} &= - \gamma v + F_{ext} \\
+	M^{(2)}_{xx} &= \lim_{\Delta t \rightarrow 0 } \frac{1}{2} \frac{\moy{(\Delta x)^2}}{\Delta t} = 0 = \lim_{\Delta t \rightarrow 0 } \frac{v^2 \Delta t}{2} \\
+	M_{vv}^{(2)} &= \lim_{\Delta t \rightarrow 0} \frac{1}{2} \frac{\moy{(\Delta v)^2}}{\Delta t} \\
+	&= \gamma = \frac{\gamma kT}{m} \\
+	M^{(2)}_{xv} &= \lim_{\Delta t \rightarrow 0} \frac{1}{2} \frac{\moy{\Delta x \Delta v}}{Delta t} = \lim \moy{v \Delta v} = 0 \end{align}
+	
+	
+	$$(\derp{}{}{t} + v \derp{}{}{x} + \frac{F_{ext}}{m}\derp{}{}{v} )P = \mathcal{L}_{libre} P(x,v,t) = \gamma [\derp{}{}{v} (vP + \frac{kT}{m} \derp{}{}{v})P] $$ où $\mathcal{L}$ est l'opérateur de mouvement libre. 
+	C'est l'équation de Kramers. 
+	
+	Plus généralement 
+	$$ (\derp{}{}{t} + \vec{v} \vec{\nabla}_{\vec{r}} + \frac{\vec{F}_{ext}}{m} \vec{\nabla}_{\vec{v}})P(\vec{x},\vec{v},t) = \gamma \derp{}{}{\vec{v}} [\vec{v}P + \frac{kT}{m} \vec{\nabla}_{\vec{v}}P]$$
+	
+	On vérifie que $$P^*(x,v) \propto e^{- \beta U_{ext}}e^{- \frac{1}{2} m v^2}$$ est solution de Kramers stationnaire. 
+	
+	On peut voir Kramers comme une équation de conservation de probabilité 
+	
+$$	(\derp{}{}{t} + \vec{v} \vec{\nabla}_{\vec{r}} + \frac{\vec{F}_{ext}}{m}\vec{\nabla}_{\vec{v}})P = \vec{\nabla}_{\vec{v}} \vec{J} = 0 $$
+$$\vec{J} = - \gamma \vec{v}P - \Gamma \vec{\nabla}_{\vec{v}}P $$
+Avec $- \gamma \vec{v}P$ un terme de convection et $- \Gamma \vec{\nabla}_{\vec{v}}P$ un terme de diffusion. 
+
+Dans la limite des temps longs (ou des grandes frictions), le degré de liberté de la vitesse est relaxé, et on devrait retrouver une équation de diffusion classique pour $\rho(x,t) = \int \ud v P(x,v,t)$. C'est bien le cas, mais le montrer à partir de Kramers quand $\gamma \rightarrow \infty$ est délicat (cf TD2). 
+
+Il est plus simple de se placer sur une échelle $t \gg \gamma^{-1}$ ce quie fait que $x$ est markovien et donc on peut utiliser l'équation de Fokker-Planck correspondante. 
+
+$$ \derp{}{\rho}{t}(x,t) = - \derp{}{}{x}(M^{(1)}_x \rho) + \derp{}{}{x}^2(M^{(2)}_{xx}\rho) + \dots $$
+
+Pour $t \gg \gamma^{-1}$ 
+\begin{align}
+	\frac{\Delta_x}{\Delta t} = \mu F_{ext}(x) + o(\Delta t) \\
+	M_{xx}^{(2)} &= \frac{1}{2} \lim_{\Delta t \rightarrow 0} \frac{\moy{\Delta x \Delta x}}{\Delta t} = D \\
+	\derp{}{}{t}\rho &= - \derp{}{}{x}(\mu F_{ext} P - D \derp{}{}{x} P ) 
+\end{align}
+\'Equation de Schmolukowski.
+
+Solution stationnaire $$\rho(x,t) \propto e^{- \frac{\mu}{D}U_{ext}} $$
+
+Revoir la notion de grande frcition. La description a un sens pourvu que la séparation d'échelle entre $\gamma^{-1}$ et le temps de relaxation de position ($t_0 = \frac{\sigma^2}{D}$)
+
+$$ \gamma^{-1} \ll ? \ll \frac{\sigma^2}{D}$$ 
+$$ \frac{mkT}{(m \gamma)^2} \ll \sigma^2 \quad \Rightarrow \quad \frac{\rho \sigma^3 kT}{(6 \pi \eta \sigma)^2} \ll \sigma^2$$
+
+Cette hypothèse est valable dès l'échelle moléculaire, donc a fortiori pour l'échelle du mouvement brownien. 
+
+\subsubsection{Quelques méthodes de résolution}
+
+$$ \derp{}{}{t}P(v,t) = \gamma \derp{}{}{v} \left( vP + \frac{kT}{m} \derp{}{}{v}P \right) $$
+particule de Rayleigh. 
+
+Déduite de $derp{v}{t} = - \gamma v + \frac{R}{m}$ on doit donc trouver le $P(v,t)$ d'Ornstein Uhlenbeck.
+
+Méthode spécifique : $$\derp{}{}{t} P - \gamma v \derp{}{}{v} P + \dots $$
+On peut la réécrire $$\derp{}{}{t}P  - \gamma \derp{}{P}{\ln v} + \dots $$
+On choisit alors comme nouvelle variable $ve^{- \gamma t}$
+
+On pose : $$Q(u,t) = e^{- \gamma t } P(ue^{- \gamma t},t)$$ La présence de l'exponentielle du temps permet de faire en sorte que $Q$ soit aussi une probabilité. 
+
+$$ \derp{}{Q}{t} = \frac{\gamma kT}{m} e^{2\gamma t} \derp{2}{Q}{u} $$
+
+On redéfinit alors notre échelle de temps : $\ud \theta = e^{2 \gamma t} \ud t $, qui nous permet de revenir à une équation de diffusion ordinaire, et donc d'obtenir la solution. 
+
+
+Méthode spectrale : 
+$$\derp{}{P}{t} = \mathcal{L}_{FP} P $$ où $\mathcal{L}_{FP}$ est un opérateur. On cherche donc les valeurs propres et les fonctions propres. C'est pénible parce que $\mathcal{L}_{FP}$ n'est pas auto-adjoint. 
+
+On pose $$u = \frac{v}{\sqrt{\frac{2kT}{m}}}$$ 
+$$\left( \derp{2}{}{u} + 2 u \derp{}{}{u} - 2 \lam_n \right) H_n (u) = 0 $$ où $\psi_n(v) = e^{-u^2}H_n(u)$
+$\lam_n = 0,-1,-2 \dots $ et $H_n$ sont les polynômes de Hermite. 
+
+Résolution par l'équation de Schrödinger : 
+On écrit l'équation de Schmolukowski avec $F_{ext} = - \derp{}{}{x} U_{ext}$ 
+$$ \derp{}{\rho}{t} = - \derp{}{}{x} \left( \mu F_{ext} \rho \right) + D \derp{2}{}{x}\rho $$
+
+On pose 
+$$ \rho(x,t) = \sqrt{\rho_{eq}(x)} g(x,t)$$ où $\rho_{eq} (x) = \frac{1}{Z} e^{- \beta U_{ext}}$ 
+Attention, $\beta$ n'est pas toujours $\frac{1}{kT}$, ça dépend du problème considéré. Dans le cas du mouvement brownien, c'est le cas. 
+
+$$- \derp{}{g}{t} = D \left[ - \derp{2}{}{x} + V_{eff}(x) \right] g$$ C'est Schrödinger en temps imaginaire (parce qu'il manque un i). 
+
+$$H = - \derp{2}{}{x} + V_{eff}(x)$$ qui est un hamiltonien, et donc est auto-adjoint. Les vecteurs propres à gauche et à droite coincident.   
+
+$$ V_{eff}(x) = \frac{1}{2} \left(\derp{}{}{x} \beta U_{ext}^2 \right)^2 - \frac{1}{2} \derp{2}{}{x} (\beta U_{ext})$$
+
+Si on note $\lam_n$ les valeurs propres de $H$ : 
+$$g(x,t) = \sum_n c_n e^{- \lam_n t} \Phi_n(x)$$ où $\Phi_n$ sont les fonctions propres de $H$ (associées aux $\lam_n$). 
+
+De plus, on a $H = Q^{\dagger} Q$ où $$Q = \der{}{x} + \frac{1}{2} \derp{}{}{x}(\beta U_{ext})$$
+$$ Q^{\dagger} = - \derp{}{}{x} + \frac{1}{2} \derp{}{}{x}(\beta U_{ext}) $$
+
+$$\moy{\Phi_n | H \Phi_n} = \lam_n \moy{\Phi_n | \Phi_n} $$ donc $\lam_n \geq 0 $ ce qui est important pour la relaxation. 
+$$moy{Q \Phi_n | Q \Phi_n} = \lam_n \moy{\Phi_n | \Phi_n} $$
+
+Il existe donc une valeur propre nulle, associée à 
+$$ \Phi_0 = e^{-  \frac{1}{2}\beta U_{ext}} \quad Q\Phi_0 = 0$$
+ce vecteur propre est associé à $$\rho_ew = \sqrt{\rho_eq} \Phi_0 \propto \rho_eq$$
+
+C'est non dégénéré sous certaines conditions. Il existe un état stationnaire et convergent. 
+
+On a montré que $$\derp{}{\rho}{t} = - \derp{}{}{x}(\mu F_{ext} \rho) + \derp{2}{\rho}{x}$$ s'écrit $$ \rho(x,t) = \Phi_0(x) \sum_n c_n e^{- \lam_n t}\Phi_n(x)$$ et quand $\rho(x,t=0) = \delta(x-y)$ 
+$$ \Phi_0 \sum_{0}^{\infty} c_n(y)\Phi_n(x) = \delta(x-y) = \sum_n \Phi_n(y)\Phi_n(x)$$
+(cette dernière égalité est une relation de fermeture que l'on ne se soucie pas de démontrer)
+ceci implique $$c_n(y)\Phi_n(x) = \Phi_n(y)$$
+
+$$\rho(x,t) = \Phi_0(x) \sum_n \frac{\Phi_n(y)}{\Phi_0(y)} e^{- \lam_n t}\Phi_n(x)$$
+
+
+\subsubsection{\'Equation de FP et de Kolmogorov à rebours}
+
+$$\derp{}{P}{t}(x,t|y_0,t_0) = \mathcal{L}P$$
+$$ \derp{}{P}{t_0}(x,t|y_0,t_0) = \mathcal{L}^{\dagger}P$$
+
+\subsection{Relations entre les équations de Langevin et de Fokker-Planck, le dilemne Itô-Stratonovich}
+
+\begin{align}
+	\dot{y} &= A(y) + R(t) \\
+	\moy{R(t)R(t')} = 2D \delta (t-t') \\
+	\Rightarrow \quad \derp{}{P}{t}(y,t) &= - \derp{}{A(y)P}{y} + C \derp{2}{P}{y}\\
+\end{align}
+
+La réciproque est vraie si le bruit est additif. Mais dans notre description, on a rencontré : 
+$$\derp{}{P}{t} = - \derp{}{AP}{y} + \derp{2}{D(y)P}{y} $$
+Quelle est l'équation de Langevin correspondante ? La réponse n'est pas unique.
+
+Considérons $$\dot{y} = A(y) + C(y)R(t)$$
+On peut voir R(t) comme une succession de points $\delta$ arrivant à un instant $t_{\nu}$ dont chacune modifie la valeur de y $y(t^+_{\nu}) - y(t^-_{\nu}) = C(y)$. Rien ne dit quelle valeur de y donsidérer. Il y a différents choix correspondent à différentes équations de FP. (noter que FP ne souffre pas de polyinterprétabilité)
+
+Stratonovich a choisi une prescription "valeur moyenne". 
+$$ y(t + \Delta t) = y(t) + A(y(t)) \Delta t + C \left[ \frac{y(t) + y(t+\Delta t)}{2} \right] \int_t^{t+\Delta t} R(t') \ud t' $$
+où l'on notera $B_{Delta t} = \int_t^{t+\Delta t} R(t') \ud t'$
+
+Itô a opté pour : 
+$$ y(t + \Delta t) = y(t) + A(y(t)) \Delta t + C [y(t)] B_{\Delta t}$$
+
+Plus généralement, on va considérer : 
+
+$$y(t + \Delta t) = y(t) + A(y(t)) \Delta t + C [qy(t) + (1-q)y(t+\Delta t)] B_{\Delta t} $$
+avec $0 \leq q \leq 1$. 
+
+On peut voir alors que le choix d'Itô est $q=1$ et le choix de Stratonovich $q=\frac{1}{2}$. 
+
+Quels FP ? 
+
+Avec Itô : 
+$$\derp{}{P}{t}(y,t) = - \derp{}{A(y)P}{y} + D \derp{2}{C^2(y)P}{y} $$
+
+Le cas où $q$ est quelconque est plus délicat : 
+\begin{align}
+	\Delta y &= A(y(t)) + C \left[ qy(t) + (1-q) \left( y(t) + A(y(t)) \Delta t + C(y)B_{\Delta t} \right) \right] B_{\Delta t} \\
+	&= A \Delta t + C[y] B_{\Delta t} + (1-q)\left[ A \Delta t + C B_{\Delta t} \right] C'(y) B_{\Delta t} \\
+	\Rightarrow \quad \frac{\moy{\Delta y}}{\Delta t} &= A(y(t)) + (1-q) C(y) C'(y) 2 D \\
+	\moy{(\Delta y)^2} = C^2(y)2D \Delta t 
+\end{align}
+	D'où le FP résultant : 
+	
+\begin{align}
+	\derp{}{P}{t} &= - \derp{}{}{y}[AP + (1-q)CC'2DP] + D \derp{2}{C^2 P }{y} \\
+	\derp{}{P}{t} &= - \derp{}{A(y)P}{y} + D \derp{}{}{y} [C^{2(1-q)} \derp{}{C^{2q}P}{y}] 
+\end{align}
+
+Ce qui correspond bien à notre précédent résultat pour $q=1$. 
+
+La prescription de Stratonovich joue malfré tout un rôle particulier en physique : 
+\begin{align}
+	\dot{y} &= A(y) + C(y)R(t) \\
+	\frac{\dot{y}}{C(y)} &= \frac{A(y)}{C(y)} + R(t) \\
+	\ud \bar{y} &= \frac{\ud y}{C(y)} \qquad \derp{}{}{\bar{y}} = C(y) \derp{}{}{y}\\
+	\dot{\bar{y}} &=  \bar{A}(\bar{y}) + R(t) 
+\end{align}
+
+Le FP associé ne pose pas problème : 
+\begin{align}
+	\derp{}{\bar{P}}{t} &= - \derp{}{\bar{A}(\bar{y}) \bar{P}}{\bar{y}} + D \derp{2}{\bar{P}(\bar{y},t)}{\bar{y}} \\
+	\bar{P}\ud \bar{y} &= P \ud y \quad \Rightarrow \quad \bar{P}(\bar{y},t) = C(y) P(y,t) \\
+ \derp{}{CP}{t} &= -C \derp{}{AP}{y} + DC \derp{}{}{y} [C \derp{}{CP}{y}] 
+\end{align}
+On retrouve donc la prescription de Stratonovich, $q=\frac{1}{2}$. Mais on a déplacé le problème : on ne sait pas si on a le droit d'effecteur le changement de variable qui transforme $y$ en $bar{y}$ ! 
+
+Réponse : oui, si $\tau_c$ est fini (mais petit) prendre à la limite $\tau_c \rightarrow 0$ donne Stratonovich. Malgré tout, les mathématiciens préfèrent Itô : 
+$$ \ud y = A(y) \ud t + C(y) \ud W $$ où $W$ est un processus de Wiener. 
+
+Le terme équation différentielle stochastique désigne uniquement une équation de cette forme. 
+
+Noter qu'au niveau de FP, la différence entre les deux hypothèses tient dans le terme dérivé $ \derp{}{}{y} (D C(y) C'(y) P)$ appelé dérive fantôme (spurious drift). 
+
+Pourquoi parler d'Itô qui implique des règles de calcul spécifiques ? Parce qu'Itô peut être une grille de lecture pertinente dans certains cas. 
+
+Itô s'applique par exemple dans le cas d'une loi de Poisson (voir IX 5 du van Kampen). 
+
+Conclusion : une fois qu'une grille de lecture a été choisie (en choisissant une valeur de $q$), on a équivalence entre Langevin et FP. Mais cette équivalence tombe dans le cas vectoriel :
+\begin{align}
+	\dot{x_1} &= 2 x_2 + \Gamma_1  \qquad \dot{x_2} = -2x_1 + \Gamma_2 \\
+	\moy{\Gamma_i(t)\Gamma_j(t')} &= 2 \delta_{ij} \delta(t-t') \\
+	\dot{x_1} &= \cos (x_1^2 + x_2^2) \Gamma_1 + \sin (x_1^2 + x_2^2)\Gamma_2 \\
+	\dot{x_2} &= - \sin (x_1^2 + x_2^2) \Gamma_1 + \cos (x_1^2 + x_2^2) \Gamma_1 \\
+\end{align}
+Ces deux équations de Langevin à deux dimensions ont pour équation FP  : 
+$$ \derp{}{P(x_1,x_2,t)}{t} = - \derp{}{2x_2P}{x_1} + \derp{}{2x_1P}{x_2} + (\derp{2}{}{x_1} + \derp{2}{}{x_2})P $$
+Il y a donc perte de l'équivalence. 
+
+A partir de l'équation : 
+$$ \vec{j} = - (\vec{\nabla}V)\rho + \vec{\nabla} \rho $$
+on obtient comme équation FP : $$ \derp{}{\rho}{t} + \div \vec{j} = 0 $$ Pour les temps longs ($t \rightarrow \infty$), on a une solution stationnaire aux temps longs $\rho^*$.
+$$\vec{j} = \rho^* \vec{\nabla}(f_{\rho^*})$$
+On a alors $$\div \vec{j} = 0 \Rightarrow \vec{j} = 0$$
+
+
+
+ 
+
+
+
+\section{Système hors d'équilibre approche macroscopique, hors équilibre faible}
+Ce chapitre n'aura pas lieu. Aller voir sur le site pour de la lecture à ce sujet.
+
+\section{Processus irréversibles : éléments de théorie cinétique}
+Objectif : Donner les fondements des approches macro/méso dans le contexte du transport dans les gaz : présenter l'équation de Boltzmann, dicuter les 2 conséquences (obtention des équation de l'hydrogène, phénomène d'irréversibilité et théorême H). 
+
+\subsection{Introduction}
+
+La mécanique statistique à l'équilibre n'a pas de pendant opérationnel hors équilibre. Il est nécessaire d'adopter une approche microscopique par la théorie cinétique, qui permet de décrire des situations arbitrairement hors de l'équilibre. 
+
+\subsubsection{Cadre de travail}
+
+Idée centrale : expliquer le comoprtement hors équilibre par les interactions (collisions) entre les molécules. On va se restreindre au transport dans les gaz diluées.
+
+Ordres de grandeur typique : on est toujours dans les CNTP. 
+\begin{itemize}
+	\item Longeur thermique de Broglie : $\Lambda \approx \frac{\hbar}{\sqrt{2 \pi mkT}} \approx 1 \dot{A}$
+	\item Portée des interactions interatomiques : $a \approx 3 \dot{A}$ 
+	\item Distance entres particules voisines : $n^{-1/3} \approx 30 \dot{A}$ 
+	\item Libre parcours moyen : $\approx \frac{1}{n \sigma_{eff}} \approx 1000 \dot{A}$
+	\item Taille de la boîte : $L$ macroscopique
+\end{itemize} 
+
+On peut en déduire immédiatement
+\begin{itemize}
+	\item $n \Lambda^3 \ll 1 $ système classique, mais $\Lambda \approx a$ donc la mécanique quantique peut jouer un rôle dans les collisions (mais pas entretemps). 
+	\item l'intervalle de temps séparant deux collisions est grand devant la durée d'une collision : $\frac{lpm}{\bar{v}} \gg \frac{a}{\bar{v}}$ on peut donc considérer que les collisions sont des phénomènes instantanées.
+	\item la probabilité d'avoir trois particules qui se cognent est $\propto n^3$ donc négligeable. On considèrera toujours des collisions n'impliquant que 2 particules. 
+\end{itemize}
+
+Il est important d'avoir un gaz pas trop dense, mais en même temps, il ne faut pas que la densité soit trop faible, sinon le libre parcours moyen devient comparable à la taille de la boîte. 
+
+On se restreint à un gaz monoatomique. On peut alors considérer des collisions élastiques. 
+
+\subsubsection{Description des collisions}
+
+On utilise un modèle classique entre deux particules. Dans la zone d'interactions, les deux particules se repoussent et donc changent leur trajectoire.
+
+\begin{align}
+	m_1 \vec{v_1} + m_2 \vec{v_2} & = & m_1 \vec{v'_1} + m_2 \vec{v'_2} \\
+	\frac{1}{2} m_1 v_1^2 + \frac{1}{2} m_2 v_2^2 & = & \frac{1}{2} m_1 v'_1^2 + m_2 v'^2_2 
+\end{align}
+A 3D On a 4 relations pour 6 inconnues, il y a donc deux degrés de liberté. On va définir : 
+$$ \vec{v} = \frac{m_1 \vec{v_1} + m_2 \vec{v_2}}{m_1 + m_2} \quad \vec{u} = \vec{v_1} - \vec{v_2} $$
+
+On se place dans le référentiel du centre de masse, où la collision revient à un changement de direction de la vitesse relative. On parle alors de diffusion.
+ 
+$$ \vec{u'} = u', \theta', \phi' = (u',\Omega') \qquad u=u' $$
+C'est l'angle solide qui porte la signature de la collision. L'information est contenue dans la section efficace différentielle $\sigma(u,\Omega')$ définit comme il suit : imaginons un flux incident de particules avec une vitesse $\vec{u}$ $I_{\vec{u}}$ en $m^2s_{-1}$ le nombre de particules diffusées par unité de temps par dans un élément d'angle solide $\ud \Omega'$ autour de $\Omega'$
+
+$$ I_{\vec{u}} \sigma (u,\Omega') \ud \Omega' $$
+Si le potentiel d'interaction (de paire)est central alors $\sigma(u,\theta')$ ne dépend pas de $\phi'$. Plus formellement : 
+$$\sigma \equiv \sigma(\vec{v_1},\vec{v_2}\rightarrow \vec{v'_1},\vec{v'_2})$$
+doit vérifier l'invariance par renversement du temps : 
+$$\sigma(\vec{v_1},\vec{v_2}\rightarrow \vec{v'_1},\vec{v'_2}) = \sigma(\vec{-v_1},\vec{-v_2}\rightarrow \vec{-v'_1},\vec{-v'_2})$$
+et l'invariance de $\vec{r} \rightarrow - \vec{r}$ : 
+$$ \sigma(\vec{v_1},\vec{v_2}\rightarrow \vec{v'_1},\vec{v'_2}) = \sigma(-\vec{v'_1},-\vec{v'_2}\rightarrow -\vec{v_1},-\vec{v_2})$$
+On a alors : 
+$$\sigma(\vec{v_1},\vec{v_2}\rightarrow \vec{v'_1},\vec{v'_2}) = \sigma(\vec{v'_1},\vec{v'_2}\rightarrow \vec{v_1},\vec{'_2})$$
+C'est ce qui s'appelle la micro-réversibilité. 
+
+Remarque : le calcul explicite de $\sigma$ est très difficile. 
+
+\subsubsection{Le cas des sphères dures}
+
+Préalable : $$2\pi b \ud b = \sigma 2 \pi \sin \theta' \ud \theta' = \sigma 2 \pi \sin \Omega' \ud \Omega'$$
+avec $b$ le paramètre d'impact.
+On a alors $$ \sigma = \frac{b}{\sin \theta'} \left| \der{b}{\theta'} \right| $$ 
+
+Exemple pour des sphères : $\sigma = \frac{1}{4} d^2$ avec $d$ le diamètre des sphères, de telle sorte que la section efficace totale soit : $$ \int \sigma \ud \Omega' = \frac{1}{4} d^2 4 \pi = \pi d^2$$
+
+\subsection{\'Equation de Boltzmann}
+
+Gaz : $N$ particules indicernables, espave des phases à $6N$ dimensions. Pour le gaz dilué, ce n'est pas utile de connaître la densité à $N$ points, pour prendre en compte les propriétés macroscopiques intéressantes, une fonction à un point suffit, on parle d'espace  $\mu$ pour degré de liberté $(\vec{r},\vec{v})$ donc 6 dimensions. Formellement : 
+$$ f(\vec{r},\vec{v},t) = \moy{\sum_i \delta (\vec{r_i} - \vec{r})\delta(\vec{v} - \vec{v_i})}$$
+Raisonnement formulé par Boltzmann en 1872, sous forme d'hypothèse non contrôlée, il a fallu attendre un siècle pour obtenir une justification à cette hypothèse.
+
+$$f^{(2)} (\vec{r}, \vec{v_1},\vec{r},\vec{v_2}) = f(\vec{r},\vec{v_1},t) f(\vec{r_2},\vec{v_2},t)$$ on néglige les corrélations entre les vitesses des particules qui vont entrer en collision.  Quels mécanismes ne sont pas compatibles avec ce chaos moléculaire ? 
+
+Une recollision 1-2 à cause d'une molécule 3 ne serait pas compatible, mais cet évènement a une probabilité proportionelle à $n^3$. 
+
+D'une manière générale, $f(\vec{r},\vec{v},t)$ évolue sous l'action du mouvement libre des particules et des collisions. Dans un champ de force extérieure : 
+
+$$\left( \derp{}{}{t} + \vec{v} \vec{\nabla}_{\vec{r}} + \frac{\vec{F}_{ext}}{m} \vec{\nabla}_{\vec{r}} \right) f(\vec{r},\vec{v_1},t) = \der{}{f}{t} _{coll} $$
+avec le terme de collision à expliciter.
+
+Lien avec les observations macroscopiques : 
+\begin{align}
+	n(\vec{r},t) = \int f(\vec{v_1},\vec{r},t) \ud \vec{v} \\
+	n \vec{u} &= \int \vec{v} f(\vec{r},\vec{v_1},t) \ud \vec{v} 
+\end{align}
+La première équation définit la densité locale, la seconde définit le champ de vitesse locale.
+
+\subsubsection{L'intégrale de collision}
+
+Bilan gain-pertes : 
+$$\derp{}{f}{t}_{coll} = \derp{}{f}{t}_{coll}^{gain} - \derp{}{f}{t}_{coll}^{pertes} $$
+Commençont par le terme de pertes, considérons une molécule dans $\delta \vec{r}$ et de vitesse $\vec{v_1}$, dans $\delta(\vec{r})$  se trouvent des molécules de vitesse $\vec{v_2}$ à $\delta(\vec{v_2})$, qui forment un faisceau incident sur la cible $\vec{v_1}$. Le flux incident : 
+$$I = |\vec{v_1} - \vec{v_2}| f(\vec{r}, \vec{v_1},t) \delta \vec{v_2}$$
+
+D'où le nombre de particules diffusées dans $$\ud \Omega' = I \sigma(|\vec{v_1} - \vec{v_2}|,\Omega') \ud \Omega' $$
+
+On somme ensuite sur tous les angles solides de diffusion ( c'est-à-dire sur les géométries de collision) et sur tous les partenaires possibles. De plus, il y a $f \delta \vec{r_1}\delta \vec{r_2}$ molécules dans $\delta \vec{r}$ à $\delta \vec{v_2}$ près : 
+$$\derp{}{f}{t}_{coll}^{pertes \delta \vec{v_1}} = \delta \vec{v_1} f (\vec{r} \vec{v_1} t ) \int \ud \vec{v_2} \ud \Omega' |\vec{v_1} - \vec{v_2}| \sigma(\vec{v_{12},\Omega'})$$
+$\rightarrow$ terme de gain $\vec{v_1^*} \vec{v_2^*} \rightarrow \vec{v_1} \vec{v_2}$
+
+On somme sur tous les partenaires $\vec{v_1^*} \vec{v_2^*}$ qui vont donner $\vec{v}$ à $\delta \vec{v}$ près : 
+$$ \derp{}{f}{t}_{coll}^{gain} = \int \ud \vec{v_1^*} \ud \vec{v_2^*} \ud \Omega' \sigma (| \vec{v_1^*},\vec{v_2^*}|,\Omega') f(\vec{r}\vec{v_1^*} t) f(\vec{r},\vec{v_2^*},t) |\vec{v_1^*} - \vec{v_2^*}|$$
+
+On va changer de variable et sommer sur $\vec{v_1}$ et $\vec{v_2}$. Le jacobien vaut 1 car les collisions sont élastiques. En effet : 
+$$ \ud \vec{v_1^*} \ud \vec{v_2^*} = \ud \vec{v^*} \ud \vec{u^*} = \ud \vec{V} \ud \vec{u} = \ud \vec{v_1} \ud \vec{v_2}$$
+De plus $|\vec{v_1} - \vec{v_2}|= |\vec{v^*_1} - \vec{v^*_2}|$
+
+Enfin, on utilise la microréversibilité de $\sigma$ : 
+\begin{align}
+	\derp{}{f}{t}_{coll}^{gain} &= \int \ud \vec{v_1} \ud \vec{v_2} \ud \Omega' |\vec{v_1} - \vec{v_2}| \sigma(|\vec{v_1} - \vec{v_2}|,\Omega')  f(\vec{r},\vec{v_1^*},t) f(\vec{r},\vec{v_2^*},t) \\
+	&= \delta \vec{v_1} \int \ud \vec{v_2} \ud \Omega' \dots \\
+	&= \delta \vec{v_1} \int \ud \vec{v_2} \ud \Omega ' v_{12} \sigma (v_{12} \Omega') f(\vec{r},\vec{v'_1},t) f(\vec{r},\vec{v'_2},t) \\
+	\left( \derp{}{}{t} + \vec{v_1} \vec{\nabla}_{\vec{r}} + \frac{\vec{F}_{ext}}{m}\right) f(\vec{r},\vec{v_1},t) &= \int \ud \vec{v_2} \ud \Omega' |\vec{v_1} - \vec{v_2}| \sigma (|\vec{v_1} - \vec{v_2}|,\Omega') (f'_1 f_2 - f_1 f_2)  
+\end{align}
+où l'on a noté : $f_i' = f(\vec{r},\vec{v'_i},t)$
+
+On peut réécrire l'équation de Boltzmann sous une forme parlante : 
+$$	\left( \derp{}{}{t} + \vec{v} \vec{\nabla}_{\vec{r}} + \frac{\vec{F}_{ext}}{m}\right) f(\vec{r},\vec{v},t) =	\int \ud \vec{v_1} \ud \vec{v_2} \ud \Omega' |\vec{v_1} - \vec{v_2}| \sigma(|\vec{v_1} - \vec{v_2}|,\Omega')  f(\vec{r},\vec{v_1},t) f(\vec{r},\vec{v_2,t)\left[\delta(\vec{v} - \vec{v'_1}) - \delta(\vec{v} - \vec{v_1}) \right] $$
+On a sommé sur toutes les collisions possibles, et après avec la fonction de dirac, on sélectionne quelles collisions nous intéressent. 
+
+Cette écriture est de portée générale et s'applique aussi aux descriptions des collisions dissipatives (comme dans les milieux granulaires). 
+
+\subsubsection{Théorême H irréversibilité}
+
+Préambule : Notion d'invariant collisionnel : toute fonction $\psi(\vec{v})$ telle que : 
+$$ \psi(\vec{v_1}) + \psi (\vec{v_2}) = \psi(\vec{v'_1}) + \psi(\vec{v'_2})$$
+
+\begin{align}
+	\derp{}{}{t} \int \psi(\vec{v}) f(\vec{v}) \ud \vec{v} &= \int \ud \vec{v} \psi(\vec{v}) \derp{}{ f(\vec{v})}{t} \ud \vec{v} \\
+	&= \frac{1}{2} \int \ud \vec{v_1} \ud \vec{v_2} \sigma v_{12} f(\vec{v_1},t) f(\vec{v_2},t) \left[ \psi(\vec{v'_1}) + \psi(\vec{v'_2}) - \psi( \vec{v_1})  - \psi(\vec{v_2}) \right] \\
+	& \vec{v_1},\vec{v_2} \rightarrow \vec{v'_1} \vec{v'_2} \\
+	&= \frac{1}{2} \int \ud \vec{v'_1} \ud \vec{v'_2} \sigma v_{12} f(\vec{v_2},t)f(\vec{v'_1},t) \left[ \psi(\vec{v'_1}) + \psi(\vec{v_1}) - \psi(\vec{v_2}) \right] \\
+	&= \frac{1}{2} \int \ud \vec{v_1} \ud \vec{v_2} \sigma v_{12} f(\vec{v'_1},t)f(\vec{v'_2},t) \left[\psi(\vec{v_1}) + \psi(\vec{v_2}) - \psi(\vec{v'_1}) - \psi(\vec{v'_2}) \right] \\
+	&= \frac{1}{4} \int \ud \vec{v_1} \ud \vec{v_2} \sigma v_{12} (f'_1f'_2 - f_1f_2) \left[ \psi(\vec{v_1}) + \psi(\vec{v_2}) - \psi(\vec{v'_1}) - \psi(\vec{v'_2}) \right]
+\end{align}
+ Et donc si $\psi$ est un invariant collisionnel, c'est bien nul. 
+ 
+Il existe 5 invariants collisionnels : 
+$\psi_1 =1$, $\psi_2,\psi_3, \psi_4$ vitesses et $\psi_5 \quad v^2$. On ne peut pas en trouver plus, car sinon tout serait fixé et la oloi de force serait superflue : tout invariant est une combinaison linéaire de ces 5 là. 
+
+Théorême H : Systèmes homogènes, sans force extérieure. Boltzmann a mis en évidence l'irréversibilité de son équation en considérant la fonctionnelle H :
+$$H(t) = \int \ud \vec{v} f (\vec{v},t) \ln \left[ \frac{h^3}{n^3} f(\vec{v},t) \right] $$ qui rappelle formule de Shannon de l'entropie (1948), donc $H$ peut jouer le rôle d'une entropie. 
+
+$$ \der{H}{t} = \int \ud \vec{v} (1+ \ln f) \derp{}{f}{t} = \frac{1}{4} \int \ud \vec{v_1}\ud \vec{v_2} \sigma v_{12} (f'_1 f'_2 - f_1 f_2) [ \ln (f_1 f_2) - \ln (f'_1 f'_2)] $$ qui est négatif, car c'est de la forme : $$ (a-b)(\ln(b)-\ln(a))<0$$ et que le logarithme est une fonction croissante.
+
+Or H admet une borne inférieure, en effet : 
+$$	\int f \ln \frac{f}{f_{eq}} \ud \vec{v} \geq 0 $$ car $$- \int f \ln \frac{f_{eq}}{f} \ud \vec{v} \geq \int f (\frac{f_{eq}}{f} - 1) \ud \vec{v} $$
+donc 
+$$ \int f \ln f  \ud \vec{v} \geq \int f \ln f_{eq} \ud \vec{v}$$
+
+Conclusion : H est bornée inférieurement, donc tend vers une constante aux temps longs.
+
+Pour résumer: 
+$$ \derp{H}{t} \leq 0 \quad \der{H}{t}=0 \Leftrightarrow \quad f'_1f'_2 = f_1f_2 \quad \der{H}{t}\rightarrow_{t \rightarrow \infty} 0$$
+
+Corollaire : aux temps longs, $\ln f'_{01} + \ln f'_{02} = \ln f_{01} + \ln f_{02} $ où l'on appelle $f_0$ la solution aux temps longs. 
+$$\ln f_0 = \alpha 1 + \beta \vec{v} + \gamma v^2$$ que l'on peut écrire avec $\vec{u}$ vitesse du centre de masse : 
+$$ \frac{1}{2} \moy{m (\vec{v} - \vec{u})^2} = \frac{3}{2} kT$$ définition cinétique de la température. 
+
+$$ f_0 = n \left( \frac{m}{2 \pi kT}\right)^{3/2} e^{- \frac{1}{2} \frac{m (\vec{v}- \vec{u})^2}{kT}}$$
+Conclusion : évolution irréversible de $f$ vers $f_0$ (distributions de Maxwell-Boltzmann).
+
+Lien avec l'entropie : Reportons $f_0$ dans H (à faire en exercice). On obtient : 
+$$ H_0 = n \ln (n \Lambda^3) - \frac{3}{2} n $$ C'est l'entropie, à un signe près et à une densité près.
+
+On peut revenir à une description spatiale et avec une force extérieure, on a encore S croissant, avec $$S = \int f [1 - \ln ()]\ud \vec{r} \ud \vec{v} $$
+Dans ces conditions, pour $\vec{F} = - \vec{v} V_{ext}$ : 
+$$ f_0 \propto e^{- \beta V_{ext}} e^{\frac{-1}{2} \frac{m(\vec{v}-\vec{u})^2}{kT}}$$
+
+Discussion : irréversibilité et paradoxes.
+
+Paradoxe de la récurrence (Zermelo,1896) : Poincarré a démontré qu'en mécanique classique que tout système d'énergie totale fixée dans un espace fini retourne après un certain temps aussi près que l'on veut de l'état initial (ce qui est à la base de l'hypothèse ergodique). Le truc, c'est que ce temps est souvent très très long devant l'échelle de temps des manipulations (pour $10^{23}$, c'est de l'ordre de plusieurs fois l'âge de l'univers).
+
+Paradoxe de réversibilité : les équations microscopiques sont réversibles, mais pas les équations macroscopique. se référer au daltonien qui ne distingue pas ses chaussettes rouges de ses chaussettes vertes, si elles sont toutes mélangées, pour lui c'est pareil que si elles sont toutes rangées. L'irréversibilité est de nature statistique.
+
+\subsubsection{Au-delà de l'équation de Boltzmann}
+
+Point de départ : l'équation de Liouville pour les probabilités à N particules, à relier aux marginales.
+
+$n=1$:
+$$ \derp{}{f^{(1)}}{t} + (\vec{v}\vec{\nabla})f^{(1)} + \frac{\vec{F}_{ext}}{m}\vec{\nabla}_{\vec{v_1}}f = \derp{}{f_{coll}}{t} = - \int \vec{F_{12}} \frac{1}{m} \derp{}{f^{(2)}}{\vec{v_2}}f^{(2)}(1,2,t) \ud 2 $$
+
+$n=2$ : 
+$$ \left[ \derp{}{}{t} + \vec{v_1} \vec{\nabla} + \frac{\vec{F_{ext}}}{m} \vec{\nabla} \vec{v_2} + \frac{\vec{F_{12}}}{m} \left( \derp{}{}{\vec{v_1}} \derp{}{}{\vec{v_2}} \right) \right] f^{(2)} = \txt{Coll fonction de }f^{(3)}$$
+
+Hiérarchie à priori infinie (BBGKY). En général l'ordre 1 suffit, à la limite on prend l'ordre 2. 
+
+Objectif : il faut une relation de fermeture. 
+
+\subsection{\'Equations macroscopiques de l'hydrodynamique}
+
+\subsubsection{Lois de conservation associées aux invariants collisionnels}
+
+Moyenne d'une "observable"  quelconque $A(\vec{r},\vec{v},t)$
+$$\moy{A(\vec{r},\vec{v},t)} = \frac{\int A f^{(1)}(\vec{r},\vec{v},t) \ud \vec{r} \ud \vec{v}}{\int f^{(1)} \ud \vec{v} \equiv n(\vec{r},t)}$$
+
+Revenons à Boltzmann : 
+$$ \left[ \derp{}{}{t} + \vec{v} \vec{\nabla} + \frac{\vec{F}}{m} \vec{\nabla}_{\vec{v}} \right] f = \derp{}{f_{coll}}{t} $$
+
+On multiplie cette équation par un invariant due la collision $\psi_{\alpha}(\vec{v})$ et on intègre par rapport à $\vec{v}$. Alors, l'intégrale de collision apport une contribution nulle. 
+
+\begin{align}
+	 \int \ud \vec{v} \psi_{\alpha} \derp{}{f}{t} &+ \int \psi_{\alpha} \vec{v}\vec{\nabla}_{\vec{r}} f \ud \vec{v} &+ \int \psi_{\alpha} \frac{\vec{F}}{m} \vec{\nabla}_{\vec{v}} f \ud \vec{v} &= 0 \\
+	 \derp{}{}{t} \int f \psi_{\alpha} \ud \vec{v} &+ \vec{\nabla}_{\vec{r}} [\int \psi_{\alpha} \vec{v} f \ud \vec{v}] &+ \vec{F}_{ext}\int \psi_{\alpha}\vec{\nabla}_{\vec{v}}f \ud \vec{v} &= 0 \\
+	  & &- \vec{F}_{ext} \int f \vec{\nabla}_{\vec{v}} \psi_{\alpha} \ud \vec{v} &=0 \\
+	  \derp{}{}{t}(n \moy{\psi_{\alpha}}) &+ \vec{\nabla}_{\vec{r}} (n(\vec{r},t) \moy{\psi_{\alpha}}) &- n \frac{\vec{F}_{ext}}{m} \moy{\vec{\nabla}_{\vec{v}}} &=0 
+\end{align}
+
+\`A réécrire pour chacun des 5 invariants : 
+\begin{enumerate}
+	\item $$ \psi_1 = 1 \quad \Rightarrow \quad \derp{}{}{t} n + \vec{\nabla}_{\vec{r}}(n \vec{u}) = 0 \quad \vec{u}(\vec{r},t) = \moy{\vec{v}}$$ équation de continuité.
+	
+	\item $$ \psi_{\alpha} = v_{\alpha} \derp{}{}{t}(n\vec{u}) + \vec{\nabla}_{\vec{r}}(n \moy{\vec{v}\vec{v}}) - \frac{n}{m}\vec{F}_{ext} \bbar{I} = \vec{0} $$ On introduit la vitesse $ \vec{\xi} = \vec{v} - \vec{u}(\vec{r},t)$ (peculiar velocity) : $$\moy{\vec{\xi}} = \vec{0} \quad \moy{\vec{v}\vec{v}} = \vec{u}\vec{u} + \moy{\vec{\xi}\vec{\xi}}$$ où $\moy{\vec{\xi}\vec{\xi}}$ est associé au tenseur des pressions défini comme il suit : 
+	$$ \bbar{P} = n(\vec{r},t) m \moy{\vec{\xi}\vec{\xi}} = m \int \ud \vec{v} \vec{\xi}\vec{\xi}f(\vec{r},\vec{v},t) $$
+\begin{align}
+	\derp{}{n \vec{u}}{t} &+ \vec{\nabla}_{\vec{r}} (n \vec{u}\vec{u} &+ \frac{\bbar{P}}{m}) &= \frac{n}{m} \vec{F}_{ext}\\
+	n \derp{}{\vec{u}}{t} + \vec{u} \derp{}{n}{t} &+ n (\vec{u}\vec{\nabla}) \vec{u} + \vec{u}\vec{\nabla}_{\vec{r}} (n \vec{u}) &+ \vec{\nabla}_{\vec{r}} \frac{\bbar{P}}{m} &= \frac{n}{m}\vec{F}_{ext} \\
+	\derp{}{\vec{u}}{t} &+ (\vec{u}\vec{\nabla})\vec{u} &= \frac{-1}{nm} \vec{\nabla}_{\vec{r}} \bbar{P} &+ \frac{\vec{F}_{ext}}{m} \\
+\end{align}
+Ce qui nous ramène à quelque chose qui ressemble à l'équation de Naiver-Stokes, mais en très général (et donc en pas très utile). Cependant, on a un lien clair entre le microscopique et le macroscopique.
+
+\item $$\psi_5 = \frac{1}{2}v^2 \quad \frac{1}{2}\moy{v^2} = \frac{1}{2}\moy{u^2} + \frac{1}{2} \moy{\xi^2}$$
+avec $\frac{1}{2} \moy{\xi^2} = \frac{d}{2}\frac{kT}{m}$ qui définit la température locale. 
+$$\derp{}{}{t}\left[ (u^2 + \frac{3}{2} \frac{kT}{m})n \right] + \vec{\nabla}_{\vec{r}} \left[ n \vec{u} (\frac{u^2}{2} + \frac{3}{2} \frac{kT}{m}) + \frac{\bbar{P}}{m} \vec{u} + \frac{1}{m} \vec{J}_{q} \right] - n \vec{u} \frac{\vec{F}_{ext}}{m} = \vec{0}$$
+où $n \vec{u} (\frac{u^2}{2} + \frac{3}{2} \frac{kT}{m})$ est un terme d'advection d'énergie, $\frac{\bbar{P}}{m} \vec{u}$ est le travail des forces intérieures, $ n \vec{u} \frac{\vec{F}_{ext}}{m} $ le travail des forces extérieures, $\vec{J}_{q}$ le flux de chaleur.
+Si on prend en compte les informations obtenues dans les deux points précédents : 
+$$ n (\derp{}{}{t} + \vec{u}\vec{\nabla}_{\vec{r}})\frac{3kT}{m} = - \bbar{P}:\bbar{\Lambda} - \vec{\nabla}_{\vec{r}}\vec{J}_q $$
+où $\bbar{\Lambda}_{ij} = \frac{1}{2} (\partial_i u_j + \partial_j u_i)$ tenseur des taux de déformation.
+\end{enumerate}
+
+Remarque : on ne peut jamais trouver $\partial_i v_j$, qui n'a pas de sens : $\vec{r}$ et $\vec{v}$ dont des variables aléatoires indépendantes. Une particule à $\vec{r}$ à l'instant $t$ peut avoir toutes les vitesses $\vec{v}$ possibles de manière probabiliste. 
+
+Suite du programme : calculer $\bbar{P}$ et $\vec{J}_q$ pour obtenir une description fermée, nécessite la résolution de l'équation de Boltzmann. On cherche à les relier aux grandients$\vec{\nabla}n, \vec{\nabla}\vec{u},\vec{\nabla}T$. On se limitera à une réponse linéaire en $\vec{\nabla}$ ce qui est l'ordre de Navier-Stokes (pour une réponse quadratique, il s'agira de l'ordre de Burnett). Par exemple, pour un fluide isotrope, relation entre $\bbar{P}$ et $\bbar{\Lambda}$ : 
+$$ P_{\alpha  \beta} = \delta_{\alpha,\beta} - 2 \eta \Lambda_{\alpha \beta} + \delta_{\alpha \beta}(\frac{2}{3}\eta - \zeta)(\vec{\nabla}_{\vec{r}}\vec{u})$$
+où $\eta$ est la viscosité de cisaillement, $\zeta$ bulk viscosity (difficile à observer).
+
+En règle générale : 
+$$P_{\alpha \beta} = \lam_{\alpha \beta \gamma \delta} \Lambda_{\gamma \delta}$$ $\lam$ a 81 éléments. 
+
+Estimation naïve des coefficients de transport : 
+vitesse typique $\bar{v}$ et $l$ libre parcours moyen $l \propto \frac{1}{\sigma_{eff}}$
+
+Coefficient de diffusion : $D \propto \bar{v}l$^
+
+Viscosité : $\eta \propto \bar{v} l n m$
+
+Conductivité thermique : $\kappa \propto \bar{v}l n k$
+
+\subsection{Développement de Chapman-Enskog}
+
+Donne le cadre qui fournit une famille de solutions à l'équation de Boltzmann.
+
+\subsubsection{L'idée}
+
+Les collisions thermalisent le système. L'échelle de temps de cette thermalisation, c'est une échelle de temps microscopique (de l'ordre de $\frac{l}{\bar{v}}$ par exemple). En un temps très court, la thermalisation va annuler le terme collisionnel. Cependant l'équilibre ainsi créé sera local. L'équilibre global sera donc atteint non pas par les collisions, mais par le transport (qui lui se fera à une échelle de temps macroscopique).  
+
+La distribution de Maxwell-Boltzmann locale : 
+$$ f_0 (\vec{r},\vec{v},t) = n(\vec{r},t) (\frac{m}{2 \pi kT(\vec{r},t)})^{3/2} e^{- \frac{m(\vec{v}-\vec{u}(\vec{r},t))^2}{2 kT}}$$
+qui annule l'opérateur de collision. \`A cette échelle, les $\vec{\nabla}$ sont inopérants, le régime collisionnel est dominant.  
+
+Mais $f_0$ n'annule pas l'opérateur de mouvement libre, $\derp{}{}{t} + \vec{v} \vec{\nabla} \dots$ donc $f_0$ continue d'évoluer mais à une échelle de temps $\tau_h \approx \frac{L_h}{\bar{v}}$ où $L_h$ est la longueur hydrodynamique. Dans le régime hydrodynamique, le transport domine. 
+
+On va pouvoir tirer profit de la séparation entre ces deux échelles de temps en utilisant l'approximation du temps de relaxation. 
+
+$$ \left( \derp{}{}{t}  + \vec{v} \vec{\nabla}_{\vec{r}} + \frac{\vec{F}_{ext}}{m}\vec{\nabla}_{\vec{r}} \right) f = \frac{- f f_0}{\tau}$$
+
+Attention, cette équation n'est pas linéaire, à cause de $f_0$, qui dépend de $n,\vec{u},T$ qui sont les moments de $f$. 
+
+$\vec{F} = \vec{0}$ passer en  quantités adimensionnées : $$ \vec{r^*} = \frac{\vec{r}}{L_h} \qquad t^* = \frac{t}{\tau_h} \qquad \vec{v^*} = \frac{\vec{v}}{\bar{v}}$$
+
+$$ \left( \derp{}{}{t^*} + \vec{v^*} \vec{\nabla}_{\vec{r^*}} \right) f = \frac{1}{\epsilon}(f-f_0) \quad \epsilon=\frac{\tau}{\tau_h}$$
+où $\epsilon=\frac{\tau}{\tau_h} = \frac{l}{L_h}$ d'où l'idée : $$f = \sum_{n=0}^{\infty} \epsilon^n f_n $$ 
+
+On a à l'ordre 1 : 
+$$ \mathcal{L}_{\txt{mvt libre}}f_0 = f_1 $$ fonction uniquement de $n,\vec{u},T$, on parle de solution normale : 
+$$ f(\vec{r},\vec{v},t) = f(\vec{v},n(\vec{r},t), \vec{u}(\vec{r},t), T(\vec{r},t)) $$
+Cela n'a de sens que sur une échelle de temps hydrodynamique, qui ne permet pas d'accéder à l'échelle cinétique. En général, faire le développement à l'ordre 1 suffit. S'il ne suffit pas, on peut aller chercher les ordres suivants. 
+
+En règle générale, $\tau$ n'apparaît pas explicitement, il est caché dans l'opérateur de collision. L'idée est de développer la fonction de distribution $f$ autour de la solution de l'équilibre thermodynamique locale $f_0$ sous la forme d'une solution normale. C'est la méthode de Chapman-Enskog
+
+$$ (\derp{}{}{t} + \vec{v}\vec{\nabla})f(\vec{r},\vec{v},t) = \frac{\derp{}{f_{coll}}{t}}{\xi} = \frac{J(f,f)}{\xi}$$
+où $$J(g,h) = \int \ud \vec{v}_2 \ud \Omega' \sigma v_{12} [g'_1h'_2 - g_1h_2]$$
+
+On développe : $$f = \sum_n \xi^n f_n $$ où $f_0$ est la distribution de Maxwell-Boltzmann. On utilise une écriture inspirée de celle obtenue dans le cadres de l'approximation à un temps de relaxation, mais attention, ici $\xi$ est un paramètre formel pour ordonner le développement en puissance de $\vec{\nabla}$.  In fine, $\xi=1$. Ce n'est pas un problème pour la convergence, car l'élément qui est petit est en fait inclus dans $f_n$. 
+
+\subsubsection{Mise en place}
+
+Par construction, les $f_n$ dépendent de $\vec{r}$ et $t$ via 
+$$r = \int f \ud \vec{v} \qquad \vec{u} = \frac{1}{n}\int f \vec{v} \ud \vec{v} \qquad T = \dots $$
+
+Donc : 
+\begin{align}
+	\int f_n \ud \vec{v} &= 0 \\
+	\int f_n (\vec{v}-\vec{u}) \ud \vec{v} &= \vec{0} \\
+	\int f_n (\vec{v}-\vec{u})^2 \ud \vec{v} &= 0 
+\end{align}
+
+Dans Boltzmann, ça nous donne : 
+\begin{align}
+	0 &= J(f_0,f_0) \\
+	(\derp{}{}{t} + \vec{v}\vec{\nabla})f_0 &= J (f_0,f_1) + J(f_1,f_0) \\
+	(\dots) f_i = \sum_{j=0}^{n_1} J(f_j,f_{i-j+1}) 
+\end{align}
+
+A l'ordre 0, quelle hydrodynamique ? 
+
+$$\vec{J}_q^{(0)} = \vec{0} $$ par symétrie
+$$P_{\alpha \beta} = m \int (v_{\alpha}-u_{\alpha})(v_{\beta}-u_{\beta})f_0 \ud \vec{v} = nkT \delta_{\alpha \beta} $$
+On voit alors apparaître l'équation d'état du Gaz Parfait. 
+$$ \derp{}{n}{t} + \vec{\nabla}(n \vec{u}) = 0 $$
+$$(\derp{}{}{t} + \vec{u}\vec{\nabla})\vec{u} = - \frac{1}{nm} \vec{\nabla}P $$
+$$ (\derp{}{}{t} + \vec{u}\vec{\nabla})\vec{u} = - \frac{2}{3n} \bbar{P}:\bbar{\Lambda} = \frac{-1}{c_v}(\vec{\nabla}_{\vec{r}}) kT \quad c_v=\frac{3}{2} $$
+c'est l'équation d'Euler pour un fluide parfait. $c_v=\frac{3}{2}$ pour un gaz monoatomique. 
+
+On chercher désormais $f_1$ sous la forme : 
+$$f_1 = \Phi(\vec{r},\vec{v},t)f_0 $$
+
+On injecte dans l'équation qui relie $f_0$ et $f_1$ : 
+$$ (\derp{}{}{t} + \vec{v}\vec{\nabla}) f_0 = J(f_0,f_1) + J(f_1,f_0)$$
+que l'on réécrit : 
+$$ \mathcal{L}f_0 = f_0 \mathcal{C}(\Phi) $$ où $\mathcal{C}$ est un opérateur linéaire. 
+
+On commence par calculer : $$ \frac{\mathcal{L}f_0}{f_0} = [\frac{m}{2 kT} (\vec{u}-\vec{v})^2 - \frac{5}{2}] (\vec{u}-\vec{v}) \vec{\nabla} \ln(kT) + \frac{m}{kT} \bbar{\Lambda}:((\vec{u}-\vec{v})(\vec{u}-\vec{v}) - \frac{1}{3}(\vec{u}-\vec{v})^2 \bbar{I})$$
+
+Propriétés de $\mathcal{C}$. Introduire le produit scalaire $$\moy{\Psi| \Phi} = \int \Psi \Phi f_0(\vec{v}) \ud \vec{v}$$
+
+On montre que $\mathcal{C} = \mathcal{C}^{\dagger}$
+
+Conditions de solubilité : on doit trouver 
+$$\mathcal{C}(\Phi) = \mathcal{L}(\ln f_0)$$ d'où $$\mathcal{L}(\ln f_0) \perp \txt{Ker} \mathcal{C}^{\dagger} = \txt{Ker} \mathcal{C} $$
+Donc 
+$$ \moy{\mathcal{L}(\ln (f_0))| \psi_{\alpha}(\vec{v})} = 0 $$ pour les 5 invariants. 
+
+Pour terminer, on cherche $\Phi$ sous la forme : 
+$$\Phi = \alpha + \vec{B}\vec{\xi} + \gamma \xi^2 + \vec{A} \vec{\nabla}\ln(kT) + \frac{1}{kT} \bbar{B}:\bbar{\Lambda}$$
+
+
+
+\section{Systèmes hors d'équilibre, théorie cinétique et problèmes de transport (équation de Boltzmann)}
+
+
+
+
+
+
+
+
+\end{document}

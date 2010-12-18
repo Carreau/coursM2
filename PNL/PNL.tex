@@ -1,0 +1,832 @@
+\documentclass{book}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[left=30mm,right=30mm,top=25mm,bottom=25mm]{geometry}
+\newcommand{\lam}{\lambda}
+\newcommand{\txt}[1]{\textrm{#1}}
+\newcommand{\moy}[1]{\langle #1 \rangle}
+\newcommand{\ud}{\mathrm{d}}
+\newcommand{\der}[3][]{\frac{\mathrm{d}^{#1} #2}{\mathrm{d} #3^{#1}}}
+\newcommand{\derp}[3]{\frac{\partial^{#1} #2}{\partial #3^{#1}}}
+
+\title{Physique non-linéaire}
+
+\author{}
+
+\begin{document}
+
+%bla bla bla ça commence pas...
+
+%LANDAU HYDRO ELASTICITE MECANIQUE DU POINT MATERIEL (OBLIGATOIRE)
+
+Le cours se découpera en deux parties, l'un sur les instabilités confinées (concernant une grandeur bornée en amplitude), et l'autre sur les instabilité non confinées (pour lesquelles on ne pourra pas utiliser les mêmes méthodes).
+ 
+\chapter{Instabilité dans les systèmes à un degré de liberté}
+
+On se focalise sur les systèmes très simples. La grandeur dans un système à un degré de liberté est caractérisée uniquement par un scalaire (par exemple $A$). Il existe une force (au sens large), telle que si $F<F_c \quad A=0$ et si $F>F_c \quad A \neq 0$. On appelle ce $F$ le paramètre de contrôle, $A$ est le paramètre d'ordre. $F_c$ est le point de bifurcation. Ce système de seuil n'est pas traduisible en Physique linéaire. 
+
+Il est important de rechercher les symétries dans les systèmes. 
+
+\section{Premier exemple}
+ \subsection{Définition du problème}
+On prend un anneau tournant. L'anneau est un rail dans lequel on place une bille. L'anneau tourne autour d'un axe à la vitesse $\Omega$ (paramètre de contrôle). Si $\Omega$ est trop petit, la bille reste en bas. A partir d'un $\Omega_c$, la bille se déplace sur l'anneau. 
+
+On se place dans le repère tournant lié à l'anneau. On appelle $\gamma$ l'accélération. On utilise le repère $(\vec{u}_r,\vec{u}_{\theta}) $
+
+\subsection{Résolution}
+\textit{C'est beaucoup plus simple en faisant un bilan énergétique}
+
+\begin{align}
+	m \gamma_R &= m\gamma_a - m\gamma_e - m \gamma_c \\
+	\gamma_c &= 2 \vec{\Omega} \wedge \vec{v}_R =0 \quad \txt{Coriolis, compensé par la réaction du rail}\\
+	\gamma_e &= - \Omega^2 R \sin \theta  \\
+	m R \der{2}{\theta}{t} &= - mg \sin \theta + m \Omega^2 R \sin \theta \cos \theta \\
+	g &= \Omega^2 R \cos \theta
+\end{align}
+
+Les positions d'équilibre : $\theta = 0$ et $\cos \theta = \frac{g}{R \Omega^2}= \frac{\Omega_0}{\Omega}$
+
+\begin{figure}%
+\includegraphics[width=\columnwidth]{filename}%
+\caption{}%
+\label{ex1}%
+\end{figure}
+
+
+
+On a une symétrie axiale, en théorie, la bille peut monter d'un côté ou de l'autre (en pratique, ce sont les défauts de l'expérience qui vont fixer). Une fois que la bille a choisi un côté, on a perdu la symétrie. 
+
+\subsection{Bifurcation supercritique}
+
+On se place juste au-dessus de la bifucation : $\Omega = \Omega_0(1+ \epsilon)$. On peut alors faire un DL : $$1 - \frac{\theta^2}{2} \approx \frac{1}{1+2 \epsilon} \approx 1 - 2 \epsilon \quad \theta = \pm 2 \sqrt{\epsilon}$$. 
+Ces bifurcations sont dites "parfaites" (en racine de $\epsilon$), ou encore surcritique ou supercritique. 
+
+\begin{figure}%
+\includegraphics[width=\columnwidth]{filename}%
+\caption{}%
+\label{diag1}%
+\end{figure}
+
+\subsection{Stabilité}
+
+Toute étude doit évaluer la stabilité des solutions existantes. 
+
+\subsubsection{Première méthode, la plus générale}
+
+\begin{align}
+	\theta &= \theta_e + a e^{i \alpha t} \quad \alpha \txt{ est complexe }\\
+	R \der{2}{\theta}{t} &= - g \sin \theta + R \Omega^2 \cos \theta \sin \theta \\
+	\theta_a&=0 \quad Ra(-\alpha^2)e^{i \alpha t} = - g a e^{i \alpha t} + R \Omega^2 \theta a e^{i \alpha t} \\
+	\alpha^2 &= \Omega_0 - \Omega \\
+\end{align}
+Il faut que les exponentielles et les $a$ se simplifient, toujours ! 
+Ici , pour les $\Omega<\Omega_0$, la solution est stable, dans l'autre cas, la solution est instable. 
+
+\begin{align}
+	\theta &= \theta_e + b e^{i \beta t} \\
+	Rb(-\beta^2) e^{i \beta t} &= -g \cos\theta_e b e^{i \beta t} + R \Omega^2 \cos^2 \theta_e b e^{i \beta t}\\
+	-R \beta^2 &= -g \cos \theta_e + R \Omega^2 \cos^2 \theta_e \\
+	\beta^2 &= \Omega^2_0 \frac{\Omega^2_0}{\Omega^2} - (\Omega^2_0 - \Omega^2) \\
+	\beta^2&= \frac{(\Omega^2_0 - \Omega^2)}{\Omega^2}
+\end{align}
+
+On a des oscillations autour de la position d'équilibre, donc c'est stable. 
+
+\section{Exemple 2 : l'Elastica d'Euler, flambage}
+%plus la tige est longue plus elle sera facile à faire bifurquer, plus sa section est large, plus ça sera difficile [...] On peut tout faire à la main [...]On l'encastre. 
+
+%ça c'est pas une bonne barre, elle a une grande section [...]Qu'est-ce qu'il peut lui arriver à cette barre quand on fait des efforts [...]
+
+\begin{figure}%
+\includegraphics[width=\columnwidth]{filename}%
+\caption{}%
+\label{ex2}%
+\end{figure}
+
+Un barre : $s\ll L^2$ globalement la barre est plutôt comme un spaghetti que comme une boîte de conserve.
+
+\'Energie élastique de la déformation de la barre : $$ \frac{1}{2} E I  \int_0^L (\derp{}{\theta}{l})^2 \ud l - F \int (1- \cos \theta) \ud l$$
+
+$E$ module d'Young, $I = \frac{-E}{\rho}\iint y^2 \ud y \ud z $ le facteur géométrique (cf le cours de MMC), $\theta$ l'angle du flambage, $l$ l'abscisse curviligne, $F$ la force appliquée.
+
+$l=0 \quad \theta=0$ la barre est encastrée.
+
+Calcul variationnel des extrema de l'énergie. 
+
+\begin{align}
+	\theta &= \theta_e(l) + \delta \theta \\
+	\delta \mathcal{E} &= E I \int_0^L \derp{}{\theta_e}{l} \derp{}{\delta \theta}{l} - D \int \sin \theta_e \delta \theta \ud l \\
+	\txt{IPP} \quad &= [EI \derp{}{\theta_e}{l} \delta \theta]_0^L - EI \int \derp{2}{ \theta_e}{l} \delta \theta \ud l  - F \int \sin \theta_e \delta \theta \ud l \\
+	\int \ud l [EI \derp{2}{ \theta}{l} +F \sin \theta] \delta \theta + [\cdots] \\
+\end{align}
+ça doit être vrai en tout point de ma barre donc : 
+$$[EI \derp{2}~{ \theta}{l} +F \sin \theta] = 0$$
+
+Conditions aux limites: $$EI \derp{}{\theta}{l}(L) = 0$$
+
+On va adimensionner l'abcisse curviligne : $l = L*s$ avec $s \in [0,1]$. 
+
+$$m^2 = \frac{FL^2}{EI}$$
+
+On voit alors apparaître : 
+$$ \derp{2}{ \theta}{s} + m^2 \sin \theta =0$$ 
+C'est une équation du pendule, mais avec d'autres conditions aux limites. 
+
+Une fois que la poutre a flambé, on a perdu une symétrie. Les conditions aux limites sont : une extrêmité encastrée au sol et une extrêmité libre.
+
+$\left[ EI \derp{}{\theta}{s} \delta \theta \right]_0^1 $ s'annule en $s=1$ car l'extrêmité est libre. pour $s=0$, $\theta=0$. 
+
+\begin{align}
+	 \frac{1}{2} &= \left( \derp{}{\theta}{s} \right)^2 = m^2 \cos \theta + C \\
+	 \derp{}{\theta}{s} &= \pm \sqrt{2}m \left[ \cos \theta - \cos \theta_0 \right]^{1/2} \\
+	 s &= \frac{1}{\sqrt{2}m} \int_0^{\theta} \frac{\ud \Gamma}{\left[ \cos \Gamma - \cos \theta_0 \right]^{1/2}} \\
+	 1 &= \frac{1}{\sqrt{2}m} \int_0^{\theta_0} \frac{\ud \Gamma}{\left[\cos \Gamma - \cos \theta_0 \right]^{1/2}} \\
+\end{align}
+ 
+ Cette équation est soluble mathématiquement par résolution numérique. Dans la suite, on linéarise l'équation pour le cas où on est proche du seuil. 
+ 
+ $$\derp{2}{ \theta}{s}+ m^2 \theta = 0 $$
+ 
+ On a alors comme solution : 
+ $$ \theta = A \sin (ms) \quad s=1 \quad m = \frac{\pi}{2}+k\pi$$
+ 
+ La force est le paramètre de contrôle. Bien sûr, cette solution n'est valable que tant que la linéarisation est valable. On peut néanmoins aller plus loin. 
+ 
+ On pose $m=m_0 + \alpha \quad m_0 = \frac{\pi}{2}$. On va prendre pour $A$ une fonction lentement variable $A(\epsilon s)$ avec $\epsilon$ petit. 
+\begin{align}
+	 \theta &= \epsilon A(\epsilon s) \sin m_0 s  = \epsilon^a B(X) e^{im_0s},+ cc\\
+	 \derp{}{\theta}{s} &= \epsilon^a \left[ im_0B + \epsilon B' \right] e^{im_0s} + cc \\
+	 \sin \theta & \approx \theta - \frac{\theta^3}{6} \\
+	 \theta^3 &= \left[B e^{im_0s} + B^* e^{-im_0s}\right]^3 = B^3e^{3 i m_0 s} + 3 B^2 B^* e^{im_0s}+ cc\\ 
+\end{align}
+
+on réécrit alors notre équation du pendule : 
+
+$$ \left[ \derp{2}{ \theta }{s} + m^2 \sin \theta \right] = 0 = \epsilon^a \left[ -m_0^2 B + 2im_0 \epsilon B' \right] e^{-m_0s} + \epsilon^a (m_0^2 + 2 m_0 \alpha)(B e^{im_0s}) - \frac{(m_0^2 + 2 m_0 \alpha)e^{3a}}{6}(B^3 e^{3im_0s} + 3 B^2 B^* e^{im_0s})=0$$
+
+On va négliger le terme qui n'a pas la même fréquence que les autres, en $e^{3im_0s}$. 
+
+Premier ordre de l'équation : $\epsilon^a$
+
+$$ -m_0^2 B + m_0^2B=0$$ ça va c'est facile. C'est logique c'est l'équation linéarisée. 
+
+Deuxième ordre : $\epsilon^{a+1}$
+
+$$ \epsilon^{a+1} 2im_0B' + 2m_0 \alpha B - \frac{m_0^2 \epsilon^{3a}}{2}|B|^2B^* = 0 \txt{ on prend } 3a=a+1$$
+
+%C'est quand même super moche ! Attention ça marche que si a est plus petit que 1
+
+On arrive pour l'instant à : 
+$$ \theta = \sqrt{\epsilon}B(\epsilon s)e^{c  \sin \frac{\pi}{2} s }$$
+
+On a une équation de Landau complexe du premier ordre en $B'$ qui contient des non-linéarités : 
+
+\begin{align}
+	 2iB' + 2  B - \frac{m_0}{2}|B|^2B &= 0 \\
+	 B - 2iB'^* + 2 B^* - \frac{m_0}{2}|B|^2B^* &= 0 \\
+	 \der{BB^*}{X} = 0 \quad B = B_0e^{i \phi(X)} \\
+	 2 i (i \phi')B_0 + 2 B_0 - \frac{m_0}{2}B_0^3 &=0\\
+	 \phi' &=  1 - \frac{m_0}{4}B_0^2 \\
+\end{align}
+
+Les deux solutions de $\phi'$ sont donc soit une constante, soit une constante nulle. Mais on ne peut pas avoir du $\phi'$ donc on doit l'annuler, et donc $$ |B|^2 = \frac{4}{m_0} = B_0^2$$
+
+$$ \theta = \sqrt{\epsilon} \frac{2 \sqrt{2}}{\sqrt{\pi}}e^{i \frac{\pi}{2}s} = \epsilon^{1/2} \frac{4 \sqrt{2}}{\sqrt{\pi}}\sin \frac{\pi}{2}s$$
+
+On écrit l'énergie : 
+
+\begin{align}
+	\mathcal{E} &= \frac{EI}{FL^2}\left[ \int \frac{1}{2} (\derp{}{\theta}{s})^2 + m^2 \int (1- \cos \theta ) \ud s e^{i(\frac{\pi}{2}s+ \epsilon s)} \right] \\
+	& \propto \frac{1}{2} \theta_0^2 (\frac{\pi}{2})^2 \int \cos^2 \frac{1}{2} s \ud s - m^2 \frac{\epsilon \theta_0^2}{2} \int \sin^2 \frac{\pi}{2}s \ud s \\
+	&= \epsilon \frac{\theta^2}{2} \left[ (\frac{\pi}{2})^2 \frac{1}{2} - \frac{m^2}{2} \right] \\
+\end{align}
+L'énergie de la solution bifurquée est plus basse que l'énergie de $\theta=0$. La solution bifurquée est donc stable, et la solution $\theta=0$ est instable.
+
+\subsection{Exemple 3}
+
+On s'intéresse au pendule pesant, d'équation : 
+$$ \der{2}{\theta}{t} + \omega^2 \sin \theta = 0  \qquad \omega = \sqrt{\frac{g}{L}}$$
+
+ On sait qu'on a une bifurcation supercritique, donc au voisinage du point critique, on essaye de chercher une solution de la forme : 
+ 
+ $$\theta(t) = \epsilon^{1/2} \Gamma_0(t,\epsilon t) + \epsilon^{3/2} \Gamma_1(t,\epsilon t, \epsilon^2 t) + \epsilon^{5/2} \dots $$
+ 
+ Que l'on dérive : 
+ $$ \der{2}{\theta}{t}= \epsilon^{1/2} \left[ \derp{2}{\Gamma_0}{t_1} + 2 \epsilon \frac{\partial^2 \Gamma_0}{\partial t_1 \partial t_2} \right] + O(\epsilon^{5/2}) + \epsilon^{3/2} \derp{2}{\Gamma_1}{t_1} + \dots $$
+ 
+ $$\sin \theta = \epsilon^{1/2} \Gamma_0 + \epsilon^{3/2} \Gamma_1  - \frac{1}{6} \epsilon^{3/2}\Gamma_0^3$$
+ 
+ $$t_1 = t \qquad t_2 = \epsilon t $$
+ 
+ On insère alors ces trois termes dans l'équation, puis on regarde ce qui se passe à chaque ordre en $\epsilon$ : 
+ 
+\begin{align}
+	\derp{2}{\Gamma_0}{t_1} + \omega^2  \Gamma_0 &= 0 \\
+	\Gamma_0 (t_1,t_2) &= A(t_2)e^{i \omega t} + c.c. \\
+	 \derp{2}{\Gamma_1}{t_1} + \omega^2 \Gamma_1 &= - 2 i \omega \der{A}{t_2}e^{i \omega t_1} + c.c. + \frac{\omega^2}{6} \left[A(t_2) e{i \omega t_1} + A^*(t_2)e^{- \omega t_1} \right]^3
+\end{align}
+ (où c.c. est le complexe conjugé de l'expression précédente, car il faut que nos grandeurs restent réelles). On élimine les termes qui divergent (car ils ne sont pas physiques) et de ce fait, on obtient à l'ordre suivant l'information qui nous manque sur $A$.
+ 
+ 
+\begin{align}
+	\derp{2}{\Gamma_1}{t_1} + \omega^2 \Gamma_1 &= F(t_2) e^{i \omega t_1} \\
+	\derp{2}{\Gamma_1}{t_1} + \omega^2 \Gamma_1 &= -2 i \omega \der{A}{t_2} + \frac{\omega^2}{6} 3 A(t_2)^2 A^*(t_2) = 0 \\
+	i \der{A}{t_2} &= \frac{\omega}{4} |A|^2 A \\
+\end{align}
+ 
+ Qui est une équation que l'on a déjà traitée, on peut donc écrire directement : 
+ $$ A = A_0 e^{i  phi(t_2)} $$
+ On a donc
+\begin{align}
+	- \phi' A_0 &= \frac{\omega}{4} A_0^3 \\
+	A = A_0 e^{-i \frac{\omega}{4} A_0^2 \epsilon t} \\
+	 \epsilon^{1/2} \Gamma_0 &= \epsilon^{1/2} A_0 e^{i \omega (1 - \frac{|A_0|^2}{4})\epsilon t} + c.c. \\
+	 &= \epsilon^{1/2} B_0 \sin (\omega  (1 - \frac{\epsilon B_0^2}{16})t )
+\end{align}
+En utilisant les conditions initiales. 
+
+\chapter{Propriétés des équations de Landau}
+
+Où l'on va voir les formes générales de ce qu'on a vu précédemment dans les exemples. 
+
+On a trouvé des équations de la forme : 
+$$i \Gamma_0 \der{A}{t'} = \epsilon A - \alpha |A|^2 A $$
+
+$$t'=\Gamma_0 t$$ $t'$ est un temps mathématique, $t$ est le temps physique. 
+
+On pose : $A = \beta B$ avec $\alpha \beta^2 = 1$ 
+
+On obtient : 
+$$ i \der{B}{t} = \epsilon B  - |B|^2 B $$
+
+A-t-on une réversibilité du système ? Voyons ce qu'il se passe dans l'équation lorsqu'on change $t$ en $-t$ et $B$ en $B^*$. 
+
+$$ - i \der{B^*}{t} = \epsilon B^* - |B|^2 B^* $$
+
+Qui est vraie car l'équation complexe conjuguée de l'équation de Landau est toujours aussi vraie. Il faut se souvenir que $B$ représente l'amplitude des oscillations. Cette équation est aussi du type équation de Schrödinger (avec aucun terme d'espace). 
+
+Il n'y a donc pas de dissipations dans cette équation. On va en introduire : 
+$$i(1 - \lam i) \der{B}{t} = \epsilon B - |B|^2 B $$
+$$B = r e^{i \phi} $$
+
+\begin{align}
+	i(1 - \lam i)( \der{r}{t} + i t \der{\phi}{t} ) &= \epsilon r - r^3 \\
+	\lam \der{r}{t} - r \der{\phi}{t} &= \epsilon r - r^3 \\
+	\der{r}{t} + \lam r \der{\phi}{t} &= 0 \\
+	(\lam + \frac{1}{\lam}) \der{r}{t} &= \epsilon r -r^3 
+\end{align}
+
+On cherche ce qu'il se passe dans le cas où $r$ est très petit et $\epsilon$ est négatif : 
+\begin{align}
+	r &= r_0 e^{\alpha t} \\
+	(\lam + \frac{1}{\lam}) \alpha = \epsilon 
+\end{align}
+ On en déduit que $\lam$ doit être positif, parce qu'on doit retourner à l'équilibre et donc avoir une exponentielle négative, donc $\alpha$ négatif, et on est dans le domaine des $\epsilon$ négatifs. 
+ 
+ 
+ Si on veut que les termes dissipatifs soient dominants, on a $\lam \gg 1$ et donc on réécrit l'équation sous la forme : 
+$$	\lam \der{B}{t} = \epsilon B - B^2$$
+$B=0$ est toujours solution. On perturbe un peu cette solution :
+
+$$B = 0 + b e^{ \alpha t} $$
+
+La solution est instable si $\alpha$ est positif, et stable dans le cas contraire. 
+
+$B = \pm \sqrt{\epsilon}$ sont les autres solutions, que l'on va perturber : 
+$$ B = \pm \sqrt{\epsilon} + c e^{\beta t}$$ 
+où le signe de $\beta$ va donner la stabilité. 
+
+\begin{align}
+	\der{B}{t} &= c \beta e^{\beta t}\\
+	&= \epsilon c e^{\beta t} - 3 \epsilon c e^{\beta t} \\ 
+	\beta &= \epsilon - 3 \epsilon = -2 \epsilon
+\end{align}
+Attention, on se souvient que $\epsilon >0$ vu qu'on a pris sa racine carrée. Donc $\beta$ est nécessairement négatif, et les positions sont stables. 
+
+\'Etude énergétique : 
+
+$$	\mathcal{E} = - \frac{\epsilon}{2} B^2 + \frac{B^4}{4} $$
+
+\section{?}
+
+$$\derp{2}{\theta}{t} + \Omega_0^2 \sin \theta = \Lambda \derp{2}{\theta}{x}$$
+
+C'est une EDP : on ne sait rien de particulier sur l'espace des solutions. En plus elle est non linéaire. On va commencer par étudier le système linéarisé : 
+$$ \derp{2}{\theta}{t} + \Omega_0^2 \theta = \Lambda \derp{2}{\theta}{x}$$
+
+On cherche des solutions du type : 
+$$\theta \approx e^{kx-\omega t}$$
+(on sait déjà que la fonction nulle est solution). 
+
+On obtient la relation de dispersion : 
+$$ - \omega^2 + \Omega_0^2 = - \Lambda k^2 \quad \omega^2 = \Lambda k^2 + \Omega_0^2 $$
+
+On a ainsi une relation entre $\omega$ et $k$. 
+
+On a alors des ondes dispersives, et on peut définir deux vitesses, une vitesse de phase $ v_{\phi} = \frac{\omega}{k}$ et la vitesse de groupe : $v_g = \der{\omega}{k} = \frac{\Lambda k}{\omega}$
+
+On a pour cette équation la propriété : $v_g v_{\phi}$ est une constante (ce qui n'est pas forcément le cas pour toutes les relations de dispersion). 
+
+Cependant, cette solution ne peut pas être une onde plane, sinon on a un problème de conservation de l'énergie. On va donc superposer des ondes pour faire un signal localisé. 
+
+$$\theta = \theta_0(x,t) e^{ikx}e^{i \omega(k) t}$$
+
+On ne connaît pas encore $\theta_0$. \`A l'instant $t=0$, elle est localisée en $x$. On suppose que c'est une fonction qui varie lentement par rapport à $e^{i \omega t}$. On réinjecte dans notre équation linéaire : 
+
+$$	- \omega^2 \theta_0  -2 i \omega  \derp{}{\theta_0}{t} + \Omega_0^2 \theta_0  = \Lambda \left[ - k^2 + \derp{2}{\theta_0}{x} + 2 i k  \derp{}{\theta_0}{x} \right] $$
+
+On va changer de variable : 
+$$ \theta_0(x,t) = \tilde{\theta_0} (x-Ut,t) = \tilde{\theta_0}(X(t),t) $$
+
+$$-2 i \omega ( -U  \derp{}{\tilde{\theta_0}}{X} + \derp{}{\tilde{\theta_0}}{t}) = 2ik \Lambda \derp{}{\tilde{\theta_0}}{X} + \Lambda \derp{2}{\tilde{\theta_0}}{X} $$
+
+Pour faire disparaître des termes, on choisit : $U = \frac{k}{\omega} \Lambda  = v_g $ : 
+$$ - 2 i \omega \derp{}{\tilde{\theta_0}}{t} = \Lambda \derp{2}{\tilde{\theta_0}}{X}$$
+
+On appelle solutions auto-similaires les solutions de la forme : $$ \tilde{\theta_0} =t^{\beta} f(\frac{x}{t^{\alpha}})$$. C'est une autre classe de solutions pour les EDP. 
+
+On prend l'équation aux dimensions :
+$$ -2 \omega \frac{\tilde{\theta_0}}{t} = \Lambda \frac{\tilde{\theta_0}}{X^2}$$
+
+On choisit alors $$\zeta = \frac{2 \omega}{\Lambda} \frac{X^2}{t + i a}$$ On ajoute le $a$ pour ne pas avoir de singularité à temps fini. On regarde si ça marche : 
+$$ \tilde{ \theta_0} = (t+ia)^{\beta} f(\frac{x}{t^{\alpha}})$$
+
+\begin{align}
+	-2 i & \omega \left[ \beta (t+ia)^{\beta-1} f - (t+ia)^{\beta} \frac{\zeta}{t+ia} \der{f}{\zeta}\right] \\
+	&= \Lambda (t+ia)^{\beta} \left[  \derp{2}{f}{\zeta} \left( \frac{2 \omega}{\Lambda (t+ia)} \right)^2 4X^2 + + \der{f}{\zeta} \frac{4 \omega}{\Lambda (t+ia)}  \right] \\
+	&= (t+ia)^{\beta-1}(-2\omega) \left[\beta f - \zeta \der{f}{\zeta}\right] \\
+	&= (t+ia)^{\beta-1} \left[\der{f}{\zeta} \frac{16 \omega^2}{\Lambda} \frac{X^2}{t+ia} + \der{f}{\zeta}  4 \omega \right] \\
+	&= - i  \left[\beta f - \zeta \der{f}{\zeta}\right] = 4 \zeta \derp{2}{f}{\zeta} + 2 \der{f}{\zeta}
+\end{align}
+
+C'est une équation différentielle ordinaire d'ordre 2. On ne sait les résoudre que si un mathématicien l'a déjà fait pour nous. Ici heureusement, ce sont les mêmes qu'en mécanique quantique alors ça a été fait. 
+
+On va supposer ici $\zeta$ grand, on a : 
+$$i \zeta f' = 4 f''$$
+
+On suppose donc un comportement asymptotique : $$ f \approx T(\zeta) e^{-i \frac{\zeta}{4}}$$ où $T$ est un polynôme, qui permet d'assurer la convergence. 
+
+On revient à $\theta$ : $$\theta =  (t+ia)^{\beta} e^{ \frac{i \omega}{2 \Lambda} \frac{(x-Ut)^2}{t+ia} } e^{i(kx-\omega t)} T(\frac{2 \omega}{\Lambda}\frac{(x-Ut)^2}{t+ia}) + c.c.$$
+
+On doit alors calculer : 
+$$ \mathcal{E} = \int \ud x \theta \theta^* = \int \ud X \theta \theta^*$$
+
+\begin{align}
+	e^{\frac{i \omega}{2 \Lambda (t+ia)}X^2 - i \frac{\omega}{2 \Lambda (t+ia)} X^2 } e^{\frac{\omega X^2}{2 \Lambda}\left[\frac{i}{t+ia} - \frac{i}{t-ia}\right]} \\
+	&=e^{\frac{\omega X^2}{\Lambda}\frac{a}{t^2+a^2}} \qquad a<0 \\
+	\mathcal{E} &= \int \ud X (t^2+a^2)^{\beta} e^{\frac{\omega X^2}{\Lambda}\frac{a}{t^2 + a}} G(\dots) \\
+	Y &= \frac{X}{\sqrt{t^2 + a^2}} \\
+	\mathcal{E} &= \int \ud Y \sqrt{t^2 + a^2} (t^2 + a^2)^{\beta} e^{- \dots Y^2} G(Y) 
+\end{align}
+
+ On en déduit que $\beta= - \frac{1}{2}$. Mais on n'a toujours pas $a$. On va essayer de le faire correspondre aux conditions initiales (ce qui n'est pas très rigoureux parce que $a$ a été trouvé pour le régime asymptotique. On se place à l'instant initial, et $a$ sera alors la largeur de la gaussienne initiale. 
+ 
+Pour examiner rapidement les non-linéarités, on ne résoud pas, on regarde simplement ce que leur présence change. 
+\begin{align}
+	-2 i \omega \derp{}{\theta_0}{t} - \frac{\Omega_0^2}{2} |\theta_0|^2 \theta_0 &= \Gamma \derp{2}{\theta_0}{x^2} \\
+	& \tau_0 e^{i(qx + \omega t)} \\
+	 - 2 i \omega_0 \omega \tau_0 &= - \Gamma q \tau_0 + \frac{\Omega_0^2}{2}\tau_0^3
+	 \end{align}
+ 
+ On va chercher un $\tau_0$ qui permet d'annuler la dispersion, ce qui fera des solutions qui ne se déforment pas au cours du temps (les solitons).
+ 
+Reprenons alors l'équation de Sine-Gordon, pour une chaîne de pendules : 
+$$ \derp{2}{\theta}{t} + \Omega_0^2 \sin \theta = \Lambda \theta_{xx}$$
+On fait le même changement de variable $X = x-Ut$ et des solutions de la forme $A(x-Ut,t)e^{i(kx - \omega t)}$ : 
+$$ (U^2 - \Lambda) \theta_{XX} + \Omega_0^2 \sin \theta = 0$$ 
+Sauf qu'on ne connaît pas le signe de $(U^2 - \Lambda)$.
+
+Premier cas : $U> \sqrt{\Lambda}$. On pose $l^2 = \frac{U^2 - \Lambda}{\Omega_0}^2$ 
+
+On intègre par rapport à $\theta$ : 
+$$\frac{l^2}{2} \theta_X^2 = \cos \theta + cste$$
+$$\theta_X^2 = \frac{4}{l^2} \cos^2 \frac{\theta}{2} \qquad \theta_{X}= \pm \frac{2}{l} \cos \frac{\theta}{2}$$
+
+\begin{align}
+	\int \frac{\ud \tau}{\cos \frac{\tau}{2}} &= \pm \frac{2}{l}(X-X_0)  \\
+	2 \ln (\tan (\frac{\pi}{4} + \frac{\theta}{4})) &= \pm \frac{2}{l}(X-X_0) \\
+	\theta &= \pi + 4 A \tan (e^{\frac{x-Ut}{l}})
+\end{align}
+
+On peut voir dans le poly de cours le calcul de stabilité. Pour l'instant tous les $U$ sont possibles. Expérimentalement, ça sera différent mais la théorie que l'on a développée pour l'instant ne permet pas d'en savoir plus. 
+
+$$v_g = \frac{k}{\omega}\Lambda = \frac{k \Lambda}{\sqrt{k^2 \Lambda + \omega_0^2}}$$
+
+Deuxième cas : $U < \sqrt{\Lambda}$. On pose $$l^2 = \frac{\Lambda - U^2}{\Omega_0^2}$$
+
+On a l'équation :
+\begin{align}
+	l^2 \theta_X - \sin \theta &= 0 \\
+	\theta_X^2 &= \frac{2}{l^2}(1 - \cos \theta) = \frac{4}{l^2} \sin^2 \frac{\theta}{2} \\
+	\int \frac{\ud \tau}{\sin \frac{\tau}{2}} &= \pm \frac{2}{l}X \\
+	2 \ln \tan \frac{\theta}{4} &= \pm \frac{2}{l}X \\
+	\theta &= - \pi + 4 A \tan e^{+ \frac{x-Ut}{l}} = 4 A \tan e^{\frac{X}{l}}
+\end{align}
+ 
+ $l^2$ donne la largeur du soliton (en valeur absolue). On a toujours pas de sélection de la vitesse. 
+ 
+ On va mettre en évidence l'existence de solitons dans une autre équation, qui se retrouve dans beaucoup de problèmes de couche limite: 
+ 
+ 
+\begin{align}
+	 \derp{2}{\theta}{t}(X,t) &= \epsilon \theta (X,t) - \theta^3 (X,t) + \theta_X (X,t) \\
+	 (U^2 - 1) \theta_X &= \epsilon \theta - \theta^3 \\
+	 (U^2 - 1) \frac{\theta_X^2}{2} &= \epsilon \frac{\theta^2}{2} - \frac{\theta^4}{4} + cste \\
+	 &= - \frac{1}{4} (\theta^2 - \epsilon)^2 \txt{ cette solution n'arrive que si }U<1 \\
+	 \theta_X &= - \derp{}{V}{\theta} = \frac{1}{U^2 -1}(\epsilon \theta - \theta^3) \\
+	 V &= \frac{1}{1- U^2} \left( \frac{\epsilon \theta^2}{2} - \frac{\theta^4}{4} \right) \\
+	 \int \frac{\ud \theta}{\theta^2 - \epsilon} &=  \int \frac{\ud \tau}{\tau^2 - \epsilon} = \sqrt{\frac{1}{2 (1-U^2)}}X \\
+	 \frac{-1}{2 \sqrt{\epsilon}} \int \frac{\ud \tau}{\tau + \sqrt{\epsilon}} - \frac{\ud \tau}{tau - \sqrt{\epsilon}}&= \pm \frac{1}{\sqrt{2 (1-U^2)}} X \\
+	 \ln \frac{\tau + \sqrt{\epsilon}}{\tau - \sqrt{\epsilon}} &=  \pm \sqrt{\frac{2 \epsilon}{1-U^2}} X \\
+	 \theta &= \sqrt{\epsilon} \tanh \sqrt{\frac{2 \epsilon}{1-U^2}}X
+\end{align}
+
+Si on a $U>1$, la forme du potentiel change : $$ V = \frac{1}{1-U^2}(\frac{\epsilon \theta^2}{2} - \frac{\theta^4}{4})$$ Au lieu d'avoir un potentiel avec deux bosses, on a un potentiel avec deux creux. Les solutions sont alors de la forme $\sqrt{\epsilon} \cosh(\frac{X}{l})^{-1}$, qui forme une solution très piquée dans l'espace. 
+ 
+ \chapter{Processus convectifs}
+ 
+La convection a lieu dans un milieu comportant des hétérogénéité (de température, de concentration \dots). 
+
+\section{L'expérience de Richardson}
+
+Expérience en atmosphère ouverte. On chauffe un fluide.
+On définit le nombre de Richardson, qui compare la poussée d'Archimède et l'inertie : 
+$$R_i = \frac{\rho_0 \alpha \Delta T G}{\rho_0 v^2 /D}$$
+avec $\rho_0$ densité du fluide, $\Delta T$ gradient de température, $\alpha$ le coefficient de diffusion, $G$ la gravité, $v$ la vitesse caractéristique, $D$ la distance caractéristique. On a négligé la viscosité. 
+
+\section{L'expérience de Rayleigh-Bénard}
+
+Un fluide entre deux plaques de températures différentes (avec la plaque du haut la plus froide). Il peut s'établir un régime avec des cellules de convection dans lesquelles le fluide remonte, est refroidi, donc devient plus dense, retombe, est réchauffé, et recommence le cycle. L'espacement entre les plaques est noté $D$ (traditionnellement), $\Delta T $ la différence de température, $V$ la vitesse du fluide dans le cycle.
+
+On prend un petit volume élémentaire. Lors d'un petit déplacement $\delta l$, on a un changement de température $$\delta t = \frac{\Delta T}{D} \delta l  = \frac{\Delta T}{D} V \delta \tau  \approx \frac{\Delta T V R^2}{D D_{dif}}$$
+où $R$ est la taille du volume élémentaire, $D_{dif}$ le coefficient de diffusion. 
+
+$$R_{\alpha} = \frac{\rho_0 \alpha g \Delta T U R^2}{D D_{dif} 6 \pi \eta R U } \frac{4}{3} \pi R^3 = \frac{\rho_0 \alpha G \Delta T D^3}{\eta D_{dif}}$$
+
+C'est le nombre de Rayleigh. 
+
+\section{\'Equations de la mécanique des fluides}
+
+$$\rho \left( \derp{}{v}{t} + (\vec{v} \vec{\nabla})\vec{v} \right) = ( -  \nabla P + \eta \Delta \vec{v} + \rho_0 \alpha \Delta T G \vec{e_z}$$
+$T_0,\rho_0$ sont fixés pour une hauteur donnée de la cellule (en général au milieu), elles servent de référence.
+
+
+$$ \derp{}{T}{t} + (\vec{v} \vec{\nabla})T = D_{dif} \Delta T $$
+
+$$\derp{}{\rho}{t} + \div \rho \vec{v} = 0 $$
+
+$$t_{diff} = \frac{D^2}{D_{diff}} \qquad \theta = \frac{T-T_0}{\Delta T}$$
+
+$$v = \frac{D}{D^2} D_{dif} = \frac{D_{dif}}{D}$$
+
+On adimensionne l'équation sur la température : 
+$$ \frac{D_{eff}}{D^2} \Delta T \derp{}{\theta}{t} + \frac{D_{eff}}{D^2}\Delta T  \vec{v}\nabla \theta  = \frac{D_{eff}}{D^2} \Delta T \Delta \theta $$
+
+$$\derp{}{\theta}{t} + (\vec{v} \nabla)\theta = \Delta \theta $$
+On a adimensionné l'équation.
+
+$$\derp{}{\vec{v}}{t}  + \frac{D^2_{eff}}{D^3}(\vec{v}\nabla)\vec{v} = - \frac{p_0}{\rho_0 D} \nabla P + \frac{\eta}{\rho_0} \frac{D_{dif}}{D^3} \Delta \vec{v} + \alpha g \Delta T \theta \vec{e_z}$$
+
+
+$$ \frac{D_{dif}\rho_0}{\eta} (\derp{}{\vec{v}}{t} + (\vec{v}\nabla)\vec{v}) = - \nabla P + \Delta \vec{v} + R_a \theta \vec{e_z}$$
+
+On note $P_r = \frac{\eta}{\rho_0 D_{dif}}$
+
+$\theta$ varie entre -1/2 et 1/2
+
+$$\derp{2}{\theta}{z} = 0 \qquad \theta = -z \quad \derp{}{P}{z} = R_a (-z) $$
+$$P = - \frac{R_a z^2}{2} + \dots $$
+
+Cette solution ne sera valable que pour des faibles écarts de température. On fait une analyse de stabilité linéaire, pour connaître le domaine de validité.
+
+\begin{align}
+	\theta &= -z + \theta_0(z) e^{\Omega t} e^{ikx} \\
+	v &= \vec{v_0}(z) e^{\omega t} e^{ikx}  \\
+	P &= \frac{-R_a z^2}{2} + \epsilon \rho_0 \dots \\
+	\frac{1}{P_r} \Omega \vec{v_0}(z) e^{ikx} &= - \nabla(P_0 e^{ikx}) + \Delta \vec{v} + R_a \theta_0(z) e^{ikx}\vec{e_z} \\
+	- \Delta(\rho_0 e^{ikx}) + R_a \theta'_0(z) e^{ikx} &= 0 \\  
+	\derp{}{\theta}{t} + (v \nabla) \theta &= \Delta \theta \\
+	\Omega \theta_0 - v_{0z} = \Delta \theta_0 \\
+	0 & - \Delta p_0 + R_a \derp{}{\theta_0}{z} \\
+	\frac{1}{P_r} \Omega \Delta V_{0z} = - \derp{}{\Delta p_0}{z} + \Delta^2 V_{0z} + R_a \Delta \theta \frac{1}{P_r} \Omega \Delta V_{0z} \\
+	&= - R_a \derp{2}{\theta_0}{z^2} + \Delta^2V_{0z} + R_a\Delta \theta \\
+\end{align}
+
+On obtient un système de deux équations : 
+\begin{align}
+	\Omega \theta_0 -  \Delta \theta_0 - V_{0,z} = 0 \\
+	R_a \Delta_2 \theta + \Delta^2 V_{0,z} = 0 
+	\theta_0 (k_x^2 + k_y^2) - \derp{2}{\theta_0}{z} - V_{0z} =0 \\
+	-R_a \theta_0(k_x^2 + k_y^2) + (k_x^2 - k_y^2 + \derp{2}{}{z})v_{0z}
+\end{align}
+ 
+On choisit $V_{0,z} = 0$ en $z=\pm \frac{1}{2}$ 
+ 
+On va noter $k^2$ le carré du vecteur $\vec{k}$, qui remplacera $k_x^2 + k_y^2$ dans les deux équations précédentes.
+
+\begin{align}
+	0 &= Ra[-k^2 \theta_0] + [-k^2  + \derp{2}{}{z}]^2 V_{0z} \\
+	0 &= (-k^2 + \derp{2}{}{z})\theta_0 + V_{0z} \\
+	\theta &= \pm \frac{1}{2} \qquad z =  \mp \frac{1}{2} \\
+	\theta_0 &= 0 \qquad \txt{ quand } z &= \pm \frac{1}{2} \quad \forall \quad z
+	V_{0z} &= \txt{ en } z = \pm \frac{1}{2} \\
+	\div \vec{V}_{0z} &= 0 = \derp{}{V_{0,z}}{x} + \derp{}{V_{0,z}}{y} +\derp{}{V_{0,z}}{z}  = 0 \qquad \forall x,y,z \\
+	V_{0,x} = 0 \quad V_{0,y} = 0 \quad \forall x,y \txt{ donc } \\
+	\derp{}{V_{0x}}{x} &= 0 \qquad \derp{}{V_{0y}}{y} = 0 \txt{ et donc }\\
+	\derp{}{V_{0z}}{z} &= 0   
+\end{align}
+ 
+Les solutions pour ces conditions aux limites sont de la forme : 
+$$ A \cos k_1 z + B \cosh k_2 z + C \cosh k_2^* z$$
+Pour trouver les coefficients, il faut utiliser des méthodes numériques. Cette méthode est expliquée dans les livres et n'est pas très intéressante à présenter. 
+
+Ici, on change le problème, pour s'intéresser à un film de fluide dans l'air.
+
+\begin{align}
+	\sigma_{xz} & \approx \derp{}{V_{0z}}{z} + \derp{}{V_{0z}}{x} = 0 \\
+	\sigma_{yz} & \approx \derp{}{V_{0y}}{z} + \derp{}{V_{0z}}{y} = 0 \\
+	\derp{}{V_{0x}}{z} &= 0 \qquad \derp{}{V_{0y}}{z} = 0 \\
+	\derp{}{}{z} [\derp{}{V_{0,z}}{x} + \derp{}{V_{0,z}}{y} +\derp{}{V_{0,z}}{z}]= 0 \qquad \forall x,y,z \\
+	\txt{ en } z &= \pm \frac{1}{2} \qquad \derp{2}{V_{0z}}{z}(z=\pm\frac{1}{2})=0 \\
+\end{align}
+
+On va alors avoir des solutions sinusoïdales de la forme $$ \cos qz e^{ik_xx}e^{ik_yy} \qquad q = \pi + 2m \pi$$ et $$\sin qz e^{ik_xx}e^{ik_yy} \qquad q = 2m \pi$$
+
+\begin{align}
+	(-k^2 - \derp{2}{}{z})\theta_0 + V_{0z} &= 0 \\
+	(-k^2 -q^2) \theta_0 + V_{0z} &= 0 \\
+	Ra(-k^2 \theta_0) + [-k^2 + \derp{2}{}{z}]^2 V_{0z} &= 0 \\
+	Ra(-k^2 \frac{V_{0z}}{k^2 + q^2}) + [k^2 + q^2]^2 V_{0z} &= 0 \\
+	Ra &= \frac{(k^2+q^2)^3}{k^2}
+\end{align}
+ 
+ 
+\begin{align}
+	\Gamma_0 \derp{}{A}{t} &= \epsilon A - |A|^2A + \Gamma A_{xx} \\ 
+	V_0 &= A(x,y,t)e^{i k_0 x} \cos \pi z \\
+	A &= A_0 e^{i\delta kx} \\
+	0 &= \epsilon - |A_0|^2 - \Gamma sk^2
+\end{align}
+
+Stabilité des rouleaux. 
+\begin{align}
+	A &= A_0 e^{i \delta k x} + a e^{\Omega t} e^{i(\delta k  +q)x}\\
+	AA^* &= (A_0 + ae^{\Omega t} e^{iqx})(A_0 + a^* e^{\Omega t} e^{-iqx}) \\
+	|A|^2 A &= (A_0^3 + A_0^2 2a e^{\Omega t} e^{iqx} + A_0^2 a^* e^{\Omega t} e^{-iqx})e^{i \delta k x} \\
+	e^{i (\delta k +q)x}& \qquad  \Gamma_0 \Omega a &= \epsilon a  2 a A_0^2 - \Gamma (\delta k + q)^2 \\
+	e^{i(\delta k - q)x}& \qquad 0 &= - a^* A_0^2 \\
+\end{align}
+
+On doit considérer un couple de perturbations : 
+\begin{align}
+	A &= A_0 e^{i \delta k x} + a e^{\Omega t} e^{i(\delta k  +q)x} + b e^{\Omega t}e^{i (\delta k - q)x} \\
+	AA^* &= (A_0 + ae^{\Omega t} e^{iqx} +  b e^{\Omega t}e^{ -i qx})(A_0 + a^* e^{\Omega t} e^{-iqx} + b^* e^{\Omega t}e^{i qx}) \\
+	|A|^2 A &= (A_0^3 + A_0^2 (2a+b^*) e^{\Omega t} e^{iqx} + A_0^2 (2b+ a^*) e^{\Omega t} e^{-iqx})e^{i \delta k x}\\
+	\Gamma_0 \Omega a &= \epsilon a - (2a + b^*)A_0^2 - \Gamma a (\delta k + q)^2 \\
+	\Gamma_0 \Omega b^* &= \epsilon b^* - (2 b^* + a)A_0^2 - \Gamma b^*(\delta k -q )^2 
+	\end{align}
+	
+	\begin{align}
+	\txt{det} \left| \begin{array}{cc} \Omega -\epsilon + 2 A_0^2 + \Gamma(\delta k + q)^2 & + A_0^2 \\
+	+ A_0^2 & \Omega -\epsilon + 2 A_0^2 + \Gamma(\delta k - q)^2 \\	
+\end{array} \right| &=0 \\
+	\left( \Omega - \epsilon + 2 A_0^2 + \Gamma(\delta k^2+ q^2 ) \right)^2 è 4 \Gamma^2 \delta k^2 q^2 -A_0^4 = 0 \\
+	\Omega - \epsilon + 2 A_0^2 + \Gamma(\delta k^2 + q^2) &= \pm \sqrt{4 \Gamma^2 \delta k^2 q^2 + A_0^4} \\
+	&= \Omega - A_0^2 - \Gamma \delta k^2 + 2 A_0^2 + \Gamma(\delta k^2 + q^2) \\
+	&= \Omega + A_0^2 + \Gamma q^2 \\
+	&= \pm \sqrt{4 \Gamma^2 \delta k^2 q^2 + A_0^4} \\
+	\Omega &= -(A_0^2 + q^2) \+ \sqrt{4 \Gamma^2 \delta k^2 q^2 + A_0^4}\\
+\end{align}
+
+On a une instabilité si $\Omega>0$ et donc si $$A_0^2 + \Gamma q^2 < \sqrt{4 \Gamma^2 \delta k^2 q^2 + A_0^4} $$
+On réécrit cette inégalité : 
+
+\begin{align}
+	A_0^4 + \Gamma^2 q^4 + 2 A_0^2 \Gamma q^2 &< A_0^4 + \epsilon \Gamma^2 \delta k^2 q^2 \\
+	\epsilon &= A_0^2 + \Gamma \delta k^2 \\
+		(\epsilon - \Gamma \delta k^2)q^2 \Gamma &< 2 \Gamma \delta k^2 q^2 \\
+	(\epsilon - \Gamma \delta k^2)&< 2 \delta k^2 \\
+	\epsilon &< 3 \Gamma \delta k^2 \\
+\end{align}
+
+Les expérimentateurs observent une unique longueur d'onde d'instabilités, que nous n'avons toujours pas obtenues. On poursuit donc avec l'instabilité zig-zag.
+
+\subsection{Instabilité zig-zag}
+
+\begin{align}
+	A &= A_0 e^{i \delta k x} + a^{\Omega t}e^{o \delta k q}e^{i q y} + b e^{\Omega t} e^{i \delta k x} e^{-iqy} \\
+	&= 0 \\
+\end{align}
+
+
+\chapter{\'Equation de réaction-diffusion}
+
+Ce phénomène concerne les réactions chimiques. 
+
+Rappels sur la cinétique chimique. 
+
+$$S + E \leftrightarrow^{k_1} C \rightarrow^{k_2} P+E $$
+
+On peut alors écrire : 
+\begin{align}
+	\der{[S]}{t} &= -k_1 [S][E] + k_{-1}[C]\\
+	\der{[E]}{t} &= -k_1 [S][E] + (k_{-1} + k_2) [C] \\
+	\der{[C]}{t} &= k_1 [S][E] - (k_1 + k_2)[C] \\
+	[S] &= S_0 s \\
+	[E] &= E_0 e \\
+	[C] &= - [E]+ cste \\
+	S_0 \der{s}{t} &= -k_1 S_0 E_0 se + k_1 E_0 (1-e)\\
+	E_0 \der{e}{t} &= -k_1 SE_0 se + (k_1+k_2)E_0(1-e)\\
+	\frac{1}{k_1 E_0} \der{s}{t} &= - se + \frac{k_{-1}}{k_1 S_0}(1-e)\\
+	\frac{1}{k_ S_0}\der{e}{t} &= -se + \frac{k_1 + k_2}{k_1 S_0} (1-e)\\
+	\tau_1 &= \frac{1}{k_1 E_0} \\
+	\tau_2 &= \frac{1}{k_1 S_0} \\
+\end{align}
+
+On met peu de catalyseur $$ \epsilon = \frac{E_0}{S_0}$$
+
+\begin{align}
+	s &= s_0 + \epsilon s_1 + \epsilon^2 s_2 \\
+	e &= e_0 + \epsilon e_1 + \epsilon^2 e_2 \\
+	-s_0 e_0 + K_2 (1-e_0) &= 0 \\
+	e_0 &= \frac{K_2}{K_2 + s_0} \\
+	\der{s_0}{t} &= - s_0 \frac{K_2}{K_2 + s_0} + \frac{K_1s_0}{K_2 + s_0}\\
+	\der{s_0}{t}  \frac{K_2 + s_0}{s_0} &= (K_1 - K_2) \\
+	K_2 \ln s_0 + s_0 &= (K_1 - K_2) t + 1 \\
+\end{align}
+
+En faisant ça, on a mis un $\epsilon$ devant une dérivée, et on l'a éliminée (à tous les ordres), donc ça ne peut pas marcher. On va réintroduire une dépendance en temps, mais d'une autre forme (pour pouvoir résoudre). 
+
+
+\begin{align}
+	t &= \epsilon^{\tau}\\
+	\der{s_0}{\tau} &= 0  \qquad s_0 &= 1\\
+	\der{e}{\tau} &= -e + K_2 (1-e)\\
+	\der{e}{\tau} + e(1 + K_2) &= K_2 \\
+	e &= \frac{K_2}{1 + K_2} + \frac{1}{1 + K_2}
+\end{align}
+
+\begin{align}
+	\derp{}{[C]}{t} &= F([A],[C])\\
+	\derp{}{[C]}{t} + \div [C] \vec{v} = F([A],[C])\\
+	&= F(\dots) + D \Delta [C] \\
+	0 &= D ([C],(\nabla C)) \\
+	J_B &= X[C]\nabla [B]\\
+	\derp{}{[B]}{t} &= D_C \Delta [B] - \nabla X [C] \nabla [B] + F(\dots)\\
+\end{align}
+
+
+\subsection{Instabilité de Turing}
+On écrit la forme la plus générale des équations : 
+\begin{align}
+	\derp{}{U}{t} &= F(U,V) + D_u \Delta U\\
+	\derp{}{V}{t} &= G(U,V) + D_v \Delta V \\
+\end{align}
+
+Conditions initiales $U_0,V_0$ homogènes et stationnaires : 
+\begin{align}
+	0 &= F(U_0,V_0) \\
+	0 &= G(U_0,V_0) \\
+\end{align}
+
+On prend alors des solutions de type : 
+$$U=U_0 + u e^{\Omega t}e^{ikx}$$
+et pareil pour $V$. 
+
+On a alors les équations de départ : 
+\begin{align}
+	\Omega u &= \underbrace{\derp{}{F}{U}(U_0,V_0)}_{F_u} u + F_V v -k^2 D_u u \\
+	\Omega v &= G_u u  + G_v v - k^2 D_v v \\
+\end{align}
+
+Que l'on écrit sous forme de matrice :
+$$ \begin{matrice}{cc} \Omega - F_u + k^2 \Omega D_u & -F_v \\ -G_u & \Omega - G_v + k^2 D_v \end{matrice} =0 $$
+
+On calcule le déterminant de cette matrice : 
+\begin{align}
+	\Omega^2 - \Omega (G_v + F_u - k^2(D_v + D_u)) + (F_u - k^2 D_u)(G_v - k^2 D_v) - F_v G_u &=0 \\
+	(G_v+F_u - k^2(D_v + D_u))^2 - 4 (F_u G_v - F_v G_u) &= \Delta \\
+\end{align}
+Le trinôme a donc pour solutions réelles si $\Delta>0$ : 
+\begin{align}
+	\Omega_{\pm} &= \frac{G_v + F_u - k^2(D_v + D_u) \pm \sqrt{\Delta }}{2}\\
+\end{align}
+Dont on doit avoir le signe pour connaître la stabilité. 
+
+Pour avoir des solutions stationnaires stables, on doit avoir : $$\Omega = \der{\Omega}{k} = 0$$
+
+On doit alors chercher $$h(k) = 0$$
+
+$$k^2 = (D_v F_u + D_u G_v) \pm \sqrt{\Delta}$$
+
+On a donc comme conditions : 
+\begin{align}
+	G_v + F_u &<0 \\
+	0 & \leq F_u G_v - F_v G_u \\
+	D_v F_u + D_u G_v &> 0 
+\end{align}
+
+\section{Instabilité de Saffman-Taylor}
+
+Dans une cellule de Hele-Shaw, on met de l'huile et de l'air, et on souffle l'air sur l'huile. Il se forme un doigt. 
+
+On appelle $2a$ la largeur de la plaque. 
+
+$$\vec{v} = \frac{-b^2}{12 \mu} \vec{\nabla}P $$
+$$ \div \vec{v}=0$$
+$$\Phi = - \frac{b^2}{12 \mu} P$$
+
+Comme on prend des vitesses moyennées dans l'épaisseur et non des vitesses classiques, on ne peut pas garder les conditions aux limites de Navier-Stokes (vitesse tangentielle nulle aux parois). On ne conserve que la condition de non pénétration, la vitesse normale est nulle aux parois. 
+
+$$\vec{v}_{interface} = U \cos \theta = \vec{N}\vec{\nabla}\Phi$$
+
+La condition sur la contrainte à l'interface ne tient pas non plus. 
+
+On a aussi une interface courbée, et donc on peut écrire les pressions de Laplace : 
+$$p_{huile} = p_{air} = - \gamma |\mathcal{C}|$$
+
+Il y a trop de contraintes. On ne peut pas calculer à partir des équations la forme de l'interface. On peut néanmoins tenter des solutions, et voir si elles sont stables. La stabilité du front plan sera évoquée en TD. 
+
+On cherche des solutions du type : $$\Phi = Re(\Psi(z))\qquad z = x + i y $$
+\begin{align}
+	\Delta \Phi &= 0 \\
+	\frac{1}{r} \derp{}{}{r} r \Phi_r &= 0 \\
+	\ln z &= \ln r + i \theta \\
+	\Phi &= \Phi_0 \ln \frac{r}{R_0(t)}
+\end{align}
+
+La deuxième équation qu'elles doivent satisfaire : 
+\begin{align}
+	n \nabla \Phi &= \derp{}{\Phi}{r}(r = R_0) = \frac{\Phi_0}{R_0(t)} \\
+	&= \dot{R_0}(t) \\
+	R_0 \dot{R_0} &= \Phi_0 \\
+	R_0^2 = 2 \Phi_0 t \\
+\end{align}
+
+La troisième équation à vérifier : 
+\begin{align}
+	\Phi &= \frac{b^2}{12\mu} \frac{\gamma}{R_0}\\
+	\Phi &= \Phi_0(t) (\ln \frac{r}{R_0} + A)\\
+	\Phi_0 A &= \frac{b^2}{12 \mu} \frac{\gamma}{R_0}\\
+	R_0 \dot{R_0} &= \frac{b^2}{12 \mu} \frac{\gamma}{R_0A}\\
+\end{align}
+
+On a des solutions analytiques, on peut donc tester la stabilité. 
+
+ 
+\begin{align}
+	a_n(t) &= a_n e^{\Omega_n t}\\
+	Re(z^n) &= r^n \cos n \theta \\
+	Re(z^{-n}) &= r^{-n} \cos n \theta \\
+	\Phi &= \Phi_0 + a_n(t) r^{-n} \cos n \theta \\
+	R &= R_0(t) (1 + \epsilon_n(t) \os n \theta)\\
+	\vec{r} &= R \vec{e_r}\\
+	\vec{z} &= \begin{matrice}{c} \der{R}{\theta} \\ R \end{matrice} \\
+	\vec{N} &= \begin{matrice}{c} \frac{R}{\sqrt{R^2 + R'^2}} \\ - \frac{R'}{\sqrt{R^2 + R'^2}} \end{matrice} \\
+	&= \begin{matrice}{c} 1 \\ - \frac{R_0 \epsilon_n n \sin n\theta}{R_0} \end{matrice} \\
+	\vec{N} \vec{\nabla}\Phi &= \frac{\Phi_0}{R_0} (1 - \epsilon_n \cos n \theta) - n a_n  R_0^{n-1}\os n \theta \\
+	&= \dot{R_0} + \dot{R_0} \epsilon_n \cos n \theta + R_0 \dot{\epsilon_n} \cos n \theta \\
+\end{align}
+
+La courbure en coordonnées cylindriques est résolue par des logiciels de calcul abstrait : 
+\begin{align}
+	\kappa &= \frac{R^2 + 2 R_{\theta}^2 - R R_{\theta \theta}}{(R^2 + R_{\theta}^2)^{3/2}}\\
+	&= \frac{1}{R_0} (n^2 - 1)\epsilon_n\\
+	\Phi_0 \epsilon_n \cos n \theta = a_n R_0^{-n} \cos n \theta &= \frac{b^2}{12 \mu} \frac{\gamma}{R_0}(n^2 -1)\epsilon_n \cos n \theta \\
+	a_n R_0^{-n} &= (\frac{b^2}{12 \mu} \frac{\gamma}{R_0}(n^2 -1) - \Phi_0) \epsilon_n \\
+	\dot{\epsilon_n} R_à &= \left[\frac{n}{R_0}(\Phi_0 - \frac{b^2}{12 \mu} \frac{ \gamma}{R_0}(n^2 -1)) - \frac{\Phi_0}{R_0} - \dot{R_0} \right]\epsilon_n \\
+	\Omega_n &= \frac{\dot{\epsilon}_n}{\epsilon_n} \\
+	&= \frac{\Phi_0}{R_0^2}\left[ (n-2) - \frac{b^2}{12\mu}\frac{\gamma}{R_0 \Phi_0} - n (n^2 -1) \right]
+	\der{\Omega_n}{n} &= 0 
+\end{align}
+
+On considère un doigt d'air dans de l'huile dans un tube. On appelle $V$ la vitesse de progression du doigt. 
+Sur le doigt, $\Phi = 0$. 
+\begin{align}
+	V_{\infty} &= \lam V \\
+	- V (1-\lam)2a &= (V_{\infty} - U)2a \\
+	\Psi_{\infty} &= V_{\infty}z \\
+	 \Phi &= V_{\infty} x \\
+	 \derp{}{\Phi}{y} &= - \derp{}{\Psi}{x}\\
+	 \derp{}{\Phi}{x} &= - \derp{}{\Psi}{y}\\
+	 \derp{}{\Psi}{x} &= 0 \quad \forall x \\
+	 y &= \pm a \\ 
+	 z &= F(\Psi) \\
+	 &= \frac{\Psi}{\lam U } + \sum_n a_n e^{\frac{-n (\Phi + i \Psi)}{\lam U}} \\
+	 y &= 1 +\sum_n a_n e^{- \frac{n \Phi \Pi}{\lam U}} \sin n \Pi  \\
+	 n \nabla \Phi &= U \cos \theta \\
+	 \derp{}{\Psi}{s} &= U \derp{}{y}{s}\\
+	 y &= \frac{y}{\lam} - \sum_n a_n \sin \frac{n \Pi y}{\lam}\\
+	 \frac{\lam -1 }{\lam}\int_0^{\lam} y \sin \frac{m \Pi y }{\lam} \ud y= a_m \\
+\end{align}
+On fait une IPP : 
+\begin{align}
+	\frac{\lam-1}{\lam} \frac{\lam(- \cos m \Pi)}{\frac{m \Pi }{\lam}} &= -  \frac{a_m \lam}{2} \\
+	a_m &= \frac{2 (1- \lam) (-1)^{m+1}}{m\Pi}\\
+\end{align}
+
+
+
+\end{document}

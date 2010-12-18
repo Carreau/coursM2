@@ -1,0 +1,826 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{}
+\newcommand{\lam}{\lambda}
+\newcommand{\txt}[1]{\textrm{#1}}
+\newcommand{\moy}[1]{\langle #1 \rangle}
+\newcommand{\ud}{\mathrm{d}}
+\newcommand{\der}[3][]{\frac{\mathrm{d}^{#1} #2}{\mathrm{d} #3^{#1}}}
+\newcommand{\derp}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\bbar}[1]{\bar{\bar{#1}}}
+
+\makeindex
+\title{Interfaces}
+
+
+\begin{document}
+
+\tableofcontents
+
+\section{Introduction}
+
+\subsection{Historique}
+
+1806 : Théorie de Laplace de la capillarité. Hypothèse très forte pour l'époque : existence d'atomes \\
+1798 : Cavendish mesure les forces gravitationnelles en laboratoire. \\
+1808 : Clairant fait une expérience qui montre que l'ascension capillaire est indépendante de l'épaisseur des tubes. Cela n'est pas compatible avec l'hypothèse que les forces capillaires sont liées à la gravité. \\
+1856 : Thomas Young propose la loi qui porte son nom sur les angles de contact. \\
+1850 : Lord Kelvin montre que la pression de vapeur saturante d'un liquide dépend de la courbure de l'interface liquide-vapeur.\\
+\dots \\
+1950 : l'école russe des interfaces revisite les théories précédentes. \\
+1989 : article de P-G De Gennes dans Review of Modern Physics \emph{Wetting statics and dynamics}
+
+\subsection{Notion d'interface}
+
+\textbf{Interface} : séparation entre 2 milieux 1 et 2 quelconques.\\
+\textbf{Surface} : séparation entre une phase dense (solide,liquide) et une phase diluée (gaz). L'existence de la surface est directement liée à l'existence d'interaction attractices entre les molécules. A partir de ce moment, créer de la surface c'est rompre des liaisons entre molécules, et donc ça coûte de l'énergie : 
+$$\delta W = \gamma \ud A$$
+
+\paragraph{Modèle naïf}
+
+On considère un réseau cubique d'atomes de maille $a$, de côté $L=Na$. On note $- \epsilon$ l'énergie d'interaction entre les atomes. Ce modèle est excessivement simple, il n'y a pas de portée à l'interaction. 
+
+\begin{figure}[h!]%
+\includegraphics[width=7cm]{modele_naif.png}%
+\caption{}%
+\label{}%
+\end{figure}
+
+$$E_p = 3 N^2(N-1) (- \epsilon) = -3 N^3 \epsilon + 3 N^2 \epsilon = - \frac{3V \epsilon}{a^3} + \frac{3 S \epsilon}{6a^2}$$ où l'on voit apparaître un terme négatif (stabilisateur) proportionnel à $V$ : $\frac{-3 \epsilon}{a^3}$ et un terme positif (donc destabilisant) proportionnel à $S$ : $\gamma = \frac{3 \epsilon}{6 a^2} = \frac{1}{2 a^2}$
+
+Exemple : le cyclohexane 
+
+\begin{align}
+	\Delta U_{vap} = 10,5 kJ/mol\\
+	\rho = 773 kg/m^3 \\
+	M = 84,16 g/mol \\
+	a^3 =\frac{M}{\rho \mathcal{N}_a} \quad a = 5,65 \dot{A} \\
+	\epsilon = \frac{\Delta U_{vap}}{6 \mathcal{N}a} = 8,41 \cdot 10^{-21} J \\
+	\gamma = 26,5 \cdot 10^{-3}
+\end{align}
+
+valeur mesurée : $\gamma = 24,7mJ/m^2$
+
+Remarque :
+
+\begin{table}[h!]
+	\centering
+		\begin{tabular}{l|c|c}
+		n-pentane & $\gamma$ = & 15,49 \\
+		n-hexane  & $\gamma $= & 17,89 \\
+		n-heptane & $\gamma $= & 19,65 \\
+		n-octane & $\gamma $= & 21,14 \\			
+		\end{tabular}
+		\caption{Les énergies sont en mL/m². On voit que la théorie naïve ne permet pas de permettre l'évolution en fonction de la longueur d'une chaîne}
+\end{table}
+
+Remarque 2 : 
+
+\begin{table}[h!]
+	\centering
+		\begin{tabular}{l|c}
+		eau & 71,99 \\
+		méthanol & 22,07 \\
+		mercure & 485 \\			
+		\end{tabular}
+		\caption{Ici, on voit bien que le type d'interaction (liaison hydrogène, VdW, métallique) a aussi son importance.}
+\end{table}
+
+
+\subsection{Problèmes d'échelle}
+
+
+\begin{figure}[h!]%
+\includegraphics[width=\columnwidth]{gouttes_vs_lc.png}%
+\caption{}%
+\label{}%
+\end{figure}
+
+\paragraph{Longueur capillaire}
+La longueur capillaire est la limite entre le domaine où la gravité ne joue pas, et le domaine où la gravité domine. Pour la déterminer, on compare les deux énergies : 
+
+$$E_{p.pesanteur} = \rho g l_c \quad E_{p. surface} = \gamma l_c^2 \quad \frac{E_{P.pesanteur}}{E_{p. surface}} = \frac{\rho g l_c^4}{\gamma l_c^2}$$
+
+D'où : 
+$$ l_c = \frac{\gamma}{\rho g}$$
+
+Par exemple pour l'eau : $l_c \approx 2,5mm$
+
+En-dessous de cette longueur, les gouttes adoptent plutôt une forme sphérique. L'épaisseur d'une goutte est saturée à cette longueur, ce qui force la goutte à s'aplatir. 
+
+\paragraph{Echelle microscopique/macroscopique} : Au niveau microscopique, on a un potentiel d'interaction en $v(r) \approx \frac{c}{r^6}$ (en général on prend le potentiel LJ). Au niveau mésoscopique, les échelles de longueur sont de l'ordre de la dizaine de mm, on a une densité homogène dans les phases continues, on a alors une décroissance qui va en $z^{-2}$, et donc des forces à plus longue portée qu'à l'échelle microscopique. 
+
+\begin{figure}[h!]%
+\includegraphics[width=7cm]{sphere_sphere.png} \\
+\includegraphics[width=7cm]{plan_plan.png}
+\caption{}%
+\label{}%
+\end{figure}
+
+\paragraph{Formes de l'interface }: 
+\begin{figure}[h!]%
+\includegraphics[width=7cm]{forme_macro.png}%
+\includegraphics[width=7cm]{forme_micro.png}
+\caption{Modélisation de l'interface à une échelle macroscopique ou mésoscopique. On n'ira pas à l'échelle microscopique}%
+\label{}%
+\end{figure}
+
+\paragraph{temps de séjour d'une molécule à l'interface }: 
+
+On considère une surface $A$, et on calcule le nombre de molécule qui rapent sur cette surface par unité de temps. 
+
+$$\frac{PA}{\sqrt{2 \pi m k T}}$$
+
+La pression pertinente ici est la pression de vapeur saturante de l'eau à 25°C $P_S = 3185Pa$ et $M=18g/mol$ on obtient donc $3\cdot 10^{7}$ molécules par secondes qui tapent sur une surface de $10 \dot{A}^2$
+
+Le temps de séjour d'une molécule à la surface est donc de l'ordre de $10^{-7}$s.
+
+Problèmes de définition de l'équilibre : On prend une boîte de Pétri dans laquelle on met de l'eau propre, et on ajoute une goutte de toluène.
+
+\begin{figure}[h!]%
+\includegraphics[width=\columnwidth]{probleme_d_equilibre.png}%
+\caption{}%
+\label{}%
+\end{figure}
+
+Le toluène s'étale et mouille. Puis le toluène se rétracte au bout de quelques secondes, et éventuellement oscille entre ces deux états. Initialement, le toluène ayant une tension de surface plus faible que l'eau, il s'étale sur l'eau pour optimiser l'énergie de surface. Puis dans un second temps, une faible partie du toluène se dissout dans l'eau, et abaisse donc sa tension de surface, la goutte de toluène se rétracte alors. Ici on a une autre échelle de temps, celle de la dissolution du toluène.
+
+\section{Approche mécanique de la tension de surface}
+
+\subsection{Mécanique de surface, pression anisotrope}
+
+\begin{figure}[h!]%
+\includegraphics[width=\columnwidth]{interface_cubique.png}%
+\caption{}%
+\label{}%
+\end{figure}
+
+Système à 1 composante, interface à $z=0$. Rowlinson \& Widon \emph{Molecular theory of capillarity}
+
+Liquide homogène à l'équilibre : 
+
+$$ \vec{g} = \vec{0} \quad \bbar{\sigma} = - P \bbar{I} \quad \bbar{\sigma} = \left[ \begin{array}{ccc}
+	-P & 0 & 0 \\
+	0 & -P & 0 \\
+	0 & 0 & -P 
+	\end{array} \right]$$
+	
+	Interfaces : 
+	
+	$$ \bbar{\sigma} = \left[\begin{array}{ccc} 
+	-P_{\bot} & 0 & 0 \\
+	0 & -P_{\bot} & 0 \\
+	0 & 0 & -P_{\bot}
+	\end{array}\right]$$
+	
+	\begin{figure}[h!]%
+\includegraphics[width=\columnwidth]{P_interface.png}%
+\caption{}%
+\label{}%
+\end{figure}
+
+$P_N$ dans la direction normale.
+
+$$P_N = P = \txt{pression statique} \quad P_{\bot} (x,y,z) = P_{\bot}(z) \quad \delta W = \gamma \ud A$$
+
+\begin{figure}[h!]%
+\includegraphics[width=\columnwidth]{interface_repere.png}%
+\caption{}%
+\label{}%
+\end{figure}
+
+Quel est le travail associé à cette transformation ? 
+
+\begin{align}
+	\delta W &= \delta W_N + \delta W_{\bot} \\
+	\delta W_{\bot} &= - \int_{-l/2}^{l/2} l P_{\bot}(z) \ud z \\
+	\delta W_N &= -P_N l^2 \delta z = + P_N l^2 \delta y \\
+	&= P_N l \delta A \\
+	\delta W &= \delta W_{\bot} + \delta W_N = \int_{-l/2}^{l/2} P_N \ud z \delta A - \int_{-l/2}^{l/2}P_{\bot}(z) \ud z \delta A \\
+	\gamma &= \int_{-l/2}^{l/2}[P-P_{\bot}(z)]\ud z \\
+	\Rightarrow \quad \gamma &= \int_{-\infty}^{\infty} [P - P_{\bot}(z)] \ud z
+\end{align}
+
+La tension de surface est une vraie tension, liée à $P_{\bot} \neq R$ .
+
+Remarque 1 : on ne sait pas calculer $P_{\bot}(z)$.
+
+Remarque 2 : Ordre de grandeur $\gamma = 20mJ/m^2$, $\Delta z \approx 10^{-9}m$, on a alors $\Delta P \approx 200 bar$ Ce qui fait quand même une pression assez grande ! 
+
+Remarque 3 : 
+
+\begin{figure}[h!]%
+\includegraphics[width=\columnwidth]{interface_courbe.png}%
+\caption{$P_I \neq P_{ext} \rightarrow$ à cause de l'existence de $P_{\bot}$}%
+\label{}%
+\end{figure}
+
+$$\ud [rP_N \theta] = \ud r P_{\bot} \theta \quad \theta \ll 1$$
+
+On a alors : 
+$$P_N \ud r - r \ud P_N = \ud r P_{\bot}$$
+que l'on intègre des deux côtés de l'interface : 
+$$\int \ud r (P_N - P_I) = \int r \ud P_N  = r \int \ud P_N$$ car $r$ est constante à l'interface. 
+$$ \gamma = r (P_I - P_{ext}) \quad (P_I - P_{ext}) = \frac{\gamma}{r}$$
+
+Dans le cas d'une courbure dans les deux directions (dans l'espace). On définit alors deux rayons de courbure principaux $R_1$ et $R_2$ et on aura : 
+$$ (P_I - P_{ext}) = \gamma \left(\frac{1}{R_1} + \frac{1}{R_2} \right)$$
+Relation de Laplace
+
+Applications : les petites bulles se vident dans les grosses. 
+
+La relation de Laplace permet de calculer la forme d'un ménisque formé par un liquide sur une surface solide verticale (figure \ref{angle_de_raccord})
+
+\begin{figure}[h!]%
+\includegraphics[width=\columnwidth]{angle_de_raccord.png}%
+\caption{Le liquide fait un angle $\theta_0$ avec le solide. Quelle est la hauteur $z_0$ du ménisque ? }%
+\label{angle_de_raccord}%
+\end{figure}
+
+\begin{align}
+	P(M) &= P_0 - \rho g z = P_0 - \frac{\gamma}{R} \\
+	\rho g z &= \frac{\gamma}{R}\\
+	\frac{1}{r} &= \der{\phi}{s} \\
+	\tan \phi &= \der{z}{x} \\
+	\rho gz &= \frac{\gamma \ud \phi}{\ud x \sqrt{1 + tan^2 \phi}} = \frac{\gamma \ud \phi \cos \phi}{\ud x} \\
+	&= \frac{\gamma \cos \phi \tan \phi \ud \phi}{\ud z} \\
+	\rho g z \ud z &= \gamma \sin \phi \ud \phi \\
+	x \rightarrow infty & \quad \phi \rightarrow 0 \quad z \rightarrow 0 \\
+	\frac{1}{2} \rho g z^2 &= \gamma (1-\cos \phi ) \\
+	\frac{1}{2} \rho g z_0^2 &= \gamma (1-\sin \theta_0) \\
+	z_0 &= l_0 \sqrt{2(1-\sin \theta_0)} \\
+	z_0max &= \sqrt{2}l_c = \sqrt{2} \kappa^{-1} \quad \theta_0 = 0 \\  
+\end{align}
+
+Application : On approche une surface sphérique d'un liquide, par le dessus. $z$ est la distance entre la sphère et le liquide, $\alpha_0$ l'angle de contact initial, $a$ le rayon du cylindre de contact, $R$ le rayon de la sphère ($R \gg a$). On trace $\pi a^2$ en fonction de $z$ et on obtient une décroissance linéaire. Pourquoi est-elle linéaire ? 
+
+\begin{figure}%
+\includegraphics[width=\columnwidth]{mouillage_lunette.png}%
+\caption{}%
+\label{mouillage_lunette}%
+\end{figure}
+
+\begin{align}
+	z_0 &= \sqrt{2(1-\sin \theta_0)}l_c \\
+	R^2 &= a^2 + (R^2-(z_0-z))^2 \\
+	R^2 &= a^2 + R^2 -2 R(z_0-z) + (z_0-z)^2 \\
+	a^2  & \approx 2 R (z_0 - z) \\
+	\pi a^2 & \approx 2 R(\sqrt{2(1-\sin \theta_0)}l_c - z \\ 
+\end{align}
+
+En réalité, $\theta_0$ dépend de $z$, mais pas beaucoup, parce qu'on considère un régime quasi-statique. En régime dynamique, on tire un film liquide sur le solide, on a donc un ménisque dynamique (en $Ca^{1/3}$ ? ) et et un démouillage.
+
+\subsection{Tension de surface et interactions}
+
+\begin{figure}[h!]%
+\includegraphics[width=\columnwidth]{TS_interactions.png}%
+\caption{p(e) énergie d'interaction par unité de surface}%
+\label{TS_interactions}%
+\end{figure}
+
+
+p(e) énergie d'interaction par unité de surface. $2 \gamma =p(0)$. Comment calculer $p(0)$ en fonction du potentiel d'interaction $V(\vec{r})$ entre les molécules. 
+
+\begin{align}
+	w(z) \ud \tau &= \rho^2 \ud \tau \int_{x',y',z'>z} \ud x' \ud y' \ud z' V(\vec{r}) \\
+	p(e) &= \int_e^{\infty} w(z) \ud z \\
+	\gamma &= \frac{1}{2} \rho^2 \int_0^{\infty} \ud z \int_{z'>z,x',y'} V(\vec{r}) \ud x' \ud y' \ud z' \\
+	V(\vec{r}) &= \frac{-C}{R^6} \\
+	w(z) &= \rho^2 C \iint_{r=z \quad \theta =0}^{z=\infty \quad \theta=\arccos(\frac{z}{r})} 2 \pi r \ud r \sin \theta \ud \theta \frac{1}{r^6} \\
+	&= - \rho^2 C 2\pi \int_z^{\infty} \frac{\ud r}{r^4} [- \cos \theta]_0^{\arccos(\frac{z}{r})} \\
+	&= - \rho^2 C 2 \pi \int_z^{\infty} \frac{\ud r}{r^4}\left(- \frac{z}{r} +1 \right) \\
+	&= - \rho^2 C 2 \pi \int_z^{\infty} \frac{\ud r}{r^4} - \frac{z \ud r}{r^5} = \frac{\pi \rho^2 C}{6 z^3} \\
+	P(e) &= \int_e^{\infty} w(z) \ud z = \frac{- \pi \rho^2 C}{12 e^2} \\
+	P(e) &= \frac{A}{12 \pi e^2} \quad A = \pi^2 \rho^2 C >0 \\
+\end{align}
+
+$A$ est la constante de Harmaker. $C$ est proportionnel à $\alpha^2$ la polarisabilité (voir le cours de MM). 
+
+On voit que cette expression n'est pas valable pour $e=0$, puisqu'elle diverge. Ce qui est logique, car on n'a pris que la partie attractive de VdW. A petite distance, on devra considérer la partie répulsive. Cette expression est valable jusqu'à l'échelle moléculaire.
+
+$$\gamma = \frac{A}{12 \pi D_0}$$
+
+Israelatchvili p204. $D_0$ est presque toujours le même, même si on ne sait pas pourquoi. 
+
+L'additivité n'est pas évidente. Le calcul théorique de la constante de Hamaker est en fait plus compliquée et fait appel à la théorie de Lipschitz. 
+
+\subsection{Cas des systèmes asymétriques}
+
+\begin{figure}[h!]%
+\includegraphics[width=\columnwidth]{asymetrique.png}%
+\caption{}%
+\label{asymétrique}%
+\end{figure}
+
+$$A_{121} = A_{212} = (\sqrt{A_{11}}- \sqrt{A_{22}})^2 >0$$
+Deux milieux vont toujours s'attirer.
+
+$$A_{132} \approx ( \sqrt{A_{11}} - \sqrt{A_{33}})(\sqrt{A_{22}} - \sqrt{A_{33}})$$ qui peut être positif ou négatif.
+
+Cas où 2 est un gaz et 1,3 sont des phases condensées. Comme $\rho_2$ est négligeable par rapport aux autres $\rho_i$, on a $$A_{132}\approx - \sqrt{A_{33}}(\sqrt{A_{11}} - \sqrt{A_{33}})$$
+$A_{132}<0$ 1 est plus polarisable que 3 (et réciproquement), donc a tendance à épaissir de film (amincir dans le cas contraire). Dans le premier cas, on est plutôt en mouillage total, dans le second on est plutôt en mouillage partiel.
+
+\paragraph{Loi de Laplace}
+
+\begin{align}
+	\delta W_p &= (p_{ext} - p_{int} ) 4 \pi r^2 \ud r \\
+	\delta W_{cap} &= \gamma \ud A = \gamma 8 \pi r \ud r \\
+	\delta W_{cap} &= - \delta W_p \\
+	(p_{int} - p_{ext}) &= \frac{2 \gamma}{r}
+\end{align}
+
+
+\paragraph{Notion de pression de disjonction}
+
+C'est la pression qui exist entre les deux interfaces à la distance $e$. 
+$$\Pi(e) = \der{P}{e} = \frac{-A}{6 \pi e^3}$$
+
+Applications : Cas de l'Hélium (totalement mouillant). On peut calculer l'épaisseur $e$ d'Hélium sur une surface solide verticale à une hauteur $h$. 
+
+$$P(M) = P_0 - \rho g z = P_0 - \Pi(e) $$
+
+$$- \rho g z = \frac{A}{6 \pi e^3}$$ et donc $$e^3 = \frac{A }{6 \pi \rho g z} $$ 
+
+Dans le cas de l'Hélium, $A<0$
+
+\begin{align}
+	\delta W_p = (p_{ext} - p_{L}) \ud e S \\
+	\delta W_{VdW} &= - \der{P}{e} \ud e S &= \Pi(e) S \ud e \\
+	\der{P}{e} &= - \Pi(e) \txt{ Pression de Disjonction} \\
+	(p_{ext} - p_{L}) &= \Pi(e)\\
+	p_L = p_{ext} + \Pi(e) \qquad \Pi(e) = \frac{-A_{s/v}}{6 \pi e^3} 
+\end{align}
+
+Remarques : 
+\begin{itemize}
+	\item $\Pi(e)$ pour autre chose que les forces de VdW 
+	\item Attention les conventions varient ! Dans GBPO, $-A_{sv}>0$ est remplacé par $+A>0$ pour le mouillage total. Dans Israelatchvili, Hénon, Wennerström, $A_{sv}<0$ en mouillage total. 
+\end{itemize}
+
+Applications : 
+
+Mesure de la constante de Hamaker par la méthode de la goutte captive. 
+
+On met une surface de quartz au-dessus d'un bain de tétradécane. On fait monter une bulle dans le tétradécane avec $r<\kappa^{-1}$ donc la bulle garde une forme sphérique. On est en conditions de mouillage total, donc la bulle vient s'applatir contre le quartz, mais il reste en permanence un film liquide entre la bulle et le quartz. Avec un microscope, on mesure le rayon de la surface de "contact". Si la présence du film est bien dûe à la pression de disjonction, l'épaisseur $e$ du film sera de l'ordre du dixième de micron. 
+
+On mesure $e$ par réflectométrie, mais ça ne marche pas bien pour des épaisseur inférieures à $\frac{\lam}{10}$. 
+
+L'ellipsométrie : le principe est d'envoyer un faisceau polarisé sur $e$ et on observe un changement de polarisation  du signal donne une mesure très précise de l'épaisseur $e$. C'est une technique beaucoup plus précise pour les petites épaisseur (mesure d'épaisseurs nanométriques à l'angström près). 
+
+Pour calculer l'épaisseur : la pression dans le film sera :
+\begin{align}
+	p_f &= p_0 + \frac{2 \gamma}{r} - \Pi(e) \\
+	&= p_0 + \frac{2 \gamma}{r} + \frac{A_{slv}}{6 \pi e^3} = p_0 \txt{ car il n'y a pas d'écoulement} \\
+	\frac{- A_{slv}}{6 \pi e^{3}} = \frac{2 \gamma}{r} \\
+	e = \left( \frac{-A_{slv}r}{12 \pi \gamma} \right)^{1/3}
+\end{align}
+
+Technique de l'anneau poreux : \begin{figure}[h!]%
+\includegraphics[width=\columnwidth]{anneau_poreux.png}%
+\caption{On contrôle la différence de pression entre le liquide et l'enceinte}%
+\label{anneau poreux}%
+\end{figure}
+
+\'Equilibre d'un film de liquide avec sa vapeur  : on a un film de liquide déposé sur un solide, et comme gaz de la vapeur du liquide. La pression de la vapeur est inférieur à la pression de vapeur saturante $p_v<p_{sat}$ et $A_{slv}<0$
+
+On va écrire l'équilibre mécanique : $$p_L = p_v - \Pi(e) =p_v + \frac{A_{slv}}{6 \pi e^3}$$ et l'équilibre chaimique : $$ \mu_L(p_L) = \mu_v(p_v)$$
+
+\begin{align}
+	\mu_v(p_v) &= \mu_v (p_{sat}) + kT \ln \frac{p_v }{p_{sat}} \txt{ hypothèse GP}\\
+	\mu_l(p_l) &= \mu_l(p_{sat}) + \bar{\omega_l}(p_l - p_{sat}) \txt{ hypothèse incompressible}\\
+	kT \ln \frac{p_v}{p_{sat}} &= \omega_l(p_l - p_{sat}) \\
+	&= \omega_l(p_v + \frac{A_{slv}}{6 \pi e^3} - p_{sat}
+\end{align}
+
+Si $p_v\approx p_{sat}$ : 
+\begin{align}
+	kT \ln \frac{A_{slv}\bar{\omega_l}}{6 \pi e^3} \\
+	e &= \left( \frac{A\omega_l}{6 \pi kT \ln \frac{p_v}{p_{sat}}} \right)^{1/3}
+\end{align}
+
+Pour les régimes où $p_v \ll p_{sat}$ on fait appel à l'équation de Langmuir. 
+
+Machine à force de surface (SFA): inventée par David Tabor et popularisée par Israelatchvili. 
+
+\begin{figure}[h!]%
+\includegraphics[width=\columnwidth]{SFA.png}%
+\caption{}%
+\label{SFA}%
+\end{figure}
+
+deux surfaces de mica croisés. On pousse la surface du dessus avec un piézo. On envoie de la lumière blanche par le dessous au niveau de la zone de contact et on analyse la lumière avec un spectro pour mesurer les interférences. Avec un dépôt sur le mica d'une petite couche d'argent, on peut obtenir une cavité type Fabry-Perot. On obtient la distance $d$ entre les surfaces. 
+
+On impose un déplacement. S'il n'y a pas d'interactions, il n'y aura aucune différence entre le déplacement imposé et le déplacement modifié. S'il y a des interactions, à longue distance ça ne fera pas de différence, mais à courte distance, la distance mesurée sera plus petite dans le cas attractif et plus grande dans le cas répulsif. On peut alors remonter à la force en attachant les deux cylindres de mica avec des ressorts de raideur connue. 
+
+\subsection{Stabilités de films liquides minces}
+
+Pour une couche d'air d'épaisseur $e$ dans un liquide : $$F(e) = 2 \gamma + P(e) \qquad \lim_{e \rightarrow \infty} P(e)=0$$
+
+Pour un film liquide posé sur un solide (1:solide, 2:liquide, 3:vapeur) 
+$$F(e) = \gamma_{12} + \gamma{23} + P(e) \qquad \lim_{e \rightarrow \infty} = 0 $$
+$$F(0) = \gamma_{13}$$
+
+$$ \gamma_{13} = \gamma_{12} + \gamma_{23} + P(0) $$
+donc 
+$$ P(0) = \gamma_{13} - \gamma_{12} - \gamma_{23} = S_0 $$
+où $S_0$ est le paramètre d'étalement. 
+
+Si $S_0 \geq 0 $, $\gamma_{13}>\gamma_{23} + \gamma_{12}$ donne un mouillage total. 
+
+Si $S_0 \leq 0 $, $\gamma_{13}< \gamma_{23} + \gamma_{12}$ mouillage partiel. 
+
+En réalité, l'état de mouillage va être un compétition entre le contact ($e \approx 0$) et les forces à longue portée. 
+
+Remarque : Les tensions de surface soivent être définies à l'équilibre (au cas où il y a miscibilité partielle des différentes phases). Cela peut se révéler un problème expérimental. 
+
+Remarque 2 : $$S_0 = \int_0^{\infty} \Pi(z) \ud z  \qquad \Pi(z) = - \der{P}{z}$$
+
+Application à la stabilité
+
+Dans le cas du mouillage total, $e \rightarrow \infty$ est un minimum d'énergie. Mais si on dépose une goutte de volume fini, on a une compétition entre les forces de VdW et le paramètre d'étalement. On a alors une crêpe mésoscopique. Pour une goutte de volume : $\Omega = \pi R^2 h$, et avec $A$ l'aire totale du solide :
+\begin{align}
+	F &= [\gamma_{SL} + \gamma + P(h)]\pi R^2 + [A - \pi R^2] \gamma_{SG}\\
+	&= - S_0 \pi R^2 + P(h) \pi R^2 + A \gamma_{SG} \\
+	&= \frac{- S_0}{h} + P(h) \frac{\Omega}{h} + A \gamma_{SG} \\
+	\derp{}{F}{h}(e) &= 0 = \frac{S_0}{h^2}\Omega + \frac{P(h)}{h^2} \Omega  + \frac{\Omega}{h}\der{P}{h} \\
+	S_0 &= P(e) + e \der{P}{h}(e)
+\end{align}
+
+C'est l'équation de la tangente à la courbe $P(h)$. (analogue à la méthode de la double tangente en thermodynamique). 
+
+Ordres de grandeur $$P(z) = - \frac{A_{slv}}{12 \pi z^2}$$ On trouve $$e = \sqrt{- \frac{A_{slv}}{4 \pi S_0}} $$
+$e$ est de taille moléculaire ou nanométrique.
+
+Si $S_0<0$ et $A>0$, il y aura alors mouillage partiel. 
+
+Mouillage pseudo-partiel ($S_0>0$ et $A>0$) Si on met une grosse goutte $\Omega > e_{M}A$ avec $A$ la surface de solide qu'on peut mouiller, on aura une goutte posée sur un film mince. Si on met une petite goutte, on l'étale complètement sur le solide.  
+
+
+Ref: F. Brochart et al, Langmuir 1991, 7 , 335-338
+
+Mouillage d'une fibre : $$p_0 + \frac{\gamma}{b} + \frac{A_{slv}}{6 \pi e^3} = p_0 + \frac{2 \gamma}{R_1}$$ avec $R_1$ le rayon de la goutte, $b$ le rayon de la fibre, $e$ l'épaisseur du fil déposé sur une fibre. On suppose $R_1 \gg e$, d'où 
+$$ \frac{\gamma}{b} \approx - \frac{A_{slv}}{\gamma 6 \pi e^3} $$
+$$ e = [- \frac{A_{slv}b}{\gamma 6 \pi}]^{1/3} $$
+$e$ dépend donc de $A$ et de $b$. 
+
+\subsection{Capillarité classique}
+
+\subsubsection{Loi de Young (mouillage partiel)}
+
+\begin{align}
+	\delta W &= (\gamma_{SL} - \gamma_{SV}) L \ud x + \gamma L \ud x \cos \theta =0 \\
+	\gamma \cos \theta &= \gamma_{sv} - \gamma_{sl}
+\end{align}
+Qui est appelée la Loi d'Young. 
+
+Méthodes expérimentales : photo  de profil, Lame de Wilhemy, méthode optique.
+
+\subsubsection{Vérification expérimentale de Young}
+
+Il faut mesurer $\gamma_{sl}$ et $\gamma_{sv}$.
+
+Test de Zismans et Coy
+
+On mesure $\cos \theta$ en fonction de $\gamma$ et on en déduit $\gamma_c$ la tension du liquide pour laquelle on oaurait un mouillage totale. $\gamma_c = \gamma_{sv} - \gamma_{sl}$. 
+
+Chaudhury : test JKR, loi de Hertz, adhésion entre surfaces. 
+$$F = \frac{a^3K}{R}  - a^3(6  \pi K W)$$ où $K = \frac{16 E}{9}$ est la raideur du matériau, $W$ l'énergie d'adhésion.
+
+On peut ensuite mesurer cette énergie d'adhésion. 
+
+\subsection{Tension de ligne}
+
+$$E = \gamma s_{LV} + \gamma_{SL}s_{SL} + \gamma_{SV}s_{SV} + \kappa 2 \pi R$$ où $\kappa$ est l'énergie de création d'une ligne par unité de longueur (tension de ligne). 
+
+Ordres de grandeur : 
+\begin{align}
+	kappa \approx \frac{\epsilon}{a} \approx \frac{kT}{a} \approx 10^{-11} N/m \\
+	\gamma \cos \theta &= \gamma_{SV} - \gamma_{SL} - \frac{\kappa}{R} 
+\end{align}
+modification de la loin d'Young.
+
+Cette influence est visible dans les simulations. Dans la nanofluidique, ce terme a une importance. Remarque : $\kappa$ peut être trouvé positif ou négatif : c'est une grandeur d'excès. 
+
+\subsection{Quelques situtions de capillarité classiques}
+
+\paragraph{Flaque d'eau}  crêpe macroscopique, de rayon $R$ grand devant sa hauteur $h$ : 
+
+\begin{align}
+	E &= \gamma_{SL} \pi R^2 + \gamma \pi R^2 + (A - \pi R^2)\gamma_{SV} + \pi R^2 \rho g \frac{h^2}{2} \\
+	\Omega &= \pi R^2 h \\
+	E &= (\gamma_{SL} + \gamma - \gamma_{SV}) \frac{\Omega}{h} + A \gamma_{SV} + \Omega  \frac{h}{2} \rho g \\
+	\der{E}{h} &= 0 =(- \gamma_{SL} + \gamma - \gamma_{SV} ) \frac{\Omega}{h^2} + \Omega \frac{\rho g}{2} \\
+	h^2 &= \frac{2 \gamma}{\rho g} (- \gamma_{SL} + \gamma - \gamma_{SV} ) \\
+	h &= \kappa_{-1} \sqrt{2 (1 - \cos \theta)} \\
+	\theta \rightarrow \quad 180° \qquad h_{max} &= 2 \kappa^{-1}  \\
+\end{align}
+
+\paragraph{cylindre fin} ($b \ll \kappa^{-1})$ de rayon $b$. 
+
+La hauteur de montée $h$ est gouvernée par la courbure du fil. $h \approx b$. 
+
+Lorsque $b$ devient grand, $h = \kappa^{-1} \sqrt{2(1 - \sin \theta)}$ 
+
+
+\paragraph{Caténoïde et courbure en coordonnées axisymétriques}
+
+\begin{align}
+	\frac{1}{R_1} &= \frac{z''}{(1 + z'^2)^{3/2}} \\
+	\frac{1}{R_2} &= \frac{\cos \alpha}{x} \\
+	\frac{1}{R_2} &= \frac{z'}{x(1 + z'^2)^{1/2}}
+\end{align}
+
+Attention, les courbures sont différentes dans le GBPO. 
+$$\frac{1}{R_1} + \frac{1}{R_2} = 0 $$ surface de courbure nulle. Caténoïde $x = \ch z$ mais cela pose problème lorsque $x$ devient grand, on doit raccorder sur une surface plane, pour $x \approx l_c$
+
+\subsection{Surfaces réelles : rôle de la rugosité et des hétérogénéité chimiques}
+
+hystérésis de l'angle de contact (chimiques et géométriques). 
+
+$z = z_0 \cos kx$ $\theta_{apparent} = \theta_{local}$
+
+$$\theta_{apparent} = \theta_{local} - \der{z}{x}$$ On a une différence entre l'angle macroscopique observé et l'angle local réel. 
+
+$$\theta_{apparent} = \theta_{local} + kz_0 \sin kx$$
+
+
+\subsection{Rôle des défauts sur l'angle moyen}
+
+$r$ rugosité de surface = aire vraie/aire projetée. 
+
+\begin{align}
+	\frac{\ud E}{L} &= (\gamma_{SL} - \gamma_{SV})r \ud x + \gamma \cos \theta \ud x \\
+	&= 0 \txt{ à l'équilibre }\\
+	- (\gamma_{SL} - \gamma_{SV})r = \gamma \cos \theta \\
+	\cos \theta &= r \cos \theta_0 
+\end{align}
+qui est la loi de Wenzel.
+
+La rugosité rend une surface hydrophile encore plus hydrophile, et une surface non mouillante encore plus hydrophobe.
+
+\paragraph{Mouillage de Casoci}
+
+Mouillage d'une surface en crénaux.
+
+\begin{align}
+	\frac{\ud E}{L} &= \Phi_S (\gamma_{SL} - \gamma_{SV})\ud x + (1 - \Phi_S) \gamma \ud x + \gamma \cos \theta \ud x \\
+	\der{E}{x} &= 0 \\
+	\cos \theta &= -1 + \Phi_S(\cos \theta_0 +1) 
+\end{align}
+
+Cette situation ne prévoit pas de transition superhydrophobe. Expérimentalement, il est difficile de voir l'hystérèse de l'angle de contact. 
+
+\paragraph{Modèle de Joanny-de Gennes} 
+Défauts à la surface $ s(x,y)= \moy{s} + h(x,y) $
+
+négliger la gravité au bord de la goutte : 
+$$\derp{2}{z}{x} + \derp{2}{z}{y} = 0 $$ courbure dans l'approximation des petits angles. 
+
+Transformée de Fourier : 
+$$z(x,y) = \theta_0 y + \frac{1}{2\pi} \int \alpha_q e^{iqx}e^{- |q|y} \ud y $$
+
+perturbation de longueur $\frac{1}{q}$ dans la directiàon de $x$. Elle s'mortit sur une distance $\frac{1}{q}$ dans la direction $y$. 
+
+$$\eta(x) = \frac{f_1}{\pi \gamma \theta_0^2}\ln \frac{L}{x} $$
+
+très longue portée, couplage très important. 
+
+vérifée expérimnetalement. 
+
+Défaut de taille $\alpha$ : 
+$$\frac{f_1}{\eta_{max}} \approx \frac{\pi \gamma \theta_0^2}{Ln \frac{L}{\alpha}} = k $$
+$k$ constante de raideur du défaut ou de la ligne. 
+
+
+$$k (y_n - y_L) = h(y_n-y_d)$$
+
+le terme de gauche ramène la ligne à l'horizontale, le terme de droite est le terme qui tire.  
+
+\section{Thermodynamique des interfaces}
+
+\subsection{Grandeurs d'excès}
+
+Approche simple, thermodynamique classique. 
+
+Adsorption, déplétion, rôle des tensio-actifs, $\rho(z)$ admis. Classique parce qu'on considèrera des interfaces continues, $\rho(z)$ à une interface. 
+
+\subsubsection{Tension de surface}
+
+\begin{align}
+	\delta W = \gamma \ud A \\
+	\ud U &= R \ud S - p \ud V + \sum_i \mu_i \ud N_i + \gamma \ud A \\
+	\gamma &= \left( \derp{}{U}{A} \right)_{S,V,N_i} \\
+	\ud F &= \ud(U-TS)= - S \ud T - p \ud V + \sum_i \mu_i \ud N_i + \gamma \ud A \\
+	\gamma &= \left( \derp{}{F}{A} \right)_{T,V,N_i} \\
+	\ud G &= ( S \ud T + V \ud p + \sum_i \mu_i \ud N_i + \gamma \ud A \\
+	\gamma &= \left( \derp{}{G}{A} \right)_{T,p,N_i} \\
+	\Omega &= F - \sum_i N_i \mu_i \\
+	\ud \Omega &= -S \ud T - p \ud V  - \sum_i N_i \ud \mu_i + \gamma \ud A \\
+	\gamma &= \left( \derp{}{\Omega}{A} \right)_{T,V,\mu_i}
+\end{align}
+On travaillera avec le grand potentiel $\Omega$ quand on sera en humidité contrôlée, avec des pressions partielles et donc un potentiel chimique fixé. 
+
+\subsubsection{Grandeurs d'excès}
+
+Approche de Guggenheim : on traite l'interface comme une phase supplémentaire. 
+
+Approche de Gibbs : on localise l'interface comme un plan. On décrit les choses avec des grandeurs d'excès. 
+
+$z_a$ est la position arbitraire du plan de Gibbs. $\alpha$ et $\beta$ sont les deux phases.
+\begin{align}
+	N &= \int{-\infty}^{\infty} A \rho(z) \ud z \\
+	N_{\alpha} &= \int_{- \infty}^{z_a} A \rho_{\alpha}(z) \ud z \\
+	N_{\beta} &= \int_{z_a}^{\infty} A \rho_{\beta} \ud z \\
+	N^S &= N - N^{\alpha} - N^{\beta} 
+\end{align}
+
+$z_a$ n'est pas définie de manière univoque.  Toutes les grandeurs extensives sauf le volume ont des grandeurs d'excès. 
+
+Conséquences : 
+\begin{align}
+	F &= - p V + \sum_i \mu_i N_i + \gamma A \\
+	G &= \sum_i N_i \mu_i + \gamma A \\
+	F^{\alpha} &= - p V + \sum_i \mu_i N_i^{\alpha}\\
+	F^S &= \sum_i \mu_i N_i^S + \gamma A \\
+\end{align}
+\'Energie libre d'excès, liée à la présence de l'interface. Encore une fois, elle dépend de $z_a$. 
+
+Remarque : on va définir $$\Gamma_i = \frac{N_i^S }{A} $$, où $\Gamma_i$ est une sorte de concentration de surface de l'espèce $i$. On l'appelera en général excès de surface. 
+
+Remarque 2 : une seule espèce sous deux phases  $\Gamma = 0$ permet de localiser $z_a$. 
+
+\subsubsection{Relation de Gibbs Duhem pour les interfaces}
+
+On suppose qu'il y équilibre mécanique et équilibre chimique. 
+
+\begin{align}
+	\ud F &= - S \ud T  - p \ud V + \sum_i \mu_i \ud N_i + \gamma \ud A \\
+	\ud F^{\alpha} &=  - S^{\alpha} \ud T  - p \ud V^{\alpha} + \sum_i \mu_i \ud N^{\alpha}_i \\
+	\ud F^S &= - S^S \ud T + \sum_i \mu_i \ud N^S_i + \gamma \ud A \\
+	F^S&= \sum_i \mu_i \ud N_i^S + \gamma A \\
+	S^S \ud T + A \ud \gamma + \sum_i N_i^S \ud \mu_i &=0 \\
+	\txt{à T fixée } & \ud \gamma = - \sum_i \Gamma_i \ud \mu_i \\
+\end{align}
+
+$\ud \gamma$ est indépendant de $z_a$. C'est valable que dans le cas d'unterfaces fluides. Cette interface est l'isotherme de Gibbs. 
+
+\subsubsection{Application au cas des systèmes bi-composants}
+
+Avec un soluté dans un solvant (eau). 
+\begin{align}
+	\ud \gamma &= - \Gamma_1 \ud \mu_1 - \Gamma_2 \ud \mu_2 \\
+	\ud \gamma &= - \Gamma_2 \ud \mu_2 \\
+\end{align}
+car on a naturellement $\Gamma_1 = 0$ pour le solvant. 
+
+\begin{align}
+	\mu_2 &= \mu_2^* + RT \ln \frac{a}{a_0} \\
+	\ud \mu_2 &= RT \frac{\ud a}{a} \\
+	\ud \gamma &= - \Gamma_2 RT \frac{\ud a}{a}|_T \\
+	\Gamma_2 &= \frac{-a}{RT} \left( \derp{}{\gamma}{a} \right)_T \\
+\end{align}
+$a$ et $a_0$ sont l'activité de l'espèce 2 et l'activité du solvant. 
+$\Gamma_2$ est un excès de surface du soluté. 
+
+$\Gamma_2>0$ tensio-actif. 
+$\Gamma_2>0$ sels. 
+
+AN 0,5 mmol de SDS ajouté à de l'eau pure. $\gamma(25°C) = 71,99 mN/m \rightarrow 69,09 mN/m$ 
+$$\Gamma_2 \approx \frac{c}{RT} \frac{\Delta \gamma}{\Delta c} \approx 1,118.10^{-6}mol/m^2$$
+Chaque molécule occupe $1,42 nm^2$. 
+
+Remarque : $c \ll cmc$ donc beaucoup de molécules à la surface. 
+
+Remarque 2 : $$ \Gamma_2 = \frac{-1}{RT} \derp{}{\gamma}{\ln a} $$ 
+Donc pour $a \approx c$, $$\Gamma_2 \approx \frac{-1}{RT} \derp{}{\gamma}{\ln c} $$
+
+Il ne faut pas voir la cmc comme la concentration pour laquelle la surface a été remplie, cela arrive avant. 
+
+\begin{align}
+	\Delta \gamma &= \gamma_0 - \gamma = kc \\
+	\derp{}{\gamma}{c} &= k \\
+	\Gamma &= \frac{c}{RT} k = \frac{\gamma_0 - \gamma}{RT}\\
+	\gamma_0 - \gamma = \Gamma RT = \Pi\\
+\end{align}
+où $\Pi$ est une pression de surface. 
+
+Cuve de Langmuir : cuve en téflon, dotée d'une barrière amovible, remplie d'eau. Si le tensio actif n'est pas soluble, si on le met d'un côté, il va rester de ce côté. On a alors deux surface de tension de surface différentes : le système cherche alors à agrandir la surface de tension de surface moindre. C'est une sorte de loi des gaz parfaits à 2D, ce n'est valable qu'aux petites concentrations. 
+
+\subsection{Théorie microscopique des interfaces}
+
+Approche de Van der Waals. 
+
+Sur la courbe de $F(V)$, on peut trouver, à l'aide de la méthode de la double tangente, le volume de liquide et le volume de gaz à l'équilibre. $$\left( \derp{}{F}{V} \right)_T = p_s$$ qui est aussi une condition d'équilibre mécanique. 
+
+\begin{align}
+	 \ud \mu &= - S \ud T + v \ud p \\
+	 &= v \ud p \\
+	 \mu_L - \mu_g &= \int v \ud p
+\end{align}
+
+égalité des aires. 
+
+\subsection{Profils d'interface}
+
+Transition L-V : Dnas le diagramme énergie libre F en fonction de V, grâce à la méthode de la double tangente, on peut trouver $V_l$ et $V_g$  à l'équilibre. 
+
+$f= \frac{F}{V}$ fraction volumique d'énergie libre. 
+
+$$\mu = \derp{}{F}{N}_{T,V} = \derp{}{F/V}{N/V}_{T,V} = \derp{}{f}{\rho}_{T} = \mu $$
+
+En traçant $f(\rho)$, on peut refaire la construction de la double tangente. 
+
+$$\mu = \frac{f_l - f_g}{\rho_l - \rho_g}$$
+
+$$p = - \derp{}{F}{V} = -f - \rho \derp{}{f}{\rho} = p$$
+
+$$W(\rho) = f-f_{double tan}$$
+
+\begin{align}
+	F^S = \int (f(\rho,z) - f_{lg}) A \ud z \\
+	&= \int^{z_a} (f - f_l) A \ud z - \int_{z_a} (f-f_g) A \ud z \\
+	f_{dt} &= f_l + \mu(\rho - \rho_l) = fg + \mu(\rho-\rho_g)\\
+	f_l &= f_{dt} - \mu(\rho - \rho_l)\\
+	f_g &= f_{dt} - \mu(\rho -\rho_g)\\
+	F^S = \int (f-f_{dt}) A \ud z + \mu N_S \\
+	&= \gamma A + \mu N_S \\
+	\gamma &= \int (f-f_{dt})\ud z \\
+	&= \int W(\rho) \ud z\\
+\end{align}
+
+Principe : le profil $\rho(z)$ choisi est celui qui minimise $\gamma$. Le profil qui minimise l'énergie est l'interface raide. 
+
+$$f(\rho) - f_{dt}(\rho) = W(\rho) + \frac{1}{2} m (\derp{}{ \rho}{z})^2 $$ où le seconde terme est le coût à avoir l'interface complètement raide. 
+
+$$\gamma[\rho] &= \int [W(\rho) + \frac{1}{2} m (\derp{}{\rho}{z})^2] \ud z $$
+
+où $\gamma[\rho]$ est une fonctionnelle de densité. 
+
+\begin{align}
+	m \derp{2}{\rho}{z} &= \der{W}{z}\der{\rho}{z}\\
+	W(\rho) + \frac{1}{2} m (\derp{}{\rho}{z})^2 &= cste\\
+	\rho \rightarrow \rho_l &\qquad W(\rho) \rightarrow 0 \\
+	&  \der{\rho}{z} \rightarrow 0 \\
+	W(\rho) - \frac{1}{2}m (\der{\rho}{z})^2 &= 0 \\
+	\der{\rho}{z} = \sqrt{\frac{2 W(\rho)}{m}}\\
+	\gamma &= m \int (\der{\rho}{z})^2 \ud z = \int_{\rho_g}^{\rho_l} \sqrt{2 m W(\rho)}\us \rho \\
+\end{align}
+Au voisinage du point critique, la courbe est relativement symétrique : 
+$$ W(\rho) = C(\rho - \rho_l)^2(\rho - \rho_g)^2$$
+
+
+
+\section{Interlude : Condensation capillaire}
+
+Une tige (cantilever) de 100 microns avec une pointe de rayon de courbure 10-50nm au bout. On envoie un laser sur la pointe, qui est réfléchit. Selon la position de la pointe, qui suit la surface, on voit se déplacer le faisceau réfléchi. On peut alors cartographier la surface, avec une résolution de 0,1nm en hauteur, et de 10 à 50 nm en surface. 
+
+On peut également tester la réaction du substrat, en maintenant la déflexion avec une boucle de rétroaction. 
+
+Spectroscopie de force de contact. On mesure la force nécessaire pour maintenir la pointe au même endroit en fonction de sa distance au substrat $z$. Lorsque la pointe est au contact avec le solide, et qu'on tente de l'en éloigner, on voit un pic dans la force à fournir : c'est le phénomène de condensation capillaire qui retient la pointe. Si les deux surfaces sont hydrophobes, on n'observe pas ce pic. 
+
+Qu'est-ce qu'il se passe ? On fabrique un ménisque d'eau entre la pointe et la surface. 
+
+\begin{align}
+	\mathcal{C} & \approx \frac{-1}{r} + \frac{1}{a} \\
+	h \ll R \\
+	r \ll R \\
+	a \gg R \\
+	\mathcal{C} & \approx \frac{-1}{r} \\
+\end{align}
+Avec $h$ la distance entre la pointe et le solide, $r$ le rayon de courbure du ménisique, $R$ le rayon de courbure de la pointe, $a$ le rayon du ménisque. 
+
+On écrit l'équilibre mécanique : 
+$$ p_L = p_V + \gamma \mathcal{C}$$
+
+\'Equilibre chimique : 
+\begin{align}
+	 \mu_L(p_L) &= \mu_V(p_V) \\
+	 &= \mu_L(p_{sat}) + \bar{\omega}_L(p_L - p_{sat}\\
+	 &= \mu_V(p_{sat}) + kT \ln \frac{p_V}{p_{sat}}\\
+	 \mu_L(p_{sat})&> \mu_V(p_{sat})\\
+	 kT \ln \frac{p_V}{p_{sat}} &= \bar{\omega}_L(p_L - p_{sat})\\
+	 &= \bar{\omega_L}(p_L - p_V + p_V - p_{sat}) \\
+	 &= \bar{\omega_L}(\gamma \mathcal{C} + p_V - p_{sat})\\
+	 p_V & \approx p_{sat}\\
+	 \mathcal{C} &= \frac{kT}{\omega_L\gamma}\ln \frac{p_V}{p_{sat}}
+\end{align}
+ 
+$$\mathcal{C}<0 \quad \rightarrow \quad \frac{p_V}{p_{sat}} <1$$ apparition de la goutte. 
+
+AN : pour de l'eau : $$\frac{1}{\mathcal{C}} = - 10^{10}m$$
+
+Force d'adhésion : $$F_{adh} = \pi a^2 \Delta P = \pi a^2 \frac{\gamma}{r} = 4 \pi \gamma R$$
+indépendante de l'humidité. 
+
+Entre deux sphères : $$F_{adh} = 2 \pi \gamma R$$
+
+Pour des grains de sables $$F_{adh} = 4,2.10^{-6} N \qquad P = 4.10^{-8}N$$ Donc on pourrait faire des châteaux de sable à n'importe quelle humidité ? 
+
+En fait le problème vient de la rugosité des billes, les ponts se forment entre des pointes sur les billes, et donc la surface maintenue est bien plus faible que pour une bille parfaitement lisse. Du coup on n'observe pas de cohésion sans eau. 
+
+Isothermes d'adsorption dans les mésoporeux : on observe une hystérèse dans le diagramme de $m$ en fonction de $\frac{p_V}{p_{sat}}$. 
+
+
+\end{document}

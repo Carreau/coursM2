@@ -1,0 +1,1482 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage[colorlinks]{hyperref}
+
+\newcommand{\bra}[1]{\vert #1 \rangle}
+\newcommand{\ket}[1]{\langle #1 \vert}
+\newcommand{\moy}[1]{\langle #1 \rangle}
+\newcommand{\lam}{\lambda}
+\newcommand{\Lam}{\Lambda}
+\newcommand{\txt}[1]{\textrm{#1}}
+\newcommand{\ud}{\textrm{d}}
+\newcommand{\der}[3][]{\frac{\ud^{#1} #2}{\ud #3^{#1}}}
+\newcommand{\derp}[3]{\frac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newcommand{\Derp}[3][]{\frac{\textrm{D}^{#1} #2}{\textrm{D} #3^{#1}}}
+\newcommand{\bbar}[1]{\bar{\bar{#1}}}
+\newenvironment{matrice}{ \left[ \begin{array} }{\end{array} \right]}
+\renewcommand{\div}{\textrm{div}}
+
+
+\begin{document}
+
+\section{}
+
+
+\subsection{}
+
+\subsubsection{}
+
+\subsubsection{Transition ferro-paramagnétique}
+
+Diagramme de phase. courbes de $H$ en fonction de l'aimantation pour une température inférieure ou supérieure à $T_C$
+
+
+On va s'intéresser à la physique des systèmes au voisinage de tels points critiques $C$ points de terminaison d'une ligne de coexistence entre deux phases. POurquoi est-ce intéressant ? Motivations physiques et techniques. 
+
+\subsection{Motivations Physiques}
+
+Recherche d'universalité : des systèmes très différents, comme des aimants ou des fluides, se comportent de manière remarquablement semblable au bvoisinage d'un point critique. Par exemple : $\beta$ est le même pour tous les fluides, alors que $T_C$ varie beaucoup. $\beta$ est le même pour des fluides et pour des aimants ?. 
+
+\subsection{Motications techniques}
+
+Description théorique de ces systèmes est un problème difficile (couplages à toutes les écehlles de taille du système). Donner un lien entre l'emergence de théories importantes : théorie de champ moyen (théorie de Landau), théorie phénoménologique en termes de lois d'échelle, développement du groupe de renormalisation (prix Noblel de Wilson 1982).
+
+\subsection{Questions posées ici}
+
+Question 0 : Pourquoi a-t-on des transitions de phase ? Comment décrire les transition de phase à l'aide de la mécanique statistique ordinaire ? 
+
+Question 1 : Peut-on porposer un cadre théorique unifié qui permette de décrire la phase du point critique qualitativement (par exemple, de manière à reproduire l'annulation continue de l'aimantation) et quantitativement (par exemple, peut-on caculer l'exposant critique $\beta$ ) ? 
+
+Question 2 : Pourquoi a-t-on de l'universalité ? Peut-on caractériser les représentants d'une classe d'universalité (ici, des systèmes ayant le même comportement au point critique). 
+
+\subsection{Description qualitative de la physique du point critique}
+
+On va utiliser le langage magnétique. Sur l'exemple du modèle d'Ising (spin $\pm 1$ interaction entre plus proches voisins, interactions ferromagnétiques). 
+
+Pour $T \gg T_C$ : Amas de + et de - , qui ont une taille typique $\zeta$ longueur de corrélation $\zeta \approx a$ pas du réseau.  
+
+Pour $T \geq T_C$ : la taille des amas augmente, et $\zeta$ augmente. 
+
+Pour $T=T_C$ : on a des amas de tutes les tailles possibles. $\frac{\zeta}{a} \rightarrow \infty$, les amas ont une structure fractale : mer de spins + qui contient des ilôts de spins -, qui contiennent des lacs de spins + \dots Invariance d'échelle du système. 
+
+Remarque : on est partis d'interactions entre proches voisins et on observe des corrélaitons à large portée, voire à portée infinie. 
+
+Conséquence : échec es approches perturbatives ordinaires à cause de ces couplages à toutes les échelles de taille du système. Point positif : il existe une invariance d'échellle que l'on utilisera explicitement pour le groupe de renormalisation. 
+
+\subsection{Description qualitative}
+
+\`A cette invariance d'échelle du système est associée l'existence de lois de puissance de plusieurs observables, définissant un jeu d'exposants critiques. 
+
+$H=0$ : aimantation en champ nul : $$T<T_C \qquad m \propto |T-T_C|^{\beta}$$
+
+Longueur de corrélation $\zeta$ : définie à l'aide des propriétés de décroissance spatiale de la fonction de   corrélation convexe : $$G_C(\vec{r_1},\vec{r_2}) = \moy{\sigma(\vec{r_1}),\sigma(\vec{r_2})} - \moy{\sigma(\vec{r_1})}\moy{\sigma(\vec{r_2})}$$ où $\sigma$ est le spin. 
+
+$$ T \neq T_C \qquad G_C \propto e^{- \frac{|\vec{r_1}- \vec{r_2}|}{\zeta}} $$
+$$\zeta \approx |T-T_C|^{- \nu} \txt{ lorsque } T \rightarrow T_C$$ 
+
+$$ T=T_C \qquad G_C \approx \frac{1}{|\vec{r_1}- \vec{r_2}|}^{d-2 + \eta}$$
+où $d$ est la dimension de l'espace de phase considéré. 
+
+Chaleur spécifique : $$C = \derp{}{E}{T} \approx  |T-T_C|^{-\alpha}$$
+
+Pour $H \neq 0$ $$X = \derp{}{m}{H}(H=0) \approx |T_T_C|^{- \gamma}$$
+
+Isotherme critique : $$ T=T_C \qquad H \propto m^{\delta}$$
+
+On a défini 6 exposants critiques. On montrera qu'en fait 2 seulement son indépendants, et que ce sont des quantités universelles (qui ne dépendent que de la dimension physique considérée et de la symétrie du paramètre d'ordre).
+
+Programme : \begin{itemize}
+	\item Mécanique statistique et transition de phase 
+	\item Théorie de Landau 
+	\item Introduction d'une théorie de champ à gros grain, sicussion de l'influence des fluctuations
+	\item Introduction du groupe de renormalisation dans l'espace ordinaire
+	\item Groupe de renormalisation de la théorie des champs introduite précédemment
+\end{itemize}
+
+
+\section{Mécanique statistique et transition de phase}
+
+Objectifs : \begin{itemize}
+	\item Rappeler les difficultés posées à la mécanique statistique par la description des transitions de phase
+	\item Caractériser les mécanismes responsables des transitions de phase
+		\subitem qualitativement : compétition ordre/désordre
+		\subitem quantitativement : paramètre d'ordre, fonction de corrélation
+	\item Illustrer ces considérations générales sur l'exemple du modèle d'Ising
+\end{itemize}
+
+\subsection{Difficulté posées à la mécanique statistique ordinaire par les transitions de phase}
+
+Question : Coment voit-on, à partir des seuls principes de la mécanique statistique ordinaire que les mêmmes molécules formeront selont les circonstances un gaz, un fluide \dots sans que rien ne vienne modifier les interactions entre molécules ? 
+
+On a longtemps pensé qu'il faudrait rajouter des postulats à la physique statistique pour expliquer les transitions de phase, jusqu'aux travaux de Peierls (1937) et Onsager (1944) qui ont montré l'existence d'une transition de phase par le modèle d'Ising 2D. Ils ont également montré l'existence de singularités, voire de divergences des fonctions thermodynamiques au voisinage du point critique. 
+
+Surprenant à première vue : $$Z = \sum_{\mathcal{C}} e^{\frac{-E}{kT}}$$
+Le raisonnement qui dit que comme $Z$ est une somme de termes analytiques, pour toute température non-nulle $Z$ est analytique est faux, car on observe la limite thermodynamique, où $Z$ est une somme sur un nombre infini de configurations, et donc peut être singulière. La limite est responsable de potentielles singularités des fonctions thermodynamiques. 
+
+\subsection{Mécanisme qualitatif des transitions de phase}
+
+\subsubsection{Compétition ordre/désordre}
+
+$$ E(\mathcal{C}) = -J \sum_{\moy{r,r'}} \sigma_r \sigma_{r'}$$
+avec $\sigma$ le spin et $J>0$  
+
+Pour $T=0$ \begin{itemize}
+	\item Tous les spins sont alignés dans le même sens 
+	\item l'état du système n'est pas fixé
+	\item Une facon de fixer l'état du système consiste à figer les spins du bord, pour exemple à la valeur +
+\end{itemize}
+
+On augmente $T$ 
+
+$$Z = \sum_{\mathcal{C}} e^{- \frac{E(\mathcal{C})}{kT}} = \sum_E w(E) e^{-\frac{E}{kT}}$$
+$$w(E) = e^{\frac{S}{k}} \qquad Z = \sum_E e^{\frac{-1}{kT}(E-TS)}$$
+
+Cette somme est piquée autour de l'énergie $E$ qui minimise $F=E-TS$. On retrouve la minimisation de l'énergie libre, mais elle contient tout le problème de la compétition ordre/désordre : 
+\begin{itemize}
+	\item les états de basse énergie ont une faible entropie 
+	\item les états de haute énergie ont une haute entropie
+	\item compétition contrôlée par $T$
+\end{itemize}
+
+On peut imaginer avoir un état ordonné à basse température et désordonné à haute température.
+
+\subsubsection{Illustration : Modèle d'Ising 1D et 2D}
+
+On cherche à donner des arguments qualitatifs permettant de savoir si on a une température critique non nulle poiur ces modèles. 
+
+Démarche : 
+\begin{itemize}
+	\item On part de $T=0$, où on a un état fondamental fixé par les spins du bord
+	\item On augmente la température $T$ : on va considérer des excitations de basse énergies
+	\item On calcule $\Delta E$ et $\Delta S$ et donc $\Delta F$
+	\subitem Si $\Delta F <0$ alors on a un état désordonné dès que la température est non nulle.
+	\subitem Si $\Delta F>0$ pour $T$ assez basse : on a un état ordonné à basse température.
+\end{itemize}
+
+\paragraph{modèle d'Ising 1D}
+
+\begin{align}
+	\Delta E &= (2J)2 \\
+	\Delta S &= k \ln (L)\\
+	\Delta F &= \Delta E - T \Delta S = 4J - k \ln(L) T <0
+\end{align}
+$L$ la taille du système est très grande devant la taille caractéristique d'un ilôt.  Ici $\Delta F<0$ donc il n'y a pas d'état ordonné à température non nulle.
+
+\paragraph{modèle d'Ising 2D}
+
+\begin{align}
+	\Delta E &= 2J(\txt{ périmètre de l'ilôt }) \\
+	& \approx 2Jl \\
+	\Delta S &= k \ln \Omega \leq k \ln(L^2 \txt{ nbre de marches aléatoires 2D de nbre de pas = au périmètre })\\
+	& \leq k \ln (L^2 4^{l}) = 2 K \ln L +(k \ln 4)l \approx l(k \ln 4) \\
+	\Delta F \geq 2Jl - Tl(k\ln4) \geq 0 \qquad \txt{ si } T<\frac{2J}{k \ln 4}
+\end{align}
+
+On s'attend à avoir un état ordonné pour $T$ assez basse.
+
+Remarque : on le vérifiera plus précisément tout à l'heure.
+
+\subsection{Caractérisation quantitative des transitions de phase}
+
+\subsubsection{Paramètre d'ordre}
+
+\paragraph{Position du problème} On a envie de considérer : 
+$$ \moy{\sigma_r} = \frac{\sum_{\mathcal{C}} \sigma_r e^{-E(\mathcal{C})}}{Z}$$
+or $E$ est presque invariante par renversement de tous les spins donc la moyenne devrait être nulle (le presque vient des spins au bord qui sont fixés). Plutôt que de fixer les spins aux bords, on introduit un champ magnétique.
+$$E(\mathcal{C}) = - J \sum_{\moy{r,r'}} \sigma_r \sigma_{r'}- h \sum_r \sigma_r $$
+
+Que vaut $\moy{\sigma_r}$ ?Peut-on considérer : $\lim_{h \rightarrow 0 } \moy{\sigma_r} =0 $ ? En fait il faut considérer la limite thermodynamique : $$\lim_{N \rightarrow \infty} \lim_{h \rightarrow 0 } \moy{\sigma_r} = 0 $$
+
+En revanche, la limite intersée : $$ \lim_{h \rightarrow 0 } \lim_{N \rightarrow \infty} \moy{\sigma_r} $$ peut être non nulle. 
+
+\paragraph{Définitions}
+
+Si $$\lim_{h \rightarrow 0 }\lim_{N \rightarrow \infty}  \moy{\sigma_r} = 0 $$ On a un état désordonné (la symétrie initiale est restaurée).
+
+Si $$\lim_{h \rightarrow 0 }\lim_{N \rightarrow \infty}  \moy{\sigma_r} = m_s \neq 0$$ on a un état ordonné et la symétrie a été spontanément brisée. Il reste de la symétrie initale : 
+$$ $$\lim_{h \rightarrow 0^+ }\lim_{N \rightarrow \infty}  \moy{\sigma_r} = \lim_{h \rightarrow 0^- }\lim_{N \rightarrow \infty}  \moy{\sigma_r} $$
+
+Définition : $m_s$ l'aimantation spontanée vaut 0 dans l'état désordonné, et est non nulle dans l'état ordonné : on dira que c'est le paramètre d'ordre de la transition. 
+
+\subsubsection{Illustration sur l'exemple du modèle d'Ising 1D et 2D}
+
+cf TD1 (p74-81) 
+
+...trucs que j'ai ratés à cause du RER B
+
+\section{Théorie de Landau}
+
+Construction directe d'un potentiel thermodynamqiue en s'appuyant sur des considérations de symétrie et des hypothèses d'analyticité.
+
+\subsection{Thermodynamique des transitions de phase}
+
+\subsubsection{Rappel : dérivation fonctionnelle}
+
+définition : Soit $\Phi$ une fonction qui, à une fonction $u$ associe un nombre (fonctionelle). On considère un variation $\delta u$ de û^et la cariation $\delta \Phi$ associée. 
+
+Si $$\delta \Phi[u] = \Phi[u + \delta u] - \Phi[u] = \int \ud x D(x) \delta u(x) + o(\delta u)$$
+
+On dit que $D(x)$ est la dérivée fonctionnelle de $\Phi$ par rapport à $u$. 
+
+Exemple : soit $\Phi :  u \rightarrow u(x_0)$ on a 
+\begin{align}
+	\Phi(u) &= u(x_0) = \int \ud x \delta(x-x_0) u(x) \\
+	\delta \Phi(u) = \int \ud x \delta(x-x_0) \delta u(x) \\
+	\derp{}{\Phi}{u(x)} &= \delta(x-x_0)
+\end{align}
+
+
+Soit $\Phi(u) = \int \ud y u^2(y)$
+
+\begin{align}
+	\derp{}{\Phi}{u(x)} = \int \ud y \derp{}{u^2(y)}{u(x)} \\
+	&= \int \ud y \frac{2 u(y) \delta u(y)}{\delta u(x)} = 2 u(x) \\
+	\Phi(u) &= e^{\int \ud y u^3(y)} \\
+	\derp{}{\Phi}{u(x)} &= \derp{}{}{u(x)} (\int \ud y u^3(y)) \Phi(u) \\
+	\Phi(u) &= \int \ud y (\derp{}{u}{y} )^2 \\
+	\delta \Phi(u) &= \int \ud y 2 \der{u}{y} \delta(\der{u}{y}) \\
+	&= -2 \int \ud y \der{^2 u}{y^2} \delta(u(y)) \\
+	\derp{}{\Phi(u)}{u(y)} &= -2 \der{^2 u}{y^2} \\
+	\Phi(u) &= \int \ud \vec{y} (\vec{\nabla}u)^2 \\
+	\derp{}{\Phi}{u(\vec{y})} &= -2 \nabla^2 u(y)
+\end{align}
+
+
+\subsection{Paramètre d'ordre- Fonctions de corrélations connexes}
+
+Soit un système décrit par une variable continue $\Phi(\vec{r})$
+
+\dots trucs qu'il a effacés de manière totalement gratuite trop tôt. 
+
+On ajoute un champ extérieur $\vec{h}(\vec{r})$ inhomogène qui se couple à $\vec{\Phi}$ selont un terme : $$- \int \ud^d r \vec{h}(\vec{r}) \vec{\Phi}(\vec{r})$$ où $\vec{\Phi}(\vec{r})$ est un vecteur à n dimensions, $\vec{r}$ est un vecteur à d dimensions, d étant la dimension de l'espace physique considéré. 
+
+Remarque : si on a un système sur réseau, $$\Phi(\vec{r}) = \sum_{r_i} \delta(\vec{r} - \vec{r_i}) \dots$$
+
+Soit $H_0$ le terme correspondant aux interations entre cariables $\vec{\Phi}$ (par exemple le terme d'interaction entre spins). On ajoute un champ extérieur $\vec{h}$ inhomogène, qui se couple à $\Phi$ selon un terme du type 
+$$- \int \ud^d \vec{r} \vec{h}(\vec{r}) \vec{\Phi}(\vec{r}) $$
+
+Fonction de partition : 
+$$Z = \int_{etats} e^{-\beta H_0 + \beta \int \ud^d r \vec{h}(\vec{r}) \vec{\Phi}(\vec{r}) } $$
+
+Paramètre d'ordre : 
+$$\vec{m}(\vec{r}) = \moy{\vec{\Phi}}(\vec{r})$$
+
+\begin{align}
+	m_i(\vec{r}) &= \frac{1}{Z} \int_{etats} \Phi_i(\vec{r}) e^{-\beta H_0 + \beta \sum_{j} \int \ud^d r' \vec{h}_j(\vec{r'}) \vec{\Phi}_j(\vec{r'})} \\
+	&= \frac{1}{Z} \int \frac{1}{\beta} \derp{}{}{h_i} e^{- \beta H_0 + \beta \sum_j^n  \int \ud^d r' \vec{h}_j(\vec{r'}) \vec{\Phi}_j(\vec{r'})} \\
+	&= \frac{1}{\beta Z} \derp{}{Z}{h_i} \\
+	&= \frac{\vec{1}}{\beta} \derp{}{}{h_i}\ln(Z) \\
+	&= - \derp{}{F}{h_i} \\
+	\vec{m} &= \derp{}{F}{\vec{h}(\vec{r})}
+\end{align}
+
+Fonction de corrélation connexe : 
+
+\begin{align}
+	G_{ij}^c(\vec{r},\vec{r'}) \equiv \moy{\Phi_i(\vec{r}) \Phi_j(\vec{r'})} - \moy{\Phi_i(\vec{r})}\moy{\Phi_j(\vec{r'})} \\
+	&= \moy{(\Phi_i(\vec{r}) - \moy{\Phi_i(\vec{r})})(\Phi_j(\vec{r'}) - \moy{\Phi_j(\vec{r'})})}
+\end{align}
+
+mesure la corrélation entre les fluctuations de $\vec{\Phi}$. 
+
+\begin{align}
+	\moy{\Phi_i(\vec{r}) \Phi_j(\vec{r'})} = \frac{1}{Z} \int_{etats} \Phi_i \Phi_j e^{\beta H} \\
+	&= \frac{1}{Z} \frac{1}{\beta^2} \derp{}{}{h_i \partial h_j} e^{\beta H} \\
+	&= \frac{1}{\beta^2 Z} \frac{\partial^2}{\partial h_i \partial h_j} Z \\
+	G_{ij}^c(\vec{r},\vec{r'}) &= \frac{1}{\beta^2 }\left[ \frac{1}{Z}  \frac{\partial^2 Z}{\partial h_i \partial h_j} - \frac{1}{Z^2} \derp{}{Z}{h_i} \derp{}{Z}{h_j} \right] \\
+	&= \frac{1}{\beta}\left( \derp{}{}{h_i}(\frac{1}{Z} \derp{}{Z}{h_j}) \right) \\
+	&= - \frac{1}{\beta} \frac{\partial^2 F}{\partial h_i \partial h_j}
+\end{align}
+
+Fonctions de réponse - Réponse linéaire
+
+Fonction de réponse : 
+$$ \chi_{ij}(\vec{r}\vec{r'}) = \derp{}{m_i}{h_j} $$ susceptibilité généralisée
+
+\begin{align}
+	\chi_{ij} &= \derp{}{}{h_j}(- \derp{}{F}{h_i}) \\
+	&= - \frac{\partial^2 F}{\partial h_i \partial h_j} \\
+	&= \beta G_{ij}^c
+\end{align}
+
+Elle s'utilise le plus souvent pour un champ $\vec{h}$ nul. 
+
+$$\derp{}{m_i}{h_j}(\vec{h}=\vec{0}) = \beta G_{ij}^c(\vec{h}=\vec{0}) $$
+
+Formule de la réponse linéaire : elle relie la réponse linéaire à une perturbation aux fonctions de corrélations connexes en l'absence de perturbations.
+
+\subsubsection{Transformations de Legendre - Potentiel thermodynamique}
+
+Pour l'instant $F$ est une fonction de $T$ et $\vec{h}$, on préfèrerait travailler avec $T$ et $ \vec{m}$. On fait une tranformation de Legendre (généralisée). On définit un potentiel thermodynamique par : 
+$$\Gamma = F + \int \ud^d \vec{h} \vec{m} $$
+à $T$ fixée :
+\begin{align}
+	\ud \Gamma &= \ud F + \int \ud^d r [\ud \vec{h} \vec{m} + \vec{h} \ud \vec{m}] \\
+	&= \int \ud^d r \derp{}{F}{\vec{h}}\ud \vec{h} +  \int \ud^d r [\ud \vec{h} \vec{m} + \vec{h} \ud \vec{m}] \\
+	&= \int \ud^d r \vec{h} \ud \vec{m} \\
+	\derp{}{\Gamma}{\vec{m}} = \vec{h}
+\end{align}
+
+Remarque : que deviennent ces formules dans le cas homogène ? 
+
+$$\ud F = - \int \ud^d r \vec{m}\vec{h} = -V \vec{m} \ud \vec{h} $$
+
+donc $$\vec{m} = \frac{-1}{V} \derp{}{F}{\vec{h}}$$ où $V$ est le volume du système.
+
+On peut aussi raisonner en densité d'énergie libre : $$ \derp{}{f}{\vec{h}} = - \vec{m} \qquad f = \frac{F}{V}$$
+
+De même : 
+\begin{align}
+	\ud \Gamma &= \int \ud^d r \vec{h} \ud \vec{m} \\ 
+	&= V \vec{h} \ud \vec{m} \\
+	\derp{}{\gamma}{\vec{m}} = \vec{h} \\
+	\gamma &= \frac{\Gamma}{V }
+	\end{align}
+densité du potentiel thermodynamique. 
+
+Remarque : En champ nul, $\gamma$ est donc extremale. En fait, n utilisant des arguments de stabilité, $\gamma$ est minimale par rapport à $\vec{m}$ à l'équilibre.
+
+Que dire des déricées secondes de $\Gamma$ ? 
+$$ \frac{\partial^2 \Gamma}{\partial m_i \partial m_j} = \derp{}{h_i}{m_j}$$
+
+Comment est-ce relié à $$\chi_{ij} = \derp{}{m_i}{h_j}$$ 
+
+Introduisons l'inverse matriciel de $\chi$ défini par : 
+$$\sum_k \int \ud^d r'' (\chi^{-1}(\vec{r},\vec{r''}))_{ik} (\chi)_{kj}(\vec{r''},\vec{r'}) = \delta_{ij} \delta{\vec{r''}-\vec{r}}$$
+or 
+\begin{align}
+	\derp{}{m_i}{m_j} &= \delta_{ij} \delta(\vec{r''}-\vec{r}) \\
+	&= \sum_k \int \ud^d r'' \left( \derp{}{m_i}{h_k} \right) \left( \derp{}{h_k}{m_j} \right) \\
+	\derp{}{h_k}{m_j} &= (\chi^{-1})_{kj}(\vec{r''},\vec{r})
+\end{align}
+ 
+$$ \frac{\partial^2 \Gamma}{\partial m_i \partial m_j} = \chi^{-1}_{ij}(\vec{r},\vec{r'}) = \beta^{-1} G^{-1}_{ij}(\vec{r},\vec{r'})$$
+
+On va commencer par considérer des situations homogènes ($\vec{m}$ et $\vec{h}$ uniformes), puis on envisagera des situations inhomogènes, qui permettent de calculer les fonctions de corrélation. 
+
+Questions : 
+Peut-on rendre compte des lois de puissance obervées pour $\vec{m}$ $\chi$ C ? et les formes observées pour les fonctions de corrélation ? 
+
+\subsection{Théorie de Landau au voisinage de $T_C$ : cas homogène}
+
+Ici, on va considérer le cas d(un paramètre d'ordre scalaire m associé à un système dont la physique est invariante dans le retournement $m \rightarrow -m$. En TD, on considèrera le cas d'un paramètre d'ordre vectoriel $\vec{m}$ associé à un système dont la physique est invariante par rotation globale du paramètre d'ordre. 
+
+\subsubsection{Construction du potentiel thermodynamique}
+
+Obervations : $m=0$ pour $T>T_C$, $m \ll 1 $ pour $T \leq T_C$ 
+
+$m$ étant petit, on développe le potentiel $\gamma$ (situation homogène) en puissances de $m$. (hypothèse d'analyticité). 
+$$\gamma(T,m) = \gamma_0(T) + \sum_i^4 \alpha_i m^i + \mathcal{O}(m^5) $$
+
+La symétrie impose ici : 
+$$\gamma(T,-m) = \gamma (T,m)$$
+
+Ne subsistent donc que les puissances paires dans le développement précédent : 
+$$\gamma(T,m) = \gamma_0(T) + \frac{1}{2} a(T) m^3 + \frac{1}{4} b(T) m^4 + \mathcal{O}(m^6) $$
+
+Signe des coefficients $a$ et $b$ ? 
+
+$$h = \derp{}{\gamma}{m}$$ équation d'état.
+
+En champ nul, $$\derp{}{\gamma}{m} = 0$$ donc $$a(T)m + b(T)m^3 = 0 \qquad m(a(T) + b(T)m^2) =0$$
+
+Deux solutions possibles : 
+\begin{align}
+	m&=0 \\
+	m&= \sqrt{\frac{-a(T)}{b(T)}} \txt{  si $a$ et $b$ sont de signes opposés} \\
+	\gamma''(m) &= a(T) + 3b(T)m^2 \\
+	\gamma''(m_1) &= a(T) \\
+	\gamma''(m_2) &= a(T) + 3 b(T) \frac{-a(T)}{b(T)} = - 2 a(T) 
+\end{align}
+
+Pour $T<T_C$ : on veut que $m_2$ soit la solution stable. Il faut donc $a(T) <0$ et $b(T)<0$. 
+
+Pour $T=T_C$, pour avoir un transition continus, on impose à $m_2$ de s'annuler en $T_C$, donc $$a(T_C) =0 \qquad b(T_C) > 0$$
+
+Pour $T>T_C$, on veut que $m_1$ soit la solution stable, donc cela impose $a(T)>0$, on suppose de plus que $b(T)$ continue, et donc reste positive au voisinage de $T_C$. 
+
+On suppose $a$ et $b$ déceloppables en puissances de $t=\frac{T-T_C}{T_C}$ : 
+\begin{align}
+	a(T) &= a_0 t + \mathcal{O}(t^2) \qquad & a_0 >0 \\
+	b(T) &= b_0 t + \mathcal{O}(t^2) \qquad & b_0>0 \\
+\end{align}
+
+Finalement : 
+$$ \gamma(T,m) = \gamma_0(T) + \frac{1}{2}(a_0 t)m^2 + \frac{1}{4} b_0 m^4 \qquad a_0>0 \qquad b_0>0$$
+
+\subsubsection{Prédictions}
+
+Paramètre d'ordre : 
+$m_s =0$ pour $T>T_C$, $m_s \approx \sqrt{\frac{-a_0t}{b_0}} \qquad t<0$  pour $T<T_C$, à rapprocher de $m_s \approx |T-T_C|^{\beta} \qquad T<T_C$ 
+
+Remarque : seule la norme de $m_s$ est fournie (pas la direction). 
+
+Potentiel thermodynamique : 
+\begin{align}
+	h&=0 \\
+	\gamma(T) &= \gamma(T,m_s) \\
+	t>0 & \gamma(T) = \gamma_0(T) \\
+	t<0 & \gamma(T) = \gamma_0(T) + \frac{1}{2} a_0 t(-\frac{a_0 t}{b_0}) + \frac{1}{4} b_0 \frac{(a_0 t)^2}{b_0^2} \\
+	&= \gamma_0(T) - \frac{1}{4} \frac{(a_0t)^2}{b_0} 
+\end{align}
+
+$\gamma$ est continue en $t=0$. Entropie volumique : $$s = - \derp{}{\gamma}{T}$$
+
+$s$ est continue en $t=0$. 
+
+Chaleur spécifique : $$c = T \derp{}{s}{T} = - T \derp{2}{\gamma}{T} $$
+
+$c$ présente une discontinuité en $t=0$. 
+
+\`A rapprocher de : 
+\begin{align}
+	c & \approx c_+  |T-T_C|^{- \alpha_+} \qquad T>T_C \\
+	c & \approx c_- |T-T_C|^{- \alpha_-} \qquad T<T_C \\
+\end{align}
+
+dans la théorie de Landau, $\alpha_+ = \alpha_- = 0$ discontinuité. 
+
+Susceptibilité : 
+$$\chi = \derp{}{m}{h}(h=0)$$
+
+équation d'état : $$h = \derp{}{\gamma}{m} = (a_0 t)m + b_0 m^3 $$
+$$\derp{}{h}{m} &= a_0 t + 3 b_0 m^2 $$
+
+quand $h=0$, $m=m_s$ 
+$$ \chi = \frac{1}{\derp{}{h}{m}} $$
+
+\begin{align}
+	t>0 \quad & m_s=0 \\
+	\chi & \approx \frac{1}{a_0 t} \\
+	t<0 \quad & m_s = \sqrt{\frac{-a_0 t}{b_0}} \\
+	\chi & \approx \frac{1}{a_0 t + 3 b_0 (\frac{-a_0 t}{b_0})} \approx \frac{1}{-2 a_0 t} 
+\end{align}
+à rapprocher de $$\chi \approx \chi_+ |T-T_C|^{- \gamma_+} \qquad T>T_C$$
+$$ \chi \approx \chi_- |T-T_C|^{- \gamma_-} \qquad T<T_C $$
+
+dans la théorie de Landau $\gamma_+ = \gamma_- = 0$
+
+Remarque : $$\frac{\chi_+}{\chi_-} = -2$$ qui est indépendant du matériau. 
+
+Isotherme critique : 
+$$h = (a_0t) m+ m^3 $$
+
+$t=0$ $h \approx m^3$ à rapprocher de $h \approx m^{\delta}$ 
+dans la théorie de Landau $\delta = 3$
+
+\subsection{Théorie de Landau au voisinage de $T_C$ : cas inhomogène}
+
+Pour calculer les fonctions de corrélation, on a besoin de considérer des configurations inhomogènes du paramètre d'ordre. 
+
+\subsubsection{Construction du potentiel thermodynamique $\Gamma$}
+
+Commode ici d'uiliser un formalisme continu. $m$ doit être vu ici comme une moyenne spatiale de l'aimantation, sur un domaine de taille grande devant le pas du réseau $a$, et petite devant la longueur de corrélation $\zeta$. 
+
+Tout ce qui suit a un sens seulement au voisinage de $T_C$ (pour lequel on observe $\frac{\zeta}{a} \gg 1$). 
+
+Le développement précédent s'appuyait sur la constatation que m restait petit au voisinage de $T_C$ Ici, on va de plus utiliser le fait que m est une fonction lentement variable au voisinage de $T_C$. On va donc développer, $\Gamma$ en puissances des dérivées du paramètre d'ordre. 
+
+Une forme respectant la sumétrie du problème est la suivante : 
+$$ \Gamma (T, \{ m(\vec{r}) \}) = \Gamma_0(T) + \int \ud^d r [\frac{1}{2}a m^2 + \frac{1}{4} b m^4 + \frac{1}{2} (\vec{\nabla}m)^2 + \dots ] $$
+
+Remarque : on a pas de termes linéaires dans les déricées à cause de la symétrie $m \rightarrow -m$. 
+
+On a utilisé la liberté d'un changement d'échelle : $r_i \rightarrow \lam_i r_i $ de manière à prendre un coefficient $\frac{1}{2}$  devant $(\vec{\nabla}m)^2$ 
+
+Les termes de la forme $m \nabla^2 m$ sont autorisés mais ils se ramènent aux termes précédents : 
+$$ \div(m \grad m) &= m \div \grad m + (\vec{\nabla}m)^2 $$
+
+d'où $$\int \ud^d r m \nabla^2 m = \int \ud^d r \div (m \grad m) -  \int \ud^d r (\vec{\nabla}m)^2 $$le premier terme est un terme de surface, négligeable à la limite thermodynamique. 
+
+Comme précédemment : 
+\begin{align}
+	a(T) &= a_0 t + \mathcal{O}(t) \\
+	b(T) &= b_0 + \mathcal{O}(t) \\
+	a_0>0 & b_0>0 
+\end{align}
+
+\subsubsection{Prédiction : calcul des fonctions de corrélation connexes}
+
+$$h(\vec{r}) =  \derp{}{\Gamma}{m(\vec{r})} $$
+
+c'est-à-dire : 
+$$h(\vec{r}) &= a(T) m(\vec{r}) + b(T) m^3(\vec{r}) - \nabla^2 m(\vec{r})$$
+
+Dérivons fonctionellement par rapport à $m(\vec{r'})$
+
+$$\derp{}{h(\vec{r})}{m(\vec{r})} = a(T) \delta(\vec{r}-\vec{r'}) + 3 b(T) m^2(\vec{r}) \delta (\vec{r}-\vec{r'}) - \nabla^2 \delta (\vec{r}-\vec{r'})$$
+
+On prend maintenant $\vec{h}=\vec{0} $:$ \vec{m}=\vec{m_s}$ uniforme
+On a déterminé précédemment : 
+\begin{align}
+	\derp{}{h(\vec{r})}{m(\vec{r'})}(\vec{h}=\vec{0}) &= (a(T) + 3 b(T) m_s^2)\delta(\vec{r}-\vec{r'}) \\
+	&= \chi^{-1}(\vec{r}\vec{r'}) = \beta^{-1} G_c(\vec{r},\vec{r'})
+\end{align}
+Problème invariant par translation : 
+$$G_c(\vec{r},\vec{r'}) = G_C(\vec{r},-\vec{r'})$$ 
+
+Passage en TF : 
+
+$$\tilde{G^{-1}}(\vec{q}) = \int \ud^d r e^{i \vec{q}\vec{r}}G^{-1}(\vec{r}) $$
+
+On multiplie $\derp{}{h(\vec{r})}{m(\vec{r'})}$ par $e^{i \vec{q}(\vec{r}-\vec{r'})}$ et on intègre par rapport à $\vec{r}$ : 
+
+\begin{align}
+	& \frac{1}{\beta} \int \ud^d r e^{i \vec{q}(\vec{r}-\vec{r'})}G^{-1}(\vec{r}-\vec{r'}) \\
+	&= (a + 3b m_s^2)\int \ud^d r e^{i\vec{q}(\vec{r}-\vec{r'})} \delta(\vec{r}-\vec{r'})  - \int \ud^d r e^{i \vec{q}(\vec{r}-\vec{r'})}\nabla^2 \delta(\vec{r}- \vec{r'}) \\
+	&	\int \ud^d r e^{i\vec{q}(\vec{r}-\vec{r'})} \delta(\vec{r}-\vec{r'}) =1 \\
+	&  \int \ud^d r e^{i \vec{q}(\vec{r}-\vec{r'})}\nabla^2 \delta(\vec{r}- \vec{r'}) = \int \ud^d r \nabla^2(e^{i \vec{q}(\vec{r}-\vec{r'})}) \delta(\vec{r}-\vec{r'}) = -q^2 \\
+	\frac{1}{\beta} \tilde{G^{-1}}(\vec{q}) &= a + 3bm_s^2 + q^2	
+\end{align}
+
+Comment relier $\tilde{G^{-1}}$ à $\tilde{G}$ ? 
+
+$$ \int \ud \vec{r''} G^{-1}(\vec{r},\vec{r''}) G(\vec{r''},\vec{r'}) = \delta(\vec{r}-\vec{r'})$$
+
+Passage à la TF : 
+$$\tilde{G^{-1}}(\vec{q}) \tilde{G}(\vec{q}) = 1 \qquad \tilde{G^{-1}} = \frac{1}{\tilde{G}} $$
+
+$$\frac{1}{\beta \tilde{G}(\vec{q})} = a + 3b m_s^2 +q^2 $$
+
+et donc 
+$$ \tilde{G}(\vec{q}) = \frac{kT}{a + 3b m_s^2 + q^2}$$
+
+Puis $$G(\vec{r}) = kT \int \frac{\ud^d q }{(2\pi)^d} \frac{e^{- i \vec{q}\vec{r}}}{a + 3b m_s^2+ q^2}$$
+
+Pour $T=T_C$, $a + 3b m_s^2  = 0$, et donc 
+$$ G(\vec{r}) = kT \int \frac{\ud^d q }{(2\pi)^d} \frac{e^{- i \vec{q}\vec{r}}}{q^2}$$
+
+$\vec{r} = r \vec{u_z} \qquad $\vec{\theta} = r \vec{q}$$ 
+
+$$G(\vec{r} = \frac{kT}{r^{d-2}} \int \frac{\ud^d \theta}{(2 \pi)^d} \frac{e^{- i \vec{\theta}\vec{u_z}}}{\theta^2}$$
+
+Pour $T=T_C$, $G \propto \frac{1}{r^{d-2}}$ à rapprocher de $$ G \propto \frac{1}{r^{d-2 + \eta}}$$
+Dans la théorie de Landau $\eta=0$. 
+
+Pour $T \neq T_C$ : 
+\begin{align}
+	\zeta^{-2} &= a + 3b m_s^2 \\
+	G &= \frac{kT}{(2 \pi)^d} \int \ud^d q \frac{e^{-i \zeta \vec{q} \frac{\vec{r}}{\zeta}}}{1 + q^2 \zeta^2} \\
+	&= \frac{kT}{(2 \pi)^d} \frac{\zeta^2}{\zeta^d} \int \ud^d u \frac{e^{-i \vec{u} \frac{\vec{r}}{\zeta}}}{1 + u^2} \\
+	&= \frac{kT}{(2 \pi)^d} \frac{\zeta^2}{\zeta^d} F(\frac{\vec{r}}{\zeta}) \\
+\end{align}
+
+Détermination de $F$ si $d=3$ : 
+
+\begin{align}
+	F(\vec{v}) &= \int \ud^3 u \frac{e^{-i \vec{u} \vec{v}}}{1 + u^2} \\
+	&= 2 \pi \int_0^{\infty} \ud u \frac{u^2}{1 + u^2} \int_0^{\pi} \ud \theta \sin \theta e^{-iuv \cot \theta} \\
+	\int_0^{\pi} \ud \theta \sin \theta e^{-iuv \cot \theta}&= \int_{-1}^{+1} \ud x e^{-iuvx} \\
+	&= \frac{1}{-iuv}(e^{-iuv} - e^{iuv}) = \frac{2 \sin(uv)}{uv} \\
+	F(v) &= \frac{4 \pi}{v} \int_0^{\infty} \ud u \frac{u}{1 + u^2} \sin(uv) \\
+	&= \frac{4\pi}{v} \frac{1}{2} \int_0^{\infty} \ud u \frac{u}{1 + u^2} \sin(uv) \\
+	&= \frac{4\pi}{v} \frac{1}{2} \Im (\int_{- \infty}^{\infty} \ud u \frac{u}{1+u^2}e^{iuv}) \\
+	\Im (\int_{- \infty}^{\infty} \ud u \frac{u}{1+u^2}e^{iuv}) &= 2 i \pi \Re (\frac{z}{1+z^2} e^{ivz}i) \\
+	&= \Im(2i \pi \frac{i}{2i} e^{-v}) \\
+	&= \pi e^{-v} \\
+	F(v) &= \frac{2 \pi^2}{v} e^{-v} 
+\end{align}
+
+Finalement $$G = \frac{kT}{(2\pi)^3} \frac{1}{\zeta} \frac{2 \pi ^2}{\frac{r}{\zeta}} e^{- \frac{r}{\zeta}}$$
+
+\begin{align}
+	G &= \frac{kT}{4 \pi} \frac{e^{\frac{r}{\zeta}}}{r} \\
+	d&=3 \\
+	\zeta &= \frac{1}{\sqrt{a + 3b m_s^2 }} \\
+	t>0 & \quad \zeta \approx \frac{1}{\sqrt{a_0t}} \\
+	t<0 & \quad \zeta \approx \frac{1}{\sqrt{-2a_0t}} \\
+\end{align}
+
+On trouve bien une divergence de $\zeta$ pour $t=0$, à rapprocher de 
+\begin{align}
+	\zeta \approx \zeta_+ |T-T_C|^{- \nu_+} \quad T>T_C \\
+	\zeta \approx \zeta_- |T-T_C|^{-\nu_-} \quad T>T_C \\
+	\nu_+ &= \nu_- = \frac{1}{2}
+\end{align}
+dans la théorie de Landau. 
+
+Détermination de $F$ pour $v \rightarrow \infty$ : 
+$$F(\vec{v}) = \int \ud^d u \frac{e^{-i \vec{u}\vec{v}}}{1 + u^2} $$
+
+Remarque : pour $A>0$, on a $$\frac{1}{A} = \int_0^{\infty} \ud t e^{-tA}$$
+
+\begin{align}
+	F(\vec{v}) &= \int \ud^d u e^{- i \vec{u} \vec{v}} \int_0^{\infty} \ud t e^{-t (1 + u^2)} \\
+	&= \int_0^{\infty} \ud t e^{-t} \int \ud^d u e^{-t u^2 - i \vec{u}\vec{v}} \\
+	e^{-t u^2 - i \vec{u}\vec{v}} &= e^{-t \sum_j^d u_j^2 - i \sum_j^d u_j v_j} \\
+	\int \ud^d u e^{-t u^2 - i \vec{u}\vec{v}}  &= \prod_{j=1}^d \int_{- \infty}^{\infty} \ud u_j e^{- \frac{1}{2} u_j^2 - i u_j v_j} \\
+	\int_{- \infty}^{\infty} \ud u_j e^{- \frac{1}{2} u_j^2 - i u_j v_j} &= \sqrt{\frac{2 \pi}{2t}} e^{\frac{1}{2} \frac{v_j^2}{2t}} \\
+	\prod_{j=1}^d \int_{- \infty}^{\infty} \ud u_j e^{- \frac{1}{2} u_j^2 - i u_j v_j} &= (\frac{\pi}{t})^{d/2} e^{\frac{1}{4t}v^2} 
+\end{align}
+
+rappel : $$\int_{- \infty}^{\infty} \ud t e^{- \frac{1}{2} a t^2 + bt } = \sqrt{\frac{2 \pi}{a}}e^{\frac{b^2}{2a}} $$
+
+\begin{align}
+	F(\vec{v}) &= Pi^{d/2} \int_0^{\infty} \ud t \frac{1}{t^{d/2}} e^{-(t + \frac{v^2}{4t})} \\
+	f(t) &= t + \frac{v^2}{4t} \\
+	f'(t) &= 1 - \frac{v^2}{4t^2} \\
+	f'(t) &= 0 \quad \txt{ ssi } t = \frac{v}{2} \\
+	y &= \frac{t}{v/2} \\
+	f(t) &= \frac{v}{2}y + \frac{v^2}{4} \frac{2}{v} \frac{1}{y} \\
+	&= \frac{v}{2}(y + \frac{1}{y}) \\
+	F(\vec{v}) &= \pi^{d/2}(\frac{v}{2})^{1-d/2} \int_0^{\infty} \ud y \frac{1}{y^{d/2}} e^{- \frac{v}{2}(y + \frac{1}{y})} \\
+	g(y) &= y + \frac{1}{y} \\
+	g' &= 1 - \frac{1}{y^2} \\ 
+	g'' &= \frac{2}{y^3} \\
+	g(y) &= g(1) + (y-1)g'(1) + \frac{1}{2} (y-1)^2 g'' + \dots \\
+	F(\vec{v})& \approx \frac{\pi^{d/2}}{2^{1-d/2}} v^{1-d/2} e^{-v} \sqrt{\frac{2\pi}{v}} \\
+	& \propto \frac{1}{v^{d/2 - 1 + 1/2}} e^{-v} \\
+	& = \frac{1}{v^{\frac{d-1}{2}}}e^{-v} \\
+	G_c(r) \propto_{r \rightarrow \infty} \frac{e^{- r/\zeta}}{e^{\frac{d-1}{2}}} 
+\end{align}
+
+\subsection{Discussion}
+
+\section{Au-delà du champ moyen : effet des fluctuations}
+
+Objectif : Construire une théorie de champ à gros grain dont l'ordre zéro doit redonner la théorie de Landau. En retour, ceci nous permettra de discuter quantitativement l'effet  des fluctuations. 
+
+\subsection{Modèle de Landau-Wilson}
+
+Dans le modèle de spins précédent, de nombreux détails n'avaient vraiment d'importance : seul comptait le fait que $\tilde{\mathcal{J}}(\vec{q}) - \tilde{\mathcal{J}}(0) \propto q^2$, ce qui correspondait à des interactions à courte portée. Seule comptait également la structure du développement de $ln(\cosh \beta x)$ à petit $m$, et donc la symétrie. 
+
+Idée : On construit cette fois un hamiltonien de la manière suivante : 
+
+$$	\beta H &= \int \ud^d r \left[ \frac{1}{2} (\vec{\nabla}\phi)^2 + V(\vec{q}) \right] $$
+avec $V$ construit pour respecter les symétries du problème, dans l'esprit de la théorie de Landau. 
+
+Par exemple : $$ V(\phi) = \frac{1}{2} r \phi^2 + \frac{1}{4!}g \phi^4 $$
+
+On est donc rémené à une fonctionnelle de type Landau, mais il s'afit d'un Hamiltonien, et pas d'une énergie libre. 
+
+$$e^{- \beta F} = \int_{etats} e^{-\beta H} = Z $$
+
+Conséquences : 
+
+Les hypohtèses d'analyticité daites sur $F$ pour Landau peuvent être mises en défaut, car à la limite thermodynamique, on a une infinité de degrés de liberté mis en jeu. Au contraire, le hamiltonien $H$, qui résulte d'une moyenne locale, met en jeu un nombre fini de degrés de liberté. 
+
+Remarque : les fonctions continues $\phi$ considérées ici sont supposées être issues d'un modèle sur réseau. On imposera à ces fonctions de ne pas varier fortement à l'échelle du réseau $a$. 
+
+En prétique, les intégrales de Fourier seront limitées par un cut-off supérieur $\Lambda = \frac{1}{a}$. 
+
+Fonction de partition 
+
+$$Z = \int \mathcal{D} [\phi] e^{- \int d^d r [\frac{1}{2} r \phi^2 + \frac{1}{4!} g \phi^4 + \frac{1}{2}(\vec{\nabla}\phi)^2] + \int \ud^d h(\vec{r}) \phi(\vec{r})} $$
+
+où $\int \mathcal{D}[\phi]$ représente une somme sur toute sles fonctions $\phi$ respectant la contrainte préédente. 
+
+Cas d'un paramètre vectoriel : 
+$$Z = \int \mathcal{D}[\phi] e^{- \int \ud^d r [\frac{1}{2} r \phi^2 + \frac{1}{4!} g (\vec{\phi}^2)^2 + \frac{1}{2} \sum_i (\vec{\nabla}\phi_i)^2] + \int \ud^d r \vec{h}(\vec{r})\vec{\phi}(\vec{r})} $$
+
+\subsection{Ordre 0 de la théorie de Landau-Wilson}
+
+Montrons qu'on retrouve à cet ordre 0 la théorie de Landau. Cet ordre 0 est définit en ne conservant dans la somme des configurations définissant $Z$ que la configuration de plus grand poids. 
+
+$$ \frac{\delta[A[\phi] - \int \ud^d \vec{r} \vec{h}](\vec{r}) \vec{\phi}(\vec{r})}{\delta \phi_{ \alpha}(\vec{r})} = r \phi_{\alpha}(\vec{r}) + \frac{1}{3!} g (\vec{\phi}^2)(\vec{r}) \phi_{\alpha}(\vec{r}) - \nabla^2 \phi_{\alpha}(\vec{r}) + h_{\alpha}(\vec{r}) $$
+
+Notons $\hat{\phi}$ la configuration la plus probable. 
+
+\begin{align}
+	Z^0 &= e^{-A [\hat{\phi}] + \int \ud^d \vec{h}(\vec{r}) \vec{\phi}(\vec{r})} \\
+	F^0 &= - \ln Z^0 = A[\hat{\phi}] - \int \ud^d r \vec{h}(\vec{r}) \vec{\hat{\phi}}(\vec{r}) \\
+	m_{\alpha} (\vec{r}) &= - \frac{\delta F}{\delta h_{\alpha}(\vec{r})} \\
+	&= \int \ud^d s \sum_{\beta} \frac{\delta A}{\delta \hat{\phi}_{\beta}(s)} \frac{\delta \hat{\phi}_{\beta}(s)}{\delta h_{\alpha}(\vec{r})}  - \sum_{\beta} \int \ud^d s \left[ \frac{\delta h_{\beta}(s)}{h_{\alpha}(\vec{r})} \hat{\phi}_{\beta}(s) + h_{\beta}(s) \frac{\delta \hat{\phi}_{\beta}(s)}{h_{\alpha}(\vec{r})} \\
+	 &= \hat{\phi}_{\alpha}(\vec{r}) 
+\end{align}
+
+\`A l'ordre 0 : 
+$$ \vec{m}(\vec{r}) = \vec{\hat{\phi}}(\vec{r}) $$
+
+Potentiel thermodynamique à l'ordre 0 : 
+\begin{align}
+	\Gamma^0 &= F^0 + \int \ud^d s \vec{h}\vec{m} \\
+	&= A [\hat{\phi}] - \int \ud^d s \vec{h}\vec{\hat{\phi}} + \int \ud^d s \vec{h}\vec{m} \\
+	&= A[\vec{m}] \\
+	&= \int \ud^d r [ \frac{1}{2} r \vec{m} + \frac{1}{4!} g (\vec{m}^2)^2 + \frac{1}{2} \sum_i (\vec{\nabla}m_i)^2] \\ &= \Gamma_{Landau}
+\end{align}
+
+
+\section{Au-delà du champ moyen : effet des fluctuations}
+
+\subsection{Théorie de champ moyen effective à fros frain}
+
+Cas d'un champ scalaire : 
+$$ Z = \int \mathcal{D}[\phi]e^{- \int \ud^d r [\frac{r \phi^2}{2} + \frac{g \phi^4}{4!} + \frac{(\nabla \phi)^2}{2}]}e^{\int \ud^d r h(r)\phi(r)} $$
+
+\subsection{Ordre 0 }
+
+$$Z^0 = e^{-H[\hat{\phi}]}$$ où $\hat{\phi}$ est la configuration la plus probable.
+
+$$\left( \derp{}{H}{\phi(r)}\right)_{\hat{\phi}} = 0 $$
+
+$$m(r) = \hat{\phi}(r)$$
+
+$$ \Gamma^0(m) = \Gamma_{Landau}(m)$$
+
+\subsection{Ordre 1}
+
+Que vaut le potentiel thermodynamique à l'ordre 1 ? Quelle est l'indluence des dlucetuations de $\hat{\phi}$ sur les observables physiques ?
+
+Remarque : le calcul de $\Gamma^1(m)$ servira à évaluer quantitativement l'effet des fluctuations, et dans le cadre du RG. 
+
+On introduit : 
+\begin{align}
+	\psi & \equiv \phi - \hat{\phi} \\
+	H[\phi] &= H[\hat{\phi}] + \int \ud^d r \left( \derp{}{H}{\phi(\vec{r})}\right)_{\hat{\phi}} \psi(\vec{r}) \\
+	& + \frac{1}{2} \int \ud^d r \ud^d s \psi(\vec{r}) \left( \derp{2}{H}{\phi(\vec{r}) \phi(\vec{s})} \right)_{\hat{\phi}} \psi(\vec{s}) + O(\psi^3) \\
+	K &= \frac{\partial^2 A}{\partial \phi(\vec{r})\partial \phi(\vec{s})} \\
+	\derp{}{A}{\phi(\vec{r})} = r \phi(\vec{r}) + \frac{1}{3!} g \pshi^3(\vec{r}) \\
+\end{align}
+
+Puis 
+\begin{align}
+	\frac{\partial^2 A}{\partial \phi(\vec{r})\partial \phi(\vec{s})} = r \delta(\vec{r}-\vec{s}) + \frac{1}{2} g \phi^2(\vec{r})\delta(\vec{r}-\vec{s}) - \nabla^2 \delta(\vec{r}-\vec{s})\\
+	K(\vec{r},\vec{s}) &= (r + \frac{1}{2}g \hat{\phi}^2(\vec{r})- \nabla^2)\delta(\vec{r} - \vec{s}) \\
+	Z^1 &= \int \mathcal{D}[\phi] e^{- H (\hat{\phi})+ \frac{1}{2}\int \ud^d r \ud^d s \psi(\vec{r} K(\vec{r}\vec{s}) \psi(\vec{s}))}\\
+	&= Z^0 \int \mathcal{D}[\psi] e^{-\frac{1}{2}\int \ud^d r \ud^d s \psi H \psi}
+\end{align}
+
+
+Rappel : intégrales gaussiennes : 
+
+A 1 variable : 
+\begin{align}
+	I(a,b) = \int \ud x e^{- \frac{ax^2}{2}+ bx}\\
+&= e^{\frac{b^2}{a}}\int \ud y e^{\frac{-ay^2}{2}} \\
+&= e^{\frac{b^2}{2a}}\sqrt{\frac{2\pi}{a}}\\
+y &= x - \frac{b}{a}\\
+\end{align}
+
+Pour n variables : 
+
+\begin{align}
+	I(a,b) = \int_{\mathbf{R}^n} \ud x_1 \dots \ud x_n e^{\frac{-1}{2}\sum_{i,j} x_i A_{ij}x_j + \sum_i b_i x_i} \\
+	&= \int_{x \in \mathbf{R}^n} \ud x e^{- \frac{1}{2} ^tx A x + ^t b x } 
+\end{align}
+
+A symétrique, définie positive. Calcule en trois étapes : recentrage (ou on élimine le terme de source b)
+\begin{align}
+	y &= x - A^{-1}b\\
+	I(A,b) &= e^{\frac{1}{2} ^t b A^{-1}b}I(A,0)\\
+\end{align}
+
+Deuxième étape : calcul de $I(A,0)$ 
+On diagonalise $A$, et on fait le changement de vaiable associé.
+
+\begin{align}
+	I(A,0)&= \int \ud  z e^{- \frac{1}{2} ^t z D z }\\
+	&= \int \ud z_1 \dots \ud z_n e^{\frac{-1}{2} \sum_n \lam_i z_i^2}
+\end{align}
+Avec $D$ la matrice diagonale de $A$. 
+
+Troisième étape : Utilisation du résultat obtenu pour 1 variable. 
+
+$$I(A,0) = \prod_i \sqrt{\frac{2\pi}{\lam_i}} = \frac{(2\pi)^{n/2}}{(det A)^{1/2}}$$
+
+On obtient donc : 
+$$I(A,b) = \frac{(2 \pi)^{n/2}}{(det A)^{1/2}} e^{\frac{1}{2} ^t b A^{-1}b}$$
+
+Cas fonctionnel : 
+\begin{align}
+	\int \mathcal{D}[\phi] e^{\frac{-1}{2}\int \ud^d r \ud^d s \phi(\vec{r}) K(\vec{r},\vec{s})\phi(\vec{s})} e^{\int \ud^d r \phi(\vec{r}) h(\vec{r})} \\
+	&= \frac{C}{\sqrt{det K}} e^{\frac{1}{2}\int \ud^d r \ud^d s h(\vec{r}) K^{-1} h(\vec{s})} \\
+	K^{-1} &= \int \ud^d r'' K^{-1}(\vec{r}\vec{r'})K(\vec{r''}\vec{r'}) = \delta(\vec{r}-\vec{r'}) \\
+	Z^1 &= Z^0 \int \mathcal{D}[\psi(\vec{r})]e^{- \frac{1}{2} \int \ud^d r \ud^d s \psi()\vec{r} K \psi(\vec{s})}\\
+\end{align}
+
+Remarque : 
+\begin{align}
+	(^t x A x) &= (^t x A x)^t = ^t x ^t A x = ^t x (\frac{A + ^t A}{2}) x \\
+\end{align}
+
+$$ Z^1 = Z^0 \frac{C}{\sqrt{\txt{det}K}}$$
+
+Calcul de $\txt{det}K$ : 
+
+On suppose désormais que $h$ est uniforme. On a fonc $\hat{\phi}(\vec{r}) = \hat{\phi}$ uniforme. 
+$$K = (r + \frac{1}{2} g \hat{\phi}^2 - \nabla^2) \delta(\vec{r}-\vec{s})$$
+invariant par translation. 
+
+On considère que le système est dans une boîte de volume $V=L^d$, et on impose des conditions aux limites périodiques. 
+
+On considère les fonctions $$u_{\vec{q}}(\vec{r}) = \frac{1}{\sqrt{V}}e^{i \vec{q}\vec{r}}$$
+
+Les fonctions sont périodiques si $$u_{\vec{q}})(\vec{r}+ L \vec{u_i}) = u_{\vec{q}}(\vec{r}) $$
+donc si $$\forall i \qquad q_i = n_i \frac{2 \pi}{L}$$ 
+
+Elles sont fonctions propres de $K$, en effet : 
+\begin{align}
+	 \int \ud^d s K u_{\vec{q}}(\vec{s}) &= \int \ud^d s (r + \frac{g \hat{\phi}^2}{2}-\nabla^2)\delta(\vec{r}-\vec{s})u_{\vec{q}}(\vec{s}) \\
+	 &= \int \ud^d s \delta(\vec{r}-\vec{s}) (r + \frac{g \hat{\phi^2}}{2} - \nabla^2)\frac{1}{\sqrt{V}}e^{i \vec{q}\vec{s}}\\
+	 &= \int \ud^d s \delta(\vec{r}-\vec{s})(r + \frac{g \hat{\phi^2}}{2} - q^2)\frac{1}{\sqrt{V}}e^{i \vec{q}\vec{s}}\\
+	 &= (\frac{1}{\sqrt{V}}e^{i \vec{q}\vec{s}})(r + \frac{g \hat{\phi^2}}{2} - q^2) \\
+	 K u_{\vec{q}} &= (r + \frac{g \hat{\phi^2}}{2} - q^2)u_{\vec{q}}\\
+	 Z^1 = Z^0 \frac{C}{\sqrt{\txt{det}K}} \\
+	 \txt{det}K &= \prod_{\vec{q} \quad q_i = \frac{n_i 2 \pi}{L}} (r + \frac{g \hat{\phi^2}}{2} - q^2) 
+\end{align}
+
+\'Energie libre : 
+$$F^1 = - \ln Z^1 = - \ln Z^0 + \frac{1}{2} \ln(\txt{det}K)$$
+
+Densité d'énergie libre : 
+$$f^1(h) = \frac{F^1}{V} = f^0(h) + \underbrace{\frac{1}{2 V}\ln (\txt{det}K)}_{\Delta f(h)}$$
+
+Soit $m$ fixée : 
+Soient $h^0$ et $h^1$ les solutions implicites : 
+\begin{align}
+	m &= - \left( \derp{}{f^0}{h} \right)_{h=h^0} \\
+	&= - \left( \derp{}{f^1}{h} \right)_{h=h^1}\\
+	\gamma^1(m) &= f^1(h^1) + m h^1 \\
+	&= f^0(h^1) + \Delta f(h^1) + m h^1
+\end{align}
+
+On néglige les termes d'ordre 2 dans cette expression : 
+\begin{align}
+	\gamma^1(m) &= f^0(h^0) + (h^1-h^0) (\derp{}{f^0}{h})_{h^0} + \dots \\
+	&+ \Delta f(h^0) + \dots 
+	&+ m h^1 \\
+	(\derp{}{f^0}{h})_{h^0} &= -m \\
+	\gamma^1(m) &= f^0(h^0) + m h^0 + \Delta f(h^0) \\
+	&= \gamma^0(h^0) + Delta f(h^0)\\
+	\Delta f(h^0) = \frac{1}{2V} \ln (\prod_{\vec{q}})(r + \frac{gm^2}{2}+ q^2 ) \\
+	&= \frac{1}{2V} \sum_{\vec{q}} \ln(r + \frac{1}{2}g m^2+ q^2)
+\end{align}
+
+On considère la limite de grand volume $L \rightarrow \infty$. 
+
+\begin{align}
+	\ud n_i &= \frac{L}{2 \pi} \ud q_i \\
+	\Delta f(h^0) \approx_{L \rightarrow \infty} \frac{1}{2L^d}(\frac{L}{2 \pi})^d \int \ud^d q \ln (r + \frac{gm^2}{2}+ q^2 ) \\
+	\gamma^1(m) &= \frac{1}{2} rm^2 + \frac{1}{4!} gm^4 + \frac{1}{2} \int \frac{\ud^d q}{(2 \pi)^d} \ln (r + \frac{gm^2}{2}+ q^2 )\\
+\end{align}
+
+Le calcul fait ici d'un champ $\phi$ à une dimension, en TD, on fera le calcul analogue si $\phi$ a $n$ dimensions. 
+
+\subsection{Conséquences physiques}
+
+On va regarder l'influence des fluctuations sur la susceptibilité en champ nul pour $T>T_C$. 
+
+Rappel : $$\chi^{-1} = \derp{}{h}{m}(m=0) = \derp{2}{\gamma}{m}(m=0)$$
+
+Ordre 0 : 
+\begin{align}
+	\chi^{-1}(T) = \derp{2}{\gamma^0}{m}(m=0) = r \approx a_0(T-T_0) \\
+\end{align}
+
+$T_C$ est définie par $\chi^{-1}(T_C) = 0$
+
+$$T_C = T_0 \qquad \gamma = 1 $$
+
+Ordre 1 : 
+\begin{align}
+	 \chi^{-1}(T)^1 &= \derp{2}{\gamma^1}{m}(m=0) \\
+	&= r(T) + \frac{1}{2} \int \frac{\ud^d q}{(2 \pi)^2}(\derp{2}{}{m}\ln (r + \frac{gm^2}{2}+ q^2 )) \\
+	&= r(T) + \frac{1}{2} \int \frac{\ud^d q}{(2 \pi)^2}g(\derp{}{}{m}\ln \frac{m}{(r + \frac{gm^2}{2}+ q^2 )}) \\
+	&=r(T) + \frac{1}{2} \int \frac{\ud^d q}{(2 \pi)^2}g \frac{1}{r+ q^2}\\
+	\chi^{-1}(T)^1 &= r(T) + \frac{g}{2} \int \frac{\ud^d q}{(2\pi)^d} \frac{1}{r(T) + q^2} 
+\end{align}
+
+Peut être vu comme un développement en puissances de $g$, en s'arrêtant à la puissance 2 en $g$. 
+
+Première conséquence : 
+$$\chi^{-1}(T) = 0 \quad \Leftrightarrow \quad a_0(T-0-T_C) \approx \frac{g}{2} \int \frac{\ud^d q}{(2 \pi)^d} \frac{1}{q^2} $$
+
+On trouve donc que $T_C$ est abaissée par les fluctuations : des états qui apparaissaient ordonnés avec le champ moyen peuvent être destabilisés par les fluctuations. 
+
+Deuxième conséquence : 
+$$\chi^{-1}(T) = r(T) - r(T_C) + \frac{g}{2} \int \frac{ \ud^d q}{(2 \pi)^d} (\frac{1}{r(T) + q^2} - \frac{1}{r(T_C) + q^2}) + O(g^2) $$
+
+Estimons : 
+\begin{align}
+	(\frac{1}{r(T) + q^2} - \frac{1}{r(T_C) + q^2}) &\\
+	t &= r(T) - r(T_C) \\
+	(\frac{1}{r(T) + q^2} - \frac{1}{r(T_C) + q^2}) &= \frac{-t}{(t + q^2 + r(T_C))(r(T_C) + q^2)} \\
+	r(T_C) &= O(g) \\
+	(\frac{1}{r(T) + q^2} - \frac{1}{r(T_C) + q^2}) &= - \frac{t}{(t + q^2)q^2} + O(g) \\
+	\chi^{-1}(T) &= t(1 - \frac{g}{2} \int \frac{\ud^d q}{(2 \pi)^d} \frac{1}{(t+q^2)q^2}) \\
+\end{align}
+
+Regardons la limite $t \rightarrow 0 $ : deux choses peuvent se produire. Soit l'intégrale converge, et l'exposant $\gamma$ n'est pas modifié par les fluctuations. Soit l'intégrale diverge, et le terme correctif explose, et la théorie des perturbation n'a pas de sens. 
+
+Rappel : Les intégrales de Fourier en $q$ ont un cut-off supérieur de $\frac{1}{a}$. 
+$$I(t) = \frac{\Omega_d}{(2\pi)^d}\int_0^{\Lambda} \ud q \frac{q^{d-1}}{(t+q^2)q^2} $$ Donc en $t=0$, 
+$$I(0) = \frac{\Omega_d}{(2\pi)^d}\int_0^{\Lambda} \ud q \frac{1}{q^{5-d}} $$
+et donc l'intégrale converge si $d>4$. 
+
+Les fluctuations déplacent la valeur de la température critique, modifient le préfacteur de $\chi^{-1}$ mais ne modifient pas l'exposant critique. 
+
+La dimension à partir de laquelle les exposants critiques sont dominés par le champ moyen s'appelle la dimension critique supérieure. 
+
+Si $d<4$, on a un terme correctif qui explose, la théorie de champ moyen n'a pas de sens, et on attend un exposant différent de celui de la théorie de Landau. 
+
+Retrouvons ce résultat de manière plus qualitative. 
+
+Considérons la variable $$M =  \int_V \ud^dx \phi(x)$$
+où $V$ est le volume de taille typique $\xi^d$
+
+\'Evaluons le paramètre $\frac{\moy{M^2} - \moy{M}^2}{\moy{M}^2}$ 
+
+\begin{align}
+	\moy{M^2} - \moy{M}^2 &= \int_{V^2} \ud^d x \ud^d y [ moy{\phi(x)\phi(y)} - \moy{\phi(x)}\moy{\phi(y)}] \\
+	G_C(x,y) &= moy{\phi(x)\phi(y)} - \moy{\phi(x)}\moy{\phi(y)}\\
+\end{align}
+
+Rappel : dans le cadre de la théorie de Landa, on avait trouvé : 
+\begin{align}
+	G_C(\vec{r}) \propto \int \frac{e^{-i \vec{q}\vec{r}}}{\xi^{-2} + q^2} \ud^d q \\
+	&= \xi^2 \int \frac{e^{-i \vec{q}\vec{r}}}{1 + q^2\xi^2} \ud^d q \\
+	&= \frac{\xi^2}{\xi^d} F(\frac{\Omega}{\xi})\\
+	&= V \int_V \ud^d r G_C(r) \\
+	&= V \xi^{2-d}\xi^d \approx \xi^2 V \\
+	\moy{M}^2 &= V^2 (\sqrt{T-T_C})^2\\
+	\frac{\moy{M^2} - \moy{M}^2}{\moy{M}^2} &= \frac{\xi^{2-d}}{T-T_C} \\
+	&= (T-T_C)^{-\frac{1}{2}(2-d)-1}\\
+	&= (T-T_C)^{\frac{d-4}{2}}\\
+\end{align}
+
+On retrouve qualitativement le critère précédent.
+
+Examinons la divergence de l'intégrale quand $t \rightarrow 0$ pour $d<4$. 
+$$I(t) = \int \frac{\ud^dq}{(2\p)^d} \frac{1}{(t+q^2)q^2}$$
+
+Remarque : l'intégrale existe si $d>2$
+
+\begin{align}
+	I(t) &= \frac{\Omega_d}{t}\frac{1}{(2\pi)^d} \int_0^{\Lambda} \ud q \frac{q^{d-1}}{1+ (\frac{q}{\sqrt{t}})^2}q^2\\
+	k &= \frac{q}{\sqrt{t}}\\
+	I(t) &= \frac{\Omega_d (\sqrt{t})^{d-2}}{(2\pi)^2} \int_0^{\frac{\Lambda}{\sqrt{t}}} \ud k \frac{1}{k^{3-d}(1+k^2)}\\
+	&= \frac{\Omega_d}{(2\pi)^d}t^{\frac{d-2}{2}-1}\int_0^{\infty} \ud k \frac{1}{k^{3-d}(1+k^2)} \\
+	\chi^{-1}(t) &= t(1 - \lam t^{\frac{d-4}{2}})\\
+\end{align}
+
+Le domaine correspondant à $$\frac{\lam}{t^{\frac{4-d}{2}}} \ll 1 $$ correpond à un domaine de validité de la théorie de Landau. 
+
+Important en pratique : pour les supraconducteurs, on n'observe pas expérimentalement le domaine de non validité de Landau. 
+
+\subsection{Gaz sur un réseau}
+
+On considère un fluide avec un potentiel d'interaction $V$ tel que $V(r \rightarrow 0) \rightarrow + \infty$, $V(r \rightarrow \infty) \rightarrow 0$ et un minimum $V(\sigma) = - \epsilon <0$. 
+
+On fait un modèle très schématique : on discrétise le volume en cellules de taille typique $\sigma$. On tient compte de la partie répulsice du potentiel en imposant qu'une cellule est occupée par au plus une particule. On introduit $n_i$ le nombre d'occupation du site $i$, $n_i$ valant 0 si le site est vide, 1 s'il est occupé. On tient compte également de la partie attractive, en prenant l'énergie suivante : 
+$$E(\mathcal{C}) = -\epsilon \sum_{\moy{i,j}} n_i n_j$$
+
+Comme on ne fixe pas le nombre de particules, on se place dans l'ensemble Grand Canonique. 
+
+Grande fonction de partition : 
+$$ \Theta = \sum_{n_1\dots n_N}e^{\beta \mu \sum_i n_i + \beta \epsilon \sum_{i,j} n_i n_j}$$
+
+\begin{align}
+	\sigma_i = 2 (n_i - \frac{1}{2}) = 2 n_i -1 \\
+	n_i &= \frac{1 + \sigma_i}{2}\\
+	\Theta &= \sum_{\sigma_1 \dots \sigma_N} e^{\beta \mu \sum_i \frac{1+\sigma_i}{2}} e^{\beta \epsilon \sum_{i,j}\frac{(1+\sigma_i)(1+\sigma_j)}{4}}\\
+	Z &= \sum_{\sigma_i}e^{\beta J \sum_{i,j} \sigma_i \sigma_j}e^{\beta h \sum_i \sigma_i}\\
+	J &= \frac{\epsilon}{4}\\
+	\beta h &= \frac{\beta \mu}{2} + \frac{\beta \epsilon}{4} 2q \\
+\end{align}
+avec $q$ le nombre de plus proches voisins sur le réseau. 
+
+Correspondance entre la grande fontion de partition du gaz sur réseau et la fonction de partition du modèle d'Ising en champ magnétique. 
+
+Exemple : On veut reproduire les étapes faites dans le cas d'un champ scalaire $\phi$, dans le cas d'un champ vectoriel $\vec{\phi}$ à $n$ compostantes, associé : 
+\Large $$Z &= \int \mathcal{D}[\vec{\phi}]e^{- \int \ud^d r [\frac{1}{2} r \vec{\phi}^2 + \frac{1}{4!}g (\vec{\phi}^2)^2 + \frac{1}{2} \sum_i (\nabla \phi_i)^2]} e^{\int \ud^d r \vec{h}(\vec{r})\vec{\phi}(\vec{r})} $$ \normalsize
+
+On cherche à calculer $\gamma^1(m)$. 
+
+\begin{align}
+	H[\vec{\phi}] &= H[\hat{\phi}] + \frac{1}{2} \sum_{\alpha,\beta} \int \ud^d r \ud^d s \psi_{\alpha}(\vec{r}) \frac{\partial^2 H}{\partial \phi_{\alpha}(\vec{r})\partial \phi_{\beta}(\vec{s})}_{\vec{\phi}=\vec{\hat{\phi}}} \psi_{\beta}(\vec{s}) + O(\psi^3) \\
+	K_{\alpha,\beta}(\vec{r},\vec{s}) &= \frac{\partial^2 H}{\partial \phi_{\alpha}(\vec{r})\partial \phi_{\beta}(\vec{s})}_{\vec{\phi}=\vec{\hat{\phi}}} \\
+	\derp{}{A}{\phi_{\alpha}(\vec{r})} &= r \phi_{\alpha}(\vec{r}) + \frac{g}{3!}\vec{\phi}(\vec{r})^2 \phi_{\alpha}(\vec{r}) - \nabla^2 \phi_{\alpha}(\vec{r}) \\
+	\frac{\partial^2 A}{\partial \phi_{\alpha}(\vec{r})\partial \phi_{\beta}(\vec{s})} &= r \delta_{\alpha \beta} \delta (\vec{r}-\vec{s}) \\ &+ \frac{g}{3!} \delta_{\alpha \beta} \delta(\vec{r}-\vec{s}) (\vec{\phi}(\vec{r}))^2 \\ &+ \frac{g}{3!} \phi_{\alpha}(\vec{r}) 2 \phi_{\beta}(\vec{r}) \delta(\vec{r}-\vec{s}) \\ & - \nabla^2 \delta_{\alpha \beta} \delta(\vec{r}-\vec{s})\\
+	K_{\alpha \beta} (\vec{r}\vec{s}) &= \delta_{\alpha \beta} (r + \frac{g}{3!}\hat{\phi}^2(\vec{r}) - \nabla^2)\delta(\vec{r}-\vec{s}) + \frac{g}{3}\phi_{\alpha}(\vec{r}) \phi_{\beta}(\vec{r}) \delta (\vec{r}-\vec{s}) \\
+\end{align}
+
+On considère un champ $\vec{h}$ uniforme : $\hat{\vec{\phi}}$ est uniforme. Notons : $\hat{\vec{\phi}} = \hat{\phi} \vec{e}$. 
+
+On peut introduire les projecteurs : 
+\begin{align}
+	P_{\alpha, \beta}^L &= e_{\alpha}e_{\beta}\\
+	P_{\alpha, \beta}^T &= \delta_{\alpha,\beta} - e_{\alpha}e_{\beta} \\
+	K_{\alpha \beta} &= (\delta_{\alpha \beta} - e_{\alpha}e_{\beta})(r + \frac{g}{3!}\hat{\phi}^2 - \nabla^2)\delta(\vec{r}-\vec{s}) \\
+	& + e_{\alpha}e_{ \beta}(r + \frac{g}{3!}\hat{\phi}^2 - \nabla^2 + \frac{g}{3}\hat{\phi}^2)\delta(\vec{r}-\vec{s}) \\
+	&= P_{\alpha \beta}^L K_L(\vec{r},\vec{s}) + P_{\alpha \beta}^T K_T(\vec{r}\vec{s}) \\
+	K_L &= (r + \frac{g}{2}\hat{\phi}^2 - \nabla^2)\delta(\vec{r}-\vec{\vec{s}})\\
+	K_T &= (r + \frac{g}{3!}\hat{\phi}^2 - \nabla^2)\delta(\vec{r}-\vec{s})\\
+	Z &= Z^0 \int \mathcal{D}[\vec{\psi}] e^{- \frac{1}{2} \sum_{\alpha,\beta} \int \ud^d r \ud^d s \left[ \psi_{\alpha}P_{\alpha,\beta}^L K_L \psi_{\beta}(\vec{s}) \right + \psi_{\alpha}(\vec{r})P_{\alpha,\beta}^T K_T \psi_{\beta}(\vec{s})\right]} \\
+	&= Z^0 \int \mathcal{D}[\psi_L]\mathcal{D}[\psi_T]e^{- \frac{1}{2} \int \ud^d r \ud^d s \left[ \psi_L(\vec{r})K_L \psi_{\beta}(\vec{s})\right]} e^{\frac{-1}{2} \int \ud^d r \ud^d s \sum_i \psi_{T,i}(\vec{r}) K_T \psi_{T,i}(\vec{s})}\\
+	Z^1 &= Z^0 \frac{C}{\sqrt{\txt{det}K_L}} \left( \frac{C}{\sqrt{\txt{det}K_T}} \right)^{n-1} \\
+	F^1 &= F^0 + \frac{1}{2} \ln \txt{det} K_L + \frac{n-1}{2} \ln \txt{det} K_T \\
+	\gamma^1(\vec{m}) &= \gamma^0(\vec{m}) + \frac{1}{2} \int \frac{\ud^d q}{(2 \pi)^d} \ln (r + \frac{1}{2}gm^2 + q^2) + \frac{n-1}{2}\int \frac{\ud^d q}{(2 \pi)^d} \ln (r + \frac{1}{2} \frac{g}{3} m^2 + q^2)\\
+\end{align}
+
+\section{Introduction aux groupes de renormalisation}
+
+
+\subsection{Bloc de spins de Kadanoff}
+
+Première apparition de constantes de couplage variant avec l'échelle (due à Kadanoff, 1967). Méthode trop simple pour permettre des calculs explicites. Susceptible de généralisations : impotant d'avoir cette image en tête. 
+
+On considère un modèle d'Ising, avec interactions entre plus proches coisins, sur un réseau carré de pas $a$, de hamiltonien : 
+$$ - \frac{H}{kT} = J \sum_{i,j} \sigma_i \sigma_j $$
+
+Remarque : on a incorporé la température dans la définition de J. 
+
+Idée : au voisinage de $T_C$, $\zeta \rightarrow \infty$. En conséquence, les fluctuations de courtes longueurs d'ondes sont très peu probables. Vu de loin, les spins compris dans la région d'extension très petite devant $\zeta$ agissent comme un super spin, c'est-à-dire comme un spin unique. 
+Groupons les spins, ici par 4, en "blocs de spins". Première question : quelle valeur donner à ces super spins ? Une façon de faire : 
+
+$$\sigma_b = \frac{1}{4} (\sum_{i=1}^4 \sigma_i)$$
+prennent les valeurs +1, \frac{1}{2}, 0 \frac{-1}{2}, -1. 
+
+Première approximation : On néglige les configurations pour lesquelles les 4 spins d'un même bloc ne sont pas dans le même état. Donc sur les 16 configurations possibles, on n'en retient que 2. $\sigma_b$ ne prend alors que les valeurs 1 et -1. 
+
+Deuxième approximation (très forte) : On suppose que les nouveaux spins n'interagissent qu'entre plus proches voisins. 
+
+Finalement : On est parti d'un système $S$ : Un modèle d'Ising ave interactions entre plus proches voisins $J$ sur un réseau de pas $a$. On lui a associé un nouveau système $S'$ : un modèle d'Ising avec interactions entre plus proches voisins $J'=f(J)$ (que nous ne cherchons pas à connaître pour l'instant) sur un réseau carré de pas $2a$. 
+
+On cherche à comparer ces 2 modèles : on va mesurer les ongueurs en nombre de pas du réseau considéré : 
+$$r_{AB} = r_{\phi} a = r_{\phi'}(2a) \qquad r_{\phi'} = \frac{1}{2} r_{\phi}$$
+
+En particulier, pour la longueur de corrélation : $$\xi(J') = \frac{1}{2} \xi(J)$$ où les $\xi$ sont modulées en nombre de pas du réseau correspondant. 
+
+Deux conséquences : Si $J \neq J_C$, alors $$ \xi(J') = \frac{1}{2} \xi(J) < \xi(J)$$
+
+$S'$ est donc plus éloingé de la criticalité de $S$. 
+
+Si $J=J_C$, $$\xi(J_C) = \infty$$ $$\xi(J_C') = \frac{1}{2} \xi(J_C) = \infty$$ donc $J'_C$ est en fait égal à $J_C$, ou encore : $J_C$ est un point fixe de $f$. 
+
+Examinons le voisinage de $J=J_C$. Soit $J$ voisin de $J_C$. Soit $J' - f(J)$ associé :
+
+$$J' = f(J) = f(J_C) + (J-J_C) f'(J_C) + o(J-J_C)$$
+donc $$J'-J_C \approx (J-J_C)f'(J_C)$$
+
+Rappel : 
+\begin{align}
+	\xi(T) &\approx_{T \rightarrow T_C} A (T-T_C)^{- \nu}\\
+	T-T_C &= \frac{\tilde{J}}{k}\left( \frac{1}{J} - \frac{1}{J_C} \right) = \frac{\tilde{J}}{k}\frac{J_C-J}{JJ_C} \approx_{J_C} \frac{\tilde{J}}{k} \frac{J_C - J}{J_C^2} \\
+	\xi(J) &\approx_{J \rightarrow J_C} B (J_C - J)^{- \nu} \\
+	\xi(J') &= \frac{1}{2} \xi(J) \\
+	B(J_C - J')^{- \nu} &= \frac{1}{2}B (J_C - J)^{-\nu} \\
+	f'(J_C)^{-\nu} &= \frac{1}{2} = e^{- \nu \ln (f'(J_C))}\\
+	- \nu \ln f'(J_C) &= - \ln 2 \\
+	\nu &= \frac{\ln2}{\ln(f'(J_C))} \\
+\end{align}
+
+Le modèle présenté ici n'est pas satisfaisant (cf le calcul de $J' = f(J)$ à venir) mais les conclusions obtenues sont en fait générales. 
+
+Les constantes de couplage qui se transforment dans un changement d'échelle qui réduit le nombre de degrés de liberté(ici, on passe de $N$ à $\frac{N}{4}$. 
+
+Point critique = point fix de la tranformation $f$ qui relie les constantes de couplage. 
+
+Calcul des exposants critiques à l'aide de l'application $f$ linéarisée au voisinage du point fixe. 
+
+Retour à l'évaluation de $f$ : 
+Système $S$ : 2 J $\neq$ d'énergies entre deux spins identiques et deux spins différents. 
+Système $S'$ : 2J' $\neq$ d'énergies entre : \\
+\fbox{$$\begin{array}{cc}
+	\uparrow & \uparrow \\
+	\uparrow & \uparrow
+\end{array}$$}  \fbox{ $$ \begin{array}{cc}
+	\uparrow & \uparrow \\
+	\uparrow & \uparrow
+\end{array}$$} et 
+\fbox{$$\begin{array}{cc}
+	\uparrow & \uparrow \\
+	\uparrow & \uparrow
+\end{array}$$}  \fbox{ $$\begin{array}{cc}
+	\downarrow & \downarrow \\
+	\downarrow & \downarrow
+\end{array}$$}
+ = 2(2J) 
+ 
+ $$2J' = 4J$$
+ 
+ Pas de point fixe non trivial, alors qu'on sait qu'en dimension 2, le modèle d'Ising a une transition de phace à température non nulle. La méthode n'est pas satisfaisante. 
+
+\subsection{Décimation du modèle d'Ising 1D}
+
+Modèle un peu trop simple, car on sait qu'il n'y a pas de $T_C \neq 0$ mais instructif. 
+
+On suppose $N$ pair, et on regroupe les spins par 2. Le nouveau spin a la valeur de pin de gauche de la boîte, on élimine donc tous les pins de numéro impair. 
+
+\begin{align}
+	Z_N &= \sum_{tous les spins = \pm 1} e^{J \sum_i \sigma_i \sigme_{i+1}}\\
+	&= \sum_{spins pairs = \pm 1} \sum_{spins impairs = \pm 1} e^{J \sigma_1 (\sigma_0 + \sigma_2)}e^{J \sigma_3 (\sigma_2 + \sigma_4)} \dots e^{J \sigma_{N-1}(\sigma_{N-2} + \sigma_{N})}\\
+\end{align}
+
+Peut-on écrire : 
+$$ \sum_{\sigma_1 = \pm 1} e^{J \sigma_1(\sigma_0 + \sigma_2)} = A e^{J' \sigma_0 \sigma_2}$$
+
+\begin{align}
+	 \sum_{\sigma_1 &= \pm 1} e^{J \sigma_1(\sigma_0 + \sigma_2)} = 2 \cosh(J(\sigma_0+ \sigma_2))\\
+	 \txt{ si } \sigma_0 &= \sigma_2 & \quad 2 \cosh(2J) = A e^{J'} \\
+	 \txt{ si } \sigma_0 &= - \sigma_2 & \quad 2 = A e^{-J'} \\
+	 A^2 &= 4 \cosh(2J) \\
+	 e^{2J'} &= \cosh(2J) \\
+	 Z_N &= \sum_{tous les spins = \pm 1} A^{N/2} e^{J' \sigma_0 \sigma_2}\dots e^{J' \sigma_{N-1}\sigma_{N}}\\
+	 &= A_{N/2} Z_{\frac{N}{2}}(J')\\
+\end{align}
+
+Remarque 1 : rappel : $$\xi(J) = - \frac{1}{\ln \tanh J} $$
+\begin{align}
+		\tanh(J') &= \frac{\cosh(2J)-1}{\cosh(2J) + 1}\\
+		&= \frac{2 \sinh^2 J}{2 \cosh^2 J} = \tanh^2 J \\
+		\xi(J') &= \frac{-1}{\ln \tanh^2 J} = \frac{-1}{2 \ln \tanh J} = \frac{\xi(J)}{2}
+\end{align}
+
+Remarque 2 : énergie libre par site : 
+$$- \ln Z_N(J) = - \ln Z_{N/2}(J') - \frac{N}{2} \ln A $$
+
+$$f_N(J) = \frac{1}{2} f_{N/2}(J') - \frac{1}{2} \ln A $$
+
+Pasage à la limite thermodynamique : 
+$$ f(J) = \frac{1}{2}f(J') - \frac{1}{2}\ln A$$
+
+Pour la partie singulière : 
+$$f_S (J) = \frac{1}{2} f_s(J')$$
+
+Remarque 3 : ce $f$ est l'énergie libre par site, et n'a pas de rapport avec la fonction $f$ précédente. A propos de cette dernière fonction $f$ : 
+$$J' = f(J)$$ donc $$J' = \frac{1}{2}\ln(\cosh 2J) = f(J)$$ quand $J \rightarrow 0$ 
+\begin{align}
+	f(J) &= \frac{1}{2} \ln (1 + \frac{1}{2} (2J^2) + o(J^2)) \\
+	& \approx_{J \rightarrow 0} \frac{1}{2} \frac{1}{2} (2J)^2 = J^2 \\
+\end{align}
+ Quand $J \rightarrow \infty$ : 
+ 
+\begin{align}
+	 f(J) &= \frac{1}{2} \ln \frac{1}{2}( e^{2J} + e^{-2J}) \\
+	 &= \frac{1}{2} \ln (\frac{e^{2J}}{2}) + \ln (1 + o(1))\\
+	 &= J - \frac{1}{2} \ln 2 + o(1) \\
+\end{align}
+
+Pas de point non trivial : normal car Ising 1D n'a pas de température critique non nulle. Par itération de cette transformation, on tend vers le point fixe trivial $J=0$, donc le point fixe désordonné. On trouve le fait que pour toute température non nulle, le modèle d'Ising 1D est dans sa phase désordonnée. 
+
+\subsection{Décimation pour Ising 2D }
+
+Essayons de faire la même chose pour Ising 2D sur réseau carré de pas $a$, avec interaction entre plus proches voisins. 
+
+On dame le réseau, et on supprime les sites d'une couleur. On obtient un nouveau réseau carré de pas $a \sqrt{2}$. On élimine le spin $\sigma_0$ entouré des spins $\sigma_1, \sigma_2, \sigma_3$ et $\sigma_4$. 
+
+Question : A-t-on ?: 
+$$\sum_{\sigma_0 = \pm 1} e^{J \sigma_0(\sum_{i=1}^4 \sigma_i)} = A e^{J' (\sigma_1\sigma_2 + \sigma_2 \sigma_3 + \sigma_3 \sigma_4 + \sigma_4 \sigma_1)}$$
+ Non ! 
+ 
+ En fait : 
+ 
+\begin{align}
+	\sum_{\sigma_0 = \pm 1} e{J\sigma_0(\sum_{i=1}^4 \sigma_i)} = A e^{J' (\sigma_1\sigma_2 + \sigma_2 \sigma_3 + \sigma_3 \sigma_4 + \sigma_4 \sigma_1)} e^{K'(\sigma_1 \sigma_3 + \sigma_2 \sigma_4)} e^{L' \prod_{i=1}^4 \sigma_i}
+\end{align}
+
+De manière générale, la décimation engendre de nouveaux couplages dans le hamiltonien. En pratique, on a besoin de tromper la structure du hamiltonien. 
+
+EN pratique, on a besoin de tromper la structure du hamiltonien. On a besoin d'introduire des approximationsdifficilement contrôlables. 
+
+Cas intéressant : développement en cumulations sur réseau triangulaire. 
+
+\subsection{Structure des équations du RG}
+
+Quelles sont les conséquences de l'existence de ces équations ? On zsuppose construite une transdormation qui change l'échelle de longueur : $a \rightarrow la \quad l>1$ avec du coup $\xi \rightarrow \frac{\xi}{l}$ 
+
+Par ailleur, les $p$ paramètres $J_{\alpha}(\alpha=1,\dots,p)$ retenus pour décrire le système sont changés : 
+$$J_{\alpha} \quad \rightarrow \quad J_{\alpha}' = f_{\alpha}(J_1 \dots J_p;l)$$
+
+On suppose l'existence d'un point fixe : 
+$$ \forall \alpha \qquad J_{\alpha}^* = f_{\alpha}(J_1^*,\dots,J_p^*) $$
+
+Le point critique est point fixe. 
+
+Linéarisons $f_{\alpha}$ au voisinage du point fixe $J^*$ : 
+\begin{align}
+	J'_{\alpha}&= f_{\alpha}(J_1 \dots j_p) \\
+	&= f_{\alpha}(J_1^* \dots J_p^*) + \sum_{\beta=1}^p (\derp{}{f_{\alpha}}{J_{\beta}})_{J^*}(J_{\beta} - J_{\beta}^*) + \dots \\
+	&= J_{\alpha}^* \sum_{\beta=1}^p M_{\alpha  \beta}(J_{\beta} - J_{\beta}^*) \\
+\end{align}
+
+Cherchons les conditions aux limites des constates de couplage qui se trandforment facilement : introduisons les vecteurs propres à gauche de $M$, les $x^i$ : 
+
+$$ \sum_{\alpha=1}^p x_{\alpha}^i M_{\alpha \beta} = \lam^i x_{\beta}^i$$
+
+Soit la condition aux limites : 
+\begin{align}
+	K'^i &= \sum_{\alpha=1}^p x_{\alpha}^i (J_{\alpha} - J_{\alpha}^*)\\
+	&= \sum_{\alpha} x_{\alpha}^i (J_{\alpha}' - J_{\alpha}^* )\\
+	&= \sum_{\alpha} x_{\alpha}^i \sum_{\beta} M_{\alpha \beta}(J_{\beta} - J_{\beta}^*)\\
+	&= \sum_{\beta}(J_{\beta} - J_{\beta}^*)\sum_{\alpha} x_{\alpha}^i M_{\alpha \beta} \\
+	&= \sum_{\beta}(J_{\beta} - J_{\beta}^*) \lam^i x_{\beta}^i \\
+	K'^i &= \lam^i K^i
+\end{align}
+
+Par ailleurs, il est équivalent de faire une dilatation globale de facteur $l_1l_2$ et 2 dilatations consécutives $l_1$ puis $l_2$. 
+
+Cela implique en fait que : 
+$$ \lam^i (l_1,l_2) &= \lam^i (l_1)\lam^i(l_2)$$
+de solutions : $$\lam^i(l) = l^{y_i}$$
+Finalement : $$K'^i = l^{y_i}K^i \qquad l>1$$
+conduit à introduire 3 types de constantes de couplage $K^i$ : 
+\begin{enumerate}
+	\item Si $y_i<0$ : L'itération réduit la variable $K^i$ considérée, et l'amène à 0. La physique à grande distance est indépendante de la valeur de ces constantes de couplages $K^i$, appelées couplages non-pertinents. 
+	
+	\item Si $y_i>0$ : l'itération augmente les $K^i$. En particulier, si es $K^i$ sont initialement non nuls, on ne peut pas attendre le point fixe par itération. Ces $K^i$ sont appelées constantes de couplages pertinentes. En pratique, il s'agit en fait des paramètres à régler pour être à la criticalité. Pour un système de type Ising, il y a 2 paramètres de ce type : la température critique et le champ magnétique. 
+	
+	\item $K^i$ est dite caraible marginale. L'analyse linéaire de permet pas de conclure. 
+\end{enumerate}
+
+On définit la \emph{surface critique} : C'est une surface dans l'espface des paramètres de couplage $J_1 \dots J_p$ . C'est la surface sur laquelle les variables pertinentes (et éventuellement marginales) (et leur prolongement au domane non-linéaire) s'annulent. L'itération de la transition sur la surface critique conduit au point fixe. 
+
+Que dire de la longueur de corrélation des systèmes représentés par un point de la surface critique ? 
+\begin{align}
+	\xi(\txt{pt critique}) &= \infty \\
+	\txt{Par itération} \xi' &= \frac{\xi}{l}\\
+\end{align}
+ Finalement : 
+ $$ \forall P \in \txt{Surface critique } \xi(P) = \infty$$
+
+Il ne faut pas confondre trajectoire physique, et trajectoire du RG. La trajectoire physique est la trajectoire obtenue dans l'espace des paramètres quand on varie la température. En particulier, la surface critique n'es tpas une isotherme. 
+
+La trajectoire du RG : issue de l'itération de la transformation du RG. Exemple : Ising 3D avec intéractions entre plus proches voisins : $J_1$, entre seconds plus proches voisins $J_2$ 
+
+2 conséquences importantes : La première, c'est qu'il fournit un cadre théorique pour rendre compte de l'universalité (indépendance de la vlaeur des exposants critiques par rapport aux détails microscopiques comme les constantes d'interactions entre second plus proches voisins, le type de réseau considéré \dots). 
+
+Soit un système proche de la criticalité. Décomposons ce point sur les combinaisons pertinentes et non pertinentes. Les itérations du RG vont nous rapprocher du point critique, on va passer très près de lui, puis s'en éloigner par les directions pertinentes. Ce point fixe détermine en fait les exposants critiques. Ces exposants critiques sont donc infépendants de la position initiale (mais qui doit être proche de la criticalité). Cela nous donne l'universalité. 
+
+La seconde conséquence est que ça fournit une justification aux lois d'échelles observées. On considère un système critique, pour lequel on a 2 variables pertinentes : t,h. Par itérations, toutes les variables non pertinentes vont à 0. $$\xi(t',h') = \frac{1}{l}\xi(t,h)$$
+Prenons $h=0$ : 
+\begin{align}
+	\xi(t') &= \frac{1}{l}\xi(t)\\
+	t' &= l^{y_t}t \\
+	\xi(l^{y_t}t) = \frac{1}{l} \xi(t)\\
+	\txt{on choisit $l$ tq } l^{y_t}=1 \\
+	l &= t^{-\frac{1}{y_t}}\\
+\end{align}
+On a donc : 
+
+\begin{align}
+	\xi(t) &= t^{- \frac{1}{y_t}} \xi(1) \\ 
+	\xi(t) & \approx t^{-\nu} \\
+	\nu &= \frac{1}{y_t}\\
+\end{align}
+
+Densité d'énergie libre : 
+\begin{align}
+	f_s(t',h') = l^d f_s(t,h) &= f_s(l^{y_t},l^{y_h}h) \\
+	\txt{Prenons $l$ tel que } l^{y_t} t &= 1 \\
+	l&= t^{- \frac{1}{y_t}} \\
+	f_s(t,h) &= t^{\frac{d}{y_t}} f_s(1,\frac{h}{t^{\frac{y_t}{y_h}}}) \\
+	&= t^{\frac{d}{y_t}} \phi(\frac{h}{t^{\frac{y_t}{y_h}}})\\
+\end{align}
+
+On peut alors déduire tous les exposants critiques à l'aide de $y_t$ et $y_h$. Calculons $\beta$ : $m \propto t^{\beta}$ 
+\begin{align}
+	m &= - (\derp{}{f}{h})(h=0) \\
+	& \approx t^{\frac{d}{y_t}} t^{\frac{-y_h}{y_t}}\phi'(0) \\
+	\beta &= \frac{d - y_h}{y_t}\\
+\end{align}
+
+\section{RG de la théorie $\phi^4$}
+
+$$Z = \int \mathcal{D}[\vec{\phi}]e^{- \int \ud^d r \left[ \frac{r_0 \phi^2}{2} + \frac{g_0 \phi^4}{4!} + \frac{1}{2}\sum_{i_1}^n (\vec{\nabla}\phi_i)^2 \right]} e^{\int \ud^d \vec{h}(r) \vec{\phi}(\vec{r})}$$
+$$ \gamma(m) = \frac{1}{2} r_0 m^2 + \frac{1}{4!} g_0 m^4 + \frac{1}{2} \int \frac{\ud^d q}{(2\pi)^d} \ln(r_0 + \frac{1}{2}g_0 m^2 + q^2) + \frac{n-1}{2}\int \frac{\ud^d q}{(2\pi)^d} \ln (r_0 + \frac{1}{2}(\frac{g_0}{3})m^2 + q^2 ) $$
+
+On va considérer un dilatation $a \rightarrow la = \frac{a}{\lam}$ avec $l>1 \quad \lam<1$. $\Lambda = \frac{1}{a}$. 
+
+Peut-on trouver de nouveaux paramètres $r_0(\lam)$ et $g_0(\lam)$  tels que la physique à grande distance ne soit pas modifiée ? 
+
+\subsection{Susceptibilité}
+
+$T>T_C$ $h=0$ 
+\begin{align}
+	r &= \chi^{-1} = \left( \derp{2}{\gamma}{m} \right) (m=0) \\
+	r &= r_0 + \frac{1}{2} \int \frac{\ud^d q}{(2 \pi)^d} \left( \derp{}{}{m_i}\left( \frac{g_0m}{r_0 + \frac{1}{2}g_0m^2 + q^2} \right) \right) (m=0) + \frac{n-1}{2} \int \frac{\ud^d q}{(2\pi)^d}\frac{g_0/3}{r_0+q^2} \\
+	&= r_0 + \frac{1}{2} \int \frac{\ud^d q}{(2 \pi)^d} \frac{g_0}{r_0 + q^2}  + \frac{n-1}{2} \int \frac{\ud^d q}{(2\pi)^d}\frac{g_0/3}{r_0+q^2}\\
+	&= r_0(T) + \frac{g_0}{2}(1 + \frac{n-1}{3}) \int \frac{\ud^d q}{(2 \pi)^d} \frac{1}{r_0 + q^2} + O(g_0^2) \\
+	&= r_0(T) + g_0 \frac{n+2}{6} \int \frac{\ud^d q}{(2 \pi)^d} \frac{1}{r_0 + q^2} + O(g_0^2)
+\end{align}
+
+Pour la température critique : 
+$$ 0 = r_0 + g_0 \frac{n+2}{6} \int \frac{\ud^d q}{(2 \pi)^d} \frac{1}{r_0 + q^2} + O(g_0^2) $$
+
+Inversons ces équations : 
+\begin{align}
+	r_0 &= r - g_0 \frac{n+2}{6} \int \frac{\ud^d q}{(2 \pi)^d} \frac{1}{r_0 + q^2} + O(g_0^2) \\
+	&= r - g_0 \frac{n+2}{6} \int \frac{\ud^d q}{(2 \pi)^d} \frac{1}{r + q^2} + O(g_0^2)\\
+	r_{0,c} = - g_0 \frac{n+2}{6} \int \frac{\ud^d q}{(2 \pi)^d} \frac{1}{ q^2} + O(g_0^2)\\
+	t &= r_0 - r_{0,c} \\
+	&= r + g_0 \frac{n+2}{6} \int \frac{\ud^d q}{(2 \pi)^d} \left(\frac{1}{r_0 + q^2} - \frac{1}{n + q^2} \right) + O(g_0^2) \\
+	&= r \left[ 1 + g_0 \frac{n+2}{6} \int \frac{\ud^d q}{(2 \pi)^d} \frac{1}{(q^2)(r + q^2)} + O(g_0^2) \right]\\
+\end{align}
+
+\subsection{Constantes de couplage}
+
+\begin{align}
+	g &= \left( \derp{4}{\gamma}{m} \right)(m=0) = g_0 + \dots \\
+	F(m) &= \ln (r_0 + \frac{1}{2} g_0 m^2 + q^2 ) \\
+	F'(m) &= \frac{g_0m}{A(m)}\\
+	A(m) &= r_0 + \frac{1}{2}g_0 m^2 + q^2 \\
+	F''(m) &= \frac{g_0}{A(m)} -  \frac{(g_0m)^2}{A(m)} \\
+	F^{(3)}(m) &= - \frac{g_0^2 m}{A^2(m)} - \frac{2 g_0^2 m}{A^2(m)} + \dots \\
+	F^{(4)} (m=0) &= - \frac{g_0^2}{A(0)^2} - \frac{2 g_0^2}{A^2(0)} \\ 
+	&= - \frac{3g_0^2}{(r_0 + q^2)^2}\\
+	g &= g_0 - \frac{3 g_0^2}{2} (1 + \frac{n-1}{9}) \int \frac{\ud^d q}{(2 \pi)^d} \frac{1}{r_0 + q^2} + O(g_0^2) \\
+	&= g_0 - \frac{n+8}{6}g_0^2 \int \frac{\ud^d q}{(2 \pi)^d} \frac{1}{r_0 + q^2} + O(g_0^2) \\
+	g_0 &= g + O(g_0^2) \\
+\end{align}
+
+
+\subsection{Cas de la dimension 4}
+
+\subsubsection{Domaine critique}
+
+Rappel : angle solide en dimension $d$ : 
+\begin{align}
+	\left(\int \ud x e^{x^2} \right)^d &= \pi^{d/2} \\
+	&= \Omega(d) \int_0^{\infty} \ud r r^{d-1}e^{-r^2} \\
+	&= \Omega(d) \int_0^{\infty} \ud y y^{-1/2} y^{\frac{d}{2} - \frac{1}{2}} e^{-y} \\
+	y &= r^2 \\
+	r &= \sqrt{y} \\
+	\ud r &= \frac{1}{2\sqrt{y}} \ud y \\
+	\Omega(d) &= \frac{2 \pi^{d/2}}{\Gamma(\frac{d}{2})} \\
+	d &= 4 \qquad \Omega(d) &= \frac{2 \pi^2}{\Gamma(2)} &= 2 \pi^2 \\
+	I &= \int \frac{\ud^4 q}{(2 \pi)^4} \frac{1}{q^2(r + q^2)} \\
+	&= \frac{2 \pi^2}{(2 \pi)^4} \int_0^{\Lambda} \ud q \frac{q^3}{q^2(r+q^2)} \\
+	J &= \int_0^{\Lambda} \ud q \frac{q^3}{q^2(r+q^2)} \\
+	&= \left[ \frac{1}{2} \ln (r + q^2) \right]_0^{\Lambda} \\
+	&= \frac{1}{2} \ln (\frac{r + \Lambda^2}{r}) \approx \frac{1}{2} \ln(\frac{\Lambda^2}{r}) \\
+	& approx \int_{\sqrt{r}}^{\Lambda} \ud q \frac{1}{q}  = \ln \frac{\Lambda}{r} \\
+\end{align}
+
+De la même manière pour la deuxième intégrale. 
+
+\begin{align}
+	K &= \int \frac{\ud^4 q}{(2 \pi)^4} \frac{1}{(r + q^2)^2} \\
+	&= \frac{2 \pi^2}{(2\pi)^4} \int_0^{\Lambda} \ud q \frac{q^3}{(r + q^2)^2}\\
+	\int_0^{\Lambda} \ud q \frac{q^3}{(r + q^2)^2} & \approx \int_{\sqrt{r}} \ud q \frac{q^3}{q^4} \\
+	g &= g_0 + g^2 \frac{n+8}{6} \frac{2 \pi^2}{(2 \pi)^4} \ln \frac{\Lambda}{\sqrt{r}} + O(g^3)\\
+	t &= r \left[ 1 + g \frac{n+2}{6} \frac{2 \pi^2}{(2\pi)^4} \ln \frac{\Lambda}{\sqrt{r}} + O(g^2)\right]\\
+\end{align}
+
+\subsection{Effet d'une dilatation}
+
+$$a \rightarrow la = \frac{1}{\lam}a $$ 
+$$ \Lam \rightarrow \lam \Lam $$
+
+Peut-on trouver $g_0(\lam)$ et $t(\lam)$  solutions, quand $\Lam \rightarrow \lam \Lam$ en supposant $g$ et $r$ inchangés (la physique à grande échelle est inchangée). 
+\begin{align}
+	g_0(\lam) &= g + g^2 \frac{n+8}{6} \frac{2 \pi^2}{(2\pi)^4} \ln \frac{\lam \Lam}{\sqrt{r}} + O(g^3) \\
+	t(\lam) &= r \left[ 1 + g \frac{n+2}{6} \frac{2 \pi^2}{(2\pi)^4} \ln \frac{\lam \Lam}{\sqrt{r}}\right] + O(g^2)\\
+\end{align}
+
+Question : comment relier $g_0(\lam)$ et $t(\lam)$ à $g_0$ et $t$ ? 
+
+\begin{align}
+	t(\lam) &= r \left[ 1 + g \frac{n+2}{6} \frac{2 \pi^2}{(2\pi)^4} \ln \frac{\Lam}{\sqrt{r}}\right]  + r g \frac{n+2}{6} \frac{2 \p^2}{(2\pi)4} \ln \lam + O(g^2)\\
+	&= t + (t + O(g_0))(g_0 + O(g_0^2)) \frac{n+2}{6} \frac{2 \p^2}{(2\pi)4} \ln \lam + O(g^2) \\
+	&= t \left[ 1 + g_0 \frac{n+2}{6} \frac{2 \p^2}{(2\pi)4} \ln \lam + O(g^2)\right] \\
+	g_0(\lam) &= g_0 + g^2 \frac{n+8}{6} \frac{2 \pi^2}{(2 \pi)^4} \ln \lam + O(g^3)\\
+	&= g_0 + (g_0^2 + O(g_0^3)) \frac{n+8}{6} \frac{2 \pi^2}{(2 \pi)^4} \ln \lam + O(g^3)\\
+	&= g_0 + g_0^2 \frac{n+8}{6} \frac{2 \pi^2}{(2 \pi)^4} \ln \lam + O(g^3)
+\end{align}
+Dérivons par rapport à $\lam$ : 
+
+\begin{align}
+	\der{g_0}{\lam}&= g_0^2 \frac{n+8}{6} \frac{2 \pi^2}{(2 \pi)^4} \frac{1}{\lam} + O(g^3)\\
+	\der{t}{\lam} &= t \left[ g_0   \frac{n+2}{6} \frac{2 \pi^2}{(2\pi)^4} + O(g_0^2) \right] \\
+	&= t K(g_0) \\
+\end{align}
+
+Pour simplifier les calculs, on va intégrer dans $g_0$ le facteur en $\pi$ : 
+$$\tilde{g_0} &= \frac{2 \pi^2}{(2\pi)^4} g_0$$ et on enlève les tildes. 
+
+\subsection{Susceptibilité}
+
+$$\chi^{-1}(g_0,t,\Lam) = \chi^{-1}(t(\lam),g_0(t\lam),\lam \Lam) $$
+
+Analyse dimensionnelle : 
+$$	\int \ud^d r \left[ \frac{r \phi^2}{2} + \frac{g_0 \phi^4}{4!} + \frac{1}{2} (\vec{\nabla}\phi)^2 \right]$$
+
+Exprimons tout en inverse de longueur : 
+ 
+\begin{align}
+	[\phi] &= \frac{d}{2} -1 \\
+	[g_0] &= d - 4(\frac{d}{2} -1)  = 4-d\\
+	[r_0] &= 2 = [r] = [\chi^{-1}]
+\end{align}
+
+\begin{align}
+	\chi^{-1}(\lam^2 \frac{t(\lam)}{\lam^2}, g_0(\lam),\lam \Lam) &= \lam^2 \chi^{-1}(\frac{t(\lam)}{\lam^2},g_0(\lam),\Lam) \\
+	\chi^{-1}(t,g_0,\Lam) &= \lam^2 \chi^{-1}(\frac{t(\lam)}{\lam^2},g_0(\lam),\Lam) 
+\end{align}
+équation centrale de l'analyse faite ici. 
+
+Choisissons $\lam$ tendant vers 0 tel que : 
+$$\frac{t(\lam)}{\lam^2 \Lam^2} = 1 $$ pour sortir de la région critique, dans laquelle le déceloppement perturbatif échoue. 
+
+$$\chi^{-1}(t,g_0,\Lam) = (\lam^*)^2 \chi^{-1}(\Lam^2,g_0(\lam^*),\Lam) $$
+Il nous reste à relier $\lam^*$ à $t$. 
+
+\begin{align}
+	\lam \der{g_0}{\lam} &= \frac{n+8}{6}g_0^2 \\
+	\frac{\ud g_0}{g_0^2} &= \frac{n+8}{6} \frac{\ud \lam}{\lam} \\
+	- \frac{1}{g_0} + A &= \frac{n+8}{6} \ln \lam \\
+	g_0(\lam) &= \frac{1}{A - \frac{n+8}{6} \ln \lam} \\
+	& \approx_{\lam \rightarrow 0} \frac{6}{n+8} \frac{1}{\ln \frac{1}{\lam}} \\
+	\der{t}{\lam} &= \frac{K(g_0)}{\lam}t \\
+	t(\lam) &= r e^{\int_1^{\lam} \frac{K(g_0)}{\mu} \ud \mu} \\
+	y &= g_0(\mu) \der{y}{\mu} &= \der{g_0(\mu)}{\mu} &= \frac{1}{\mu} \beta(y) \\
+	t(\lam) &= r e^{\int_{g_0}^{g_0(\lam)} \frac{\ud y }{\beta(y)}K(y)} \\
+	& \approx t e^{\frac{n+2}{n+8} \int_{g_0}^{g_0(\lam)} \ud y \frac{1}{y}} \\
+	& \approx te^{ \frac{n+2}{n+8} \ln \frac{g_0(\lam)}{g_0}} \\
+	& \approx t(\frac{g_0(\lam)}{g_0})^{\frac{n+2}{n+8}} \\
+	&= Ct \frac{1}{(\ln (\frac{1}{\lam}))^{\frac{n+2}{n+8}}} \\
+	\chi^{-1}(t,g_0,\Lam)&= (\lam^*)^2 \chi^{-1}(\Lam^2,g_0(\lam^*), \Lam) \\
+\end{align}
+Il nous reste à relier $\lam^*$ à $t$. 
+
+\begin{align}
+	\frac{t(\lam^*)}{\lam^{*2} \Lam^2}& =1 \\
+	\frac{1}{\lam^*} &= \frac{\Lam}{\sqrt{Ct}} (\ln \frac{1}{\lam^*})^{\frac{n+2}{n+8}} \\
+	& \approx \frac{\Lam}{\sqrt{Ct}} (\ln \frac{1}{\sqrt{Ct}})^{\frac{1}{2} \frac{n+2}{n+8}}\\
+	\chi^{-1}(t,g_0,\Lam) &= \lam^{*2} \chi^{-1}(\Lam^2,g_0^{\lam^*}\approx 0 , \Lam) \\
+	& \approx  \lam^{*2} \Lam^2 \\
+	& \approx \frac{Dt}{(\ln \frac{\Lam}{\sqrt{Ct}})^{\frac{n+2}{n+8}}}
+\end{align}
+
+\subsection{Cas d'une dimension voisine de 4}
+
+$\epsilon = 4-d$
+$[g_0] = 4-d$ 
+
+introduisons une nouvelle constante de couplage sans dimension. 
+$$g_0 \rightarrow \Lam^{\epsilon}g_0 $$
+Domaine $\epsilon = O(g_0)$ Domaine critique. 
+
+\begin{align}
+	\Lam^{\epsilon} g_0 = g + g^2 \frac{n+8}{6} \left[ K(\epsilon = 0) + O(\epsilon) \right] + O(g^3) \\
+	&= 1 + \epsilon \ln \Lam \\
+	g_0 &= - \epsilon g_0 \ln \Lam g + g^2 \frac{n+8}{6} \frac{2\pi^2}{(2\pi)^4} \ln \frac{\Lam}{\sqrt{r}} + O(g^3)\\
+	&= g (1  - \epsilon \ln \Lam ) + g^2 \frac{n+8}{6} \frac{2\pi^2}{(2\pi)^4} \ln \frac{\Lam}{\sqrt{r}} + O(g^3) \\
+	t &= r (1 + g \frac{n+2}{6} \frac{2\pi^2}{(2\pi)^4})\ln \frac{\Lam}{\sqrt{r}} + O(g^2) \\ 
+\end{align}
+
+$g_0(\lam), t(\lam)$ en fonction de $g_0,t$.
+
+Forme différentielle : 
+\begin{align}
+	\chi^{-1}(t,g_0,\Lam) &= \chi^{-1}(t(\lam),g_0(\lam),\lam \Lam) \\
+	&= \lam^2 \chi^{-1}(\frac{t(\lam)}{\lam^2},g_0(\lam),\Lam) \\
+\end{align}
+
+On choisit $\lam^*$ tel que $$\frac{t(\lam^*)}{\lam^{*2} \Lam^2} = 1$$
+Calculer $t(\lam)$ quand $\lam$ tend vers 0. 
+
+\begin{align}
+	t(\lam) & \approx r \lam^{K(g_0^*)} \\
+	g_0^* & = \frac{6 \epsilon}{n+8} + O(\epsilon^2)\\
+\end{align}
+
+$$\chi^{-1}(t) \approx A t^{1 + \frac{K(g_0^*)}{1 - K(g_0^*)}} \approx A t^{\gamma}$$
+
+$$\gamma = 1+ \frac{1}{2}\frac{n+2}{n+8}\epsilon + O(\epsilon^2)$$
+
+\end{document}
+
+

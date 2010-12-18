@@ -1,0 +1,892 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+\newcommand{\lam}{\lambda}
+\newcommand{\txt}[1]{\textrm{#1}}
+\newcommand{\moy}[1]{\langle #1 \rangle}
+\newcommand{\ud}{\mathrm{d}}
+\newcommand{\der}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+\newcommand{\derp}[3]{\frac{\partial^{#1} #2}{\partial^{#1} #3}}
+
+\title{Matière molle}
+
+
+\begin{document}
+
+Dans ce cours on s'intéressera majoritairement à des systèmes à l'état liquide, ou dont au moins une phase est un liquide. Quand les molécules sont loin les unes des autres, l'énergie cinétique est dominante, et on obtient le gaz parfait. Quand on rapproche les molécules les unes des autres, les énergies d'interaction sont de plus en plus importantes, et apportent de l'ordre. A l'état liquide, on se trouve dans un cas intermédiaire. 
+
+\newpage 
+\tableofcontents
+\newpage
+
+\section{Interactions entre les molécules}
+
+Lorsque les molécules sont très proches les unes des autres, elles se repoussent les unes les autres, pour ne pas s'interpénétrer. Ces interactions stériques sont très fortes, mais à très courtes portées. Elles ne peuvent se modéliser qu'à l'aide de la mécanique quantique. Le modèle le plus simple, où l'on considère des molécules sphériques de rayon $a$ et séparées par une distance $r$, où l'énergie de répulsion est de la forme $\omega(r) = u(\frac{a}{r})^n$ avec en général $n=12$. C'est celui qui entre en compte dans le potentiel de Lenhard-Jones.
+
+Un modèle encore plus simple est le modèle de sphères dures, qui consiste à modéliser les molécules comme de simples billes : si $r>a \quad \omega = 0$ et si $r<a \quad \omega = +\infty$
+
+On se s'intéresse pas dans ce cours aux liaisons covalentes (on considère la particule issue de cette liaison comme un tout), ni aux liaisons métalliques.
+
+En général, les interactions entre molécules sont d'origine électrostatiques. 
+
+\subsection{Interactions électrostatiques}
+
+On considère l'interaction entre deux molécules (nommées de manière maline 1 et 2). On a une densité de charge $\rho_1(\vec{r}_1)$ et $\rho_2(\vec{r}_2$. On appelle $\vec{R}_1$ et $\vec{R}_2$ les centres de chaque molécule, et $\vec{R}_{12} = \vec{R_2}- \vec{R_1}$ la distance entre les deux centres.
+
+\subsubsection{Interactions entre densités de charge permanentes}
+
+$$\ud^3 \vec{r}_1 \ud^3 \vec{r}_2 = \frac{\rho_1(\vec{r_1}\rho_2(\vec{r_2})}{4 \pi \epsilon_0 || \vec{R_2} + \vec{r_2} - \vec{R_1}- \vec{r_1}||}$$
+
+Lorsque les molécules sont éloignées ($\vec{r_1},\vec{r_2})\ll \vec{R_{12}}$, on fait un développement limité de la distance : 
+
+\begin{align}
+	\frac{1}{|| \vec{R_2} + \vec{r_2} - \vec{R_1}- \vec{r_1}||} &= \frac{1}{R_{12}}\left[1 + \frac{2 \vec{r_2}\vec{R_{12}}}{R_{12}^2} - \frac{2 \vec{r_1}\vec{R_{12}}}{R_{12}^2} + \frac{(\vec{r_2}- \vec{r_1})}{R_{12}^2}\right]^{1/2} \\
+	& \approx \frac{1}{R_{12}} - \frac{\vec{r_2}\vec{R_{12}}}{R_{12}^3} + \frac{\vec{r_2}\vec{R_{12}}}{R_{12}^3} + \cdots 
+\end{align}
+
+\paragraph{Interaction ion-ion}
+
+C'est l'ordre 0 : 
+$$\omega =\frac{Q_1Q_2}{4 \pi \epsilon_0 R_{12}} \quad Q_i = \int \ud^3 \vec{r_i}\rho_i(\vec{r_i})$$
+
+L'interaction ion-ion est non-nulle ssi les deux molécules sont chargées. 
+
+Ordres de grandeur : Na+ et Cl- au contact
+
+\begin{align}
+	\omega &= \frac{-e^2}{4 \pi \epsilon_0 (a_{Na+} + a_{Cl-})} \\
+	& \approx -8,3 \cdot 10^{-19}\txt{J}
+\end{align}
+A comparer à $kT$, à 20°C, $kT = 1,38 \cdot 10^{-23} * 293 \approx 4 \cdot 10^{-21}$J. Donc $\omega = -200 kT$ 
+
+On peut en conclure que les cristaux ioniques sont plutôt cohésifs. Attention, ici on est dans le vide. Dans l'air, ça marchera encore. Dans l'eau, ça sera différent : il s'agira de savoir si le cristal peut se dissoudre. 
+
+Dans un milieu linéaire homogène isotrope, de constante diélectrique relatice $\epsilon_r$, $$ \omega_{\txt{ion-ion}} = \frac{Q_1 Q_2}{R_{12}4 \pi \epsilon_0 \epsilon_r}$$
+
+Pour l'eau $\epsilon_r \approx 80$ à 20°C, et donc $\omega_{Na+ Cl-} \approx -2,5 kT$, l'interaction est fortement écrantée dans l'eau. Cela ne suffit donc pas à expliquer pourquoi le sel est soluble dans l'eau. En effet, comme l'eau est un solvant polaire, et donc les ions sont hydratés. C'est l'interaction suivante. 
+
+\paragraph{Interaction ion-molécule polaire}
+
+C'est l'ordre 1.
+
+$$\omega = \frac{\vec{R_{12}}}{4 \pi \epsilon_0 R_{12}^3} \left[- \int \ud^3 \vec{r_1} \int \ud^3 \vec{r_2} \vec{r_2} \rho_1(\vec{r_1}) \rho_2(\vec{r_2}) + \int \ud^3 \vec{r_1} \int \ud^3 \vec{r_2} \vec{r_1} \rho_1(\vec{r_1}) \rho_2(\vec{r_2})\right]$$
+
+où l'on appelle moment dipolaire électrique : $$\vec{p_i} = \int \ud^3 \vec{r_i} \vec{r_i} \rho_i(\vec{r_i})$$
+
+Si l'on simplifie en prenant une molécule neutre : $$\vec{p} = q \vec{AB}$$ où $q$ est le nombre d'électrons ou de protons, et A le barycentre de charges négatives, et B le barycentre des charges positives. 
+
+On fait l'hypothèse que $\vec{p} \neq \vec{0}$ : la molécule est polaire. On se place dans le cas où 1 est un ion et 2 une molécule polaire. 
+
+$$\omega_{\txt{ion-dipôle}} = \frac{- Q_1 \vec{R_{12}}\vec{p_2}}{4 \pi \epsilon_0 R_{12}^3} = \frac{-Q_1 p_2 \cos \theta}{4 \pi \epsilon_0 R_{12}^2}$$ que l'on peut aussi écrire 
+$$ \omega_{\txt{ion-dipôle}} = - \vec{p_2}\vec{E_1}(\vec{R_2}) \quad \vec{E_1} = \frac{Q_1}{4 \pi \epsilon_0 R_{12}^3}\frac{\vec{R_{12}}}{R_{12}}$$
+
+$\omega$ dépend de $\theta$ et $$\omega_{min} = - \frac{|Q_1|p_2}{4 \pi \epsilon_0 R_{12}^2}$$ pour $\theta=0$ ou $\theta=\pi$.
+
+Ordre de grandeur : pour Na+ et H2O au contact $$p = 1,85 D \approx 6,17 \cdot 10^{-30}Cm \quad R_{12}\approx 1 \dot{A} + 1,4 \dot{A}$$
+
+$$\omega_{min} = \approx -39 kT$$
+
+La configuration d'énergie est beaucoup plus favorable. Mais si on divise par 80, dans l'eau, on obtient $0,5kT$, ce qui n'explique toujours pas la dissolution. 
+
+\paragraph{Interaction entre deux molécules polaires} C'est l'ordre 2.
+
+Interaction entre les deux moments dipolaires : 
+
+$$ \omega_{\txt{dipôle-dipôle}} = \frac{1}{4 \pi \epsilon_0 R_{12}^3} \left[ \vec{p_1}\vec{p_2} - 3 \frac{(\vec{p_1}\vec{R_{12}})(\vec{p_1}\vec{R_{12}})}{R_{12}^2} \right]$$
+
+On trouve la valeur minimale pour les dipôles alignés : 
+$$\omega_{min} = \frac{-2 p_1 p_2}{4\pi \epsilon_0 R_{12}^3}$$
+
+Ordre de grandeur : eau-eau au contact
+
+$R_{12} = 2,8 \dot{A} \quad p_1 = p_2 = 1,85$D $\omega_{min} = -7kT$
+
+Pour la 2e voisine, $\omega_{min} \leq -kT$
+
+Des molécules très polaires sont capables de s'orienter entre elles, mais dès la deuxième voisine, l'agitation thermique est prépondérante et désordonne l'orientation. 
+
+On regarde ce qu'il se passe à distance fixée, en prenant en compte l'agitation thermique. Il faut alors calculer une interaction moyenne. 
+
+$$\moy{\omega} = \frac{ \int \ud \theta_1 \ud \theta_2 \ud \phi \frac{p_1 p_2}{4\pi \epsilon_0 R_{12}^2}f(\theta_1,\theta_2,\phi) e^{- \frac{\omega(R_{12},\theta_1,\theta_2,\phi)}{kT}}}{\int \ud \theta_1 \ud \theta_2 \ud \phi  e^{- \frac{\omega(R_{12},\theta_1,\theta_2,\phi)}{kT}}}$$
+
+Si $|\omega(R_{12},\Omega) \ll kT \quad e^{- \frac{\omega}{kT}} \approx 1- \frac{\omega}{kt}$ où $\Omega$ représente les trois angles de l'orientation.
+
+A l'ordre 0 du développement : 
+$$\moy{\omega} = \frac{p_1 p_2}{4 \pi \epsilon_0 R_{12}^3}\moy{f}_{\Omega}$$
+
+Même probabilité pour toutes les caleurs de $\Omega$. Ici le premier terme est nul, on doit donc continuer à l'ordre 1 du développement.
+
+$$\moy{\omega} = \frac{p_1 p_2}{4\pi \epsilon_0 R_{12}^3}\frac{\int \ud \Omega f(\Omega) \frac{- \omega}{kT}}{\int \ud \Omega } = - \left( \frac{p_1 p_2}{4 \pi \epsilon_0 R_{12}^3} \right)^2 \frac{1}{kT}\moy{f^2(\Omega)}_{\Omega}$$
+
+$$\moy{\omega} = \frac{- 2}{3} \frac{1}{kT} \left( \frac{p_1 p_2}{4\pi \epsilon_0 } \right)^2 \frac{1}{R_{12}^6}$$
+
+Interaction attractive, énergie en $R^{-6}$ : interaction d'orientation, ou interaction de Kreeson, un des termes de l'interaction de Van der Waals. 
+
+\subsubsection{Interactions entre densités de charges permanentes et densités de charges induites}
+
+Les molécules ne sont pas toutes polaires, mais elles sont toutes polarisables. Dans le cas de champs faibles, la réponse est linéaire et on a : 
+$$\vec{p} = \alpha \vec{E}$$ où $\alpha$ est appelé polarisabilité. 
+
+$$[\alpha] = \frac{[p]}{[E]} = \frac{[Q]L}{\frac{[Q]}{[4 \pi \epsilon_0]L^2}} = [4 \pi \epsilon_0]L^3$$
+
+Donc $\frac{\alpha}{4\pi \epsilon_0}$ est homogène à un volume : $0,2 \dot{A}^3$ pour les molécules peu polarisables (comme He) - $10 \dot{A}^3$ pour les molécules très polarisables (comme CCl4 ou C6H6).
+
+$$\omega_{\txt{dipôle-E}} = - \vec{p}\vec{E}$$
+
+Pour une molécule polarisable, il faut connaître le passé de la molécule, comment on l'a amenée de très loin.
+
+$$\omega_{\alpha - \vec{E}} = \int_0^{\vec{E}} (- \alpha \vec{E'}) \ud \vec{E'}$$
+
+exemple : molécule polaire-molécule polarisable : 
+
+$$ V = \frac{\vec{p}\vec{R}}{4 \pi \epsilon_0 R_{12}^3} $$
+
+\begin{align}
+	 \omega &= \frac{-1}{2} \alpha \left( \frac{-1}{4 \pi \epsilon_0} \left( \frac{\vec{p}}{R_{12}^3} - 3 (\vec{p}\vec{R})\frac{\vec{R}}{R_{12}^5} \right) \right) \\
+	&= - \frac{1}{2} \alpha \left( \frac{1}{4 \pi \epsilon_0} \right) p^2 f^2(\theta) \frac{1}{R_{12}^6}
+\end{align}
+
+Interaction attractrive, en $R_{-6}$
+
+$$ \moy{\omega} = - \frac{\alpha p^2}{(4 \pi \epsilon_0)^2}\frac{1}{R_{12}^6}$$ Interaction d'induction, ou interaction de Debye.
+
+\subsection{Interactions de polarisation mutuelle}
+
+\subsubsection{Calcul pédestre de l'interaction de London}
+
+On considère deux atomes dotés d'un niveau excité $$E_{\txt{excité},i} = E_i^0 + h\nu $$
+
+Traitement en perturbation de l'énergie d'interaction électrostatique entre les 2 molécules. 
+
+On va utiliser un modèle semi-classique avec le modèle de Bohr. 
+
+
+$$p_{\txt{instant de }1} = a_0 e $$ qui polarise 2. 
+\begin{align}
+	w &= \frac{-1}{2} \alpha_2 \vec{E_{p1}}^2  \\
+	\moy{w} & \approx - \alpha_2(\frac{a_0 e}{4 \pi \epsilon_0 R^3})^2 \\
+	& \approx - \alpha_2 \frac{(a_0e)^2}{(4 \pi \epsilon_0)^2}\frac{1}{R^6} \\
+\end{align}
+
+On voit apparaître $$\alpha_1 = 4 \pi \epsilon_0 a^3$$
+\begin{align}
+	\moy{w} = - \frac{\alpha_1 \alpha_2}{(4 \pi \epsilon_0)^3} \frac{e^2}{a_0}\frac{1}{R^6} \\
+	\frac{2 e^2}{4 \pi \epsilon_0 a_0} = h\nu  
+\end{align}
+$-h\nu$ énergie du fondamental. 
+
+$$\moy{w} = -h \nu \frac{\alpha_1 \alpha_2}{(4 \pi \epsilon_0)^2}\frac{1}{R^6}$$
+
+Lz résultat du calcul de London avec un traitement perturbatif donne un résultat similaire : 
+$$ w = - \frac{3}{4}\frac{h \nu_1 \nu_2}{\nu_1 + \nu_2} \frac{\alpha_1}{4 \pi \epsilon_0}\frac{\alpha_2}{4\pi \epsilon_0}\frac{1}{R^6}$$
+
+Dans ce résultat, les polarisibilités sont les polarisabilités à fréquence nulle. 
+
+La théorie moderne de l'interaction de London dit que les pmolécules interagissent par émission, propagation et absorption de photons (Lifschitz). Les polarisabilités à prendre en compte sont celles des fréquences où les corps absorbent, donc celles où $\epsilon$ a une partie imaginaire, où $\epsilon_r$ carie rapidement avec $\nu$, où le corps disperse la lumière. On parle alors d'interations de dispersion. 
+
+Quand le temps que met un photon à faire l'aller-retour entre 1 et 2 devient très grand devant $\nu^{-1}$, l'interaction de Laonfon change de forme, on parle d'interaction retardée, et$w$ est en $R^{-7}$.
+
+\subsubsection{Interactions de Van der Waals}
+
+$$w(r) = - \frac{C_{Keesom}+C_{Debye}+C_{London}}{R^6} = \frac{C}{R^6}$$
+
+Les calculs de $C_{keesom}$ et $C_{Debye}$ sont assez simples, le calcul de $C_{London}$ est plus compliqué, mais la valeur de $C$ se mesure. Pour les molécules apolaires, seul $C_{London}$ est non nul. Il faut vraiment des molécules très polaires et très polarisable pour que $C_{London}$ ne soit plus le terme dominant. 
+
+\subsubsection{Interaction de London dans un milieu}
+
+$$w(r) = - \frac{3}{4}\frac{h \nu_1 }{\nu_1 + \nu_2} \frac{\alpha_1}{4 \pi \epsilon_0}\frac{\alpha_2}{4\pi \epsilon_0}\frac{1}{R^6}$$
+
+Attention : $\alpha_i$ représente les polarisabilités de i dans le milieu 3, avec le modèle sumplpe de cavités sphériques pour les molécules. 
+$$\alpha_i = 4 \pi \epsilon_0 \epsilon_3 \frac{\epsilon_i - \epsilon_3}{\epsilon_i+2 \epsilon_3} \approx 4 \pi \epsilon_0 n^2_3 a_i^3 \frac{n_i^2 - n_3^2}{n_i^2 + 2 n_3^2}$$
+où les $n_i$ sont les indices optiques. 
+
+$$w_{132}(r)= - \frac{C_{132}}{R^6}$$ où $C_{132}$ du signe de $\frac{n_i^2 - n_3^2}{n_i^2 + 2 n_3^2}$. Donc l'interaction de London peut être répulsive si $n_1 \leq n_3 \leq n_2$, en particulier entre molécules semblables. 
+
+
+\section{Solutions}
+
+Les liquides purs n'existent pas, on ne trouve que des solutions. Une solution est un mélange à l'échelle moléculaire d'espèces chimiques différentes. On parle aussi de mélange homogène. La solution comprend un composé majoritaire, le solvant, et des espèces minoritaires, les solutés. 
+
+\subsection{Description d'un mélange homogène}
+
+Une seule phase, dense (liquide, solide). $n_i$ moles de composé $i$, $i=1\dots k$. On considère un mélange chimiquement inerte. 
+
+\subsubsection{Paramètres indépendants et fonctions thermodynamiques associées}
+
+\begin{itemize}
+	\item variable thermique : $T$ ou $S$ 
+	\item variable mécanique : $P$ ou $V$ 
+	\item les $k$ $n_i$ 
+\end{itemize}
+Il y a donc $k+2$ paramètres indépendants. On les relie par la fonction grand potentiel $G$ :
+
+$$ \ud G = -S \ud T + V \ud P + \sum_i \mu_i \ud n_i $$
+où $$\mu_i = \left( \derp{}{G}{n_i} \right)_{T,P,n_{j\neq i}}$$ est le potentiel chimique. 
+
+On appelle $J$ le grand potentiel chimique : 
+
+$$J = F - \sum_i \mu_i n_i \quad \ud J = -S \ud T - P \ud V - \sum_i n_i \ud \mu_i $$
+
+\subsubsection{Quantités molaire partielles et quantités moyennes}
+
+A une grandeur extensive $A(T,P,\{n_i\})$ on associe une quantité molaire partielle : $$a_i \left( \derp{}{A}{n_i} \right)_{T,P,n_{j \neq i}}$$
+
+En particulier  
+\begin{align}
+g_i &= \mu_i \\
+v_i &= \left( \derp{}{V}{n_i} \right)_{T,P,n_{j \neq i}} \\
+s_i &= \left( \derp{}{S}{n_i} \right)_{T,P,n_{j \neq i}}
+\end{align}
+
+Conséquence de l'extensivité : 
+\begin{align}
+\der{}{\lam} \left( A (T,P,[\lam n_i]) \right) &= \der{}{\lam} \left( \lam A(T,P,[n_i]\right) \\
+\sum_{i=1}^k \left( \derp{}{A}{n_i} \right)_{T,P,n_{j \neq i}} n_i &= A(T,P,[n_i]) \\
+A &= \sum_{i=1}^k n_i a_i 
+\end{align}
+
+Conséquences de l'intensivité : 
+\begin{align}
+a_i(T,P,[\lam n_i]) &= a(T,P,[n_i]) \quad \lam = \frac{1}{n} \quad n=\sum_i n_i \\
+\txt{Fraction molaire en i} &: X_i = \frac{n_i}{n} \\
+\sum_i X_i = 1 
+\end{align}
+
+Donc il y a seulement (k-1) paramètres indépendants.
+
+$a_i(T,P,X_2 \dots X_k)$ fonction des $k+1$ variables itensives. 
+
+Fonction extensive : $A(T,P,n,X_2 \dots X_k)$ 
+$$A = \sum_i n_i a_i(T,P,X_2 \dots X_k) = n \sum_i X_i a_i $$
+
+$$a = \frac{A}{n} = \sum_i X_i a_i $$ donction des (k+1) paramètres intensifs indépendants $T,P,X_2 \dots X_k$. $a$ caleur moyenne de $A$ par mole. 
+
+Relation de Gibbs-Duhem pour un mélange : 
+\begin{align}
+	G &= \sum_i n_i \mu_i \txt{donc} \ud G = \sum_i \{ \mu_i \ud n_i + n_i \ud \mu_i \} \\
+	\txt{or } \ud G &= - S \ud T + V \ud P + \sum_i \mu_i \ud n_i \\
+	\txt{donc } \sum_i n_i \ud \mu_i &= -S \ud T + V \ud P \\
+	\sum_i X_i \ud \mu_i &= -s \ud T + v\ud P 
+\end{align}
+
+où $s$ est l'entropie molaire moyenne et $v$ le volume molaire moyen. 
+
+\subsubsection{Mélange à $T$ et $P$ constantes}
+
+On considère $(n_1 \dots n_k)$ moles de $k$ espèces chimiques différentes, à $T,P$ fixées. On notera $(i)$ cet état initial. On les mélange en un état final $(f)$. 
+
+$$G^{(i)} = \sum_{j=1}^k n_j \mu_j^*(T,P)$$
+où ce qui est noté $^*$ se rapport aux corps purs (attention, notation non standard).
+$$G_{(f)} = \sum_j n_j \mu_j (T,P,\{X_i\}_{i=1\dots k}) $$
+
+Enthalpie libre de mélange : 
+\begin{align}
+	\Delta G_{mix} &= G_k^{(f)} - G_{(i)} \\
+	\Delta G_{mix} &= \sum_{j=1}^k n_j [ \mu_j(T,P,\{X_i\}) - \mu_j^*(T,P)]
+\end{align}
+
+Le mélange est favorable lorsque $\Delta G_{mix}<0$.
+
+On déduit de $\Delta G_{mix}$ : 
+\begin{align}
+	\Delta V_{mix} &= V^{(f)} - V^{(i)}  = \left( \derp{}{\Delta G_{mix}}{P} \right)_{T,n_j} \\
+	\Delta S_{mix} &= è \left( \derp{}{\Delta G_{mix}}{T} \right)_{n_j,P} \\
+	Q &= \Delta H_{mix} = - T^2 \left( \derp{}{\frac{\Delta G_{mix}}{T}}{T} \right)_{P,n_j} 
+\end{align}
+
+\subsection{Solutions diluées}
+1 est majoritaire $n_j \ll n_1 \quad j=2 \dots k $ $n\approx n_1$ et $X_j \approx \frac{n_j}{n} \ll 1$
+
+$$N_i = \mathcal{N}_a n_i$$ nombre de molécules de $i$ dans le mélange. 
+$$N=\sum_i N_i \quad X_i = \frac{N_i}{N} = \frac{n_i}{n}$$
+
+Si on prend par exemple 1 presque pur et une molécule de $i$ : 
+\begin{align}
+	F &= F_1^*(T,V,N_1) + f_i \\
+	F &= -kT \ln Z \quad Z = Z_1^*(T,V,N_1)z_i \\
+	F_1^* &= -kT \ln Z_1^* \quad z_i = e^{- \frac{f_i}{kT}} \\
+\end{align}
+
+Mélange : $N_i$ molécules de $i$ avec $i=2 \dots k$ : 
+\begin{align}
+	Z &= Z_1^* \prod_{i=2}^k \frac{z_i^{N_i}}{N_i !} \txt{ molécules indiscernables} \\
+	F(T,V,N_i) &= -kT \ln Z_1^* - kT \sum_{i=2}^k (N_i \ln z_i - \ln (N_i!)) \\
+	&= F_1^* + \sum_i N_i (-kT \ln z_i) + kT \sum_i (N_i \ln N_i - N_i) \\
+	&= F_1^* + \sum_i N_i f_i(T,V) + kT \sum_i (N_i \ln N_i - N_i) \\
+	\frac{\mu_j}{\mathcal{N}_a} &= \left( \derp{}{F}{N_j} \right)_{T,V,N_{i \neq j}} 
+\end{align}
+
+Pour les solutés : 
+\begin{align}
+	 \frac{\mu_j}{\mathcal{N}_a} &= 0 + f_j(T,V) + kT (\ln N_j + \frac{N_j}{N_j} -1) \\
+	  \mu_j &= \mathcal{N}_a f_j(T,V) + RT \ln N_j \\
+	  &= \mathcal{N}_a f_j(T,V) + RT \ln N + RT \ln X_j
+\end{align}
+car on a vu que $\mu_j$ doit être indépendant de la taille du système. 
+
+$$\mu_j(T,P,X_j) = \Psi_j(T,P) + RT \ln X_j$$
+
+On note $$\mu_j(T,P,X_j) = \mu_j^{0}(T,P) + RT \ln X_j $$
+
+Mais attention $\mu_j^* \neq \mu_j^0 $ en général. 
+
+Pour le solvant : 
+\begin{align}
+	\frac{\mu_1}{\mathcal{N}_a} &= \left( \derp{}{F(T,V,N_i))}{N_1} \right)_{T,P,N_{j \neq 1}} \\
+	&= \derp{}{F_1^*}{N_1} + \sum_j N_j \left( \derp{}{f_j}{N} \right)_{T,V} \quad N \approx N_1 \\
+	\mathcal{N}_a f_j(T,V,N) + RT \ln N &= \Psi_j(P,T) \\
+	\mathcal{N}_a f_j(T,V,N) &= \Psi_j(P,T) - RT \ln N  \\
+	\mathcal{N}_a \left( \derp{}{f_j}{N} \right) &= \frac{-RT}{N} \\
+	\mu_1(T,P,X_j) &= \mu_1^(T,P) - RT \sum X_j \\
+	\sum_j X_j &= X-X_1 \\
+	X_1 &= 1 - \sum_j X_j \quad \sum_j X_j \ll 1 \\
+	\ln X_1 & \approx - \sum_j X_j \\
+\end{align}
+On peut aussi écrire : 
+$$\mu_1(T,P,X_j) \approx \mu_1^*(T,P) + RT \ln X_1 $$
+
+\subsection{Solutions idéales}
+
+On définit une solution idéale de $k$ espèces par : 
+
+\begin{align}
+	\forall  j \in \{1,\dots,k \} \qquad  \mu_j(T,P,X_j) &= \mu_j^*(T,P) + RT \ln X_j \\
+	\Delta G_{mix} &= G^f - G^i = \sum_j [\mu_j^*(T,P) + RT \ln X_j - \mu_j^*(T,P)] \\
+	\Delta G_{mix} &= RT \sum_j n_j \ln X_j = nRT \sum_j X_j \ln X_j \\
+	\Delta V_{mix} &= \left( \derp{}{\Delta G_{min}}{P} \right)_{T,n_j} = 0 
+\end{align}
+Pas de variations de volume du mélange.
+
+\begin{align}
+	 \Delta S_{mix} &= -R \sum_j n_j \ln X_j = -nR \sum_j X_j \ln X_j \\
+	 Q=0 \qquad \Delta U_{mix} &= \Delta G_{mix} + T \Delta S_{mix} - P \Delta V_{mix} =0 \\
+\end{align}
+ Un mélange idéal est un mélange pour lequel l'effet du mélange est uniquement entropique. Il n'y a pas de variations de l'énergie interne au mélange, ni de variations de volume. Par exemple, un mélange de gaz parfait est un mélange idéal. 
+
+
+\subsection{Modèles simples de mélange binaire en phase dense}
+
+\subsubsection{Modèle sur réseau}
+
+On fait l'hypothèse d'un modèle sur réseau. $\Delta V_{mix} = 0 $ par hypothèse. 
+
+\subsubsection{Entropie de mélange}
+ 
+ 
+\begin{align}
+	\Delta S_{mix} &= S^f_{config} = k \ln \Omega \\
+	\Omega &= C^{N_1}_{N_1+N_2} = \frac{(N_1 + N_2)!}{N_1! N_2!} = \frac{N!}{N_1! N_2!} \\
+	\ln \Omega &= N \ln N -N -N_1 \ln N_1 + N_1 - N_2 \ln N_2 + N_2 \\
+	&= -N_1 \ln X_1  - N_2 \ln X_2 \\
+	\Delta S_{mix} &= -R [n_1 \ln X_1 + n_2 \ln X_2 ] \\
+\end{align}
+
+\subsubsection{\'Energie de mélange}
+
+$$\Delta U_{mix} = \Delta U^{\txt{interactions}}$$ 
+
+modèle simple : on se limite aux interactions entre plus prochs voisins. 
+
+\begin{align}
+	Delta U_{mix} &= U^f - U^i = [N_{12}w_{12} + N_{11}w_{11} + N_{22}w_{22} ]  - [\frac{N_1 z}{2} w_{11} + \frac{N_2 z}{2} w_{22}] \\
+	zN_1 &= N_{12} + N_{11} \\
+	zN_2 &= N_{12} + N_{22} \\
+	\Delta U_{mix} &= N_{12} w_{12} + [N_{11} - N_{1}\frac{z}{2}]w_{11} + [N_{22} - N_2 \frac{z}{2}]w_{22} \\
+	 &= N_{12} [w_{12} - \frac{1}{2}(w_{11} + w_{22})] \\
+	 N_{12} &= N_1 z p_{12} 
+\end{align}
+
+où $p_{12}$ est la probabilité qu'un proche voisin d'un molécule 1 soit une molécule 2. 
+
+On fait une approximation de champ moyen : 
+$$p_{12} = X_2 \quad \Delta U_{mix} = N_1 \frac{N_2}{N} a \Delta w $$
+$$\Delta U_{mix} = \frac{n_1n_2}{n}W \quad W = \mathcal{N}_a z [w_{12} - \frac{1}{2} (w_{11} +w_{22})] $$
+
+\subsubsection{\'Energie libre de mélange, enthalpie libre de mélange et potentiel chimique}
+
+\begin{align}
+	\Delta F_{mix} &= \Delta U_{mix} - T \Delta S_{mix} \\
+	&= \frac{n_1 n_2}{n_1 + n_2} W + RT [n_1 \ln \frac{n_1}{n_1+n_2}  + n_2 \ln \frac{n_2}{n_1 + n_2}] \\
+	\mu_1 &= \mu_1^* + \left( \derp{}{\Delta F_{mix}}{n_1} \right)_{T,V,n_2} \\
+	&= \mu_1^*  + w\left( \frac{n_2}{n_1+n_2} - \frac{n_1 n_2}{(n_1 + n_2)^2} \right) + RT [\ln n_1 + 1 - \ln(n_1 + n_2) - 1] \\
+	\mu_1 &= \mu_1^* + W X_2^2 + RT \ln X_1 \\
+	\mu_1 &= \mu_1^* + X(1-X_1)^2 + RT \ln X_1 \\
+	\mu_2 &= \mu_2^* + W(1-X_2)^2 + RT \ln X_2 \\ 
+\end{align}
+ 
+ Cas particulier : solutions diluée : 
+ 
+\begin{align}
+	\mu_1 &\approx \mu_1^* + W X_2^2 + RT \ln (1 - X_2) \\
+	&= \mu_1^* - RT X_2 \txt{ au premier ordre} \\
+	\mu_2 &= \mu_2^* + W + RT \ln X_2 
+	\end{align}
+
+\subsubsection{Limite de solubilité}
+
+$$\frac{\Delta G_{mix}}{nRt} = \frac{W}{RT} X(1-X) + X \ln X + (1-X)\ln(1-X)$$
+
+La première quantité est défavorable au mélange si $W>0$, le deuxième terme est négatif donc favorable au mélange. 
+
+Si $W<2RT$, en particulier dans le cas $W<0$ 
+La courbe forme un creux. Il existe un X minimal entre 0 et 1 : les deux liquides sont miscibles en toutes proportions. 
+
+Si $W>2RT$, on a deux creux séparés par un maximum négatif. Il existe deux minima symétriques par rapport à 1/2 : $X_0$ et $1-X_0$. Le mélange est stable dans le cas $X \in [0,X_0]$ et dans le cas $X \in [1-X_0,1]$, et métastable dans le cas $X \in [X_0,1-X_0]$ Dans ce cas, le mélange peut démixer pour créer deux mélanges, de concentrations $X_0$ et $1-X_0$. La limite de solubilité de 2 dans 1  est $X_0$, premier minimum de $\Delta G$ 
+
+Si $W \gg RT$ $$X_0 = X_{lim} \approx e^{- \frac{W}{RT}}$$ cf TD
+
+Conséquence pratique : la mesure de $X_{lim}$ donne $W$. Démonstration rapide : $X_{lim}$ est donné par équilibre entre deux purs et la solution saturée de 2 dans 1 : 
+$$ \mu_2^* = \mu_2^{solution saturée} = \mu_2^* + W + RT \ln X_{lim}$$
+donc $$X_{lim} =  e^{- \frac{W}{RT}}$$
+
+\subsection{Solutions aqueuses}
+
+\subsubsection{L'eau, un liquide organisé}
+
+\begin{figure}%
+\includegraphics[width=\columnwidth]{mickey.png}%
+\caption{}%
+\label{mickey.png}%
+\end{figure}
+
+2 DNL, $p=1,85D \approx 6,17 10^{-30}$ C.m
+
+Dans l'eau, il se forme des liaisons hydrogène. L'eau est un liquide très cohésif, par exemple par rapport aux composés formés avec le reste de la colonne de l'oxygène (H2S,H2Se,H2Te)
+
+$\epsilon_r$ est grande pour l'eau, c'est un liquide polaire. 
+
+Grande capacité calorifique (ce qui fait des océans de bons thermostats). 
+
+Les liaisons hydrogène sont formées entre un hydrogène lié à un atome électronégatif, et un DNL appartenant à une autre molécule. Cette liaison est directionnelle, comme les liaisons covalentes, son énergie est plus grande que celle de la liaison électrostatique, et  inférieure à celle de la liaison covalente. 
+
+Chaque molécule d'eau peut faire 4 liaisons hydrogène, en tétraèdre. On peut mesurer par diffraction que la liaison fait 0,28 nm, ce qui est plus faible que la distance si on colle simplement les molécules l'une contre l'autres : elles s'interpénètre. 
+
+Les liaisons hydrogènes font de l'eau solide ordinaire un solide peu dense.
+
+\subsubsection{Enthalpie libre de mélange pour des solutions aqueuses}
+
+L'eau est un liquide organisé localement par les liaisons hydrogène. Ajouter un soluté perturbe cet ordre local. On va donc ajouter au modèle de solution régulière : 
+$$\Delta S_{local}\propto N_{eau}\chi = \mathcal{N}_a n(1-X)X$$ avec $X$ la fraction molaire du soluté.
+
+\begin{align}
+	\Delta G_{mix} = \Delta F_{mix} &= nWX(1-X) + nRT(X \ln X + (1-X)\ln(1-X)) - T \Delta S_{local} \\
+	&= n(W-T \Delta S_{transfert}) X (1-X) + nRT(X \ln X + (1-X) \ln(1-X)) \\ 
+	n(W-T \Delta S_{transfert})&= \Delta F_{transfert}
+\end{align}
+
+Par rapport à une solution régulière, on a remplacé $W$ par $\Delta F_{transfert}$. 
+
+$\Delta H_{transfert}$ se mesure par calorimétrie, $\Delta F_{transfert} = \Delta G_{transfert}$ se mesure par $X_{lim}$. 
+
+\subsubsection{Solutions de molécules hydrophiles}
+
+Composé hydrophile : composé miscible à l'eau en toutes proportions, ou avec une limite de solubilité grande. 
+
+Exemples : les solides ioniques, les molécules polaires, les espèces chargées, les alcools à courtes chaînes \dots
+
+\subsection{Solutions de molécules hydrophobes}
+
+Ce sont les molécules peu solubles dans l'eau, par exemple les molécules apolaires. 
+
+\begin{align}
+	X_{lim} = e^{\frac{- \Delta F_t}{RT}} \qquad W>0 \\
+	&= e^{- \frac{W}{RT}}e^{\frac{\Delta S_t}{T}} \\
+	\txt{Pour } N_2 & \qquad X_{lim} \ll 1 \quad \Rightarrow \quad \Delta F_t \gg RT \\
+\end{align}
+
+Donc $X_{lim}$ diminue quand la température augmente, donc $W<0$, effet énergétique favorable. Donc c'est que $\Delta S-t$ est négatif.
+
+
+\section{Solutions de molécules amphiphiles}
+
+Les molécules amphiphiles sont composées d'une partie hydrophile et d'une partie hydrophobe (en général une ou plusieurs chaînes carbonées). 
+
+\subsection{Introduction : des molécules localisées aux interfaces}
+
+Les molécules amphiphiles ont tendance à se positionner aux interfaces entre les milieux apolaires et les milieux aqueux. Ces molécules ont des propriétés détergentes, et sont aussi appelées tensioactifs (surfactant, en anglais). 
+
+
+Si on suit les lois qui prédisent la solubilité des chaînes carbonées en fonction du nombre de carbones de la chaîne, on sous-évalue complètement la solubilité des tensioactifs, pourquoi ? C'est grâce aux micelles. 
+
+\subsection{Micellisation}
+
+\subsubsection{Auto-association en solution}
+
+Les tensioactifs s'auto-associent en solution. Elles ont tendance à se positionner à l'interface, faisant diminuer la tension de surface du mélange (car comme elles préfèrent être à la surface, elles diminuent le coût de création d'une surface). \'A partir d'une concentration (appelée concentration micellaire critique), la tension de surface ne diminue plus : l'interface est saturée en tensioactifs. Les molécules sont donc obligées de rester dans le volume de la solution, elles forment alors des micelles en regroupant leurs parties hydrophobes les unes contre les autres, formant des sphères à l'échelle moléculaire (aux alentours de la CMC, on a toujours des micelles sphériques. On peut avoir des structures plus grosses comme des vésicules lorsqu'on augmente beaucoup la concentration). 
+
+On a pu constater l'existence des micelles sphériques et mesurer leur taille par diffusion de neutrons. On ne trouve que des objets de même taille. 
+
+\subsubsection{Structure des micelles}
+
+Le rayon des micelles est égal à la longueur de la chaîne carbonée étirée. Cependant, les queues aliphatiques sont à l'état liquide. Il s'agit d'une goutte d'hydrocarbure avec les têtes hydrophiles qui sortent à la surface. Mais pourquoi le rayon des micelles est-il la longueur de la chaîne étirée ? 
+
+On veut minimiser l'aire de contact par molécule entre les chaînes et l'eau $a = 4 \pi \frac{R^2}{N}$. Dans la micelle on a N chaînes qui remplissent le volume $\frac{4}{3}\pi \frac{R^3}{v}$ avec $v$ le volume d'une chaîne. On a donc $$a = \frac{4 \pi R^2}{\frac{4}{3v}\pi R^3} = \frac{3v}{R}$$ Pour minimiser cette aire, il faut donc maximiser $R$, or le $R$ maximal est bien la longueur d'une chaîne. 
+
+\subsubsection{\'Equilibre monomère-micelle}
+
+Regrouper les molécules en micelles est défavorable au niveau entropique. 
+
+\begin{align}
+	\mu_1 &= \mu_1^0 + RT \ln X_1 & \txt{ solution diluée }\\
+	\mu_{mic} &= \mu_{mic}^0 + RT \ln X_{mic}&\\
+	&= \mu_{mic}^0 + RT \ln \frac{X_N}{N} & \\
+	\mu_{mic} &= N \mu_1 & \txt{ équilibre }\\
+	`\mu_{mic}^0 + RT \ln X_{mic} &= N(\mu_1^0 + RT \ln X_1) & \\
+	&= N \mu_1^0 + RT \ln X_1^N & \\
+	X_{mic} &= X_1^N e^{\frac{N\mu_1^0 - \mu_{mic}^0}{RT}}&  \\
+	&= K X_1^N \qquad K = e^{- \frac{N \Delta G_{mic}}{RT}} & \\
+	\Delta G_{mic} &= \frac{\mu_{mic}^0}{ N} - \mu_1^0 &
+\end{align}
+
+$$X_N = N K X_1^N$$
+
+comme $X_1 \ll 1$ donc pour avoir $X_N \approx X_1$, il faut $K$ grand, et donc qu'il soit très favorable de faire des micelles pour qu'il s'en forme (l'effort pour faire des micelles est très grand !). C'est pour ça que les valeurs de $N$ sont en général très piquées : le nombre de configurations pour lesquelles les micelles sont favorables est très réduit. 
+
+\subsubsection{Concentration micellaire critique}
+
+\begin{align}
+	X &= X_1 + X_N \\
+	X_N &= NKX_1^N 
+\end{align}
+qui peut facilement être résolue graphiquement.
+
+La CMC n'est pas une valeur très précise, c'est une zone de transition. On trouve donc plusieurs définitions possibles de la CMC. Par exemple, la concentration pour laquelle quand on ajoute une molécule en solution, elle a autant de chance de rester seule que d'aller dans une micelle $$ \derp{}{X_1}{X} = \derp{}{X_N}{N} = \frac{1}{2}$$
+
+\begin{align}
+	& \derp{}{X}{X_1} &= 2 \\
+	& X &= X_1 + N K X_1^N \\
+	& \derp{}{X}{X_1} &= 1 + N^2 K X_1^{ N-1} \\
+	\txt{ CMC } &  \derp{}{X}{X_1} &= 2 \qquad N^2 K X_1^{N-1} = 1 \\
+	\txt{or à la CMC} & X \approx X_1 & \\
+	\txt{ donc } & N^2 K X_{CMC}^{N-1} &= 1 \\
+	& (N-1) \ln X_{CMC} &= - \ln K - 2 \ln N \\
+	& K &= e^{\frac{-N\Delta G_{mic}}{RT}}\\
+	& N & \approx N-1 \\
+	\txt{Hypothèse} & - N \frac{\Delta G_{mic}}{RT} & \gg 2 \ln N  \\
+	& X_{CMC} &= e^{\frac{\Delta G_{mic}}{RT}} 
+\end{align}
+donc la mesure de $X_{CMC}$ permet de mesure $\Delta G_{mic}$ (pourvu que l'hypothèse soit vérifiée). cf TD.
+
+\begin{align}
+	X &\gg X_{CMC} \qquad X \approx X_N & \\
+	X_N &= NKX_1^N & \\
+	X_1 &= \left( \frac{X_N}{NK} \right)^{1/N} \approx \frac{X^{1/N}}{NK} & \\
+	\mu_1 &= \mu_1^0 + RT \ln X_1 = \dots + \frac{RT}{N} \ln X \qquad & \txt{ si } X \gg X_{CMC} \\
+	\mu_1 &= \mu_1^0 + RT \ln X \qquad & \txt{ si } X \ll X_{CMC} 
+\end{align}
+
+\subsection{Tensio-actif ioniques}
+
+\subsection{Autres géométries de micelles}
+
+On appelle $a_0$ l'aire optimale par tête et $l$ la longueur de la chaîne aliphatique étirée. 
+
+\subsubsection{Facteur géométrique}
+
+\begin{align}
+	p &= \frac{v}{a_0 l}\\
+	v &\txt{ volume de la queue}\\
+	l &\txt{longueur de la queue}\\
+\end{align}
+
+Micelle sphérique de rayon $R$ (partie aliphatique)
+\begin{align}
+	V &= Nv = \frac{4\pi}{3}R^3\\
+	S &= N a_0 = 4 \pi R^2\\
+	\frac{v}{a_0} &= \frac{R}{3}\\
+	R<l \quad & \frac{3v}{a_0}<l \quad \frac{v}{a_0 l}<\frac{1}{3} \\
+\end{align}
+
+lorsque $p<\frac{1}{3}$, les micelles sont sphériques. Pour $p>\frac{1}{3}$, on forme des micelles cylindriques. 
+Pour une micelle cylindrique 
+\begin{align}
+	V &= h \pi R^2\\
+	S &= h 2 \pi R \\
+	\frac{v}{a_0} &= \frac{R}{2}
+\end{align}
+On doit avoir $p<\frac{1}{2}$. 
+
+Pour $p>\frac{1}{2}$, on forme des bicouches. Pour $p>1$, on forme des micelles inverses. 
+
+
+\subsubsection{Micelles cylindriques}
+
+Elles sont refermées au bout, et dans les bouts, les molécules ne sont pas dans une configuration optimale. Pour diminuer le coût relatif des bouts, il faut allonger le cylindre au maximum, mais cela a un coût entropique. C'est un compromis qui dépend de $X$, $\moy{N} \propto \sqrt{X}$  et distribution en taille large $\Delta N \propto \sqrt{X}$. 
+
+Les longues micelles donnent des solutions viqueuses (par exemple SDS + sel dans les shampooings). 
+
+\subsubsection{Diagramme de phase des solutions de TA}
+
+cf diagramme sur le poly distribué en cours. 
+
+\section{\'Emulsions}
+
+\subsection{Généralités}
+
+\subsubsection{Définition}
+C'est un mélange intime de liquides très peu miscibles. C'est une dispersion de petites gouttes de l'un dans l'autre. Pour $2R\gg1 \mu m$ : macroémulsion (lait frais entier). pour $2R \approx 100nm - 1 \mu m $ : miniémulsion (lait écrémé homogénéisé).Pour $2R < 100 nm$ on parle de nanoémulsion. 
+
+Le terme de microémulsion est réservé pour des systèmes thermodynamiquement stables. 
+
+\subsection{Propriétés physiques des émulsions}
+
+Rhéologie : mélange de 2 liquides qui coulent ou pas selon les conditions. Par exemple, la vinaigrette est une macroémusion diluée d'eau dans l'huile (émulsion inverse), est liquide. La mayonnaise, émulsion d'huile dans l'eau (dite directe) concentrée : on obtient un fluide à seuil. 
+
+Ces liquides sont "laiteux" à cause de la diffuion de la lumière par les gouttes. Les miniémulsions ou nanémulsions sont transparentes, car la taille des gouttes est inférieure aux longueurs d'onde visibles. 
+
+\subsection{Instabilité des émulsions}
+
+\subsubsection{Coût des interfaces}
+
+Gouttes d'huiles de rayon $R = 10 \mu m $ 
+\begin{align}
+	v &= \frac{4 \pi}{3} R^3 \\
+	n &= \frac{V}{v} = \frac{10^{-6}}{4.10^{-15}} \approx 25.10^{8} \\
+	s &= 4 \pi R^2\\
+	S_{tot} &= n 4 \pi R^2 = \frac{3V}{R} \approx 0,3m^2 \\
+	W_{min} &= \gamma \Delta S \approx \gamma S_{tot} = 50 mN/m * 0,3 m^2 \\
+	W_{min} &= 15 mJ 
+\end{align}
+
+Si $R=1 \mu ^m$, 10 fois moins de travail à fournir. En dispersant, on réalise un fain entropique d'environ $kT$ par goutte. Si $\Delta F <0$, on a une émulsion stable. 
+\begin{align}
+	\Delta F < 0 & \quad \Leftrightarrow \quad n(4 \pi R^2 \gamma - kT)0 \\
+	R & < \sqrt{\frac{kT}{4 \pi \gamma}} \\
+	\gamma &=50mN/m \\
+	kT &= 4.10^{-2}\\
+	R< 10^{-10}m \\
+\end{align}
+c'est à dire une solution d'huile dans l'eau ! 
+
+Pour avoir $R \approx 10nm$, il faut $\gamma<3.10^{6}N/m$, ce qui est très très faible. 
+
+Pour diminuer $\gamma$, on utilise des tensioactifs, en génétal $\gamma_{min} \approx 5 mN/m $. 
+
+Conclusion : Avec des tensio-actifs ou des mélanges de tensio-actifs très particuliers, on peut obtenir $\gamma$ très faible et donc des microémulsions. 
+
+En général, les émulsions ne sont pas des états thermodynamiquement stables, mais on peut les rendre métastables. 
+
+\subsection{Stabilisation des émusions}
+\subsubsection{Tension interfaciale eau-huile en présence de tensio-actifs}
+
+Film de tensio-actifs : aire optimale $a_0$ + courbure optimale $\frac{1}{R_0}$ 
+
+$$F = F_{min} + \iint \ud S \left[\frac{1}{2}K(a-a_0)^2 + \frac{1}{2} \kappa_c \left(\frac{1}{R_1} + \frac{1}{R_2} - \frac{2}{R_0}\right)^2 + \kappa_g \frac{1}{R_1}\frac{1}{R_2}\right] $$
+$a$ est l'aire par molécule. $K$ est le module léatique de dilatation du film, $\kappa_c$ le module élastique de courbure du film, et $\kappa_g$ le module élastique de courbure gaussienne du film. 
+
+$$R1,R_1 \gg R_0  \qquad R_1 = R_2 = R $$
+\begin{align}
+	F &= F_{min} + \iint \ud S \left[ K \frac{(a-a_0)^2}{2} + \frac{4\kappa_c}{R_0^2} + \frac{\kappa_g}{R^2} \right]\\
+	&= F_{min} + S \left[K \frac{(a-a_0^2)}{2} + \frac{4 \kappa_c}{R_0^2} \right]\\
+	\gamma &= \derp{}{F}{S} =\frac{1}{2} K (a-a_0)^2 + \frac{4 \kappa_c}{R_0^2} \\
+\end{align}
+Interface saturée $a=a_0$, mais $\gamma$ ne s'annule pas pour autant, à cause du défaut de courbure. 
+
+Pour avoir $\gamma$ résiduelle ultra-basse, il faut que $\frac{1}{R_0}\approx 0$ conditions très particulières. 
+
+Afin de rendre une émulsion métastable, il faut y rajouter des émulsifiants, dont le rôle n'est pas seulement celui de tensio-actif, mais aussi celui de pare-choc : empêcher les gouttes de coalescer.
+
+ \subsection{Dégradation des émulsions}
+ 
+ \subsubsection{Sédimentation/Crémage}
+ 
+ $$\vec{v}_{lim} = \frac{2}{9} \frac{\Delta p R^2}{\eta} \vec{g}$$
+ 
+ \subsubsection{Mûrissement d'Ostwald}
+ 
+ cf TD
+ 
+ \section{Dispersions}
+ 
+ \subsection{Généralités}
+ 
+ Les dispersions solide-liquide sont es particules solides dispersées dans un liquide. Lorsque la taille des particules est supérieure à 1µm, la dispersion est très sensible à la sédimentation, lorsque qu'elle est plus petite, on parle de suspension colloïdale, et l'agitation thermique est suffisamment efficace pour contrer la sédimentation. 
+ 
+ Exemples : le sang, l'eau des rivières (suspension très diluée), les argiles (suspension très concentrée), les peintures, les dentifrices \dots
+ 
+\subsection{Métastabilité des dispersions}
+
+Attraction de VdW, entre deux particules de rayon $a$, séparées de $r$. si $r \gg a$, on a 
+$$W(r) = - A_{12} \left(\frac{4}{3}\right)^2 \left( \frac{a}{r} \right)^6 $$
+
+$$A_{12} = C_{12}\Pi^2 \rho_1^2$$
+
+si $r \ll a$ : 
+$$W(r) = - A_{12}\frac{a}{12r}$$
+
+Les particules ont tendanc eà s'agréger, on dit que la suspension flocule. En général, il n'y a pas de fusion des particules, sauf si les surfaces sont réactives, mais les agrégats sédimentent. 
+
+On emploie le même type de stratégie que pour les émulsions pour maintenir une métastabilité, en créant des pare-chocs stériques et/ou ioniques. 
+
+\subsection{Dispersions aqueuses de particules chargées}
+
+Exemple : Si02, charge de surface négative (c'est souvent le cas). 
+
+Particule en milieu aqueux : macro-ion de charge $Ze \qquad Z<0$. 
+
+Effet à très courte portée : les ions surfaciques sont hydratés, la déshydratation coûte cher. Effet à moyenne portée : répulsion ionique entre surfaces de même charge. 
+
+\subsubsection{Répartition des petits ions autour d'un macro-ion}
+
+Un macro-ion avec une charge $Ze$, et autour de lui des contre-ions (et éventuellement des sels). On appelle $c_i$ le nombre d'ions $i$ par $m^3$, qui dépend de la position $\vec{r}$ car le potentiel $\Psi(\vec{r})$ aussi. $\mu_i$ le potentiel chimique est uniforme dans la solution diluée : 
+$$\mu_i = \mu_i^0 + kT \ln X_i(\vec{r}) + z_i e \Psi(\vec{r}) = cste$$
+
+Pour $\Psi=0$ $c_i = c_i^{\infty}$.
+
+$$\mu_i^0 + z_i z \Psi + kT \ln \frac{c_i}{c_i^{eau}} = \mu_i^0 + kT \ln \frac{c_i^{\infty}}{c_i^{eau}}$$
+
+$$c_i = c_i^{\infty} e^{- \frac{z_i e \Psi}{kT}}$$ loi de Boltzmann.
+
+$\Psi$ est créé par les macro-ions et les petits ions. $\Psi$ vérifie l'équation de Poisson :
+
+$$ \Delta \Psi + \frac{1}{\epsilon_0 \epsilon_r}\rho(\vec{r}) = 0 $$
+
+Pour $r>a$ : 
+\begin{align}
+	\rho(\vec{r}) &= \sum_i z_i z c_i(\vec{r}) \\
+	&= \sum_i z_i e c_i^{\infty}e^{- \frac{z_i e \Psi}{kT}} \\
+	\Delta \Psi + \frac{1}{\epsilon_0\epsilon_r}\sum_i z_i e c_i^{\infty}e^{- \frac{z_i e \Psi}{kT}} &= 0 \\
+\end{align}
+équation de Poisson-Boltzmann. Cette équation n'a en général pas de solutions analytiques. 
+
+\subsubsection{Linéarisation, longueur de Debye}
+
+$$\left| \frac{e \Psi}{kT} \right| \ll 1$$ partout
+
+\begin{align}
+	e^{- \frac{z_ie \Psi}{kT}} & \approx 1 - \frac{z_i e \Psi}{kT}\\
+	\phi &= \frac{e\Psi}{kT}\\
+	\frac{kT}{e}\Delta \phi + \frac{-e}{\epsilon_0\epsilon_r} \sum_i z_i c_i^{\infty} (1 - z_i \phi) &= 0 \\
+	\sum_i z_i c_i^{\infty} &= 0 
+\end{align}
+en général (neutralité électrique, assurée par les sels). 
+
+\begin{align}
+	\Delta \phi &= \kappa^2 \phi \\
+	\kappa^2 &= \frac{e^2}{\epsilon_0 \epsilon_r kT} \sum_i z_i^2 c_i^{\infty} \\
+	&= 4 \pi l_B \sum_i z_i^2 c_i^{\infty}\\
+\end{align}
+$\kappa^{-1}$ est la longueur de Debye. 
+
+\begin{align}
+	\Delta \Psi &= \frac{1}{r} \derp{2}{}{r}(r\Psi) \\
+	&= \frac{1}{r} \kappa^2(r \Psi)\\
+	r \Psi &= A e^{- \kappa r} + Be^{\kappa r}\\
+\end{align}
+
+Quand $r \rightarrow \infty$, $\Psi$ doit tester borné, donc $B=0$. Quand $r=a$ : 
+\begin{align}
+	4 \pi a^2 E &= \frac{Ze}{\epsilon_0 \epsilon_r} \txt{th. de Gauss}\\
+	- \der{\Psi}{r} &= \frac{Ze}{4 \pi \epsilon_0 \epsilon_r a^2}\\
+	\Psi &= \frac{A}{r}e^{- \kappa r} \\
+	\der{\Psi}{r} &= -A \frac{e^{-\kappa r}}{r^2}(1 + \kappa r) \\
+	A e^{- \kappa a}(1 + \kappa a) &= \frac{Ze a^2}{4 \pi \epsilon_0 \epsilon_r a^2}\\
+	\Psi(\vec{r}) &= \frac{Ze}{4 \pi \epsilon_0 \epsilon_r r}\frac{e^{- \kappa (r-a)}}{1 + \kappa a}\\
+\end{align}
+$\frac{Ze}{4 \pi \epsilon_0 \epsilon_r r}$ potentiel électrique créé par le macro-ion seul. Le potentiel est écranté par le nuage de contre-ions. La longueur de Debye est une longueur d'écrantage. 
+
+$$\kappa^2 = 4 \pi l_B \sum z_i^2 c_i^{\infty}$$
+
+NaCl en excès par rapport aux CI : 
+\begin{align}
+	\kappa^2 &= 4 \pi l_B \left[ (-1)^2 c_-^{\infty} + (1)^2 c_+^{\infty}\right]\\
+	c_-^{\infty} &= c_+^{\infty}\qquad \txt{électroneutralité}\\
+	\kappa^2 &= 8 \pi l_B c^{\infty}\\
+\end{align}
+
+Par exemple pour une solution NaCl à $10^{-2}$mol/L, $\kappa^{-1} = 3nm$ ! Il suffit de peu de sel pour écranter beaucoup. Pour le sérum physiologique, $\kappa^{-1}\approx 0,8nm$. 
+
+\subsubsection{Interaction entre les macro-ions}
+
+Macro-ions éloignés, faible recouvrement entre $\Psi_1$ et $\Psi_2$. 
+$$W_{12} \approx Ze \Psi(\vec{r}) = \frac{(Ze)^2}{4 \pi \epsilon_0 \epsilon_r r} \frac{e^{-\kappa(r-a)}}{1 + \kappa a}$$
+répulsion à courte portée. 
+
+Si on tient compte de la taille de 2 : 
+$$W_{12} \approx \frac{(Ze)^2}{4 \pi \epsilon_0 \epsilon_r r}\frac{e^{- \kappa (r-2a)}}{(1 + \kappa a)^2}$$
+
+\subsection{Interactions entre particules plaquettaires}
+
+\subsubsection{Modèle}
+
+On prend des plaquettes parallèles, de taille latérale $L$ et normales à l'axe $x$. Elles sont séparées de la distance $\ell$, avec $\ell \ll L$. La charge de surface est $- \sigma e$. On n'ajoute pas de sel. Concentration des contre-ions autour des plaquettes : $c$. 
+
+$$c(x) = c(0) e^{- \frac{e\Psi}{kT}} $$
+on choisit l'origine des potentiels en $x=0$. 
+
+Poisson-Boltzmann : 
+\begin{align}
+	\Delta \Psi + \frac{e c(0)}{\epsilon_0 \epsilon_r} e^{- \frac{e\Psi}{kT}} &= 0 \\
+	\derp{2}{\Psi}{x} + \frac{e c(0)}{\epsilon_0 \epsilon_r} e^{- \frac{e\Psi}{kT}} &= 0\\
+\end{align}
+Les conditions aux limites : 
+\begin{align}
+	E(\frac{\ell}{2}) &= - \frac{\sigma e}{2 \epsilon_0 \epsilon_r} \\
+	E(\frac{\ell}{2}^+) - E(\frac{\ell}{2}^-) = \frac{-2 \sigma e}{\epsilon_0 \epsilon_r}\\
+\end{align}
+La solution est de la forme : 
+\begin{align}
+	\Psi(x) &= \frac{2 kT}{e}\ln \cos \frac{\kappa x}{\sqrt{2}}\\
+	\kappa^2 &= 4 \pi k_B c(0)\\
+\end{align}
+La valeur de $c(0)$ est donnée par : 
+$$ - \derp{}{\Psi}{x}(x = \frac{\ell}{2}) = \frac{\sigma e}{\epsilon_0 \epsilon_r}$$
+On obtient donc : 
+$$ \tan \frac{\kappa \ell}{2 \sqrt{2}} = \frac{\sqrt{2}}{\kappa \lam}$$
+où $\lam$ est la longueur de Gouy-Chapman : 
+$$\lam = \frac{2 kT \epsilon_0 \epsilon_r}{\sigma e^2}$$
+
+La comparaison de la longueur $\lam$ et de la distance entre les plaques $\ell$ nouse permet de savoir si l'on est dans un régime de plaques proches $\ell \ll \lam$ où la concentration est homogène entre les plaques, ou dans un régime de plaques éloignées $\ell \gg \lam$, où les contre-ions sont condensés sur les plaquettes. 
+
+\'Energie d'interaction électrostatiques entre deux surfaces en regard, par unité de surface : 
+\begin{align}
+	W_{12} &= W_{12 \txt{direct}} + W_{1 \txt{contre-ion}}\\
+	P &= (- \sigma e)E_1 + (- \sigma e)E_{C-I}\\
+	&= (- \sigma e)(- \frac{\sigma e}{2 \epsilon_0 \epsilon_r}) - \int_{- \frac{\ell}{2}}^{+ \frac{\ell}{2}} e c(x)\frac{\sigma e}{2 \epsilon_0 \epsilon_r} \ud x \\
+	&= \frac{(\sigma e)^2}{2 \epsilon_0 \epsilon_r} - \frac{(\sigma e)^2}{\epsilon_0 \epsilon_r} \\
+	&= - \frac{(\sigma e)^2}{2 \epsilon_0 \epsilon_r} <0
+\end{align}
+Les interactions électrostatiques sont globalement attractives. Il faut en fait prendre en compte la pression osmotique : 
+
+\begin{align} 
+	P_{tot} &= P_{ES} + \Pi \\
+	&= - \frac{(\sigma e)^2}{2 \epsilon_0 \epsilon_r} + kT c(\frac{\ell}{2})\\
+\end{align}
+
+Or 
+\begin{align}
+	c(x) &= c(0) e^{- \frac{e \Psi}{kT}}\\
+	\der{c}{x} &= - \frac{e }{kT} (0) e^{- \frac{e \Psi}{kT}} \der{\Psi}{c}\\
+	\derp{2}{\Psi}{x} &= - \frac{e c(0)}{\epsilon_0 \epsilon_r} e^{- \frac{e \Psi}{kT}} \\
+	\der{c}{x} &= \frac{\epsilon_0 \epsilon_r}{kT} \derp{2}{\Psi}{x} \der{\Psi}{x} \\
+	&= \frac{\epsilon_0 \epsilon_r}{2 kT} \der{}{x}\left(\der{\Psi}{x} \right)^2 \\
+	&= \frac{\epsilon_0 \epsilon_r}{2kt}\der{E^2}{x} \\
+	c(x) &= c(0) + \frac{\epsilon_0 \epsilon_r}{2kT}E^2 \\
+	c_s &= c(\frac{\ell}{2}) = c(0) + \frac{\epsilon_0 \epsilon_r}{2kT}E_s^2 \\
+	E_s &= \frac{\sigma_e}{\epsilon_0 \epsilon_r} \\
+	c_s &= c(0) + \frac{(\sigma e)^2}{2 \epsilon_0 \epsilon_r kT} \\
+	P_{tot} &= kT c(0) \\
+\end{align}
+
+Pour faire passer $\ell$ à $\ell + \ud \ell$ 
+\begin{align}
+	\ud U &= \delta W + T \ud S \\
+	\delta W^{min} = \ud U = (\mu_{eau} + \mu_{eau}^*)\ud n_{eau}\\
+	\ud n_{eau} &= \frac{A \ud \ell}{v}\\
+	\Pi &= \frac{\mu_{eau} - \mu_{eau}^*}{v} \\
+	\delta W &= - \Pi A \ud \ell \\
+	P_{eff} &= \Pi \\
+\end{align}
+
+S'il y a des réservoirs dans la solution, $$P_{eff} = \Delta \Pi = \Pi - \Pi_{\txt{réservoirs}} $$
+
+Solution diluée : 
+\begin{align}
+	\mu_{eau} &= \mu_{eau}^* - kT v c(x) = \mu^*_{eau} + \frac{\epsilon_0 \epsilon_r E^2}{2}c  - v kT c(x) \\
+	\txt{diélectrique } & e^{vol} \frac{\epsilon_0\epsilon_r E^2}{2}\\
+	\Pi &= kT \left[ c(x) - \frac{\epsilon_0 \epsilon_r E^2}{2 kT}
+\end{align}
+
+\end{document}

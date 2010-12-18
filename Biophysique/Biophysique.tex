@@ -1,0 +1,1428 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\newcommand{\lam}{\lambda}
+\newcommand{\txt}[1]{\textrm{#1}}
+\newcommand{\moy}[1]{\langle #1 \rangle}
+\newcommand{\ud}{\mathrm{d}}
+\newcommand{\der}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+\newcommand{\derp}[3]{\frac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newcommand{\bbar}[1]{\bar{\bar{#1}}}
+\usepackage{hyperref}
+%Joanny  : jean-françois.joanny@curie.fr
+
+%Molecular Biology of the cell (1500 pages renouvelées tous les 5 ans), Essentials of celle biology (B.Alberts)
+
+%Physical Biology of the cell - Phillips-Theriot
+%Biological Physics - P.Nelson
+
+
+\begin{document}
+
+\tableofcontents
+
+\newpage
+
+\section{La cellule}
+
+On va s'intéresser à la cellule à trois échelles de tailles : l'échelle moléculaire ($10^{-8}$m-µm), l'échelle cellulaire (1-50 µm), l'échelle du tissu. 
+
+\subsection{Physiologie de la cellule}
+
+Les cellules sont très variées, elles peuvent avoir des propriétés très différentes. Elles peuvent être séparées en différents types (de l'ordre de la centaine pour l'homme). Par exemple, les neurones, les cellules du système immunitaire \dots Les types cellulaires se retrouvent d'un organisme à l'autre. 
+
+ Cellules consommant de l'énergie (chimique, lumineuse) pour la transformer en énergie mécanique, ou provoquer des réactions chimiques métaboliques. La cellule est donc toujours un système thermodynamique hors-équilibre.
+
+Source locale d'énergie hydrolyse ATP $\rightarrow$ ADP + P (qui donne environ 25kT).
+
+Les cellules doivent produire des molécules (100 000 protéines). 
+
+Uri Alon - Introduction to system biology
+
+Les cellules se divisent (par mitose et méiose). 
+
+Propriétés électriques (différence de potentiel avec l'extérieur. Propgation de signal : potentiel d'action. Hodefier-Huxley. 
+
+Propriétés motrices : les cellules se déplacent (en nageant, en rampant sur des surfaces) à des vitesses de l'ordre µm/min.
+
+Matrice extra-cellulaire + lymphocytes + système immunitaire.
+
+Métastases 
+
+Biologie du développement
+
+Les cellules communiquent avec leur environnement. Cela régule leur croissance, leur composition. Différenciation cellulaire (à partir des cellules souches). Par exemple une cellule souche neuronale posée sur un substrat mou fera un neurone ou une cellule gliale en fonction du module d'Young du substrat. 
+
+Les cellules peuvent adapter leur comportement. Elles peuvent détecter des signaux (souvent grâce à leurs cils). 
+
+\subsection{Structure interne des cellules}
+
+
+Procaryotes : bactéries. Petites cellules de taille typique un micron sans noyau. Leur ADN est circulaire. Elles ont une membrane rigide et se meuvent grâce à leur flagelle. 
+
+
+Eucaryotes : champignons, plantes, animaux. Elles sont 10 à 50 fois plus grosses que les procaryotes. Elles ont un noyau qui contient leur ADN. Membrane plasmique fluide (rigide pour les plantes et certaines levures). Entre le noyau et la membrane, on trouve le cytoplasme. Il est compartimenté. Les mitochondries produisent l'énergie de la cellule. Les appareils de Golgi fait le tri entre les protéines dans la cellule. Le réticulum endoplastique est le lieu de la synthèse des protéines. Les endosomes servent à faire entrer des protéines dans la cellule. L'actine qui définit l'élasticité de la cellule, les microtubules qui servent de rails sont deux types de filaments notables.
+
+\section{Molécules biologiques}
+
+Phospholipides : comme les tensioactifs, ont une partie hydrophobe et une partie hydrophile. Ils composent des membranes. Ces molécules vont s'agréger pour formes des plans d'épaisseur 3nm en moyenne, qui vont former des vésicules. Il n'y en a pas qu'un seul type dans une membrane (il y a par exemple des marqueurs). 
+
+Acides nucléiques : Squelette : groupements phosphates. Empilement de bases ATGC pour l'ADN, AUGC pour l'ARN. Hélice de pas 3.4nm. Brins complémentaires et polaires pour l'ADN, brin simple pour l'ARN. 
+
+Protéines : cf le cours de biophysique de l'année précédente sur les protéines. 
+
+
+\section{Transcription, traduction}
+
+Réplication de l'ADN. Le code génétique est composé d'une séquence de bases. Il code pour l'expression des protéines (pour les cellules eucaryotes). 
+
+\subsection{Transcription}
+
+L'ADN est transcrit en ARN messager par l'ARN polymérase, qui se déplace sur un brin d'ADN. Pour trouver le début du code d'un gène, elle chercher le brin promoteur (on ne sait pas vraiment comment). Ensuite, elle a besoin des facteurs de transcription qui sont des protéines qui doivent se fixer à l'ADN pour que la transcription se fasse. Les facteurs de transcription sont différents dans chaque type de cellule (ce qui fait que tous les gènes ne sont pas exprimés dans toutes les cellules). L'ADN polymérase se déplace alors le long du brin d'ADN pour lire le code. Il y a ensuite un mécanisme de correction d'erreurs. 
+
+\subsection{Traduction}
+
+L'épissage consiste à enlever des parties de l'ARN, en particulier les introns et les exons. Ensuite, l'ARN est transcrit en protéine. Un codon est une séquence de trois bases consécutives, et code pour un acide aminé. Un même acide aminé peut être codé par plusieurs codons différents (le code est redondant). Le ribosome est composé de 2 ARN et 42 protéines associées et transcrit l'ARN en protéine. Cela se fait dans le réticulum endoplasmique. 
+
+\subsection{Réplication de l'ADN}
+
+L'ADN polymérase + hélicase. 
+
+\section{ADN : Courbure et torsion}
+
+C'est une hélice de 3.4 nm de pas. Il y a 10,4 paires de base par tour. 
+
+\subsection{Polymères gaussiens}
+
+Ce modèle est en général applicables aux polymères synthétiques. On appelle $\vec{a}_i$ le vecteur qui représente un monomère. On considère que $||\vec{a}_i ||$ est une constante. On appelle $\vec{R}$ la distance entre les deux extrêmités du polymère. 
+
+$$\vec{R} = \sum_i \vec{a}_i$$
+
+On a donc 
+\begin{align}
+	\moy{\vec{R}} &= 0 \\
+	\moy{\vec{R}^2} &=\moy{\sum_{ij} \vec{a_i}\vec{a_j}} \\
+	&= Na^2 
+\end{align}
+
+On cherche la loi de distribution de $\vec{R}$
+
+Avec le Théorême de la Limite Centrale : 
+
+$$G_N(\vec{R}) = \frac{1}{(\frac{2\pi Na^2}{d})^{d/2}}e^{\frac{- d}{2} \frac{R^2}{Na^2}}$$
+
+On vérifie bien que 
+$$\int G_N(\vec{R}) \ud \vec{R} = 1 $$
+$$\int G_N(\vec{R}) \vec{R} \ud \vec{R} = \vec{0}$$
+$$ \int G_N(\vec{R}) \vec{R}^2 \ud \vec{R} = Na^2$$
+
+Si on fixe la distance entre les deux extrêmités. 
+
+$$Z_N(\vec{R}) = Z_N G_N(\vec{R})$$
+
+Entropie : $$ S = k \ln Z_N(\vec{R}) = S_0 \frac{kd}{2} \frac{R^2}{Na^2}$$
+
+\'Energie libre : $$ F = U-TS = F_0 + \frac{kTd}{2} \frac{\vec{R}^2}{Na^2}$$
+
+Le comportement est donc celui d'un ressort. (Attention ça ne marche pas pour les trop grandes forces). 
+
+Description continue : On considère un très grand polymère. On fixe $p$ un nombre de monomères suffisamment grand pour que le bout de polymère soit gaussien : $$G_N(\vec{r}_1,\dots \vec{r}_N/p) = G_p(\vec{r_1} - \vec{r_0})G_p(\vec{r_2}- \vec{r_1}) \dots G_p(\vec{r_{N/p}} - \vec{r_{N/p -1}}) $$
+
+\begin{align}
+	G_p(\vec{r}) &= cste e^{\frac{-3r^2}{3pa^2}} = cste e^{\frac{-H}{kT}} \\
+	H &= \frac{3}{2} \frac{kT}{pa^2}\sum_i (\vec{r_{i+1}} - \vec{r_i})^2 \\
+	&= \int_0^{N/p} \frac{3kT}{2pa^2}\left( \derp{}{\vec{r_i}}{i} \right)^2  \quad s=ipa \txt{ abscisse curviligne}\\ 
+	&= \int_0^{Na} \frac{3}{2} \frac{kT}{a} \left( \derp{}{\vec{r}}{s} \right)^2 \ud s \\
+	G_N(\vec{r}(s)) = \frac{1}{2} e^{\frac{-H}{kT}}
+\end{align}
+
+Fonction de partition : 
+
+\begin{align}
+	Z &= \int_{\txt{courbes} \vec{r}(s)} e^{- H[\vec{r}(s)]/kT} = \int_{\mathcal{R}(s)}e^{\frac{3}{2a}\int_0^{L=Na}\ud s (\derp{}{\vec{r}}{s})^2} \\
+	&= \int \mathcal{D}\vec{r} e^{\frac{-H[\vec{r}[.]]}{kT}}
+\end{align}
+C'est une intégrale fonctionnelle. 
+
+\subsection{Polymères semi-rigides}
+
+$$\vec{t}(s) = \left( \derp{}{\vec{r}}{s} \right) \quad |\vec{t}| =1 $$
+$$\derp{}{\vec{t}}{s} = C \vec{n}$$
+avec $C$ la courbure. $a$ est le diamètre du polymère.
+
+\subsubsection{Longueur de persistance}
+
+$$\mathcal{H} = \frac{kTl_p}{2} \int_0^L \ud s C^2 $$
+
+$l_p$ est la longueur de persistance : $$l_p \approx \frac{E}{kT}a^4$$
+
+\subsubsection{Fonction de partition}
+
+\begin{align}
+	Z &= \int \mathcal{D} \vec{r}[.] e^{\frac{-l_p}{2} \int_0^L  \ud s \derp{2}{\vec{r}}{s}} \\
+	&= \int \mathcal{D} \vec{t}[.] e^{\frac{-l_p}{2} \int_0^L \ud s \left( \derp{}{\vec{t}}{s} \right)^2} \\
+	\mathcal{H} &= kT \frac{l_p}{2} \sum_i a \left[ \frac{\vec{t_{i+1}} - \vec{t_i}}{a} \right]^2 \\
+	&= \frac{kT l_p}{2a} \sum_i (2 - 2 \vec{t}_{i+1} \vec{t}_{i}) = \txt{cste}- \frac{kTl_p}{a} \sum_i \vec{t}_{i+1}\vec{t} 
+	\end{align}
+	C'est le modèle de Heisenberg (comme le modèle d'Ising mais avec une orientation quelconque) à une dimension. 
+	
+\begin{align}
+	Z &= \sum_{conf} e^{\sum \frac{l_p}{a} (\vec{t}_{i+1}  \vec{t}_{i})} = \mathcal{S}^N \\
+	\mathcal{S} &= \sum_{\txt{\parbox{1cm}{orientations de $t_i$}}} e^{\frac{l_p}{a}\vec{t}_{i+1}\vec{t}_i} \\
+	&= \int_0^1 \frac{2 \pi \sin \theta \ud \theta}{4 \pi} e^{\frac{l_p}{a} \cos \theta} \\
+	&= \frac{1}{2} \int_{-1}^1 \ud u e^{\frac{l_p}{a}u} \quad u=\cos \theta \\
+	&= \frac{sh(\Xi)}{\xi} \quad \xi = \frac{l_p}{a} \\
+	Z &= \left( \frac{sh \xi}{\xi} \right)^N \\
+\moy{\vec{t}_{i+1}\vec{t}_{i}} &= \moy{\cos \theta} = \derp{}{\ln \xi}{\xi} \\
+\moy{\cos \theta} &= \frac{1}{\mathcal{S}} \int_0^{\pi} \frac{2 \pi \sin \theta \ud \theta }{4 \pi} e^{\xi \cos \theta} \cos \theta \\
+\moy{\vec{t}_{i+1}\vec{t}_{i}} &= \derp{}{}{\xi}(\ln sh \xi) - \derp{}{}{\xi}\ln \xi \\
+&= \coth \xi - \frac{1}{\xi} \\
+\moy{\vec{t}_{N+1}} &= \vec{t_N}\moy{\vec{t}_{N+1}\vec{t}_N} \\
+&= \vec{t}_N (\coth \xi - \frac{1}{\xi}) \\
+\moy{\vec{t}_0 \vec{t}_N} &= (\coth \xi - \frac{1}{\xi})^N \\
+\moy{\vec{t}_0 \vec{t}_s} &= (\coth \xi - \frac{1}{\xi})^{Na/a} \\ 
+&= e^{\frac{s}{a} \ln [\coth \xi - \frac{1}{\xi}]} \quad s=Na \\
+\ln \left[ \coth \xi - \frac{1}{\xi} \right] & \approx \ln (1- \frac{a}{l_p}) = \frac{-a}{l_p}
+\end{align}
+
+\begin{align}
+	\moy{\vec{t}_0 \vec{t}_s} = e^{\frac{-s}{l_p}} \\
+	s < l_p \quad \moy{\vec{t}_0 \vec{t}_s} = 1 \txt{ comportement de bâton } \\
+	s \gg l_p \quad \moy{\vec{t}_0 \vec{t}_s} = 0 \txt{ orientation aléatoire} \\
+\end{align}
+
+\subsubsection{Distance entre extrêmités}
+
+\begin{align}
+	\vec{R} &= \int_0^L \ud s \left( \der{\vec{r}}{s} \right) = \int_0^L \vec{t}(s) \ud s \\ 
+	\moy{\vec{R}(s)} &= 0 \\
+	\moy{\vec{R}^2(s)} &= \moy{ \int_0^L \ud s \vec{t}(s) \int_0^L \ud s' t(s')} \\
+\end{align}
+On va intégrer deux fois sur le triangle : 
+\begin{align}
+	\moy{\vec{R}^2(s)} &=2 \int_0^L \ud s \int_0^s \ud s' e^{-\frac{s-s'}{l_p}} \\
+	&= 2 Ll_p \left[ 1 + \frac{l_p}{L}(1 - e^{- \frac{L}{l_p}}) \right]
+\end{align}
+
+Si $L \ll l_p$ c'est un bâton $\moy{R^2(L)} = L^2$ (la longueur d'un bâton). Si $L \gg l_p$ , on a $\moy{R^2} = 2 L l_p$ : au bout de $l_p$, on a perdu la mémoire de l'orientation et on oriente aléatoirement. Il s'agit en gros d'un polymère gaussien de maille $l_p$ (mais si on fait cette approximation on perd un facteur 2). 
+
+ \subsubsection{Force exercée sur l'ADN, cas des forces faibles}
+ 
+ Réponse linéaire à une force : 
+ 
+\begin{align}
+	\moy{R} = \lambda f \\
+	\lambda &= \frac{\moy{R^2_z}_0}{kT} \\
+\end{align}
+
+$R_z$ composante de $\vec{R}$ suivant $\vec{f}$ . $\moy{}_0$ valeur moyenne pour une force nulle. 
+
+$H_0$ en l'absence de force. Avec une force : 
+$$ H = H_0 - \vec{f}\vec{R} \quad \moy{\vec{R}} = \frac{\sum_{états}e^{-H\beta}\vec{R}}{\sum_{états}e^{-H\beta}} $$
+$$ \moy{R_z^2}= \frac{1}{3}\moy{R^2}_0 = \frac{2Ll_p}{3} $$
+
+Fonction de réponse : $$\xi = \frac{2}{3}\frac{Ll_p}{kT}$$
+
+On peut tester cette prédiction expérimentalement pour des forces de l'ordre de $10^{-13}$N. 
+
+\subsubsection{Cas des grandes forces : utilisation de la courbure}
+
+Polymère semi-rigide. On va considérer la courbure du polymère. On appelle $\vec{t}$ la tangente au polymère et $z$ la direction de la force. 
+
+$$\vec{t}^2 = t_z^2 + t_{\bot}^2 \quad t_z = \sqrt{1-t^2_{\bot}} \approx 1 - \frac{t_{\bot}^2}{2} $$
+
+Hamiltonien de courbure : 
+
+\begin{align}
+	H &= \frac{kTl}{2} \int_0^L \ud s \left( \derp{}{\vec{t}}{s} \right)^2 - \vec{f}(\vec{r}(L) - \vec{r}(0)) \\
+	&= \frac{kTl}{2} \int_0^L \ud s \left( \derp{}{\vec{t}}{s} \right)^2 - \int_0^L \vec{f} \vec{t} \ud s \\
+	&= \frac{kTl}{2} \int_0^L  \left( \derp{}{\vec{t_{\bot}}}{s}\right)^2 - fL  + \int_0^L \frac{f \vec{t}_{\bot}}{2} \ud s \\
+	&= cste + \frac{kTl}{2} \int_0^L \left[ \left( \derp{}{\vec{t}_{\bot}}{s} \right)^2 + \left( \frac{f}{kTl} \right) \vec{t_{\bot}}^2 \right] \ud s \\
+	\moy{R} &= \moy{\vec{r}(L) - \vec{r}(0)} = \int_0^L t_z \ud s \vec{e_z} \\
+\end{align}
+
+Distance entre extrêmités : 
+\begin{align}
+	R &=L - \int_0^L \frac{\moy{\vec{t_{\bot}}^2}}{2} = L (1 - \frac{\moy{\vec{t_{\bot}}^2}}{2}) \\
+	& \txt{On passe en Fourier} \\
+	\vec{t}_{\bot}(s) &= \int_{- \infty}^{\infty} \frac{\ud q}{2 \pi} e^{iqs} \tilde{t_{\bot}}(q) \\
+	\tilde{t_{\bot}}(q) &= \int_{- \infty}^{\infty} \ud s \vec{t}_{\bot}(s) e^{-iqs} \\
+\end{align}
+
+On utilise le théorême de Parseval-Plancherl : $$\int fg^* \ud s = \int \tilde{f}\tilde{g}^* \frac{\ud q}{2\pi}$$
+
+L'Hamiltonien final donne : 
+\begin{align}
+	H &= \int \frac{\ud q}{2 \pi}\left[ q^2 |\tilde{t_{\bot}}(q)|^2 + \frac{f}{kTl} |\tilde{t_{\bot}}(q)|^2 \right] \\
+	&= \int \frac{\ud q}{2 \pi} |\tilde{t_{\bot}}(q)|^2 (q^2 + \frac{f}{kTl} \\
+\end{align}
+
+\'Equipartition de l'énergie : on va passer l'intégrale en somme discrète, calculer et repasser en continu (ça sent l'arnaque \dots)
+
+\begin{align}
+	H &= \frac{kTl}{2L} \sum_q |\tilde{t_{\bot}}(q)|^2(q^2 + \frac{f}{kTl}) 
+	& \txt{l'équipartition de l'énergie nous donne : }\\
+	\frac{kTl}{2} \moy{|\tilde{t_{\bot}}|^2(q)} (q^2 + \frac{f}{kTl}) &= kT \\
+	\moy{|\tilde{t_{\bot}}|^2} &= \frac{1}{l} \frac{2L}{q^2 + \frac{f}{kTl}} \\
+	\moy{\tilde{t_{\bot}}(q) \tilde{t_{\bot}}(q')} &= \frac{1}{l} \delta(q-q') \frac{2L}{q^2 + \frac{f}{kTl}} \\
+	2 \pi \delta(q-q') = L \delta(q-q') \\
+	\moy{\tilde{t_{\bot}}(q) \tilde{t^*_{\bot}}(q')} &= 2 \pi \delta(q-q')\frac{1}{l} \frac{2}{q^2 + \frac{f}{kTl}} \\
+	\vec{t_{\bot}}(s) &= \int \frac{\ud q}{2 \pi} \tilde{t_{\bot}}(q) e^{iqs}\\
+	\moy{|t^2_{\bot}|} &= \int \frac{\ud q}{2 \pi} \int \frac{\ud q'}{2 \pi} \moy{\tilde{t_{\bot}}(q)\tilde{t_{\bot}}(q')} e^{iqs-iq's} \\
+	&= \int \frac{\ud q}{2\pi} \int \frac{\ud q'}{2\pi} e^{is(q-q')} 2 \pi \delta (q-q') \frac{2}{q^2 + \frac{f}{kTl}} \\
+	&= \int \frac{\ud q}{\pi} \frac{1}{q^2 + \frac{f}{kTl}} \frac{1}{l} = \sqrt{\frac{kT}{fl}}	
+	\end{align}
+
+Taille de l'ADN : 
+$$R = L [1 - \frac{1}{2} \sqrt{\frac{kT}{fl}}]$$
+
+\subsection{Torsion de l'ADN}
+
+\subsubsection{Quantités topologiques} 
+
+\paragraph{Torsion et Vrille (Twist and Wrist)} 
+
+\begin{figure}[h!]%
+\includegraphics[width=\columnwidth]{vrille_torsion.png}%
+\caption{}%
+\label{vrille torsion}%
+\end{figure}
+
+\paragraph{Diagramme de liage - Enlacement entre deux courbes}
+
+Courbe projetée dans une direction $\vec{u}$ donnée.  
+
+\begin{figure}[h!]%
+\includegraphics[width=\columnwidth]{indice_de_liage.png}%
+\caption{Croisements : Si on regarde le croisement par le dessus , si le filament du dessous va vers la droite du filament du dessus on l'appelera -1, dans le cas contraire on l'appellera +1}%
+\label{Indice de liage}%
+\end{figure}
+
+\begin{figure}%
+\includegraphics[width=\columnwidth]{liage.png}%
+\caption{}%
+\label{liage}%
+\end{figure}
+
+\paragraph{}
+
+les croisements proches donnent l'entortilement (Writhe) et les croisements lointains la torsade (Twist). 
+$$ Tw = \frac{1}{2}\moy{x_p(\vec{u})} \qquad Wr = \frac{1}{2} \moy{x_L(\vec{u})} \qquad Lk = Tw + Wr$$
+
+On peut transformer la torsion en vrille à enlacement constant.
+
+\subsubsection{Modèle de la tige rigide}
+
+Propriétés mécaniques en prenant en compte la torsion et la courbure. On prend un trièdre orthogonal $(\vec{a},\vec{b}, \vec{t})$, 
+$$\der{\vec{a_i}}{s} = \vec{\Omega}\wedge \vec{a_i}$$
+
+Filament circulaire : 
+
+$$C^2 = \frac{1}{R^2} = \Omega_a^2 + \Omega_b^2$$
+
+\begin{align}
+	H &=  \frac{kT}{2} \int \ud s [ l_p(\Omega_a^2 + \Omega_b^2) + l_t(\Omega_t - \omega_0)^2 + \dots]\\
+	&= \frac{kT}{2} \int_0^L \ud s [\frac{l_p}{R^2} + l_t (\omega - \omega_0) ]
+\end{align}
+Le premier membre est le membre de courbure, le second le membre de torsion. Il peut y avoir un terme de couplage courbure torsion que l'on néglige souvent dans le cas de l'ADN. 
+
+
+\subsection{Plectomènes}
+
+Molécule droite sans courbure que l'on va tourner d'un angle $\chi$. 
+
+\begin{align}
+	H &= \frac{kTl_t}{2} \int_0^L (\omega - \omega_0)^2 \ud s \\
+	& \txt{Angle de rotation }\psi(s) \\
+	\omega &= \der{\psi}{s} \\
+	 & \txt{Sans surenroulement}\\
+	 \psi &= \omega_0 s \quad \psi(L)= \omega_0 L + \chi \\
+	 \chi &= \txt{Angle de supertours} \\
+	 H &= \frac{kTl_t}{2} \int_0^L ( \der{\psi}{s} - \omega_0)^2 \ud s \\
+\end{align}
+
+\'Equation d'Euler-Lagrange : 
+\begin{align}
+	- \der{}{s} [ \derp{}{f}{\der{\psi}{s}}] + \derp{}{f}{\psi} = 0 \\
+	\psi & \rightarrow \psi + \delta \psi \\
+	H & \rightarrow H + \ud H \\
+	\ud H &= kT l_t int_0^L (\der{\psi}{s} - \omega_0)\der{\delta \psi}{s}\ud s \\
+	&= - kT l_t \int_0^L der{2}{\psi}{s} \delta \psi \ud s \quad \der{2}{\psi}{s^2} =0 \quad \der{\psi}{s}=cste 
+\end{align}
+
+Condition aux limites : 
+$$ \psi(s) = \omega_0 s + \frac{\chi s}{L} $$
+
+\'Energie associée : 
+$$ H = \frac{kTl_t \chi^2}{2L} $$
+Couple : $$\Gamma = \derp{H}{\chi} = \frac{kTk_t\chi}{L}$$
+
+
+Formation de plectonèmes. 
+
+Plectonème : cercle de rayon R, de longueur 2$\pi R$. 
+\'Energie $$ E_p = f 2 \pi R + \frac{kTl_p}{2} \frac{2 \pi R}{R^2} = f2 \pi R + \frac{kTl_p}{2}\frac{2 \pi}{R}$$
+
+Rayon du plectonème : $$\derp{}{E_p}{R} =0 \quad R^2 = \frac{kT l_p}{2f}$$
+
+\'Energie $$2 \pi \sqrt{2 kT l_p f} = E_p$$
+
+Les plectonèmes apparaissent si $\Gamma 2 \pi > E_p$
+
+Couple d'apparition des plectonèmes : 
+$\Gamma_p = \sqrt{2 kT l_t f}$
+
+Le coupe augmente linéarement en fonction de $\chi$ jusqu'à cette valeur limite, et après aparaissent des vrilles. 
+
+\section{Diagramme de phase de l'ADN}
+
+Quand on tire l'ADN, on arrive à une transition de phase, l'ADN change de structure pour donner de l'ADN-S, il est surétiré, et donc sous enroulé.
+
+\section{Mouvement Brownien Diffusion}
+
+\subsection{\'Equation de Langevin - Diffusion}
+
+\subsubsection{\'Equation de Langevin}
+
+$$m \der{\vec{v}}{t} = \vec{f_{ext}} + \vec{f_{fr}} + \vec{f_{L}}(t)$$
+
+La force de friction $\vec{f}_{fr} = - \zeta \vec{v}$. 
+Pour la force de Langevin : $$ \moy{\vec{f_{L}}} = 0 \qquad \moy{f^i_L(t)f_L^j(t')} = \delta_{ij}\delta(t-t')A$$ où $i,j$ se rapportent aux coordonnées d'espace de la force de Langevin.
+
+Si on ne considère pas de force extérieure, on obtient donc : 
+$$ \der{\vec{v}}{t} = - \zeta \vec{v} + \vec{f}_{L}(t) $$
+On obtient une solution : 
+$$ \vec{v} = \vec{v_0}(t)e^{\frac{-t}{\tau}} \qquad \tau = \frac{m}{\zeta}$$
+\begin{align}
+	m \der{\vec{v_0}}{t} &= e^{\frac{t}{\tau}} \vec{f_L}(t) \\
+	\vec{v_0}(t) &= \vec{v_1} + \int_0^t e^{\frac{t'}{\tau}} \vec{f_L}(t') \frac{1}{m} \ud t' \\
+	\vec{v}(t) &= \vec{v_1}e^{\frac{-t}{\tau}} + \int_0^t \vec{f_L}(t')\frac{1}{m} e^{-\frac{t-t'}{\tau}} \\
+	\moy{\vec{v}}(t) &= 0 \qquad t \ll \tau 
+	\end{align}
+Fonction de corrélation de la vitesse :
+\begin{align}
+	\moy{\vec{v}(t)\vec{v(t')}} &= \moy{\int_0^t \frac{\ud t_1 e^{- (t-t')}}{n^2}\vec{f_L}(t_1) \int_0^{t'} \ud t_2 e^{-\frac{(t-t')}{\tau}} \vec{f_L}(t_2) } \\
+	\moy{\vec{f_L}(t_2)\vec{f_L}(t_1)} &= 3 A \delta(t_1-t_2)\\
+	\moy{\vec{v}(t)\vec{v}(t')} &= \frac{3A}{m^2} \int_0^t \ud t_1 e^{- \frac{(t-t_1)}{\tau}}e^{-\frac{(t'-t_1)}{ \tau}} \\
+	&= \frac{3A}{m^2} e^{- \frac{(t+t')}{ \tau}} \int_0^t \ud t_1 e^{\frac{2t_1}{\tau}} \\
+	&= \frac{3A}{2m^2} \tau e^{- \frac{(t+t')}{ \tau}} (e^{2\frac{t}{\tau}}-1) \\
+	&= \frac{3A}{2m \zeta} e^{- \frac{|t'-t|}{\tau}}
+\end{align}
+On a besoin des valeurs absolues pour la réversibilité. Aux temps longs, on doit retrouver la thermodynamique à l'équilibre : 
+\begin{align}
+	\moy{v^2} &= \frac{3A}{2 m \zeta}\\
+	\frac{1}{2} m \moy{v^2} &= \frac{3}{2} kT 
+\end{align}
+
+\subsection{Diffusion}
+Position 
+\begin{align}
+	\moy{[\vec{r}(t) - \vec{r_0} ]^2} &=  \moy{[\int_0^t \vec{v}(t_1) \ud t_1]^2} \\
+	&= \int_0^t \ud t_1 \int_0^t \ud t_2 \moy{\vec{v}(t_1)\vec{v}(t_2)} \\
+	&= \int_0^t \ud t_1 \int_0^t \ud t_2 \frac{3kT}{m}e^{- \frac{|t-t'|}{\tau}} \\
+	&= 2 \frac{3 kT}{m} \int_0^{t} \int_{0}^{t_1} e^{- \frac{|t-t'|}{\tau}} \ud t_1 \ud t_2 \\
+	t \ll \tau \qquad &u=t_1-t_2 \\ 
+	\moy{[\vec{r}(t) - \vec{r_0} ]^2} &=  \frac{6kT}{m} \int_0^t \ud t_1 \int_0^{\infty} e^{\frac{-u}{\tau}} \ud u \\
+	&= 6Dt \qquad D = \frac{kT}{m} \int_0^{\infty} e^{- \frac{u}{\tau}} \ud u = \frac{kT\tau}{m} = \frac{kT}{\zeta}	
+\end{align}
+Formule d'Einstein. Ici on a supposé qu'on était aux temps longs.
+
+Si on se place aux temps courts, on sera dans le régime balistique. 
+$$	\moy{[\vec{r}(t) - \vec{r_0} ]^2} = \moy{v^2} t^2 = \frac{3kT}{m}t^2 $$
+
+\subsection{Friction et diffusion}
+$$\zeta = 6 \pi \eta a$$ formule de Stokes. 
+
+Diffusion d'une molécule d'eau dans l'eau : 1cm par jour (s'il n'y a que de la diffusion). 
+Pour une protéine 4 micron par seconde.
+Pour une cellule temps de diffusion de l'ordre de la minute pour 1cm. 
+
+La diffusion est donc trop lente pour assurer le déplacement dans la cellule. C'est pour cela qu'il existe des moteurs moléculaires dans les cellules. 
+	
+\subsubsection{Protéines membranaires}
+
+Friction avec la membrane. Hydrodynamique à 2D. 
+
+Contrainte : $$\tau_{ij} = \eta_m \frac{1}{2} \left( \derp{}{v_i}{x_j} + \derp{}{v_j}{x_i} \right) $$
+
+$\eta_m$ est une viscosité X longeur. En général $\eta_m \approx 3. 10^{-12}Pa.s.m$
+
+Saffman-Delbrück
+
+$$\zeta - 4 \pi \eta_m \ln  \frac{a}{R}$$ Dans une membrane, ce coefficient est à peu près le même pour toutes les protéines. 
+
+\subsection{\'Equation de Fokker-Planck}
+
+$$ \derp{}{p}{t} + \vec{\nabla} \vec{j} = 0 $$
+
+\subsubsection{Diffusion libre } 
+
+$$\vec{j} = - D \vec{\nabla} p \qquad \derp{}{p}{t} = D \nabla^2 p $$
+\begin{align}
+	\moy{r^2} &= \int \mu(\vec{r}) \vec{r}^2 \ud \vec{r} = 6 D t \\
+	\mu(\vec{r},t) &= \frac{1}{(4 \pi D t)^{3/2}} e^{\frac{-r^2}{4Dt}} \\
+	\tilde{p}(\vec{q},t) &= \int e^{- i \vec{q}\vec{r}} p(\vec{r},t) \ud \vec{r} \\
+	\derp{}{\tilde{p}}{t} &= - D q^2 \tilde{p}(\vec{q} \\
+	\tilde{p}(\vec{q},t) &= A(\vec{q}) e^{-Dq^2t} = e^{- D q^2 t} \\
+	\tilde{p}(\vec{q},t) &= 1 
+\end{align}
+
+\subsubsection{Diffusion dans un potentiel extérieur}
+
+Conservation de la probabilité : 
+$$\derp{}{p}{t} + \vec{\nabla} \vec{j} = 0 $$ \'Equilibre des faces en  moyenne
+
+\begin{align}
+	\vec{j} = \vec{j_d} + \vec{j_c} \\
+	\vec{j_d} &= - D \vec{\nabla} p \\
+	\vec{_c} &= \vec{v} p \\
+	- \zeta \vec{v} - \vec{\nabla} u &=0 \\
+	\vec{v} = \frac{- \vec{\nabla}u}{\zeta} \\
+	\derp{}{p}{t} &= - \vec{\nabla} \left[ - D \vec{\nabla}p - \frac{\vec{\nabla}u}{\zeta}p \right] \\
+	&= \vec{\nabla} \left[ D \vec{\nabla} p + \frac{\vec{\nabla}u}{\zeta}p \right] 
+\end{align}
+\'Equilibre thermodynamique : 
+$$ \vec{j} = \vec{0} \quad p(\vec{r},t) = \frac{1}{2} e^{- \frac{u(\vec{r})}{kT}} \qquad D = \frac{kT}{\zeta}$$
+
+cf VanKampen
+
+\subsection{Théorême de fluctuation dissipation}
+
+\subsubsection{Fluides à l'équilibre thermodynamique}
+
+$N$ molécules, avec chacune une position et une impulsion dans l'espace, et donc un Hamiltonien. 
+
+Fonction de partition $$Z = \int \ud \vec{ r_n} \ud \vec{r}_n e^{-\beta H}$$ \'Energie libre : $$F = -kT \ln Z $$
+
+Calcul de valeurs moyennes
+$$\moy{A}(\vec{r_n}\vec{p_n}) = \frac{1}{2} \int \ud \vec{r_n} \ud \vec{p_n} e^{-H \beta} A $$
+
+A un instant t, $\vec{r_n}(t)$ et $\vec{p_n}(t)$ .
+
+Moyenner sur le temps est équivalent à moyenner sur l'espace, car le système est déterministe. 
+
+\begin{align}
+	\moy{A}(t) = \moy{A(\vec{r_n^0},\vec{p_n^0},t)} \\
+	&= \frac{1}{2}\int \ud \vec{r^0_n}\ud \vec{p^0_n} e^{-H \beta} A  = \moy{A}
+\end{align}
+
+$$\moy{A(t)A(t')} = \frac{1}{2} \int \ud \vec{r^0_n} \ud \vec{p^0_n} e^{H(\vec{r_n^0},\vec{p_n^0}) \beta}A (\vec{r_n^0},\vec{p_n^0},t) A(\vec{r_n^0},\vec{p_n^0},t') $$ 
+On peut par exemple prendre pour $A$ la densité. En fait, comme cela ne doit pas dépendre de l'origine des temps, cela ne dépend que de la différence entre $t$ et $t'$ 
+
+\subsubsection{Relaxation d'un système vers l'équilibre}
+
+Théorême de récression d'Onsager. On prend un Hamiltonien H avec une petite perturbation.  Le système est préparé avec le Hamiltonient $H + \Delta H$ mais évolue avec $H$. 
+
+\begin{align}
+	\moy{A(t)} = \frac{\int \ud \vec{r_n^0} \ud \vec{p_n^0} e^{- \frac{H + \Delta H}{kT}}A(\vec{r_n^0},\vec{p_n^0},t)}{\int \ud \vec{r_n^0} \ud \vec{p_n^0} e^{- \frac{H + \Delta H}{kT}}} \\
+	&= \moy{A}_0 - \frac{1}{2} \int \ud \vec{r_n^0} \ud \vec{p_n^0} e^{- \frac{H}{kT}} \frac{\Delta H}{kT} A \\
+	&+ \frac{1}{2} (\int \ud \vec{r_n^0} \ud \vec{p_n^0} e^{- \frac{H}{kT}}A) \frac{1}{2} \int \ud \vec{r_n^0} \ud \vec{p_n^0} e^{- \frac{H}{kT}}  \frac{\Delta H}{kT} \\
+	&= \moy{A}_0 - \frac{\moy{\Delta H A}}{kT} + \moy{A}_0 \frac{\Delta H}{kT} \\
+	&= \moy{A} +  \frac{f}{kT} \moy{A_0A(t)} - \frac{f}{kT} \moy{A} \moy{}A \\
+	\Delta A &= \moy{A(t)} - \moy{A} =  \frac{f}{kT} [\moy{A_0 A(t)}- \moy{A}^2] \\
+	\delta A &= A(t) - \moy{A} \\
+	\Delta A &= \frac{f}{kT} \moy{\delta A_0 \delta A(t)}
+	\end{align}
+Fonction de corrélation : 
+$$C(t) = \moy{\delta A_0 \delta A(t)}$$
+donc la façon dont on relaxe vers l'équilibre est donc : $$\Delta A(t) = \frac{f}{kT}C(t)$$ 
+
+\subsubsection{Fonction de réponse}
+
+$H- f(t)A$  avec $f$ petit. 
+
+$$ \moy{A(t)} - \moy{A} = \int_{- \infty}^{t} \chi(t-t')f(t') \ud t' $$
+Causalité : $\moy{A(t)}$ dépend de $f(t')$ $t'<t$ $\chi(t)$ définie si $t$ positif, et nul sinon.
+
+$\chi(t)$ fonction de réponse. 
+
+$$\moy{A(t)} - \moy{A} = f \int_{-\infty}^{t} \chi (t-t') f(t') \ud t' $$
+
+$$kT \chi(t) = - \derp{}{C}{t} t \geq 0 \quad \txt{ Fluctuation-dissipation}$$
+$$\chi(t) = 0 \qquad t \leq 0$$
+
+Ce résultat est très général, il ne suppose que l'équilibre thermodynamique. 
+
+Pourquoi "Fluctuation-dissipation" ? 
+
+\begin{align}
+	 \tilde{C}(\omega) &= \int C(t)e^{i \omega t} \ud t \\
+	 \derp{}{C}{t} \rightarrow & \quad (- i \omega)\tilde{C}(\omega)
+\end{align}
+
+Fonction de réponse : 
+$$ \tilde{\eta}(\omega) = \int_0^{\infty} \chi(t) e^{i \omega t} \ud t = \chi'(t)(\omega) + i \chi''(\omega)$$
+$$\chi''(\omega ) = \int_0^{\infty}\sin \omega t \chi(t) \ud t $$
+
+$\derp{}{C}{t} $ est impaire car $C(t)$ est paire. 
+$$-i \omega \tilde{C}(\omega) = 2 i \int_0^{\infty} \derp{}{C}{t} \sin \omega t \ud t $$
+
+Théorême de fluctuation-dissipation : 
+\begin{align}
+	i \omega \tilde{C}(\omega) = 2 i kT \int_0^{\infty} \chi(t) \sin \omega t \ud t \\
+	\omega \tilde{C}(\omega) ) 2 kT \chi''(t) \\
+	\tilde{C}(\omega) = \frac{2kT}{\omega}\chi''(t) 
+\end{align}
+
+
+
+
+\section{Systèmes hors équilibre : Théorêmes de fluctuations}
+
+\subsection{Systèmes hors équilibre}
+
+\subsubsection{Exemples}
+
+On perturbe un système à l'équilibre, et on observe son retour à l'équilibre. Par exemple, une bille attrapée par une pince optique, si on déplace la pince, la bille suit avec un certain retard. On peut aussi tirer sur les extrêmités d'un polymère. 
+
+On peut aussi maintenir un système hors équilibre. 
+
+Le processus est décrit par un Hamiltonien $H(c,\lam)$. On prend $\lam=0$ à $t=0$, le système est hors équilibre. 
+
+Travail de la force $\lam$ : $\dot{\lam} = \derp{}{\lam}{t}$
+$$W = \int_0^{t_f} \ud t \derp{}{H}{\lam}\derp{}{\lam}{t} $$
+Travail moyen : 
+$$ \moy{W} \geq \Delta F = F_f-F_i$$
+
+\subsubsection{Micro-réversibilité, Bilan détaillé}
+
+Discrétisation du temps en intervalles $\delta t$. $t_k = k \delta t$. On suppose alors qu'on a un système markovien. 
+
+\'Equation maîtresse : 
+$$ p(c,k+1) = p(c,k) + \sum_d p(d,k) W_k(d \rightarrow c) - \sum_d p(c,k) W_k(c,d)$$
+
+$W_k$ dépend de l'Hamiltonien $H(c,\lam_k)$.
+
+Si on se place à $k$ donné, donc à $t_k$ donné, relaxation vers l'équilibre thermodynamique 
+$$p_{eq}(c, \lam_k) \frac{1}{Z_k} e^{-H(c,\lam_k)/kT}$$
+$Z_k$ fcontion de partition pour $\lam_k$
+$$Z_k = \int_{\txt{états}} e^{- H(c,\lam_k)/kT}$$
+$p_{eq}$ satisfait à l'équation maîtresse : 
+$$ (p_{eq}(d,\lam_k)W_k(d \rightarrow c) - p_{eq}(c, \lam_k) W_k(c \rightarrow d)) = 0 $$
+	
+Condition de bilan détaillé : 
+$$ p_{eq}(d, \lam_k) W_k(d \rightarrow c)= p_{eq}(c, \lam_k) W_k(c \rightarrow d)$$
+
+Taux de transition relatif : 
+$$ \frac{W_k(c \rightarrow d)}{W_k (d \rightarrow c)} = \frac{p_{eq}(d,\lam_k)}{p_{eq}(d,\lam_k)} = \frac{e^{H(c,\lam_k)/kT}}{e^{H(d,\lam_k)/kT}} $$
+
+Si le système satisfait à une équation de Langevin, alors cette condition de bilan détaillé est satisfaite.
+
+\subsection{Théorème de fluctuation de Crooks}
+
+Trajectoire $\Gamma = (c_0,c_1 \dots c_N)$
+
+Probabilité d'avoir une trajectoire $\Gamma$ : 
+$$p_{eq}(\lam_0,c_0)W_0(c_0 \rightarrow c_1) W_1(c_1 \rightarrow c_2) \dots W_k(c_k \rightarrow c_{k+1}) \dots $$
+
+Remarque : Variation d'énergie
+\begin{align}
+	\Delta U (\Gamma) &= H(\lam_N,c_N) - H(\lam_0,c_0) \\
+	&= \sum_k H(\lam_{k+1},c_{k+1}) - H(\lam_k,c_k) \\
+	&= \sum_k [H(\lam_{k+1},c_{k+1}) - H(\lam_k,c_{k+1}) + H(\lam_k,c_{k+1}) - H(\lam_k,c_k)] \\
+	W &= \sum_k H(\lam_{k+1},c_{k+1}) - H(\lam_k,c_{k+1}) = \sum_k \derp{}{H}{\lam}(\lam_k,c_k) \delta \lam \\
+	&= \int_0^{t_k} \ud t \derp{}{H}{\lam} \dot{\lam}
+\end{align}
+
+Renversement du temps : On appelle $\Gamma^* = (c_N \dots c_0)$ la trajectoire inverse. 
+$$p(\Gamma^*) = p_{eq}(\lam_N,c_N)W_N(c_N \rightarrow c_{N-1}) \dots $$
+
+\begin{align}
+	\frac{p(\Gamma)}{p(\Gamma^*)} &= \frac{p_{eq}(\lam_0,c_0)}{p_{eq}(\lam_N,c_N)}\prod_k \frac{W_k(c_k \rightarrow c_{k+1})}{W_{k+1}(c_{k+1} \rightarrow c_k)} \\
+	& \approx \frac{p_{eq}(\lam_0,c_0)}{p_{eq}(\lam_N,c_N)}\prod_k \frac{W_k(c_k \rightarrow c_{k+1})}{W_{k}(c_{k+1} \rightarrow c_k)} \\
+	&= \frac{Z_N}{Z_0}e^{-H(c_0,\lam_0)/kT + H(c_N,\lam_N)/kT} \prod_k e^{\frac{1}{kT} (H(c_k,\lam_k) - H(c_{k+1},\lam_{k+1}))} \\
+	&= \frac{Z_N}{Z_0} e^{\Delta U (\Gamma)/kT} e^{- Q(\Gamma)/kT} = e^{\frac{-(F_N-F_0)}{kT}}e^{\frac{W(\Gamma)}{kT}}
+\end{align}
+
+Si maintenant on fait une expérience, et qu'on cherche la probabilité d'avoir un travail $W$ donné : 
+\begin{align}
+	 p_{\lam}(W) &= \sum_{\Gamma} p(\Gamma) \delta(W-W(\Gamma)) \\
+	 &= \sum_{\Gamma} p(\Gamma^*) \delta(W-W(\Gamma)) e^{\frac{W(\Gamma)- \Delta F}{kT}}\\
+	 &= \sum_{\Gamma} p(\Gamma^*) \delta(W + W(\Gamma^*))e^{\frac{W-\Delta F}{kT}} \\
+	 &= e^{\frac{W- \Delta F}{kT}} \sum_{\Gamma^*} p(\Gamma^*) \delta(W + W(\Gamma^*)) \\
+	 &= p_{\lam}^{txt{rev}}(-W)e^{\frac{W-\Delta F}{kT}}
+\end{align}
+
+$$\frac{p_{\lam}(W)}{p_{\lam}^{rev}(-N)} = e^{\frac{W- \Delta F}{kT}}$$
+
+$W - \Delta F$ est le travail dissipé. C'est le théorème de Crooks. 
+
+\subsection{\'Egalité de Jarzynski}
+
+$$p^{\lam}(W)e^{- \frac{W_{diss}}{kT}} = p_{\lam}^r(-W)$$
+$$ \int p_{\lam}(W) e^{- W_{diss}/kT} \ud W = 1$$
+
+Comme $\moy{e^{-x}} \geq e^{- \moy{x}}$, on a $$ \moy{e^{W/kT}} = e^{- \Delta F/kT} $$ $$ e^{- \moy{W}/kT} \leq e^{- \Delta F/kT}$$
+
+donc $$\Delta F \leq \moy{W}$$ second principe. 
+
+\subsection{Voisinage de l'équilibre : Théorème de Fluctuation-dissipation}
+
+$$\frac{W_{diss}}{kT} \ll 1$$
+
+$$\moy{e^{- \frac{W_{diss}}{kT}}} = 1 $$
+
+On fait un DL : 
+$$ 1 - \frac{\moy{W}}{kT} + \frac{\moy{W^2}}{2kT} + \dots = 1$$
+
+$$ e^{-\moy{W}/kT} e^{\frac{1}{2kT}[\moy{W^2} - \moy{W}^2]} = 1 $$
+
+A l'ordre 2 : 
+$$ \frac{\moy{W}}{kT} = \frac{1}{2kT}[\moy{W^2}- \moy{W}^2] $$ Théorème de fluctuation-dissipation. 
+
+
+	$$H=H_0 + fA \qquad t=0 \quad f=0 \qquad \moy{A}_0 =0$$
+	\'Energie libre $$ F = -kT \ln Z $$
+
+Fonction de partition : 
+\begin{align}
+	 Z &= \int_{\txt{états}} e^{(H_0 - fA)/kT} \\
+	 Z &= Z_0 \frac{1}{Z_0} \int e^{-H_0/kT} e^{fA/kT} \\
+	 &= Z_0 \moy{e^{fA/kT}} 
+\end{align}
+
+\'Energie libre : 
+\begin{align}
+	F &= F_0 - kT \ln (\moy{e^{fA/kT}}_0) \\
+	&= \frac{1}{2kT} \moy{(fA)^2} \qquad \Delta F = \frac{-1}{2kT}f^2\moy{A^2}_0\\
+	W_{diss} &= W-\Delta F = \int_0^{t_f} \derp{}{H}{f} \derp{}{f}{t} \ud t - \Delta F = \int_0^{t_f} - A(t) \derp{}{f}{t} \ud t + \frac{f^2\moy{A^2}_0}{2kT} \\
+	\moy{W_{diss}} &= \int - \moy{A(t)} \der{f}{t} \ud t + \frac{f^2\moy{A^2}}{2k<T} 
+\end{align}
+Calcul à l'ordre 2 en $f$. 
+
+\begin{align}
+	\frac{1}{2(kT)^2} \moy{W_{diss}^2} &= [\int A \der{f}{t} \ud t]^2 \frac{1}{2 (kT)^2} \\
+	- \int \moy{A} \derp{}{f}{t} \ud t + \frac{f^2}{2kT} &= \frac{1}{2kT} \moy{\int \ud t_1 \int \ud t_2 \derp{}{f}{t_1}\derp{}{f}{t_2} A(t_1) A(t_2)}_0 \\
+	&= \frac{1}{2kT} \int \ud t_1 \in \ud t_2 \derp{}{f}{t_1} \derp{}{f}{t_2} C(t_2 - t_1) \\
+\end{align}
+
+On dérive par rapport à $t_f$ : 
+$$- \moy{A(t_1)} \derp{}{f}{t}(t_f) + \frac{f \derp{}{f}{t}}{kT}\moy{A^2}_0 = \frac{1}{kT} \int \derp{}{f}{t_2} C(t_f-t_2)\ud t_2 \derp{}{f}{t}(t_f)$$
+
+On fait une IPP pour obtenir : 
+$$\int \ud t_2 \derp{}{f}{t_2}C(t_f-t_2) = C(0) f(t_f) + \int_0^{t_f} \ud t_2 f(t_2) \derp{}{C}{t_2}(t_f-t_2)$$
+
+$$C(0) = \moy{A^2}_0$$
+
+\begin{align}
+	- \moy{A(t_f)} + \frac{f \moy{A^2}_0}{kT} &= \frac{f \moy{A^2}_0}{kT} + \frac{1}{kT} \int_0^{t_f} f(t_2) \derp{}{C}{t} (t_f - t_2) \ud t_2 \\
+	\moy{A(t_f)} &= \frac{-1}{kT} \int f(t_2) \derp{}{C}{t} (t_f - t_2) \ud t_2 \txt{ Fonction de réponse} \\
+	&= \int \chi(t_f - t_2) f(t_2)\ud t_2
+\end{align}
+
+Crooks $\lam(t)$ 
+$$ \frac{\mu_{\lam}(W)}{p_{\lam}^{h}(-W)} = e^{\frac{W- \Delta F}{kT}}$$
+
+
+\section{Application au dépliement de l'ARN}
+
+\subsection{ARN}
+
+Polymère simple brin, avec des doubles hélices locales éventuelles là où les bases sont complémentaires (plein de possibilités \dots). 
+
+On va considérer un ARN replié en double épingle, et calculer la différence d'énergie entre un état déplié et cet état replié en épingle. Expérimentalement on peut mesurer la force nécessaire pour déplier l'épingle.
+
+\subsection{Théorème de fluctuation}
+
+2 états : état fermé $\sigma = 0 $ et $E_0(x=0)$, état ouvert $\sigma=1 \qquad E_1(x=L) $
+
+$$H = \delta_{\sigma_0} E_0  + \delta_{\sigma_1}(E_1 - fL)$$
+
+On calcule la fonction de partition : 
+$$ Z = e^{\frac{-E_0}{kT}} + e^{- \frac{E_1 - fL}{kT}}$$
+
+\'Energie libre : 
+$$F = -kT \ln Z = E_0 - kT \ln(1+e^{- \frac{\Delta E - fL}{kT}})$$
+
+\begin{align}
+	x &= \derp{}{H}{f} \\
+	\moy{x} &= - \derp{}{F}{f} = \frac{L - e^{- \frac{\Delta E - fL}{kT}}}{1- e^{- \frac{\Delta E - fL}{kT}}}\\
+	&= L \frac{1}{1 + e^{- \frac{\Delta E - fL}{kT}}} 
+\end{align}
+Protocole : $t=0 \qquad f=0 $
+On mesure $\Delta F = \Delta E - fL$
+
+Travail : $$W = - \int_0^L x(f') \ud f' $$ C'est pas tout à fait ce qu'on veut alors on va faire une IPP : 
+$$W = - [f'x]_0^f + \int_0^L f' \ud x  \qquad \int_0^L f' \ud x = W_x $$
+
+\begin{align}
+	W- \Delta F = W_x - \Delta F - fx(f) + \dots \\
+	&= W_x - \Delta F -fL = W_x - \Delta G \\
+	G &= F + fL 
+\end{align}
+	
+\section{Physique Statistique des Membranes }
+
+
+Au niveau physique, on considère une membrane faite avec un seul composé amphiphile, en une seule monocouche. En générale on fait les expériences sur des vésicules. 
+
+\subsection{\'Energie de courbure d'une membrane}
+
+\subsubsection{\'Energie de Courbure}
+
+Hamiltonien de Helfrich : 
+$$\mathcal{H} =  \frac{1}{2} \int \ud s K  H^2$$ où $H$ est la courbure locale, pas de courbure spontanée, $K$ module de courbure ($\equiv$ \'Energie) $\approx E d^3$
+
+$$\frac{K}{kT} \approx 10-20 \rightarrow 70$$
+
+Courbure d'une surface : 
+
+\begin{align}
+	\ud z &= a_{11} \ud x^2 + a_{12} \ud x \ud y + a_{22}\ud y^2 \\
+	&= \frac{\ud x^2}{2R_1} + \frac{\ud y^2}{R_2} \txt{ rayons de courbures principaux }\\
+	H &= \frac{1}{R_1} + \frac{1}{R_2} 
+\end{align}
+Signes de $R_1$ et $R_2$ 
+Si $R_1 R_2>0$ on a un chapeau, si $R_1R_2<0$ on a une selle de cheval. 
+
+Surface faiblement déformée :
+
+Courbure totale : 
+$$ \mathcal{H} = - \nabla^2 u ) - \derp{2}{u}{x} - \derp{2}{u}{y}$$
+$$z = \frac{x^2}{2R} = \frac{Hx^2}{2} \qquad \derp{2}{z}{x} = H $$
+
+$$ |\nabla u| \ll 1 $$ pente faible
+
+Exemples simples : sphère : $H = \frac{1}{2R}$, cylindre $H=\frac{1}{R}$
+
+\subsubsection{Tension d'une membrane}
+
+$$\gamma = \left( \derp{}{F}{A} \right)_{N,T} $$ $A$ aire de la membrane. 
+
+Membrane libre : $$\gamma = 0 \qquad \derp{}{F}{A} = 0 \rightarrow A=cste$$
+
+Tension pas trop grande : 
+
+$$\gamma = \frac{a-a_0}{a_0}k_s = k_s \frac{A-A_0}{A_0} = k_s \frac{\Delta A}{A_0}$$
+
+$k_s$ est le module d'étireent (stretching). $\gamma > 0 \approx 10^{-6} \rightarrow 10^{-3}$N/m $k_s \approx 0,1 \rightarrow 0,5$ N/m
+
+\subsubsection{Hamiltonien de Helfrich}
+
+$$\mathcal{H} = \int \frac{K}{2} H^2 + \gamma \ud s $$
+
+
+\subsection{Tubes de membrane}
+
+Avec une pipette, on piège une vésicule. Initialement, la vésicule est collée à une bille de latex, avec la pipette on la tire pour l'éloigner de la bille. Il se forme un tube qui relie la vésicule sphérique à la bille de latex. 
+
+On appelle $R$ le rayon de la vésicule, $L$ la longueur du tube, $f$ la force avec laquelle on tire. 
+
+\'Energie libre du tube : $$A = 2 \pi rL $$
+$$F = 2 \pi r L [\gamma + \frac{K}{2r^2}] - fL $$ on minimise par rapport à $r$
+
+$$\derp{}{F}{r} = 0 \qquad 2 \gamma -\frac{K}{r^2} = 0 \qquad r^2= \frac{K}{2 \gamma}$$
+$r \approx 30$nm
+
+$$F = L(f_c-f)  \qquad f_c = 2 \pi \sqrt{2 \gamma K}$$
+
+$f_c$ force pour tirer un tube. 
+
+Dans les cellules, les tubes ne se cassent pas tous seuls (simplement en tirant la bille), ce sont des protéines qui cassent les tubes. 
+
+\subsection{Fluctuations thermiques}
+
+Hamiltonien de Helfrich : 
+$$ \mathcal{H} = \int \ud s (\frac{H^2}{2} + \gamma) $$
+\begin{align}
+	\ud s &= \sqrt{1 + (\nabla u)^2} \ud x \ud y  = \left[ 1 + \frac{(\nabla u)^2}{2} \right] \ud x \ud y \\
+	H^2 & \approx (\nabla^2 u)^2 \\
+	\mathcal{H} &= \int \ud x \ud y \left( \frac{K}{2} (\nabla^2 u)^2 + \gamma + \frac{\gamma}{2} (\nabla u)^2 \right)
+\end{align}
+
+TF : 
+\begin{align}
+	\tilde{u}(\vec{q}) = \int e^{-i \vec{q}\vec{r}} u(\vec{r}) n\ud \vec{r} \\
+	u(\vec{r}) &= \frac{1}{(2 \pi)^2} \int \ud \vec{q} e^{i \vec{q}\vec{r}} \tilde{u}(\vec{q}) \\
+	\mathcal{H} &= \int \frac{\ud \vec{q}}{(2\pi)^2} \left[ \frac{K}{2} |-q^2 \tilde{u}(q)|^2 + \frac{\gamma}{2} |i \vec{q}u|^2 \right] \\
+	&= \int \frac{\ud \vec{q}}{(2 \pi)^2} \frac{|\tilde{u}(q)|^2}{2} [Kq^4 + \gamma q^2] 
+\end{align}
+
+\'Equipartition de l'énergie : $$\moy{\tilde{u}(\vec{q}) \tilde{u}^*(\vec{q})} = \frac{kT}{kq^4 + \gamma q^2} \delta (\vec{q}-\vec{q'})(2 \pi)^2 $$
+
+Amplitude moyenne : 
+\begin{align}
+	 \moy{u^2(\vec{r})} &= \moy{\int \frac{\ud \vec{q}}{(2 \pi)^2}e^{i \vec{q}\vec{r}} \tilde{u}(\vec{q}) \int \frac{\ud \vec{q'}}{(2\pi)^2} e^{- \vec{q'}\vec{r}} } \\
+	 &= \int \frac{\ud \vec{q}}{(2 \pi)^2} \int \frac{\ud \vec{q'}}{(2 \pi)^2} e^{i(\vec{q}-\vec{q'})}\vec{r} \frac{kT}{Kq^4 + \gamma q^2} (2 \pi^2) \delta(\vec{q}-\vec{q'}) \\
+	 &= \int \frac{\ud \vec{q}}{(2 \pi)^2} \frac{kT}{K q^4 + \gamma q^2} \\
+	 &= \int_0^{\infty} \frac{2 \pi q \ud q }{Kq^4 + \gamma q^2} \\
+	 &= \frac{kT}{K 4\pi} \int_0^{\infty} \frac{\ud y }{y^2 + \frac{\gamma}{K} y } \\
+	 &= \frac{kT}{K4 \pi} \int_{q_{min}}^{q_{max}} \frac{\ud y }{y(y+ q_c^2)}\\
+	 &= \frac{kT}{K 4 \pi} \left[ \ln \frac{q_{min}^2 + q_c^2}{q_{max}^2 + q_c^2} - \ln \frac{q_{min}^2}{q_{max}^2} \right] 
+\end{align}
+
+$K=0$, $\gamma$ fini, amplitude des ondes capillaires sur une surface : 
+$$\moy{u^2} = \frac{kT}{2 \pi \gamma} \ln \frac{q_{max}}{q_{min}} = \frac{kT}{2 \pi \gamma} \ln \frac{L}{a}$$
+
+Membrane libre ($\gamma=0$)
+
+\begin{align}
+	\moy{u^2} &= \frac{kT}{4 \pi \gamma} \left[ \ln \frac{q_{min}^2 + q_c^2}{q_{min}^2} - \ln \frac{q_{max^2 + q_c^2}}{q_{max}^2} \right] \\
+	&= \frac{kT}{4 \pi \gamma} \frac{q_c^2}{q_{min}^2} \\
+	q_{min} &= \frac{2 \pi}{L}\\
+	q_{max} &= \frac{2 \pi }{a} 
+\end{align}
+
+Amlpitude des fluctuations d'une membrane 
+
+$$\moy{u^2} = \frac{kT}{4 \pi K} \frac{1}{q_{min}^2} = \frac{kTL^2}{16 \pi^3 K}$$
+
+L'amplitude croît comme la taille de la membrane.
+
+\begin{align}
+	\moy{\tilde{u}(\vec{q})\tilde{u}^*(\vec{q'})} &= (2 \pi)^2 \delta(\vec{q}-\vec{q'}) \frac{kT}{\gamma q^2 + \kappa q^4} \\
+	\moy{u^2(\vec{r})} &= \frac{kT}{16 \pi^3 \kappa}L^2 \qquad \gamma=0 \\
+	\mathcal{H} &= \int \ud \vec{r} \frac{1}{2} \kappa (\nabla^2 u)^2 
+\end{align}
+
+morceau de membrane $L$ 
+
+\begin{align}
+	\nabla u \approx \frac{u}{L} \qquad \nabla^2 u \approx \frac{u}{L^2} \\
+	\mathcal{H} \approx L^D \kappa \frac{u^2}{L^4} \approx \kappa \frac{u^2}{L^{4-D}} \\
+	\frac{\kappa u^2}{L^{4-D}} \approx kT \qquad u \approx L^{\zeta} \\
+	\zeta = \frac{4-D}{2} 
+\end{align}
+
+\subsection{Tension d'une membrane, l'élasticité entropique}
+
+Aire réelle de la membrane $A$. Aire projetée $A_0$. $\Delta A = A - A_0$ membrane sous tension $\gamma$. 
+
+\begin{align}
+	A &= \int_A \ud s = \int_{A_0} \ud x \ud y \sqrt{1 + (\nabla u)^2} \\
+	&= \int \ud x \ud y [1 + \frac{1}{2} (\nablau)^2] \\
+	\Delta A &= \int \ud x\ud y \frac{1}{2} \moy{(\nabla u)^2} \\
+	&= \int \frac{\ud \vec{q}}{2 (2 \pi)^2} \moy{q^2 |\tilde{u}(\vec{q})|^2} \\
+	\tilde{u}(\vec{q}) &= \int \ud \vec{r} e^{-i \vec{q}\vec{r}} u(\vec{r}) \\
+	\Delta A &= \frac{1}{2} \int \frac{ \ud \vec{q}}{(2 \pi)^2} q^2 (2 \pi)^2 \delta (\vec{q}-\vec{q'}) \frac{ kT}{\gamma q^2 + \kappa q^4 } 
+	\txt{Modes discrets}  & A \delta_{\vec{q}\vec{q'}} = (2 \pi)^2 \delta (\vec{q}-\vec{q'}) \\
+	(2 \pi)^2 \delta(\vec{q}-\vec{q'}) = A_0 \\
+	A_0 \sum_{\vec{q}} \delta_{\vec{q}\vec{q'}} \sum_{\vec{q}}(2 \pi)^2 \delta (\vec{q}-\vec{q'}) \\
+	A_{\gamma} &= \frac{A_0}{(2 \pi)^2}\int \ud \vec{q}\\
+	\Delta A &= \frac{A_0}{2} \int_0^{\infty} \frac{2 \pi q \ud q }{(2 \pi)^2} \frac{kT q^2}{\gamma q^2 + \kappa q^4} \\
+	&= \frac{A_0}{4\pi} \int_0^{q_{max}} q \ud q \frac{kT}{\gamma + \kappa q^2} \\
+	&= \frac{A_0 kT}{8 \pi \kappa} \left[ \ln (\frac{\gamma}{\kappa} + q^2) \right]_0^{q_{max}} \\
+	&= \frac{A_0 kT}{8 \pi \kappa} \ln (\frac{\kappa q^2_{max}}{\gamma}) \\
+	&= \frac{A_0 kT}{8 \pi \kappa} \ln(\frac{\gamma_0}{\gamma}) \\
+	\Delta A & \approx \frac{A kT}{8 \pi \kappa} \ln \frac{\gamma_0}{\gamma} \\
+	\delta A &= \moy{A - A_1} - \moy{A-A_2} \\
+	&= \Delta A_1 - \Delta A_2 = \frac{A kT}{8 \pi \kappa} \ln \frac{\gamma_2}{\gamma_1} \\
+	\frac{\delta A}{A} &= \frac{kT }{8 \pi \kappa} \ln \frac{\gamma_2}{\gamma_1} \\
+	\gamma_2 &= \gamma_1 e^{\frac{8 \pi \kappa}{kT}\frac{\delta A }{A}} 
+	\end{align}
+	
+	\subsection{Mesure du modèle de courbure}
+	
+	On piège une membrane dans une micropipette. En mesurant la dépression qu'on applique pour aspirer la membrane dans la micropipette, en appliquant la loi de Laplace entre l'intérieur et l'extérieur, et entre l'intérieur et la pipette, on peut mesurer $\gamma$. 
+	
+	En fixant une bille de latex à la membrane, on tire un tube de membrane. On peut alors mesurer la force exercée sur la bille, ce qui nous donne $\gamma$ et $\kappa$ $$f = 2 \pi \sqrt{2 \gamma \kappa}$$
+	
+	\subsection{Membranes réelles, membranes actives}
+	
+	Une membrane est un mélange de phospholipides. Elles comporte un feuillet interne composé de lipides anioniques et un feuillet externe qui est composé de glycophospholipides. 
+	
+	Les protéines membranaires composent 25 à 75 \% en masse de la membrane. 
+	
+	Les membranes passives ne consomment pas d'énergie : canaux ioniques, aquaporine, récepteurs \dots 
+	Les membranes actives consomment de l'ATP et de la GTP, pour faire fonctionner des moteurs et des transporteurs. 
+	
+	\subsubsection{Protéines passives}
+	
+	Le module de courbure augmente. Nicholson et Singer : Fluid Mosaïc Model. 
+	
+	Il y a des interactions entre protéines, attractives ou oscillantes. 
+	
+	Les membranes réelles ont une courbure spontanée, car certaines protéines sont dissymétriques. 
+	
+	Courbure spontanée et hétérogénéité : on cherche à calculer l'énergie libre de la membrane. 
+	
+\begin{align}
+	F &= \int \ud s \left\{\left[ f(\phi_{\uparrow}) + f(\phi_{\downarrow}) \right] + \frac{1}{2} \kappa H^2 + H (\phi_{\uparrow} - \phi_{\downarrow}) \Theta  \right\} \\
+\phi_{\uparrow} & = \phi_0 + \delta \phi_{\uparrow} \\
+\phi_{\downarrow} &= \phi_0 + \delta \phi_{\downarrow} \\
+f(\phi_{\uparrow})&= f(\phi_0) + \frac{1}{2} \chi^{-1} \delta \phi_{\uparrow}^2 \\
+f(\phi_{\downarrow})&= f(\phi_0) + \frac{1}{2} \chi^{-1} \delta \phi_{\downarrow}^2 \\
+F &= cste + \int \ud s \left\{  \left[ \frac{1}{2} \chi^{-1} (\delta \phi_{\uparrow}^2 + \delta \phi_{\downarrow}^2) \right] + \frac{1}{2} \kappa H^2 + \frac{1}{2} H(\delta \phi_{\uparrow} + \delta \phi_{\downarrow})\Theta \right\} \\
+\phi &= \delta \phi_{\uparrow} + \delta \phi_{\downarrow} \\
+\psi &= \delta \phi_{\uparrow} - \delta \phi_{\downarrow} \\
+F &= \int \ud s \left[ (\phi^2 + \psi^2) \frac{\chi^{-1}}{4} + \frac{1}{2} \kappa H^2 + \Theta H \psi \right] 
+\end{align}
+
+On minimise par rapport à $\psi$ : 
+\begin{align}
+	\frac{\chi^{-1}}{4} \psi + \Theta H &= 0 \\
+	\psi &= - 2 \Theta \chi H \\
+	F &= \int \ud \{ \frac{\chi^{-1}}{4} \phi^2 + \frac{1}{2} \kappa H^2 - \Theta H^2 \chi \} \\
+	K_{eff} &= \kappa - 2 \chi \Theta^2 \\
+\end{align}
+instable si $K_{eff}$ négatif. 
+
+\subsubsection{Membranes actives} 
+
+Protéines actives : pompes, moteurs. 
+
+Pompes à proton (Bactériorhodopine). Flux d'eau local (modification des fluctuations). Interactions hydrodynamiques
+
+\section{Cytosquelette}
+
+\subsection{Rigidité de l'actine et des microtubules}
+
+Les fluctuations thermiques : Mesure de la force à deux dimensions. 
+
+$$	F_C = \frac{1}{2} kT l_p \int \ud s \derp{}{\theta}{s}^2 $$
+
+Décomposer $\theta$ en série de Fourier. Pas de coplpes aux extremités : $\derp{}{\theta}{s} = 0$. 
+
+\begin{align}
+	\theta &= \sum_{n=1}^{\infty} b_n \cos \frac{\pi n s}{L} \\
+	\der{\theta}{s} &= \sum_n \frac{n \pi}{L} \sin \frac{n \pi s}{L} \\
+	F_c &= \sum_n \frac{n^2 \pi^2}{L^2} b_n^2 \frac{1}{2} kT l_p \int_0^L \sin^2 \frac{n \pi s}{L} \ud s \\
+	&= \sum_n \frac{n^2 \pi^2}{L^2} \frac{1}{4} kT l_p b_n^2
+\end{align}
+
+On peut appliquer l'équipartition de l'énergie, $\frac{kT}{2}$ par mode. 
+
+\begin{align}
+	\frac{n^2 \pi^2}{4 L }kT l_p  \moy{b_n^2} = \frac{1}{2} kT \\
+	\moy{b_n^2} &= \frac{2L}{l_p} - \frac{1}{n^2 \pi^2} = \frac{2}{L}\moy{a_n^2}
+\end{align}
+
+\'Energie de courbure : 
+\begin{align}
+	F &= \frac{1}{2} kT l_p \int (\derp{2}{u}{s}^2) \ud s\\
+	\delta F &= - \int f(s) \delta u(s) \ud s \\
+	&= \frac{1}{2} kT l_p \int \ud 2 \der{2}{u}{s} \derp{2}{\delta u}{s} \\
+	&= kT l_p \int \ud s \derp{4}{u}{s} \delta u \\
+	\frac{\delta F}{\delta u(s)} &= kT l_p \derp{4}{u}{s} 
+\end{align}
+
+Force $f(s)$ par unité de longueur. $$f_c(s) =-kT l_p \derp{4}{u}{s} $$
+
+\'Equilibre des forces : 
+\begin{align}
+	f_c + f_v &= 0 \\
+	f_v &= - \zeta_{\bot} \der{u}{t} \\
+	\zeta_{\bot}&= \frac{4 \pi \eta}{\ln \frac{L}{b}} \\
+	\zeta_{\bot} \der{u}{t} &= - k T l_p \derp{4}{u}{x} \\
+	u(x,t) &= e^{i \omega t} f(x)\\
+	(i \omega \zeta_{\bot}) f &= - kT l_p f^{(4)}(x) \\
+	f(x) &= A e^{q_i x} \qquad q^4 &= \frac{- i \omega \zeta_{\bot}}{kT l_p}\\
+	q & \approx \frac{1}{l(\omega)} \qquad l(\omega) &= \left( \frac{kT l_p}{\omega \zeta^{\bot}} \right)^{1/4} \\  
+\end{align}
+
+\subsection{Théorie de Kramers}
+
+On cherche à connaitre la probabilité de dépolymérisation d'un filament d'actine. 
+
+On considère un paysage énergétique formé d'un creux en $x=0$, avec un maximum d'énergie $E$ pour $x=b$, et strictement décroissant vers $- \infty$ pour $x>b$. On appelle $k_{min}$ la constante de raideur correspondant à la parabole à laquelle s'approxime localement le minimum. On ajoute un "mur absorbant" à $x=h$, au-delà duquel on ne revient pas en arrière. 
+
+\begin{align}
+	u(x) &= \frac{1}{2} k_{min} x^2 \\
+	\delta^2 &= \moy{x^2} = \frac{kT}{k_{min}} \\
+	c(0) =& \frac{1}{\delta} \\
+	c(b) &= c(0) e^{\frac{-E}{kT}}\\
+	u &= u_{max} - \frac{1}{2} k_{max} (x-b)^2 \\
+	\delta'^2 &= \frac{kT}{k_{max}}\\
+	\txt{Flux de particules en }b & \\
+	J &= - D \nabla c \approx - \frac{c(b+\delta'^2) - c(b)}{\delta'}\\
+	&= D c(0) e^{- \frac{E}{kT}} \\
+	&= \frac{D}{\delta \delta'}e^{\frac{-E}{kT}} = \frac{1}{t_p}\\
+	\txt{Taux de réaction } \\
+	k_{eff} &= \frac{\sqrt{k_{min}k_{max}}}{2 \pi kT} e^{-\frac{E}{kT}} \\
+	t_{p} &= \int_0^h \frac{\ud x e^{\frac{u(x)}{kT}}}{D} \int_{- \infty}^{x} \ud x' e^{\frac{-u(x')}{kT}}
+\end{align}
+
+Dépolymérisation sous force : On remplace $u(x)$ par $u(x) - fx $. On a un abaissement de la barrière de potentiel $E$ devient $E-fb$. Le taux de réaction avec une force $f$ sera alors $$ k_{eff}(f) = k_{eff}(0)e^{\frac{fb}{kT}}$$ 
+
+\subsection{Génération de force par polymérisation}
+
+Une microtubule ou un filament d'actine a un bout qui cogne contre un mur. La polymérisation contre le mur va exercer une force sur le filament et le faire flamber. 
+
+\'Energie libre : 
+\begin{align}
+	F &= \frac{1}{2} kT l_p \int_0^L \ud s \left( \der{\theta}{s} \right)^2 + \vec{f}\vec{r} \\
+	&= \frac{1}{2} kT l_p \int \left( \der{\theta}{s} \right)^2 \ud ds + \int_0^L \ud s f \cos(\theta- \theta_f) \\
+	\frac{F}{kT l_p} &= \int \left( \der{\theta}{s} \right)^2 \frac{\ud s}{2} + _int_0^L q^2 \cos(\theta - \theta_f) \ud s \\
+	q^2 &= \frac{f}{kTl_p} \approx \frac{1}{L} \\
+	\txt{ Minimisation de l'énergie de courbure} \\
+	\Gamma &= \int_0^L \ud s \phi[\theta(s),\der{\theta}{s}] \\
+	\txt{\'Equations d'Euler-Langrange} \\
+	- \der{}{s}(\derp{}{\phi}{\der{\theta}{s}}) + \derp{}{\phi}{\theta} &= 0 \\
+	- \der{^2 \theta}{s^2} - q^2 \sin (\theta - \theta_p) &= 0 \\
+	\txt{Pas de couple en }\theta_f = 0 \txt{ voisinage du seuil }\\
+	\theta &= \der{u}{x} \ll 1\\
+	\der{^2 \theta}{s^2} + q^2 \theta &= 0 \\
+	\theta &= qa \cos qx - qb  \sin qx = \der{u}{x} \\
+	u &= c + a \sin qx + bn \cos qx \\
+	\txt{Conditions aux limites }& u(0)= u(L) = 0 \\
+	\der{\theta}{s} &= 0 \txt{ si } x=0 \\
+	\der{^2 \theta}{x^2} &=0 \\
+	u &= a \sin qx  \\
+	u(L) &= 0 = \sin qL \\
+	qL &= n \pi L \\
+	\txt{ Seuil de flambage pour le mode }n\\
+	f &= kT l_p \frac{n^2 \pi^2}{L^2} \\	
+\end{align}
+
+Pour l'actine : $$l_p = 17 \mu N \quad L = 300nm \quad f_c = 6 pN $$
+Pour les microtubules : $$ l_p = 5 mm \quad L = 10 \mu m \quad f_c = 2pN $$
+
+\begin{align}
+	- \frac{1}{2} \left( \der{\theta}{s} \right)^2  + q^2 \cos(\theta - \theta_f) = q^2 \cos(\theta_0 - \theta_f)\\
+	\frac{1}{2} \left( \der{\theta}{s} \right)^2 &= q^2 [\cos (\theta - \theta_f) - \cos(\theta_0 - \theta_f)] \\
+	\der{\theta}{s}^2 &= -q \sqrt{2} \sqrt{\cos (\theta - \theta_f) - \cos(\theta_0 - \theta_f)}\\
+	\int_{\theta_0}^{\theta(s)} \frac{\ud \theta}{\sqrt{\cos (\theta - \theta_f) - \cos(\theta_0 - \theta_f)}} &= q \sqrt{2} s\\
+\end{align}
+
+La force influe sur la cinétique de polymérisation : lorsque la force augmente, la polymérisation ralentit. 
+
+\begin{align}
+	\der{L}{t} &= v_p - v_d \\
+	&= k_p(f) c - v_d(f) \\
+	\txt{Loi de Kramers }& \\
+	k_p(f) &= k_p(0) e^{- \frac{f_p(b)}{kT}}\\
+	v_d &= v_d(0) e^{\frac{f_p c}{kT}}\\
+\end{align}
+
+Force d'arrêt 
+\begin{align}
+	c k_p^0 e{- \frac{k_p(a) b}{kT}} = v_d \\
+	f_p(a) &= \frac{kT}{b} \ln \left( \frac{k_p(0)}{v_d}\right) \approx 10 pN 
+\end{align}
+
+Cette force d'arrêt n'a jamais été observée expérimentalement. 
+
+\section{Moteurs moléculaires dans les cellules}
+
+Il y a besoin d'un transfert d'énergie chimique en énergie mécanique dans la cellule. La kinésine, la myosine et la dynéine sont des protéines liées à ce transfert. 
+
+La myosine s'accroche à un filament d'actine, et change de conformation. Ensuite elle se décroche et recommence. Elle ne fait qu'un pas, vers l'extrêmité +. 
+
+La kinésine et la dynéine se déplacent sur les microtubules, la première vers l'extremité +, la seconde dans l'autre sens. 
+
+L'ATP synthase recycle l'ADP en ATP grâce à un gradient de protons (que la cellule produit à partir des sucres), sous la forme d'un moteur moléculaire, doté d'un rotor et d'un stator. On peut aussi le faire fonctionner dans l'autre sens, l'alimenter en ATP et produire un gradient de protons. 
+
+Deux types d'expériences : les tests de motilité et les tests de bille. 
+
+Tests de bille : on accroche une bille au moteur moléculaire. On piège la bille dans une pince optique, et on voit à partir de quelle force de rappel le moteur est bloqué. 
+
+Test de motilité : on regarde le déplacement en fonction du temps. 
+
+\subsection{Thermodynamique des moteurs moléculaires}
+
+On est toujours hors équilibre. 
+
+Force mécanique $f$ flux conjugué : vitesse ($fv$ : énergie dépensée). 
+
+force chimique : ATP hydrolysée en ADP + $P_i$ 
+$$ \Delta \mu = \mu_{ATP} - \mu_{ADP} + P_i $$
+
+flux associé : $$r  = \der{n_{ATP}}{t}$$
+
+puissance totale dissipée : 
+$$W = f_v + r \Delta \mu >0$$
+
+On note $$ \left( \begin{array}{c} v \\ r \end{array} \right) = \Lambda \left( \begin{array}{c} f \\ \Delta \mu \end{array} \right) $$
+au voisingae de l'équilibre (modèle le plus simple possible). On développe à l'ordre 1. 
+
+\begin{align}
+	v &= \lam_{11} f + \lam_{12} \Delta \mu \\
+	r &= \lam_{21} f + \lam_{22} \Delta \mu \\
+	W>0 & \Rightarrow \quad \lam_{11}> 0 \quad \lam_{22}>0 \\
+	\det{\Delta} &= \lam_{11}\lam_{22} - \lam_{12} \lam_{21}>0 
+\end{align}
+
+Relation de symétrie d'Onsager : $\lam_{21} = \lam_{12}$
+
+$\lam_{11}$ mobilité ( à $\Delta \mu <0$, $v = mf$) 
+
+Moteur : $r \Delta \mu >0$ (énergie chimique reçue). $fv<0$ : produit de l'énergie mécanique. 
+
+Rendement : $$\eta = \frac{-f_v}{r \Delta \mu} $$ on a bien $\eta \quad \in \quad ]0,1] $
+
+force d'arrêt : $$f | v = 0 \qquad f_s = \frac{-\lam_{12}\Delta \mu}{\lam_{11}}$$
+
+\subsection{Systèmes à plusieurs état et transitions entre états}
+
+myosine : Powerstroke model (Huxley)
+kynésines : hand over hand model. 
+
+modèle à 3 états : moteur + ATP $\rightarrow_{k_1}$ moteur + ADP + $P_i$ $\rightarrow_{k_2}$moteur +P $\rightarrow_{k_3}$ moteur 
+
+Cinétique : 
+\begin{align}
+	\der{[MDP]}{t} &= k_1[M][T] - k_2[MDP] - k{-1}[MDP]\\
+	&= k_1 [M][T] - (k_{-1} + k_{2})[MDP]\\
+	\der{[MP]}{t}&= k_2 [MDP] - k_3 [MP]\\
+	\der{M}{t} &= k_3 [MP]
+\end{align}
+Hypothèses : AEQS $$\der{[MDP]}{t} = \der{[MP]}{t} = 0 $$
+
+\begin{align}
+	\frac{k_1}{k_{-1}+k_2}[M][T] &= [MDP]\\
+	[MP] &= \frac{k_2}{k_3}[MDP]\\
+	\der{[M]}{t} &= k_3 [MP] \\
+	&= \frac{k_2}{k_3}k_3 [MDP] \\
+	&= \frac{k_2}{k_{-1}+k_2}[M][T]\\
+\end{align}
+
+Concentration totale en moteurs 
+
+\begin{align}
+	[M_t] &= [M] \neq [MDP] + [MP]\\
+	&=[M] (1 + (1 + \frac{k_2}{k_3}\frac{k_1}{k_2 + k_{-1}}[T])) \\
+	[M] &= \frac{[M_t]}{1 + \frac{[T]}{K_m}} \\
+	K_m &= [(1 + \frac{k_2}{k_3})\frac{k_1}{k_2 + k_{-1}}]^{-1}\\
+\end{align}
+$K_m$ concentration critique en ATP $\rightarrow$
+$$[T] &= K_m \Rightarrow [M] = \frac{[M_t]}{2}$$
+
+On a donc $$\der{[M]}{t} = \frac{k_1 k_2}{k_2 k_{-1}} \frac{[T][M_t]}{1+ \frac{ [T]}{K_m}}$$
+
+On définit : 
+\begin{align}
+	k_{ATPase} &= \frac{k_2 k_1}{k_2 + k_{-1}}\\
+	\Rightarrow & \quad \der{[M]}{t} &= [M_t] k_{ATPase} \frac{[T]}{1 + \frac{[T]}{K_m}} \\
+	\txt{vitesse } v&= d k_{ATPase} \frac{[T]}{1 + \frac{[T]}{K_m}}
+\end{align}
+
+Remarque : moteur : catalyseur de l'hydrolyse de l'ATP. 
+
+Théorie de Kramers : 
+\begin{align}
+	k_i &= k_{i0}e^{- \frac{f \delta_i}{kT}}\\
+	\delta_1 + \delta_2 + \delta_3 &= 8nm \\
+	\delta_1 &= \delta_2 = 1nm \\
+	\delta_3 &= 6nm \\
+	v_0 &= 0,8 \mu m/s \\
+	f_s &= 5 pN 
+\end{align}
+
+\subsection{Modèle à deux niveaux}
+
+moteur : particule ponctuelle qui interacti avec le filament. 
+
+2 états : fortement lié et faiblement lié. 
+
+\'Etat fortement lié : perception de la structure de filament : périodique (période 8nm) et polaire. On construit donc un potentiel périodique mais asymétrique. 
+
+On a deux états $W_1$ bas et $W_2$ haut, avec un potentiel en forme de triangle, mais asymétrique. La périodicité est $l=8nm$, avec $l=a+b \quad a<b$. La hauteur du triangle $10kT$. On appelle $\omega_1(x)$ la probabilité de passer de l'état 1 à l'état 2, et $\omega_2(x)$ la probabilité de passer de 2 à 1. 
+
+vitesse: 
+\begin{align}
+	v &= (1-p) 0 + p(a+b) \frac{1}{\frac{1}{\omega_2} + t_1}\\
+	t_1 &= \frac{b}{v_1} \qquad \txt{temps de déplaement dans le potentiel}\\
+	\frac{1}{\omega_2} & \txt{ temps de diffusion} \\
+	\zeta v_1 = \frac{u}{b} \qquad v_1 &= \frac{u}{\zeta b} \qquad t_1 &= \frac{\zeta b^2}{u}\\
+	v & \approx \frac{a+b}{\frac{1}{\omega_2} + \frac{\zeta b^2}{u}}p \\
+\end{align}
+
+force d'arrêt : 
+
+$$ u \rightarrow u-fx \Rightarrow p(f) $$
+$$ \frac{u}{b} \rightarrow \frac{u}{b} - f $$
+$$v = p(f) \frac{a+b}{\omega_2^{-1} + \frac{\delta b^2}{u - fb}}$$
+$$ v=0 \qquad f \approx \frac{u}{b}$$
+
+Points clés : potentiel asymétrique + flucutations thermiques (diffusion). 
+
+\subsection{\'Equations de Fokker-Planck}
+
+$P_1(x,t)$ : moteur à la position $x$ dans l'état 1. 
+$P_2(x,t)$ : moteur à la position $x$ dans l'état 2. 
+
+Conservation de la probabilité : 
+\begin{align}
+	\derp{}{P_1}{t} + \derp{}{j_1}{x} &= - \omega_1 P_1 + \omega_2 P_2 \\
+	\derp{}{P-2}{t} + \derp{}{j_2}{x} &= - \omega_2 P_2 + \omega_1 P_1 \\
+\end{align}
+
+Flux de probabilité : 
+\begin{align}
+	j_1 &= -D \derp{}{P_1}{x} + \frac{P_1}{\zeta}- \left( \derp{}{W_1}{x}+ f_{ext}\right)\\
+	D &= \frac{kT}{\zeta}\\
+	j_1 &= -D \left[ \derp{}{P}{x} + \frac{P_1}{kT} \left( \derp{}{W_1}{x} - f_{ex}\right) \right]\\
+	j_2 &= -D \left[ \derp{}{P}{x} + \frac{P_2}{kT} \left( \derp{}{W_2}{x} - f_{ex} \right) \right]\\
+\end{align}
+
+Vitesse du moteur : 
+Flux total 
+\begin{align}
+	j=j_1+j_2 \\
+	\frac{1}{l}\int_0 \ud x (j_1 + j_2) \\
+	\rho &= \frac{1}{l}\int_0^l \ud x (P_1 + P_2) \ud x \\
+	& \approx \frac{j}{\rho}
+\end{align}
+
+\subsection{\'Equilibre thermodynamique (absence de force extérieure)}
+
+\begin{align}
+	P_1(x) &= pe^{- W_1(x)/kT}\\
+	P_2(x) &= pe^{-W_2(x)/kT}
+\end{align}
+Statistique de Boltzmann.
+
+$$j_1  = j_2 =0 $$
+L'équilibre thermodynamique impose : $$\omega_1 P_1 = \omega_2 P_2 $$(bilan détaillé). 
+
+\begin{align}
+	\omega_1(x) &= \omega(x) e^{\frac{W_1(x)}{kT}}\\
+	\omega_2(x) &= \omega(x) e^{\frac{W_2(x)}{kT}}
+\end{align}
+
+Le moteur ne marche que s'il est hors équilibre. 
+
+Hors équilibre  : 
+\begin{align}
+	\omega_1(x) &= e^{\frac{W_1}{kT}}\left[ \omega(x) + \alpha(x) e^{\frac{\mu_{ADP}  + \mu_{p}}{kT}} \right]\\
+	\omega_2(x) &= e^{\frac{W_1}{kT}}\left[ \omega(x) + \alpha(x) e^{\frac{\mu_{ATP}}{kT}} \right] \\
+	\omega_1(x) &= \omega_2(x) e^{\frac{W_2 - W_1}{kT}} + \Omega(x)\\
+	\Omega(x) &= \alpha(x) e^{\frac{W_1 x + \mu_{ADP} + \mu_P }{kT}}(e^{\frac{\Delta \mu}{kT}}-1) 
+\end{align}
+
+\subsection{Vitesse et dispersion}
+
+Bruit stochastoque dû aux transitions entre états. 
+\begin{align}
+	P_i &= \frac{1}{\sqrt{4 \pi D_{eff}t}} e^{- \frac{(x - vt)^2}{4 D_{eff}t}}g_i(\frac{x}{l})\\
+	\zeta v &= \frac{1}{l} \int_0^l \ud x \left[ g_1 \left( - \derp{}{W_1}{x} \right) + g_2 \left( - \derp{}{W_2}{x} \right) \right] \ud x 
+\end{align}
+
+Hypothèse : filament symétrique $W_1$ pair, donc $\derp{}{W_1}{x}$ impaire, donc de moyenne nulle,et donc $v$ nulle.
+
+\subsection{Choix du potentiel}
+
+kinésine 1 : une seule tête processive, qui se déplace entre les deux potentiels. 
+
+kinésine 2 : 2 têtes, il y en a toujours une accrochée. 
+
+2 conditions essentielles : bilan détaillé ? consomme de l'ATP et potentiel asymétrique.
+
+\section{Propriétés collectives de moteurs moléculaires}
+
+\subsection{Friction, relation force-vitesse}
+
+Test de motilité : donne à une fibre une vitesse $v$. Les moteurs s'accrochent sur cette fibre, et s'en décroche. On appelle $x$ le déplacement de l'extrêmité du moteur attachée à la fibre par rapport à sa position verticale. 
+
+
+Taux d'attachement $k_on$ et taux de détachement $k_{off}$. $t_{on} = \frac{1}{k_{off}}$ $t_{off} = \frac{1}{k_{on}}$
+
+"Duty ratio" : $$\Gamma  = \frac{t_{on}}{t_{on} + t_{off}} = \frac{k_{on}}{k_{on} + k_{off}}$$
+
+"Friction protéine" (Sekimoto)
+\'Energie dissipée : statistique des détachements. 
+$$p(t) \approx e^{-k_{off}t} \qquad p(x) = \frac{k_{off}}{v} e^{-x k_{off}/v}$$
+$$\int p(x) \ud x =1 $$
+
+\'Energie moyenne dissipée par un moteur : 
+$$\moy{\frac{1}{2}Kx^2} = \frac{1}{2} K \int p(x) x^2 \ud x = \frac{1}{2} 2K (\frac{v}{k_{off}})^2 $$
+
+$W$ énergie dissipée par unité de temps : 
+$$W = N \Gamma \frac{k{off}K N^2}{k_{off}^2} = v f_{v}$$
+
+Force de friction proportionnelle à la vitesse : 
+$$f_v = \tilde{\zeta} v$$ coefficient de friction effectif $\tilde{\zeta} = \frac{N \Gamma K}{k_{off}}$
+
+$$\tilde{\zeta}\gg \zeta$$ en général.
+
+Moteurs moléculaires (force d'arrêt) $v=0$. 
+
+$$-(\zeta + \tilde{\zeta})v + f_{ext} + f_m =0$$
+où le premier terme est un terme de friction. 
+
+$$f_m = K \delta N \Gamma = \tilde{\zeta} k_{off} \delta $$
+force créée par les moteurs. 
+
+$$ (\zeta + \tilde{\zeta}) v = f_{ext} + f_m $$
+$$v = \frac{f}{\zeta + \tilde{\zeta}} + \frac{\tilde{\zeta} k_{off} \delta}{\zeta + \tilde{\zeta}}$$
+
+$v_0 = k_{off} \delta \approx 1 \mu m /s$
+
+La force d'arrêt des moteurs est de l'ordre de 1 à 10 pN. 
+
+\subsection{Modèle à 2 états}
+
+On prend une fonction triangle symétrique et pas de fluctuations thermiques (pas de diffusion). 
+
+$p_1(x,t)$ $p_2(x,t)$ Fokker-Planck. 
+
+Taux de détachement $\omega_1(x)$ localisé au minimum du potentiel d'attachement $\omega_2 =$cste. 
+
+$$\derp{}{p_1}{t} + \derp{}{j_1}{x} = - \omega_1^* p_1 + \omega p_2 $$
+
+$j_1 = -v p_1$ moteurs répartis aléatoirement. 
+$$p_1 + p_2 = p $$
+
+$$f_m = N \int_0^l \derp{}{\omega_1}{x}p_1 + \derp{}{\omega_2}{x}p_2 \ud x  = av - bv^2$$
+
+\'Equation du mouvement : 
+$$f + f_m - \zeta v =0 \qquad f = \zeta v - \alpha \Omega v + bv^3= (\zeta - \alpha \Omega)v + bv^3$$
+
+si $\alpha \Omega > \zeta$, il y a trois vitesses possibles. ON a alors une transition de phase dynamique, et une hystérésis. 
+
+Il y a alors apparition d'oscillations spontanées. 
+
+\section{Hygrodynamique à faible nombre de Reynolds}
+
+\subsection{\'Equation de Stokes friction}
+
+\subsubsection{Nombre de Reynolds}
+
+Bactérie dans un fluide : E.Coli, 1 µm de long, $v=10\mu m/s$. 
+Dans l'eau $$Re = \frac{vL}{\nu} = \frac{3.10^{-5}10^{-6}}{10^{-6}} = 3.10^{-5} \ll 1$$
+
+Effets intertiels négligeables, et donc une équation complètement réversible. 
+
+\'Equation de Stokes : 
+$$ \eta \nabla^2 v - \vec{\nabla}P + \vec{f}_{ext}=0 $$
+
+Life at lox Reynolds number, E. Purcell, Am. J. Physics. 
+
+H. Berge E.Coli in motion 
+
+Mouvement de Listeria : bactérie dans un gel d'actine
+
+Actine de la cellule : $E = 1000 Pa$ 
+
+bactérie + comète : $$\vec{u} = \vec{v}_b - \vec{v}_c $$
+$$\zeta_c \vec{v_c} + \zeta_b \vec{v}_b = \vec{0}$$
+$$\vec{v}_b= \vec{u} \frac{\zeta_c}{\zeta_b + \zeta_c}$$
+$$\vec{v}_c = - \vec{u}\frac{\zeta_b}{\zeta_b + \zeta_c} \approx \vec{0}$$
+
+\subsubsection{Friction, interactions hydrodynamiques}
+
+friction de stokes : $$6 \pi \eta a \vec{v} = \vec{f}$$
+
+\begin{align}
+	\eta \nabla^2 \vec{v} - \vec{\nabla}P + \vec{f}\delta(\vec{r}) &= \vec{0} \\
+	\vec{\nabla}\vec{v} &= 0
+	\tilde{v}(\vec{q}) \int \vec{v}()\vec{r} e^{- i \vec{q}\vec{r}} \ud \vec{r}\\
+	- \eta q^2 \tilde{v} - i \vec{q} \tilde{P} + \vec{f} &=0 \\
+	i \vec{q}\vec{v} &= 0 \\
+	q^2 \tilde{P} + i \vec{q} \vec{f} &= 0 \\
+	\vec{P} &= \frac{-i \vec{q}\vec{f}}{q^2}\\
+	- \eta q^2 \tilde{v} + \vec{f} - \frac{\vec{q (\vec{q}\vec{f})}}{q^2} &= 0 \\
+	\tilde{v} = \frac{1}{\eta q^2} \left[ \vec{f} - \frac{\vec{q}(\vec{q}\vec{f})}{q^2} \\
+	\vec{v} &= \tilde{G} \vec{f}\\
+\end{align}
+
+$G$ tenseur d'Oseen. 
+\begin{align}
+	\tilde{G}_{ij} &= \frac{1}{\eta q^2}(\delta_{ij} - \frac{q_i q_j}{q^2}) \\
+	v_i &= \sum_j G_{ij}f_j \\
+	G_{ij}(\vec{r}) &= \int \frac{\ud \vec{q}}{(2\pi)^3} \frac{1}{\eta q^2}(\delta_{ij} - \frac{q_i q_j}{q^2})e^{i \vec{q}\vec{r}} \\
+	G_{ij}(\vec{r}) &= \frac{1}{4 \pi \eta r}[a \delta_{ij}  + b \frac{r_i r_j}{r^2}] \\
+	G_{ii}(\vec{r}) &= \frac{1}{4 \pi \eta r}(3a + b)
+	(3a+b) &=2 \\
+	G_{ij}(\vec{r})&= \frac{1}{8 \pi \eta r}[\delta_{ij} + \frac{r_i r_j}{r^2}]\\
+	\vec{v}_z(\vec{r}) &= \frac{1}{8 \pi \eta r}(1 + \frac{z^2}{r^2})f \\ 
+\end{align}
+
+
+
+\end{document}
+
+
+
+
