@@ -3,6 +3,7 @@
 \usepackage{amsmath}
 \usepackage[T1]{fontenc}
 \usepackage{}
+\usepackage{gensymb}% pour \degree
 \newcommand{\lam}{\lambda}
 \newcommand{\txt}[1]{\textrm{#1}}
 \newcommand{\moy}[1]{\langle #1 \rangle}
@@ -10,6 +11,7 @@
 \newcommand{\der}[3][]{\frac{\mathrm{d}^{#1} #2}{\mathrm{d} #3^{#1}}}
 \newcommand{\derp}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\bbar}[1]{\bar{\bar{#1}}}
+\newcommand{\angst}[0]{\text\AA}
 
 \makeindex
 \title{Interfaces}
@@ -23,19 +25,19 @@
 
 \subsection{Historique}
 
-1806 : Théorie de Laplace de la capillarité. Hypothèse très forte pour l'époque : existence d'atomes \\
-1798 : Cavendish mesure les forces gravitationnelles en laboratoire. \\
+1806 : Théorie de Laplace de la capillarité. Pourquoi les liquides montent-ils dans les tubes alors que seul la mécanique des fluides est connue ?   Hypothèse très forte pour l'époque : existence d'atomes \\
+1798 : Cavendish mesure les forces gravitationnelles en laboratoire. Et se pose la question de savoir si la capillarité est une force gravitationnelle.\\
 1808 : Clairant fait une expérience qui montre que l'ascension capillaire est indépendante de l'épaisseur des tubes. Cela n'est pas compatible avec l'hypothèse que les forces capillaires sont liées à la gravité. \\
 1856 : Thomas Young propose la loi qui porte son nom sur les angles de contact. \\
 1850 : Lord Kelvin montre que la pression de vapeur saturante d'un liquide dépend de la courbure de l'interface liquide-vapeur.\\
 \dots \\
-1950 : l'école russe des interfaces revisite les théories précédentes. \\
-1989 : article de P-G De Gennes dans Review of Modern Physics \emph{Wetting statics and dynamics}
+1950 : L'école russe des interfaces revisite les théories précédentes en incluant la physique statistique. \\
+1989 : Article de P-G De Gennes dans Review of Modern Physics \emph{Wetting statics and dynamics}
 
 \subsection{Notion d'interface}
 
 \textbf{Interface} : séparation entre 2 milieux 1 et 2 quelconques.\\
-\textbf{Surface} : séparation entre une phase dense (solide,liquide) et une phase diluée (gaz). L'existence de la surface est directement liée à l'existence d'interaction attractices entre les molécules. A partir de ce moment, créer de la surface c'est rompre des liaisons entre molécules, et donc ça coûte de l'énergie : 
+\textbf{Surface} : séparation entre une phase dense (solide,liquide) et une phase diluée (gaz). L'existence de la surface est directement liée à l'existence d'interaction attractives entre les molécules. À partir de ce moment, créer de la surface c'est rompre des liaisons entre molécules, et donc ça coûte de l'énergie : 
 $$\delta W = \gamma \ud A$$
 
 \paragraph{Modèle naïf}
@@ -47,16 +49,20 @@ On considère un réseau cubique d'atomes de maille $a$, de côté $L=Na$. On note $
 \caption{}%
 \label{}%
 \end{figure}
-
-$$E_p = 3 N^2(N-1) (- \epsilon) = -3 N^3 \epsilon + 3 N^2 \epsilon = - \frac{3V \epsilon}{a^3} + \frac{3 S \epsilon}{6a^2}$$ où l'on voit apparaître un terme négatif (stabilisateur) proportionnel à $V$ : $\frac{-3 \epsilon}{a^3}$ et un terme positif (donc destabilisant) proportionnel à $S$ : $\gamma = \frac{3 \epsilon}{6 a^2} = \frac{1}{2 a^2}$
+\begin{align*}
+E_p &= 3 N^2(N-1) (- \epsilon) \\
+    &= -3 N^3 \epsilon + 3 N^2 \epsilon \\
+    &= - \frac{3V \epsilon}{a^3} + \frac{3 S \epsilon}{6a^2}\\
+\end{align*}
+ où l'on voit apparaître un terme négatif (stabilisateur) proportionnel à $V$ : $\frac{-3 \epsilon}{a^3}$ et un terme positif (donc destabilisant) proportionnel à $S$ : $\gamma = \frac{3 \epsilon}{6 a^2} = \frac{1}{2 a^2}$
 
 Exemple : le cyclohexane 
 
 \begin{align}
-	\Delta U_{vap} = 10,5 kJ/mol\\
+	\Delta U_{vap} = 30,5 kJ/mol\\
 	\rho = 773 kg/m^3 \\
 	M = 84,16 g/mol \\
-	a^3 =\frac{M}{\rho \mathcal{N}_a} \quad a = 5,65 \dot{A} \\
+	a^3 =\frac{M}{\rho \mathcal{N}_a} \quad a = 5,65 \text{ \AA} \\
 	\epsilon = \frac{\Delta U_{vap}}{6 \mathcal{N}a} = 8,41 \cdot 10^{-21} J \\
 	\gamma = 26,5 \cdot 10^{-3}
 \end{align}
@@ -73,17 +79,17 @@ Remarque :
 		n-heptane & $\gamma $= & 19,65 \\
 		n-octane & $\gamma $= & 21,14 \\			
 		\end{tabular}
-		\caption{Les énergies sont en mL/m². On voit que la théorie naïve ne permet pas de permettre l'évolution en fonction de la longueur d'une chaîne}
+		\caption{Les énergies sont en $mL.m^{-2}$. On voit que la théorie naïve ne permet pas de permettre l'évolution en fonction de la longueur d'une chaîne}
 \end{table}
 
 Remarque 2 : 
 
 \begin{table}[h!]
 	\centering
-		\begin{tabular}{l|c}
-		eau & 71,99 \\
-		méthanol & 22,07 \\
-		mercure & 485 \\			
+		\begin{tabular}{l|cl}
+		eau & 71,99 $mJ.m^{- 2}$&interaction  par liaison hydrogène\\
+		méthanol & 22,07 $mJ.m^{- 2}$&interaction de type Van Der Waals\\
+		mercure & 485 $mJ.m^{- 2}$& interaction de type métallique\\			
 		\end{tabular}
 		\caption{Ici, on voit bien que le type d'interaction (liaison hydrogène, VdW, métallique) a aussi son importance.}
 \end{table}
@@ -94,7 +100,7 @@ Remarque 2 :
 
 \begin{figure}[h!]%
 \includegraphics[width=\columnwidth]{gouttes_vs_lc.png}%
-\caption{}%
+\caption{Forme des gouttes en fonction de leur volume, on voit que l'on sature à une hauteur de l'ordre de la longueur capillaire. En dessous de cette longueur, les goutes sont sphériques, au dessus de cette longueur, elles sont aplaties.}%
 \label{}%
 \end{figure}
 
@@ -104,17 +110,18 @@ La longueur capillaire est la limite entre le domaine où la gravité ne joue pas,
 $$E_{p.pesanteur} = \rho g l_c \quad E_{p. surface} = \gamma l_c^2 \quad \frac{E_{P.pesanteur}}{E_{p. surface}} = \frac{\rho g l_c^4}{\gamma l_c^2}$$
 
 D'où : 
-$$ l_c = \frac{\gamma}{\rho g}$$
+$$ l_c = \sqrt\frac{\gamma}{\rho g}$$
 
-Par exemple pour l'eau : $l_c \approx 2,5mm$
+Par exemple pour l'eau dont la tensionde surface est de $\gamma_{eau}72 mJ.m^{-2}$: $$l_c \approx 2,5mm$$
 
 En-dessous de cette longueur, les gouttes adoptent plutôt une forme sphérique. L'épaisseur d'une goutte est saturée à cette longueur, ce qui force la goutte à s'aplatir. 
 
 \paragraph{Echelle microscopique/macroscopique} : Au niveau microscopique, on a un potentiel d'interaction en $v(r) \approx \frac{c}{r^6}$ (en général on prend le potentiel LJ). Au niveau mésoscopique, les échelles de longueur sont de l'ordre de la dizaine de mm, on a une densité homogène dans les phases continues, on a alors une décroissance qui va en $z^{-2}$, et donc des forces à plus longue portée qu'à l'échelle microscopique. 
 
 \begin{figure}[h!]%
-\includegraphics[width=7cm]{sphere_sphere.png} \\
-\includegraphics[width=7cm]{plan_plan.png}
+	\centering
+\includegraphics[width=.7\textwidth]{sphere_sphere.png} \\
+\includegraphics[width=.7\textwidth]{plan_plan.png}
 \caption{}%
 \label{}%
 \end{figure}
@@ -133,14 +140,15 @@ On considère une surface $A$, et on calcule le nombre de molécule qui rapent sur
 
 $$\frac{PA}{\sqrt{2 \pi m k T}}$$
 
-La pression pertinente ici est la pression de vapeur saturante de l'eau à 25°C $P_S = 3185Pa$ et $M=18g/mol$ on obtient donc $3\cdot 10^{7}$ molécules par secondes qui tapent sur une surface de $10 \dot{A}^2$
+La pression pertinente ici est la pression de vapeur saturante de l'eau à 25\degree C $P_S = 3185Pa$ et $M=18g/mol$ on obtient donc $3\cdot 10^{7}$ molécules par secondes qui tapent sur une surface de $10 \text\AA ^2$
 
 Le temps de séjour d'une molécule à la surface est donc de l'ordre de $10^{-7}$s.
 
 Problèmes de définition de l'équilibre : On prend une boîte de Pétri dans laquelle on met de l'eau propre, et on ajoute une goutte de toluène.
 
 \begin{figure}[h!]%
-\includegraphics[width=\columnwidth]{probleme_d_equilibre.png}%
+	\centering
+\includegraphics[width=0.9\columnwidth]{probleme_d_equilibre.png}%
 \caption{}%
 \label{}%
 \end{figure}
@@ -152,7 +160,8 @@ Le toluène s'étale et mouille. Puis le toluène se rétracte au bout de quelques s
 \subsection{Mécanique de surface, pression anisotrope}
 
 \begin{figure}[h!]%
-\includegraphics[width=\columnwidth]{interface_cubique.png}%
+\centering
+\includegraphics[width=0.7\columnwidth]{interface_cubique.png}%
 \caption{}%
 \label{}%
 \end{figure}
@@ -176,8 +185,8 @@ $$ \vec{g} = \vec{0} \quad \bbar{\sigma} = - P \bbar{I} \quad \bbar{\sigma} = \l
 	\end{array}\right]$$
 	
 	\begin{figure}[h!]%
-\includegraphics[width=\columnwidth]{P_interface.png}%
-\caption{}%
+\includegraphics[width=\columnwidth]{p_interfaces.png}%
+\caption{Élément d'épaiseur infinitésimal de fluide }%
 \label{}%
 \end{figure}
 
@@ -186,16 +195,17 @@ $P_N$ dans la direction normale.
 $$P_N = P = \txt{pression statique} \quad P_{\bot} (x,y,z) = P_{\bot}(z) \quad \delta W = \gamma \ud A$$
 
 \begin{figure}[h!]%
-\includegraphics[width=\columnwidth]{interface_repere.png}%
+\centering
+\includegraphics[width=0.6\columnwidth]{interface_repere.png}%
 \caption{}%
-\label{}%
+\label{deform}%
 \end{figure}
 
-Quel est le travail associé à cette transformation ? 
+On va déformer cet interface comme dans le Fig\ref{deform}. Quel est le travail associé à cette transformation ? 
 
 \begin{align}
 	\delta W &= \delta W_N + \delta W_{\bot} \\
-	\delta W_{\bot} &= - \int_{-l/2}^{l/2} l P_{\bot}(z) \ud z \\
+	\delta W_{\bot} &= - \int_{-l/2}^{l/2} l P_{\bot}(z) \ud y \ud z \\
 	\delta W_N &= -P_N l^2 \delta z = + P_N l^2 \delta y \\
 	&= P_N l \delta A \\
 	\delta W &= \delta W_{\bot} + \delta W_N = \int_{-l/2}^{l/2} P_N \ud z \delta A - \int_{-l/2}^{l/2}P_{\bot}(z) \ud z \delta A \\
@@ -203,18 +213,19 @@ Quel est le travail associé à cette transformation ?
 	\Rightarrow \quad \gamma &= \int_{-\infty}^{\infty} [P - P_{\bot}(z)] \ud z
 \end{align}
 
-La tension de surface est une vraie tension, liée à $P_{\bot} \neq R$ .
+La tension de surface est une vraie tension, liée à $P_{\bot} \neq P$ .
 
 Remarque 1 : on ne sait pas calculer $P_{\bot}(z)$.
 
 Remarque 2 : Ordre de grandeur $\gamma = 20mJ/m^2$, $\Delta z \approx 10^{-9}m$, on a alors $\Delta P \approx 200 bar$ Ce qui fait quand même une pression assez grande ! 
 
 Remarque 3 : 
-
+Dans le cas d'une interface courbe (Fig.\ref{i_courbe}) on a la relation suivante:
 \begin{figure}[h!]%
-\includegraphics[width=\columnwidth]{interface_courbe.png}%
+\centering
+\includegraphics[width=0.5\columnwidth]{interface-courbe.png}%
 \caption{$P_I \neq P_{ext} \rightarrow$ à cause de l'existence de $P_{\bot}$}%
-\label{}%
+\label{i_courbe}%
 \end{figure}
 
 $$\ud [rP_N \theta] = \ud r P_{\bot} \theta \quad \theta \ll 1$$
@@ -230,6 +241,13 @@ $$ (P_I - P_{ext}) = \gamma \left(\frac{1}{R_1} + \frac{1}{R_2} \right)$$
 Relation de Laplace
 
 Applications : les petites bulles se vident dans les grosses. 
+
+\begin{figure}[h!]%
+\centering
+\includegraphics[width=0.7\columnwidth]{equilibre_bulles.png}%
+\caption{}%
+\label{}%
+\end{figure}
 
 La relation de Laplace permet de calculer la forme d'un ménisque formé par un liquide sur une surface solide verticale (figure \ref{angle_de_raccord})
 
@@ -247,7 +265,7 @@ La relation de Laplace permet de calculer la forme d'un ménisque formé par un li
 	\rho gz &= \frac{\gamma \ud \phi}{\ud x \sqrt{1 + tan^2 \phi}} = \frac{\gamma \ud \phi \cos \phi}{\ud x} \\
 	&= \frac{\gamma \cos \phi \tan \phi \ud \phi}{\ud z} \\
 	\rho g z \ud z &= \gamma \sin \phi \ud \phi \\
-	x \rightarrow infty & \quad \phi \rightarrow 0 \quad z \rightarrow 0 \\
+	x \rightarrow \infty & \quad \phi \rightarrow 0 \quad z \rightarrow 0 \\
 	\frac{1}{2} \rho g z^2 &= \gamma (1-\cos \phi ) \\
 	\frac{1}{2} \rho g z_0^2 &= \gamma (1-\sin \theta_0) \\
 	z_0 &= l_0 \sqrt{2(1-\sin \theta_0)} \\
@@ -275,7 +293,7 @@ En réalité, $\theta_0$ dépend de $z$, mais pas beaucoup, parce qu'on considère u
 \subsection{Tension de surface et interactions}
 
 \begin{figure}[h!]%
-\includegraphics[width=\columnwidth]{TS_interactions.png}%
+\includegraphics[width=0.7\columnwidth]{TS_interactions.png}%
 \caption{p(e) énergie d'interaction par unité de surface}%
 \label{TS_interactions}%
 \end{figure}
@@ -309,7 +327,7 @@ L'additivité n'est pas évidente. Le calcul théorique de la constante de Hamaker 
 \subsection{Cas des systèmes asymétriques}
 
 \begin{figure}[h!]%
-\includegraphics[width=\columnwidth]{asymetrique.png}%
+\includegraphics[width=\columnwidth]{23_asymetrique.png}%
 \caption{}%
 \label{asymétrique}%
 \end{figure}
@@ -378,7 +396,7 @@ Pour calculer l'épaisseur : la pression dans le film sera :
 \end{align}
 
 Technique de l'anneau poreux : \begin{figure}[h!]%
-\includegraphics[width=\columnwidth]{anneau_poreux.png}%
+\includegraphics[width=\columnwidth]{23_anneau_poreux.png}%
 \caption{On contrôle la différence de pression entre le liquide et l'enceinte}%
 \label{anneau poreux}%
 \end{figure}
@@ -405,7 +423,7 @@ Pour les régimes où $p_v \ll p_{sat}$ on fait appel à l'équation de Langmuir.
 Machine à force de surface (SFA): inventée par David Tabor et popularisée par Israelatchvili. 
 
 \begin{figure}[h!]%
-\includegraphics[width=\columnwidth]{SFA.png}%
+\includegraphics[width=\columnwidth]{23_SFA.png}%
 \caption{}%
 \label{SFA}%
 \end{figure}
@@ -533,7 +551,7 @@ Lorsque $b$ devient grand, $h = \kappa^{-1} \sqrt{2(1 - \sin \theta)}$
 \end{align}
 
 Attention, les courbures sont différentes dans le GBPO. 
-$$\frac{1}{R_1} + \frac{1}{R_2} = 0 $$ surface de courbure nulle. Caténoïde $x = \ch z$ mais cela pose problème lorsque $x$ devient grand, on doit raccorder sur une surface plane, pour $x \approx l_c$
+$$\frac{1}{R_1} + \frac{1}{R_2} = 0 $$ surface de courbure nulle. Caténoïde $x = ch z$ mais cela pose problème lorsque $x$ devient grand, on doit raccorder sur une surface plane, pour $x \approx l_c$
 
 \subsection{Surfaces réelles : rôle de la rugosité et des hétérogénéité chimiques}
 
@@ -754,7 +772,7 @@ Principe : le profil $\rho(z)$ choisi est celui qui minimise $\gamma$. Le profil
 
 $$f(\rho) - f_{dt}(\rho) = W(\rho) + \frac{1}{2} m (\derp{}{ \rho}{z})^2 $$ où le seconde terme est le coût à avoir l'interface complètement raide. 
 
-$$\gamma[\rho] &= \int [W(\rho) + \frac{1}{2} m (\derp{}{\rho}{z})^2] \ud z $$
+$$\gamma[\rho] = \int [W(\rho) + \frac{1}{2} m (\derp{}{\rho}{z})^2] \ud z $$
 
 où $\gamma[\rho]$ est une fonctionnelle de densité. 
 
@@ -765,7 +783,7 @@ où $\gamma[\rho]$ est une fonctionnelle de densité.
 	&  \der{\rho}{z} \rightarrow 0 \\
 	W(\rho) - \frac{1}{2}m (\der{\rho}{z})^2 &= 0 \\
 	\der{\rho}{z} = \sqrt{\frac{2 W(\rho)}{m}}\\
-	\gamma &= m \int (\der{\rho}{z})^2 \ud z = \int_{\rho_g}^{\rho_l} \sqrt{2 m W(\rho)}\us \rho \\
+	\gamma &= m \int (\der{\rho}{z})^2 \ud z = \int_{\rho_g}^{\rho_l} \sqrt{2 m W(\rho)}\ud \rho \\
 \end{align}
 Au voisinage du point critique, la courbe est relativement symétrique : 
 $$ W(\rho) = C(\rho - \rho_l)^2(\rho - \rho_g)^2$$
