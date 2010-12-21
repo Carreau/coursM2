@@ -6,6 +6,7 @@ PNG=$(SVG:%.svg=%.png)
 INKSCAPE = /Applications/Inkscape.app/Contents/Resources/bin/inkscape
 
 pdf : $(PDF)
+png : $(PNG)
 
 %.pdf : %.svg
 	@echo "pdf from " $<
