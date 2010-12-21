@@ -12,6 +12,11 @@
 \newcommand{\derp}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\bbar}[1]{\bar{\bar{#1}}}
 \newcommand{\angst}[0]{\text\AA}
+\graphicspath {{pic/}}
+% on evite de déclarer les extension, les premières extension 
+% ont priorité, ce qui nous donne des graphics sans "pixel"
+% reste a faire un script svg->pdf / svg->png
+\DeclareGraphicsExtensions{.eps,.pdf,.png,.jpg,.JPG,.jpeg}
 
 \makeindex
 \title{Interfaces}
@@ -45,9 +50,10 @@ $$\delta W = \gamma \ud A$$
 On considère un réseau cubique d'atomes de maille $a$, de côté $L=Na$. On note $- \epsilon$ l'énergie d'interaction entre les atomes. Ce modèle est excessivement simple, il n'y a pas de portée à l'interaction. 
 
 \begin{figure}[h!]%
-\includegraphics[width=7cm]{modele_naif.png}%
+\centering
+\includegraphics[width=7cm]{modele_naif}%
 \caption{}%
-\label{}%
+\label{model_naif}%
 \end{figure}
 \begin{align*}
 E_p &= 3 N^2(N-1) (- \epsilon) \\
@@ -99,7 +105,7 @@ Remarque 2 :
 
 
 \begin{figure}[h!]%
-\includegraphics[width=\columnwidth]{gouttes_vs_lc.png}%
+\includegraphics[width=\columnwidth]{gouttes_vs_lc}%
 \caption{Forme des gouttes en fonction de leur volume, on voit que l'on sature à une hauteur de l'ordre de la longueur capillaire. En dessous de cette longueur, les goutes sont sphériques, au dessus de cette longueur, elles sont aplaties.}%
 \label{}%
 \end{figure}
@@ -120,16 +126,16 @@ En-dessous de cette longueur, les gouttes adoptent plutôt une forme sphérique. L
 
 \begin{figure}[h!]%
 	\centering
-\includegraphics[width=.7\textwidth]{sphere_sphere.png} \\
-\includegraphics[width=.7\textwidth]{plan_plan.png}
+\includegraphics[width=.7\textwidth]{sphere_sphere} \\
+\includegraphics[width=.7\textwidth]{plan_plan}
 \caption{}%
 \label{}%
 \end{figure}
 
 \paragraph{Formes de l'interface }: 
 \begin{figure}[h!]%
-\includegraphics[width=7cm]{forme_macro.png}%
-\includegraphics[width=7cm]{forme_micro.png}
+\includegraphics[width=7cm]{forme_macro}%
+\includegraphics[width=7cm]{forme_micro}
 \caption{Modélisation de l'interface à une échelle macroscopique ou mésoscopique. On n'ira pas à l'échelle microscopique}%
 \label{}%
 \end{figure}
@@ -148,7 +154,7 @@ Problèmes de définition de l'équilibre : On prend une boîte de Pétri dans laquel
 
 \begin{figure}[h!]%
 	\centering
-\includegraphics[width=0.9\columnwidth]{probleme_d_equilibre.png}%
+\includegraphics[width=0.9\columnwidth]{probleme_d_equilibre}%
 \caption{}%
 \label{}%
 \end{figure}
@@ -161,7 +167,7 @@ Le toluène s'étale et mouille. Puis le toluène se rétracte au bout de quelques s
 
 \begin{figure}[h!]%
 \centering
-\includegraphics[width=0.7\columnwidth]{interface_cubique.png}%
+\includegraphics[width=0.7\columnwidth]{interface_cubique}%
 \caption{}%
 \label{}%
 \end{figure}
@@ -185,7 +191,7 @@ $$ \vec{g} = \vec{0} \quad \bbar{\sigma} = - P \bbar{I} \quad \bbar{\sigma} = \l
 	\end{array}\right]$$
 	
 	\begin{figure}[h!]%
-\includegraphics[width=\columnwidth]{p_interfaces.png}%
+\includegraphics[width=\columnwidth]{p_interfaces}%
 \caption{Élément d'épaiseur infinitésimal de fluide }%
 \label{}%
 \end{figure}
@@ -196,7 +202,7 @@ $$P_N = P = \txt{pression statique} \quad P_{\bot} (x,y,z) = P_{\bot}(z) \quad \
 
 \begin{figure}[h!]%
 \centering
-\includegraphics[width=0.6\columnwidth]{interface_repere.png}%
+\includegraphics[width=0.6\columnwidth]{interface_repere}%
 \caption{}%
 \label{deform}%
 \end{figure}
@@ -223,7 +229,7 @@ Remarque 3 :
 Dans le cas d'une interface courbe (Fig.\ref{i_courbe}) on a la relation suivante:
 \begin{figure}[h!]%
 \centering
-\includegraphics[width=0.5\columnwidth]{interface-courbe.png}%
+\includegraphics[width=0.5\columnwidth]{interface-courbe}%
 \caption{$P_I \neq P_{ext} \rightarrow$ à cause de l'existence de $P_{\bot}$}%
 \label{i_courbe}%
 \end{figure}
@@ -244,7 +250,7 @@ Applications : les petites bulles se vident dans les grosses.
 
 \begin{figure}[h!]%
 \centering
-\includegraphics[width=0.7\columnwidth]{equilibre_bulles.png}%
+\includegraphics[width=0.7\columnwidth]{equilibre_bulles}%
 \caption{}%
 \label{}%
 \end{figure}
@@ -252,7 +258,7 @@ Applications : les petites bulles se vident dans les grosses.
 La relation de Laplace permet de calculer la forme d'un ménisque formé par un liquide sur une surface solide verticale (figure \ref{angle_de_raccord})
 
 \begin{figure}[h!]%
-\includegraphics[width=\columnwidth]{angle_de_raccord.png}%
+\includegraphics[width=\columnwidth]{angle_de_raccord}%
 \caption{Le liquide fait un angle $\theta_0$ avec le solide. Quelle est la hauteur $z_0$ du ménisque ? }%
 \label{angle_de_raccord}%
 \end{figure}
@@ -275,7 +281,7 @@ La relation de Laplace permet de calculer la forme d'un ménisque formé par un li
 Application : On approche une surface sphérique d'un liquide, par le dessus. $z$ est la distance entre la sphère et le liquide, $\alpha_0$ l'angle de contact initial, $a$ le rayon du cylindre de contact, $R$ le rayon de la sphère ($R \gg a$). On trace $\pi a^2$ en fonction de $z$ et on obtient une décroissance linéaire. Pourquoi est-elle linéaire ? 
 
 \begin{figure}%
-\includegraphics[width=\columnwidth]{mouillage_lunette.png}%
+\includegraphics[width=\columnwidth]{mouillage_lunette}%
 \caption{}%
 \label{mouillage_lunette}%
 \end{figure}
@@ -293,7 +299,7 @@ En réalité, $\theta_0$ dépend de $z$, mais pas beaucoup, parce qu'on considère u
 \subsection{Tension de surface et interactions}
 
 \begin{figure}[h!]%
-\includegraphics[width=0.7\columnwidth]{TS_interactions.png}%
+\includegraphics[width=0.7\columnwidth]{TS_interactions}%
 \caption{p(e) énergie d'interaction par unité de surface}%
 \label{TS_interactions}%
 \end{figure}
@@ -327,7 +333,7 @@ L'additivité n'est pas évidente. Le calcul théorique de la constante de Hamaker 
 \subsection{Cas des systèmes asymétriques}
 
 \begin{figure}[h!]%
-\includegraphics[width=\columnwidth]{23_asymetrique.png}%
+\includegraphics[width=\columnwidth]{23_asymetrique}%
 \caption{}%
 \label{asymétrique}%
 \end{figure}
@@ -396,7 +402,7 @@ Pour calculer l'épaisseur : la pression dans le film sera :
 \end{align}
 
 Technique de l'anneau poreux : \begin{figure}[h!]%
-\includegraphics[width=\columnwidth]{23_anneau_poreux.png}%
+\includegraphics[width=\columnwidth]{23_anneau_poreux}%
 \caption{On contrôle la différence de pression entre le liquide et l'enceinte}%
 \label{anneau poreux}%
 \end{figure}
@@ -423,7 +429,7 @@ Pour les régimes où $p_v \ll p_{sat}$ on fait appel à l'équation de Langmuir.
 Machine à force de surface (SFA): inventée par David Tabor et popularisée par Israelatchvili. 
 
 \begin{figure}[h!]%
-\includegraphics[width=\columnwidth]{23_SFA.png}%
+\includegraphics[width=\columnwidth]{23_SFA}%
 \caption{}%
 \label{SFA}%
 \end{figure}
