@@ -8,6 +8,7 @@
 \newcommand{\ket}[1]{\langle #1 \vert}
 \newcommand{\moy}[1]{\langle #1 \rangle}
 \newcommand{\lam}{\lambda}
+\newcommand{\grad}{\overrightarrow{grad}}
 \newcommand{\Lam}{\Lambda}
 \newcommand{\txt}[1]{\textrm{#1}}
 \newcommand{\ud}{\textrm{d}}
@@ -20,10 +21,8 @@
 
 
 \begin{document}
-
+\tableofcontents
 \section{}
-
-
 \subsection{}
 
 \subsubsection{}
@@ -33,7 +32,7 @@
 Diagramme de phase. courbes de $H$ en fonction de l'aimantation pour une température inférieure ou supérieure à $T_C$
 
 
-On va s'intéresser à la physique des systèmes au voisinage de tels points critiques $C$ points de terminaison d'une ligne de coexistence entre deux phases. POurquoi est-ce intéressant ? Motivations physiques et techniques. 
+On va s'intéresser à la physique des systèmes au voisinage de tels points critiques $C$ points de terminaison d'une ligne de coexistence entre deux phases. Pourquoi est-ce intéressant ? Motivations physiques et techniques. 
 
 \subsection{Motivations Physiques}
 
@@ -81,7 +80,7 @@ où $d$ est la dimension de l'espace de phase considéré.
 
 Chaleur spécifique : $$C = \derp{}{E}{T} \approx  |T-T_C|^{-\alpha}$$
 
-Pour $H \neq 0$ $$X = \derp{}{m}{H}(H=0) \approx |T_T_C|^{- \gamma}$$
+Pour $H \neq 0$ $$X = \derp{}{m}{H}(H=0) \approx |T-T_C|^{- \gamma}$$
 
 Isotherme critique : $$ T=T_C \qquad H \propto m^{\delta}$$
 
@@ -196,7 +195,7 @@ En revanche, la limite intersée : $$ \lim_{h \rightarrow 0 } \lim_{N \rightarrow
 Si $$\lim_{h \rightarrow 0 }\lim_{N \rightarrow \infty}  \moy{\sigma_r} = 0 $$ On a un état désordonné (la symétrie initiale est restaurée).
 
 Si $$\lim_{h \rightarrow 0 }\lim_{N \rightarrow \infty}  \moy{\sigma_r} = m_s \neq 0$$ on a un état ordonné et la symétrie a été spontanément brisée. Il reste de la symétrie initale : 
-$$ $$\lim_{h \rightarrow 0^+ }\lim_{N \rightarrow \infty}  \moy{\sigma_r} = \lim_{h \rightarrow 0^- }\lim_{N \rightarrow \infty}  \moy{\sigma_r} $$
+ $$\lim_{h \rightarrow 0^+ }\lim_{N \rightarrow \infty}  \moy{\sigma_r} = \lim_{h \rightarrow 0^- }\lim_{N \rightarrow \infty}  \moy{\sigma_r} $$
 
 Définition : $m_s$ l'aimantation spontanée vaut 0 dans l'état désordonné, et est non nulle dans l'état ordonné : on dira que c'est le paramètre d'ordre de la transition. 
 
@@ -214,7 +213,7 @@ Construction directe d'un potentiel thermodynamqiue en s'appuyant sur des consid
 
 \subsubsection{Rappel : dérivation fonctionnelle}
 
-définition : Soit $\Phi$ une fonction qui, à une fonction $u$ associe un nombre (fonctionelle). On considère un variation $\delta u$ de û^et la cariation $\delta \Phi$ associée. 
+définition : Soit $\Phi$ une fonction qui, à une fonction $u$ associe un nombre (fonctionelle). On considère un variation $\delta u$ de $u$ et la variation $\delta \Phi$ associée. 
 
 Si $$\delta \Phi[u] = \Phi[u + \delta u] - \Phi[u] = \int \ud x D(x) \delta u(x) + o(\delta u)$$
 
@@ -237,8 +236,8 @@ Soit $\Phi(u) = \int \ud y u^2(y)$
 	\derp{}{\Phi}{u(x)} &= \derp{}{}{u(x)} (\int \ud y u^3(y)) \Phi(u) \\
 	\Phi(u) &= \int \ud y (\derp{}{u}{y} )^2 \\
 	\delta \Phi(u) &= \int \ud y 2 \der{u}{y} \delta(\der{u}{y}) \\
-	&= -2 \int \ud y \der{^2 u}{y^2} \delta(u(y)) \\
-	\derp{}{\Phi(u)}{u(y)} &= -2 \der{^2 u}{y^2} \\
+	&= -2 \int \ud y \der[2]{u}{y} \delta(u(y)) \\
+	\derp{}{\Phi(u)}{u(y)} &= -2 \der[2]{u}{y} \\
 	\Phi(u) &= \int \ud \vec{y} (\vec{\nabla}u)^2 \\
 	\derp{}{\Phi}{u(\vec{y})} &= -2 \nabla^2 u(y)
 \end{align}
@@ -442,7 +441,7 @@ Susceptibilité :
 $$\chi = \derp{}{m}{h}(h=0)$$
 
 équation d'état : $$h = \derp{}{\gamma}{m} = (a_0 t)m + b_0 m^3 $$
-$$\derp{}{h}{m} &= a_0 t + 3 b_0 m^2 $$
+$$\derp{}{h}{m} = a_0 t + 3 b_0 m^2 $$
 
 quand $h=0$, $m=m_s$ 
 $$ \chi = \frac{1}{\derp{}{h}{m}} $$
@@ -486,7 +485,7 @@ Remarque : on a pas de termes linéaires dans les déricées à cause de la symétrie
 On a utilisé la liberté d'un changement d'échelle : $r_i \rightarrow \lam_i r_i $ de manière à prendre un coefficient $\frac{1}{2}$  devant $(\vec{\nabla}m)^2$ 
 
 Les termes de la forme $m \nabla^2 m$ sont autorisés mais ils se ramènent aux termes précédents : 
-$$ \div(m \grad m) &= m \div \grad m + (\vec{\nabla}m)^2 $$
+$$ \div(m \grad m) = m \div \grad m + (\vec{\nabla}m)^2 $$
 
 d'où $$\int \ud^d r m \nabla^2 m = \int \ud^d r \div (m \grad m) -  \int \ud^d r (\vec{\nabla}m)^2 $$le premier terme est un terme de surface, négligeable à la limite thermodynamique. 
 
@@ -502,7 +501,7 @@ Comme précédemment :
 $$h(\vec{r}) =  \derp{}{\Gamma}{m(\vec{r})} $$
 
 c'est-à-dire : 
-$$h(\vec{r}) &= a(T) m(\vec{r}) + b(T) m^3(\vec{r}) - \nabla^2 m(\vec{r})$$
+$$h(\vec{r}) = a(T) m(\vec{r}) + b(T) m^3(\vec{r}) - \nabla^2 m(\vec{r})$$
 
 Dérivons fonctionellement par rapport à $m(\vec{r'})$
 
@@ -548,7 +547,7 @@ Puis $$G(\vec{r}) = kT \int \frac{\ud^d q }{(2\pi)^d} \frac{e^{- i \vec{q}\vec{r
 Pour $T=T_C$, $a + 3b m_s^2  = 0$, et donc 
 $$ G(\vec{r}) = kT \int \frac{\ud^d q }{(2\pi)^d} \frac{e^{- i \vec{q}\vec{r}}}{q^2}$$
 
-$\vec{r} = r \vec{u_z} \qquad $\vec{\theta} = r \vec{q}$$ 
+$$\vec{r} = r \vec{u_z} \qquad \vec{\theta} = r \vec{q}$$ 
 
 $$G(\vec{r} = \frac{kT}{r^{d-2}} \int \frac{\ud^d \theta}{(2 \pi)^d} \frac{e^{- i \vec{\theta}\vec{u_z}}}{\theta^2}$$
 
@@ -643,8 +642,7 @@ Objectif : Construire une théorie de champ à gros grain dont l'ordre zéro doit r
 Dans le modèle de spins précédent, de nombreux détails n'avaient vraiment d'importance : seul comptait le fait que $\tilde{\mathcal{J}}(\vec{q}) - \tilde{\mathcal{J}}(0) \propto q^2$, ce qui correspondait à des interactions à courte portée. Seule comptait également la structure du développement de $ln(\cosh \beta x)$ à petit $m$, et donc la symétrie. 
 
 Idée : On construit cette fois un hamiltonien de la manière suivante : 
-
-$$	\beta H &= \int \ud^d r \left[ \frac{1}{2} (\vec{\nabla}\phi)^2 + V(\vec{q}) \right] $$
+$$	\beta H = \int \ud^d r \left[ \frac{1}{2} (\vec{\nabla}\phi)^2 + V(\vec{q}) \right] $$
 avec $V$ construit pour respecter les symétries du problème, dans l'esprit de la théorie de Landau. 
 
 Par exemple : $$ V(\phi) = \frac{1}{2} r \phi^2 + \frac{1}{4!}g \phi^4 $$
@@ -682,8 +680,8 @@ Notons $\hat{\phi}$ la configuration la plus probable.
 	Z^0 &= e^{-A [\hat{\phi}] + \int \ud^d \vec{h}(\vec{r}) \vec{\phi}(\vec{r})} \\
 	F^0 &= - \ln Z^0 = A[\hat{\phi}] - \int \ud^d r \vec{h}(\vec{r}) \vec{\hat{\phi}}(\vec{r}) \\
 	m_{\alpha} (\vec{r}) &= - \frac{\delta F}{\delta h_{\alpha}(\vec{r})} \\
-	&= \int \ud^d s \sum_{\beta} \frac{\delta A}{\delta \hat{\phi}_{\beta}(s)} \frac{\delta \hat{\phi}_{\beta}(s)}{\delta h_{\alpha}(\vec{r})}  - \sum_{\beta} \int \ud^d s \left[ \frac{\delta h_{\beta}(s)}{h_{\alpha}(\vec{r})} \hat{\phi}_{\beta}(s) + h_{\beta}(s) \frac{\delta \hat{\phi}_{\beta}(s)}{h_{\alpha}(\vec{r})} \\
-	 &= \hat{\phi}_{\alpha}(\vec{r}) 
+	&= \int \ud^d s \sum_{\beta} \frac{\delta A}{\delta \hat{\phi}_{\beta}(s)} \frac{\delta \hat{\phi}_{\beta}(s)}{\delta h_{\alpha}(\vec{r})}  - \sum_{\beta} \int \ud^d s \left[ \frac{\delta h_{\beta}(s)}{h_{\alpha}(\vec{r})} \hat{\phi}_{\beta}(s) + h_{\beta}(s) \frac{\delta \hat{\phi}_{\beta}(s)}{h_{\alpha}(\vec{r})}\right] \\
+%	 &= \hat{\phi}_{\alpha}(\vec{r}) 
 \end{align}
 
 \`A l'ordre 0 : 
@@ -727,7 +725,7 @@ On introduit :
 	H[\phi] &= H[\hat{\phi}] + \int \ud^d r \left( \derp{}{H}{\phi(\vec{r})}\right)_{\hat{\phi}} \psi(\vec{r}) \\
 	& + \frac{1}{2} \int \ud^d r \ud^d s \psi(\vec{r}) \left( \derp{2}{H}{\phi(\vec{r}) \phi(\vec{s})} \right)_{\hat{\phi}} \psi(\vec{s}) + O(\psi^3) \\
 	K &= \frac{\partial^2 A}{\partial \phi(\vec{r})\partial \phi(\vec{s})} \\
-	\derp{}{A}{\phi(\vec{r})} = r \phi(\vec{r}) + \frac{1}{3!} g \pshi^3(\vec{r}) \\
+	\derp{}{A}{\phi(\vec{r})} = r \phi(\vec{r}) + \frac{1}{3!} g \psi^3(\vec{r}) \\
 \end{align}
 
 Puis 
@@ -939,7 +937,7 @@ Rappel : dans le cadre de la théorie de Landa, on avait trouvé :
 On retrouve qualitativement le critère précédent.
 
 Examinons la divergence de l'intégrale quand $t \rightarrow 0$ pour $d<4$. 
-$$I(t) = \int \frac{\ud^dq}{(2\p)^d} \frac{1}{(t+q^2)q^2}$$
+$$I(t) = \int \frac{\ud^dq}{(2\pi)^d} \frac{1}{(t+q^2)q^2}$$
 
 Remarque : l'intégrale existe si $d>2$
 
@@ -980,7 +978,7 @@ avec $q$ le nombre de plus proches voisins sur le réseau.
 Correspondance entre la grande fontion de partition du gaz sur réseau et la fonction de partition du modèle d'Ising en champ magnétique. 
 
 Exemple : On veut reproduire les étapes faites dans le cas d'un champ scalaire $\phi$, dans le cas d'un champ vectoriel $\vec{\phi}$ à $n$ compostantes, associé : 
-\Large $$Z &= \int \mathcal{D}[\vec{\phi}]e^{- \int \ud^d r [\frac{1}{2} r \vec{\phi}^2 + \frac{1}{4!}g (\vec{\phi}^2)^2 + \frac{1}{2} \sum_i (\nabla \phi_i)^2]} e^{\int \ud^d r \vec{h}(\vec{r})\vec{\phi}(\vec{r})} $$ \normalsize
+\Large $$Z = \int \mathcal{D}[\vec{\phi}]e^{- \int \ud^d r [\frac{1}{2} r \vec{\phi}^2 + \frac{1}{4!}g (\vec{\phi}^2)^2 + \frac{1}{2} \sum_i (\nabla \phi_i)^2]} e^{\int \ud^d r \vec{h}(\vec{r})\vec{\phi}(\vec{r})} $$ \normalsize
 
 On cherche à calculer $\gamma^1(m)$. 
 
@@ -1003,7 +1001,7 @@ On peut introduire les projecteurs :
 	&= P_{\alpha \beta}^L K_L(\vec{r},\vec{s}) + P_{\alpha \beta}^T K_T(\vec{r}\vec{s}) \\
 	K_L &= (r + \frac{g}{2}\hat{\phi}^2 - \nabla^2)\delta(\vec{r}-\vec{\vec{s}})\\
 	K_T &= (r + \frac{g}{3!}\hat{\phi}^2 - \nabla^2)\delta(\vec{r}-\vec{s})\\
-	Z &= Z^0 \int \mathcal{D}[\vec{\psi}] e^{- \frac{1}{2} \sum_{\alpha,\beta} \int \ud^d r \ud^d s \left[ \psi_{\alpha}P_{\alpha,\beta}^L K_L \psi_{\beta}(\vec{s}) \right + \psi_{\alpha}(\vec{r})P_{\alpha,\beta}^T K_T \psi_{\beta}(\vec{s})\right]} \\
+	Z &= Z^0 \int \mathcal{D}[\vec{\psi}] e^{- \frac{1}{2} \sum_{\alpha,\beta} \int \ud^d r \ud^d s \left[ \psi_{\alpha}P_{\alpha,\beta}^L K_L \psi_{\beta}(\vec{s}) + \psi_{\alpha}(\vec{r})P_{\alpha,\beta}^T K_T \psi_{\beta}(\vec{s})\right]} \\
 	&= Z^0 \int \mathcal{D}[\psi_L]\mathcal{D}[\psi_T]e^{- \frac{1}{2} \int \ud^d r \ud^d s \left[ \psi_L(\vec{r})K_L \psi_{\beta}(\vec{s})\right]} e^{\frac{-1}{2} \int \ud^d r \ud^d s \sum_i \psi_{T,i}(\vec{r}) K_T \psi_{T,i}(\vec{s})}\\
 	Z^1 &= Z^0 \frac{C}{\sqrt{\txt{det}K_L}} \left( \frac{C}{\sqrt{\txt{det}K_T}} \right)^{n-1} \\
 	F^1 &= F^0 + \frac{1}{2} \ln \txt{det} K_L + \frac{n-1}{2} \ln \txt{det} K_T \\
@@ -1026,7 +1024,7 @@ Idée : au voisinage de $T_C$, $\zeta \rightarrow \infty$. En conséquence, les fl
 Groupons les spins, ici par 4, en "blocs de spins". Première question : quelle valeur donner à ces super spins ? Une façon de faire : 
 
 $$\sigma_b = \frac{1}{4} (\sum_{i=1}^4 \sigma_i)$$
-prennent les valeurs +1, \frac{1}{2}, 0 \frac{-1}{2}, -1. 
+prennent les valeurs $+1, \frac{1}{2}, 0, \frac{-1}{2}, -1.$ 
 
 Première approximation : On néglige les configurations pour lesquelles les 4 spins d'un même bloc ne sont pas dans le même état. Donc sur les 16 configurations possibles, on n'en retient que 2. $\sigma_b$ ne prend alors que les valeurs 1 et -1. 
 
@@ -1066,27 +1064,31 @@ Le modèle présenté ici n'est pas satisfaisant (cf le calcul de $J' = f(J)$ à ven
 
 Les constantes de couplage qui se transforment dans un changement d'échelle qui réduit le nombre de degrés de liberté(ici, on passe de $N$ à $\frac{N}{4}$. 
 
-Point critique = point fix de la tranformation $f$ qui relie les constantes de couplage. 
+Point critique = point fixe de la transformation $f$ qui relie les constantes de couplage. 
 
 Calcul des exposants critiques à l'aide de l'application $f$ linéarisée au voisinage du point fixe. 
 
 Retour à l'évaluation de $f$ : 
 Système $S$ : 2 J $\neq$ d'énergies entre deux spins identiques et deux spins différents. 
 Système $S'$ : 2J' $\neq$ d'énergies entre : \\
-\fbox{$$\begin{array}{cc}
+\fbox{
+$\begin{array}{cc}
 	\uparrow & \uparrow \\
 	\uparrow & \uparrow
-\end{array}$$}  \fbox{ $$ \begin{array}{cc}
+\end{array}$
+}
+\fbox{$ \begin{array}{cc}
 	\uparrow & \uparrow \\
 	\uparrow & \uparrow
-\end{array}$$} et 
-\fbox{$$\begin{array}{cc}
+\end{array}$} et 
+\fbox{$\begin{array}{cc}
 	\uparrow & \uparrow \\
 	\uparrow & \uparrow
-\end{array}$$}  \fbox{ $$\begin{array}{cc}
+\end{array}$}
+ \fbox{$\begin{array}{cc}
 	\downarrow & \downarrow \\
 	\downarrow & \downarrow
-\end{array}$$}
+\end{array}$}
  = 2(2J) 
  
  $$2J' = 4J$$
@@ -1100,7 +1102,7 @@ Modèle un peu trop simple, car on sait qu'il n'y a pas de $T_C \neq 0$ mais inst
 On suppose $N$ pair, et on regroupe les spins par 2. Le nouveau spin a la valeur de pin de gauche de la boîte, on élimine donc tous les pins de numéro impair. 
 
 \begin{align}
-	Z_N &= \sum_{tous les spins = \pm 1} e^{J \sum_i \sigma_i \sigme_{i+1}}\\
+	Z_N &= \sum_{tous les spins = \pm 1} e^{J \sum_i \sigma_i \sigma_{i+1}}\\
 	&= \sum_{spins pairs = \pm 1} \sum_{spins impairs = \pm 1} e^{J \sigma_1 (\sigma_0 + \sigma_2)}e^{J \sigma_3 (\sigma_2 + \sigma_4)} \dots e^{J \sigma_{N-1}(\sigma_{N-2} + \sigma_{N})}\\
 \end{align}
 
@@ -1108,12 +1110,12 @@ Peut-on écrire :
 $$ \sum_{\sigma_1 = \pm 1} e^{J \sigma_1(\sigma_0 + \sigma_2)} = A e^{J' \sigma_0 \sigma_2}$$
 
 \begin{align}
-	 \sum_{\sigma_1 &= \pm 1} e^{J \sigma_1(\sigma_0 + \sigma_2)} = 2 \cosh(J(\sigma_0+ \sigma_2))\\
-	 \txt{ si } \sigma_0 &= \sigma_2 & \quad 2 \cosh(2J) = A e^{J'} \\
-	 \txt{ si } \sigma_0 &= - \sigma_2 & \quad 2 = A e^{-J'} \\
+	 \sum_{\sigma_1 = \pm 1} e^{J \sigma_1(\sigma_0 + \sigma_2)} &= 2 \cosh(J(\sigma_0+ \sigma_2))\\
+	 \text{ si } \sigma_0 &= \sigma_2 & \quad 2 \cosh(2J) = A e^{J'} \\
+	 \text{ si } \sigma_0 &= - \sigma_2 & \quad 2 = A e^{-J'} \\
 	 A^2 &= 4 \cosh(2J) \\
 	 e^{2J'} &= \cosh(2J) \\
-	 Z_N &= \sum_{tous les spins = \pm 1} A^{N/2} e^{J' \sigma_0 \sigma_2}\dots e^{J' \sigma_{N-1}\sigma_{N}}\\
+	 Z_N &= \sum_{tous\ les\ spins = \pm 1} A^{N/2} e^{J' \sigma_0 \sigma_2}\dots e^{J' \sigma_{N-1}\sigma_{N}}\\
 	 &= A_{N/2} Z_{\frac{N}{2}}(J')\\
 \end{align}
 
@@ -1167,15 +1169,15 @@ $$\sum_{\sigma_0 = \pm 1} e^{J \sigma_0(\sum_{i=1}^4 \sigma_i)} = A e^{J' (\sigm
 	\sum_{\sigma_0 = \pm 1} e{J\sigma_0(\sum_{i=1}^4 \sigma_i)} = A e^{J' (\sigma_1\sigma_2 + \sigma_2 \sigma_3 + \sigma_3 \sigma_4 + \sigma_4 \sigma_1)} e^{K'(\sigma_1 \sigma_3 + \sigma_2 \sigma_4)} e^{L' \prod_{i=1}^4 \sigma_i}
 \end{align}
 
-De manière générale, la décimation engendre de nouveaux couplages dans le hamiltonien. En pratique, on a besoin de tromper la structure du hamiltonien. 
+De manière générale, la décimation engendre de nouveaux couplages dans le Hamiltonien. En pratique, on a besoin de tromper la structure du Hamiltonien. 
 
-EN pratique, on a besoin de tromper la structure du hamiltonien. On a besoin d'introduire des approximationsdifficilement contrôlables. 
+EN pratique, on a besoin de tromper la structure du hamiltonien. On a besoin d'introduire des approximations difficilement contrôlables. 
 
 Cas intéressant : développement en cumulations sur réseau triangulaire. 
 
 \subsection{Structure des équations du RG}
 
-Quelles sont les conséquences de l'existence de ces équations ? On zsuppose construite une transdormation qui change l'échelle de longueur : $a \rightarrow la \quad l>1$ avec du coup $\xi \rightarrow \frac{\xi}{l}$ 
+Quelles sont les conséquences de l'existence de ces équations ? On suppose construite une transformation qui change l'échelle de longueur : $a \rightarrow la \quad l>1$ avec du coup $\xi \rightarrow \frac{\xi}{l}$ 
 
 Par ailleur, les $p$ paramètres $J_{\alpha}(\alpha=1,\dots,p)$ retenus pour décrire le système sont changés : 
 $$J_{\alpha} \quad \rightarrow \quad J_{\alpha}' = f_{\alpha}(J_1 \dots J_p;l)$$
@@ -1192,7 +1194,7 @@ Linéarisons $f_{\alpha}$ au voisinage du point fixe $J^*$ :
 	&= J_{\alpha}^* \sum_{\beta=1}^p M_{\alpha  \beta}(J_{\beta} - J_{\beta}^*) \\
 \end{align}
 
-Cherchons les conditions aux limites des constates de couplage qui se trandforment facilement : introduisons les vecteurs propres à gauche de $M$, les $x^i$ : 
+Cherchons les conditions aux limites des constates de couplage qui se transforment facilement : introduisons les vecteurs propres à gauche de $M$, les $x^i$ : 
 
 $$ \sum_{\alpha=1}^p x_{\alpha}^i M_{\alpha \beta} = \lam^i x_{\beta}^i$$
 
@@ -1209,7 +1211,7 @@ Soit la condition aux limites :
 Par ailleurs, il est équivalent de faire une dilatation globale de facteur $l_1l_2$ et 2 dilatations consécutives $l_1$ puis $l_2$. 
 
 Cela implique en fait que : 
-$$ \lam^i (l_1,l_2) &= \lam^i (l_1)\lam^i(l_2)$$
+$$ \lam^i (l_1,l_2) = \lam^i (l_1)\lam^i(l_2)$$
 de solutions : $$\lam^i(l) = l^{y_i}$$
 Finalement : $$K'^i = l^{y_i}K^i \qquad l>1$$
 conduit à introduire 3 types de constantes de couplage $K^i$ : 
@@ -1221,7 +1223,7 @@ conduit à introduire 3 types de constantes de couplage $K^i$ :
 	\item $K^i$ est dite caraible marginale. L'analyse linéaire de permet pas de conclure. 
 \end{enumerate}
 
-On définit la \emph{surface critique} : C'est une surface dans l'espface des paramètres de couplage $J_1 \dots J_p$ . C'est la surface sur laquelle les variables pertinentes (et éventuellement marginales) (et leur prolongement au domane non-linéaire) s'annulent. L'itération de la transition sur la surface critique conduit au point fixe. 
+On définit la \emph{surface critique} : C'est une surface dans l'espace des paramètres de couplage $J_1 \dots J_p$ . C'est la surface sur laquelle les variables pertinentes (et éventuellement marginales) (et leur prolongement au domane non-linéaire) s'annulent. L'itération de la transition sur la surface critique conduit au point fixe. 
 
 Que dire de la longueur de corrélation des systèmes représentés par un point de la surface critique ? 
 \begin{align}
@@ -1233,9 +1235,9 @@ Que dire de la longueur de corrélation des systèmes représentés par un point de 
 
 Il ne faut pas confondre trajectoire physique, et trajectoire du RG. La trajectoire physique est la trajectoire obtenue dans l'espace des paramètres quand on varie la température. En particulier, la surface critique n'es tpas une isotherme. 
 
-La trajectoire du RG : issue de l'itération de la transformation du RG. Exemple : Ising 3D avec intéractions entre plus proches voisins : $J_1$, entre seconds plus proches voisins $J_2$ 
+La trajectoire du RG : issue de l'itération de la transformation du RG. Exemple : Ising 3D avec interactions entre plus proches voisins : $J_1$, entre seconds plus proches voisins $J_2$ 
 
-2 conséquences importantes : La première, c'est qu'il fournit un cadre théorique pour rendre compte de l'universalité (indépendance de la vlaeur des exposants critiques par rapport aux détails microscopiques comme les constantes d'interactions entre second plus proches voisins, le type de réseau considéré \dots). 
+2 conséquences importantes : La première, c'est qu'il fournit un cadre théorique pour rendre compte de l'universalité (indépendance de la valeur des exposants critiques par rapport aux détails microscopiques comme les constantes d'interactions entre second plus proches voisins, le type de réseau considéré \dots). 
 
 Soit un système proche de la criticalité. Décomposons ce point sur les combinaisons pertinentes et non pertinentes. Les itérations du RG vont nous rapprocher du point critique, on va passer très près de lui, puis s'en éloigner par les directions pertinentes. Ce point fixe détermine en fait les exposants critiques. Ces exposants critiques sont donc infépendants de la position initiale (mais qui doit être proche de la criticalité). Cela nous donne l'universalité. 
 
@@ -1368,9 +1370,9 @@ Peut-on trouver $g_0(\lam)$ et $t(\lam)$  solutions, quand $\Lam \rightarrow \la
 Question : comment relier $g_0(\lam)$ et $t(\lam)$ à $g_0$ et $t$ ? 
 
 \begin{align}
-	t(\lam) &= r \left[ 1 + g \frac{n+2}{6} \frac{2 \pi^2}{(2\pi)^4} \ln \frac{\Lam}{\sqrt{r}}\right]  + r g \frac{n+2}{6} \frac{2 \p^2}{(2\pi)4} \ln \lam + O(g^2)\\
-	&= t + (t + O(g_0))(g_0 + O(g_0^2)) \frac{n+2}{6} \frac{2 \p^2}{(2\pi)4} \ln \lam + O(g^2) \\
-	&= t \left[ 1 + g_0 \frac{n+2}{6} \frac{2 \p^2}{(2\pi)4} \ln \lam + O(g^2)\right] \\
+	t(\lam ) &= r \left[ 1 + g \frac{n+2}{6} \frac{2 \pi^2}{(2\pi)^4} \ln \frac{\Lam}{\sqrt{r}}\right]  + r g \frac{n+2}{6} \frac{2 \pi^2}{(2\pi)4} \ln \lam + O(g^2)\\
+	&= t + (t + O(g_0))(g_0 + O(g_0^2)) \frac{n+2}{6} \frac{2 \pi^2}{(2\pi)4} \ln \lam + O(g^2) \\
+	&= t \left[ 1 + g_0 \frac{n+2}{6} \frac{2 \pi^2}{(2\pi)4} \ln \lam + O(g^2)\right] \\
 	g_0(\lam) &= g_0 + g^2 \frac{n+8}{6} \frac{2 \pi^2}{(2 \pi)^4} \ln \lam + O(g^3)\\
 	&= g_0 + (g_0^2 + O(g_0^3)) \frac{n+8}{6} \frac{2 \pi^2}{(2 \pi)^4} \ln \lam + O(g^3)\\
 	&= g_0 + g_0^2 \frac{n+8}{6} \frac{2 \pi^2}{(2 \pi)^4} \ln \lam + O(g^3)
@@ -1384,7 +1386,7 @@ Dérivons par rapport à $\lam$ :
 \end{align}
 
 Pour simplifier les calculs, on va intégrer dans $g_0$ le facteur en $\pi$ : 
-$$\tilde{g_0} &= \frac{2 \pi^2}{(2\pi)^4} g_0$$ et on enlève les tildes. 
+$$\tilde{g_0} = \frac{2 \pi^2}{(2\pi)^4} g_0$$ et on enlève les tildes. 
 
 \subsection{Susceptibilité}
 
