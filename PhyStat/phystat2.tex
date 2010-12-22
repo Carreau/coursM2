@@ -7,6 +7,7 @@
 \newcommand{\bra}[1]{\vert #1 \rangle}
 \newcommand{\ket}[1]{\langle #1 \vert}
 \newcommand{\moy}[1]{\langle #1 \rangle}
+\newcommand{\Moy}[1]{\left\langle #1 \right\rangle}
 \newcommand{\lam}{\lambda}
 \newcommand{\grad}{\overrightarrow{grad}}
 \newcommand{\Lam}{\Lambda}
@@ -245,16 +246,26 @@ Soit $\Phi(u) = \int \ud y u^2(y)$
 
 \subsection{Paramètre d'ordre- Fonctions de corrélations connexes}
 
-Soit un système décrit par une variable continue $\Phi(\vec{r})$
+Soit un système décrit par une variable continue $\Phi(\vec{r})$ où 
+\begin{itemize}
+	\item $\Phi(\vec r)$ est un vecteur à $n$ dimensions.
+	\item $\vec r$ est un vecteur à $d$ dimensions.
+	\item $d$ est la dimension de l'espace physique
+\end{itemize}
+	pour un système sur un réseau, on peur utiliser des diracs pour décrire en continu:
+	\begin{align*}
+		\Phi(\vec r) &= \sum_{\vec r_i}\delta(r-r_i)S_{\vec r_i}
+	\end{align*}
 
-\dots trucs qu'il a effacés de manière totalement gratuite trop tôt. 
-
-On ajoute un champ extérieur $\vec{h}(\vec{r})$ inhomogène qui se couple à $\vec{\Phi}$ selont un terme : $$- \int \ud^d r \vec{h}(\vec{r}) \vec{\Phi}(\vec{r})$$ où $\vec{\Phi}(\vec{r})$ est un vecteur à n dimensions, $\vec{r}$ est un vecteur à d dimensions, d étant la dimension de l'espace physique considéré. 
-
-Remarque : si on a un système sur réseau, $$\Phi(\vec{r}) = \sum_{r_i} \delta(\vec{r} - \vec{r_i}) \dots$$
-
-Soit $H_0$ le terme correspondant aux interations entre cariables $\vec{\Phi}$ (par exemple le terme d'interaction entre spins). On ajoute un champ extérieur $\vec{h}$ inhomogène, qui se couple à $\Phi$ selon un terme du type 
+%\dots trucs qu'il a effacés de manière totalement gratuite trop tôt. 
+Soit $H_0$ le terme correspondant aux interactions entre variables $\vec{\Phi}$ (par exemple le terme d'interaction entre spins).
+On ajoute un champ extérieur $\vec{h}$ inhomogène, qui se couple à $\Phi$ selon un terme du type 
 $$- \int \ud^d \vec{r} \vec{h}(\vec{r}) \vec{\Phi}(\vec{r}) $$
+
+%où $\vec{\Phi}(\vec{r})$ est un vecteur à n dimensions, $\vec{r}$ est un vecteur à d dimensions, d étant la dimension de l'espace physique considéré. 
+
+%Remarque : si on a un système sur réseau, $$\Phi(\vec{r}) = \sum_{r_i} \delta(\vec{r} - \vec{r_i}) \dots$$
+
 
 Fonction de partition : 
 $$Z = \int_{etats} e^{-\beta H_0 + \beta \int \ud^d r \vec{h}(\vec{r}) \vec{\Phi}(\vec{r}) } $$
@@ -274,8 +285,8 @@ $$\vec{m}(\vec{r}) = \moy{\vec{\Phi}}(\vec{r})$$
 Fonction de corrélation connexe : 
 
 \begin{align}
-	G_{ij}^c(\vec{r},\vec{r'}) \equiv \moy{\Phi_i(\vec{r}) \Phi_j(\vec{r'})} - \moy{\Phi_i(\vec{r})}\moy{\Phi_j(\vec{r'})} \\
-	&= \moy{(\Phi_i(\vec{r}) - \moy{\Phi_i(\vec{r})})(\Phi_j(\vec{r'}) - \moy{\Phi_j(\vec{r'})})}
+	G_{ij}^c(\vec{r},\vec{r'}) &\equiv \moy{\Phi_i(\vec{r}) \Phi_j(\vec{r'})} - \moy{\Phi_i(\vec{r})}\moy{\Phi_j(\vec{r'})} \\
+	&= \Moy{\left(\Phi_i(\vec{r}) - \moy{\Phi_i(\vec{r})}\right)\left(\Phi_j(\vec{r'}) - \moy{\Phi_j(\vec{r'})}\right)}
 \end{align}
 
 mesure la corrélation entre les fluctuations de $\vec{\Phi}$. 
