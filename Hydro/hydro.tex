@@ -11,7 +11,7 @@
 \newcommand{\derp}[3]{\frac{\partial^{#1} #2}{\partial #3^{#1}}}
 \newcommand{\Derp}[3][]{\frac{\textrm{D}^{#1} #2}{\textrm{D} #3^{#1}}}
 \newcommand{\ud}{\textrm{d}}
-\newcommand{\grad}{\vec{\textrm{grad}}}
+\newcommand{\grad}{\overrightarrow{\textrm{grad}}}
 \newcommand{\rot}{\vec{\textrm{rot}}}
 \renewcommand{\div}{\textrm{div}}
 \newenvironment{matrice}{ \left[ \begin{array} }{\end{array} \right]}
@@ -248,7 +248,7 @@ $$ \Derp{A}{t} = \derp{}{A}{t} + \grad A \vec{U}$$
 où $\Derp{A}{t}$ est la dérivée lagrangienne (utile pour les lois de conservation), $\derp{}{A}{t}$ est le terme instationnaire, et $ \grad A \vec{U}$ est le terme convectif.
 
 \begin{figure}%
-\includegraphics[width=\columnwidth]{exemple_3.3.png}%
+\includegraphics[width=\columnwidth]{exemple_3-3.png}%
 \caption{Si on aspire l'air par le cône.}%
 \label{exemple_3.3.png}%
 \end{figure}
@@ -283,7 +283,7 @@ On définit alors une relation phénoménologique pour $\bbar{\sigma} (\vec{U})$
 
 \begin{align}
 	\ud \vec{x}' &= \ud x + \bbar{grad} \vec{U} \ud \vec{x} \delta t \\
-	\bbar{grad U) &= \frac{1}{2}( \bbar{grad U} + ^t \bbar{grad U }) + \frac{1}{2} \bbar{grad U - ^t \bbar{grad U }}\\
+	\bbar{grad U} &= \frac{1}{2}( \bbar{grad U} + ^t \bbar{grad U }) + \frac{1}{2} \bbar{grad U - ^t \bbar{grad U }}\\
 	&= \bbar{E} + \bbar{R}	
 \end{align}
 		
@@ -321,8 +321,8 @@ Pour l'extension en 2D :
  \paragraph{exemple}
  
  \begin{figure}%
-\includegraphics[width=\columnwidth]{exemple_3.4_dilate.png}%
-\includegraphics[width=\columnwidth]{exemple_3.4_deforme.png}
+\includegraphics[width=\columnwidth]{exemple_3-4_dilate.png}%
+\includegraphics[width=\columnwidth]{exemple_3-4_deforme.png}
 \caption{}%
 \label{exemple_3.4}%
 \end{figure}
@@ -339,7 +339,7 @@ Pour la dilatation
 \begin{align}
 		\ud \vec{x'_1} &= \begin{matrice}{c} \ud x'_{11} \\ x'_{12} \end{matrice} \\
 		&= \begin{matrice}{c} \ud x_1 \\ 0 \end{matrice} + \begin{matrice}{cc} B & E_{12} \\ E_{12} & -B \end{matrice} \begin{matrice}{c} \ud x_1 \\ 0 \end{matrice} \\
-		&= \begin{matrice}{c} (1 + B)\ud x_1 \\ E_{12}\ud x_1 \\
+		&= \begin{matrice}{c} (1 + B)\ud x_1 \end{matrice}\\ E_{12}\ud x_1 \\
 		\ud \vec{x'_2}\begin{matrice}{c} \ud x'_{21} \\ x'_{22} \end{matrice} \\
 		&= \begin{matrice}{c} 0 \\ \ud x_2 \end{matrice} + \begin{matrice}{cc} B & E_{12} \\ E_{12} & -B \end{matrice} \begin{matrice}{c} 0 \\ \ud x_2 \end{matrice} \\
 		&= \begin{matrice}{c}E_{12}\ud x_2  \\(1 + B)\ud x_2  \end{matrice} 
@@ -936,9 +936,9 @@ $$\Gamma(t) = \oint_{C} \vec{U}(\vec{x},t) \ud x $$
 	\int \vec{U}(\bbar{grad} \vec{U} \ud \vec{x}) &= \int \begin{matrice}{cc} \derp{}{U_1}{x_1} & \derp{}{U_2}{x_2} \\ \derp{}{U_2}{x_1} & \derp{}{U_2}{x_2} \end{matrice} \begin{matrice}{c} \ud x_1 \\ \ud x_2 \end{matrice} \\
 	&= \int U_1 \ud U_1 + U_2 \ud U_2 = \int \frac{1}{2} (\ud U_1^2 + \ud U_2^2) = \frac{1}{2} \int \ud U^2 = 0 \\
 	\int \Derp{\vec{U}}{t} \ud \vec{x} &= \int (\vec{f} - \frac{1}{\rho} \grad p) \ud \vec{x} \txt{ si équation d'Euler} \\
-	&= \int \grad (\Phi_F è \frac{p}{\rho}) \ud \vec{x} \txt{ si }\vec{f} - \grad \Phi_F \\
+	&= \int \grad (\Phi_F - \frac{p}{\rho}) \ud \vec{x} \txt{ si }\vec{f} - \grad \Phi_F \\
 	&= \int \ud (\Phi_{F} - \frac{p}{\rho}) = 0 \\
-	\Gamma(t + \delta t) = \Gamma (t) \qquad \Derp{\Gamma}{t} = 0 
+	\Gamma(t + \delta t) &= \Gamma (t) \qquad \Derp{\Gamma}{t} = 0 
 \end{align}
 
 \section{\'Ecoulements potentiels et équation de Bernouilli}
@@ -1231,7 +1231,7 @@ $$ \frac{\eta V R}{\gamma R}= Ca$$ dans le cas où la viscosité est dominante par
 
 $$ \frac{\rho V^2 R^2}{\gamma R } = We$$ dans le cas avec l'inertie qui domine. Dans ce cas on a un jet quand $We>1$. 
 
-Un scarabée qui s'accroche à une surface dure à l'aide de ses pattes, qui se déterminent par des dzaines de milliers de filaments. $m=10mg$, $M \approx 2g$, $r=& \mu m$, 
+Un scarabée qui s'accroche à une surface dure à l'aide de ses pattes, qui se déterminent par des dzaines de milliers de filaments. $m=10mg$, $M \approx 2g$, $r=1 \mu m$, 
 $$F \approx \gamma 2 \pi r N 6 \approx 20.10^{-3}.6.10^{-6}.10^4.6 \approx 10^{-2}N$$
 
 	
@@ -1253,7 +1253,7 @@ Pour le ménisque statique, on peut écrire l'équilibre entre la pression hydrosta
 \end{align}
 	
 On trouve la courbure en haut : 
-$$ \mathcal{C}(x=H) &= - \frac{\rho g H}{\gamma} = - \sqrt{2}\kappa$$
+$$ \mathcal{C}(x=H) = - \frac{\rho g H}{\gamma} = - \sqrt{2}\kappa$$
 
 On met maintenant la paroi en mouvement. Il ne s'agit pas uniquement d'un équilibre entre la gravité et la viscosité : la surface est courbée, et donc les forces capillaires ont aussi un rôle. Cela donne naissance à la théorie LLD (Landau-Levich-Derjaguin). 
 
@@ -1273,7 +1273,7 @@ $$\eta \derp{}{u}{y} = - \gamma \derp{3}{h}{x} (y-h) $$
 avec la condition aux limites de contrainte nulle à l'interface. 
 
 On l'intègre encore : 
-$$ u(y) = - \fra{\gamma}{\eta} \derp{3}{h}{x} \left[ \frac{y^2}{2} - h \right] + V $$
+$$ u(y) = - \frac{\gamma}{\eta} \derp{3}{h}{x} \left[ \frac{y^2}{2} - h \right] + V $$
 avec la condition de vitesse $V$ à la paroi.
 
 Tout en haut du film, le film est vertical, $\derp{3}{h}{x}$ s'annule, et on a un profil bouchon à $V$. On peut avoir un profil décroissant (en portion de parabole), et même des vitesses négatives (à certains endroit le fluide coule vers le bas).  
@@ -1335,8 +1335,8 @@ On est dans l'approximation de lubrification, on écrit donc l'équation :
 	v(y) &= \frac{-\rho g}{\eta} \left[ \frac{y^2}{2} -hy \right] \\
 	Q &= \int_0^{h} \ud y v(y) \\
 	&= \frac{\rho g}{3 \eta}h^3 \\
-	\txt{conservation du flux }& \\
-	Q(x+\u dx) - Q(x) &= ( \ud x \derp{}{h}{t} \\
+	\text{conservation du flux }& \\
+	Q(x+\ud dx) - Q(x) &= ( \ud x \derp{}{h}{t} \\
 	\derp{}{Q}{t} &= - \derp{}{h}{t}\\
 	\frac{\rho g}{\eta}h^2 \derp{}{h}{x} &= - \derp{}{h}{t}\\
 \end{align}
@@ -1356,7 +1356,7 @@ On cherche les autres solutions sous la forme :
 Cette solution a des conditions aux limites étranges quand $x$ devient grand, et quand $t$ devient petit. 
 
 La première solution consiste à dire que la solution parabolique coexiste avec la solution constante : le haut du film est parabolique, et lorsque $h$ atteint $e_0$, on arrive à une zone où le film est d'épaisseur constante. La longueur $L$ de la zone amincie : 
-$$L(t) &= \frac{\rho g e_0^2}{\eta} t $$ 
+$$L(t) = \frac{\rho g e_0^2}{\eta} t $$ 
 On remarque que cette zone s'étend progressivement. On peut calculer la vitesse de progression de la zone amincie : 
 $$V_{\downarrow} = \frac{\rho g }{\eta} e_0^2 <V $$
 
@@ -1405,7 +1405,7 @@ Le drainage est plus rapide, et le film en forme de triangle.
 
 On prend le même problème, mais avec $V$ vers le bas. 
 
-L'angle $\theta$^ne dépend que de $Ca$. $$\theta \propto Ca^{1/3}$$ 
+L'angle $\theta$ ne dépend que de $Ca$. $$\theta \propto Ca^{1/3}$$ 
 
 Bilan de forces projeté sur la verticale. 
 \begin{align}
@@ -1416,7 +1416,7 @@ Bilan de forces projeté sur la verticale.
 \end{align}
 Le problème est que cette expression est pathologique : $y$ est aussi petit qu'on veut, et donc ça diverge. 
 De Gennes propose alors : 
-$$F_{\eta} & \approx \frac{\eta V}{\theta }\int_0^{\kappa^{-1}}\frac{\ud x}{x} = \frac{\eta V}{\theta} \ln \frac{\kappa^{-1}}{a}$$
+$$F_{\eta}  \approx \frac{\eta V}{\theta }\int_0^{\kappa^{-1}}\frac{\ud x}{x} = \frac{\eta V}{\theta} \ln \frac{\kappa^{-1}}{a}$$
 
 A l'équilibre : 
 \begin{align}
@@ -1428,7 +1428,7 @@ A l'équilibre :
 On considère ensuite une goutte de rayon $R$ sur une surface inclinée. Elle se déplace plus lentement que ce à quoi on s'attendrait, à cause des coins. 
 
 \begin{align}
-	\frac{\etaV}{R^2} & \approx \rho g \\
+	\frac{\eta V}{R^2} & \approx \rho g \\
 	V & \approx  \frac{\rho \theta}{\eta} R^2\\
 	\frac{\eta V}{\theta} \ln R & \approx \rho g R^3 \\
 	V & \approx \frac{\rho g}{\eta} R^2 \theta_0 \frac{1}{\ln \frac{\kappa^{-1}}{a}}
@@ -1449,7 +1449,7 @@ $$ F = \frac{2 \gamma \cos \theta }{r} \pi r^2  = 2 \pi r \gamma \cos \theta_0$$
 
 Si on écrit un classique équilibre avec la force visqueuse $-8 \pi \eta Vz$, la gravité $- \rho \pi r^2 g z$, et le terme intertiel $\rho \pi r^2 \derp{}{z \dot{z}}{t}$ :
 
-$$ \rho _pi r^2 \derp{}{z \dot{z}}{t} &= 2 \pi \gamma r - \rho \pi r^2 g z - 8 \pi \eta z \dot{z}$$
+$$ \rho _pi r^2 \derp{}{z \dot{z}}{t} = 2 \pi \gamma r - \rho \pi r^2 g z - 8 \pi \eta z \dot{z}$$
 
 On peut souvent négliger le terme de gravité, quand $z<h_0$ ou quand on est pas à la verticale. On réécrit aux dimensions : 
 Le terme intertiel : $$ \frac{\rho r^2 z^2}{t^2}$$
@@ -1468,10 +1468,10 @@ En loi d'échelle :
  
  Cherchons un maximum de $z(r,t)$ à un instant donné. 
  
- $$ \derp{}{z}{r} = 0 \qquad r_L = \left( \frac{\eta \gamma}{\rho^2g^2 t}^{1/3}$$
+ $$ \derp{}{z}{r} = 0 \qquad r_L = \left( \frac{\eta \gamma}{\rho^2g^2 t}\right)^{1/3}$$
  On voit bien la bosse, qui se déplace vers le coin ($r \rightarrow 0$). 
  
- $$z(t) \proptot^{1/3}$$
+ $$z(t) \propto t^{1/3}$$
  
  Aux temps courts $t < \frac{\rho r^2}{\eta}$, on obtient : 
  $$\rho \pi r^2 \derp{}{z \dot{z}}{t} = 2 \pi r \gamma $$
@@ -1521,7 +1521,7 @@ de Gennes 1985
 \begin{align}
 	 \Omega &= \frac{\pi}{3}r^3[2 + \cos \theta][1-\cos \theta]^2 \\
 	 r &= R \sin \theta \\
-	 \Omega &= \frac{\pi}{3} \frac{r^3}{\theta^}3 \frac{\theta h}{4} \\
+	 \Omega &= \frac{\pi}{3} \frac{r^3}{\theta^3} \frac{\theta h}{4} \\
 	 &= \frac{\pi}{4}\theta r^3 \\
 	 r & \approx \left( \frac{\gamma}{\eta} \Omega^3 \frac{1}{\ln} t	\right)^{1/10}\\
 	 	F_{\gamma} &= \gamma \frac{h^2}{r^2}r \approx \frac{\gamma h^2}{r}\\
