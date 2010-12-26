@@ -10,6 +10,7 @@
 \newcommand{\ud}{\mathrm{d}}
 \newcommand{\der}[3][]{\frac{\mathrm{d}^{#1} #2}{\mathrm{d} #3^{#1}}}
 \newcommand{\derp}[3]{\frac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newenvironment{matrice}{ \left[ \begin{array} }{\end{array} \right]}
 
 \title{Physique non-linéaire}
 
@@ -385,7 +386,7 @@ $$ \mathcal{E} = \int \ud x \theta \theta^* = \int \ud X \theta \theta^*$$
  
 Pour examiner rapidement les non-linéarités, on ne résoud pas, on regarde simplement ce que leur présence change. 
 \begin{align}
-	-2 i \omega \derp{}{\theta_0}{t} - \frac{\Omega_0^2}{2} |\theta_0|^2 \theta_0 &= \Gamma \derp{2}{\theta_0}{x^2} \\
+	-2 i \omega \derp{}{\theta_0}{t} - \frac{\Omega_0^2}{2} |\theta_0|^2 \theta_0 &= \Gamma \derp{2}{\theta_0}{x} \\
 	& \tau_0 e^{i(qx + \omega t)} \\
 	 - 2 i \omega_0 \omega \tau_0 &= - \Gamma q \tau_0 + \frac{\Omega_0^2}{2}\tau_0^3
 	 \end{align}
@@ -511,7 +512,7 @@ Cette solution ne sera valable que pour des faibles écarts de température. On fa
 	\Omega \theta_0 - v_{0z} = \Delta \theta_0 \\
 	0 & - \Delta p_0 + R_a \derp{}{\theta_0}{z} \\
 	\frac{1}{P_r} \Omega \Delta V_{0z} = - \derp{}{\Delta p_0}{z} + \Delta^2 V_{0z} + R_a \Delta \theta \frac{1}{P_r} \Omega \Delta V_{0z} \\
-	&= - R_a \derp{2}{\theta_0}{z^2} + \Delta^2V_{0z} + R_a\Delta \theta \\
+	&= - R_a \derp{2}{\theta_0}{z} + \Delta^2V_{0z} + R_a\Delta \theta \\
 \end{align}
 
 On obtient un système de deux équations : 
@@ -597,7 +598,7 @@ On doit considérer un couple de perturbations :
 	&= \Omega - A_0^2 - \Gamma \delta k^2 + 2 A_0^2 + \Gamma(\delta k^2 + q^2) \\
 	&= \Omega + A_0^2 + \Gamma q^2 \\
 	&= \pm \sqrt{4 \Gamma^2 \delta k^2 q^2 + A_0^4} \\
-	\Omega &= -(A_0^2 + q^2) \+ \sqrt{4 \Gamma^2 \delta k^2 q^2 + A_0^4}\\
+	\Omega &= -(A_0^2 + q^2) + \sqrt{4 \Gamma^2 \delta k^2 q^2 + A_0^4}\\
 \end{align}
 
 On a une instabilité si $\Omega>0$ et donc si $$A_0^2 + \Gamma q^2 < \sqrt{4 \Gamma^2 \delta k^2 q^2 + A_0^4} $$
@@ -640,7 +641,7 @@ On peut alors écrire :
 	S_0 \der{s}{t} &= -k_1 S_0 E_0 se + k_1 E_0 (1-e)\\
 	E_0 \der{e}{t} &= -k_1 SE_0 se + (k_1+k_2)E_0(1-e)\\
 	\frac{1}{k_1 E_0} \der{s}{t} &= - se + \frac{k_{-1}}{k_1 S_0}(1-e)\\
-	\frac{1}{k_ S_0}\der{e}{t} &= -se + \frac{k_1 + k_2}{k_1 S_0} (1-e)\\
+	\frac{1}{k_1 S_0}\der{e}{t} &= -se + \frac{k_1 + k_2}{k_1 S_0} (1-e)\\
 	\tau_1 &= \frac{1}{k_1 E_0} \\
 	\tau_2 &= \frac{1}{k_1 S_0} \\
 \end{align}
@@ -781,12 +782,12 @@ On a des solutions analytiques, on peut donc tester la stabilité.
 	Re(z^n) &= r^n \cos n \theta \\
 	Re(z^{-n}) &= r^{-n} \cos n \theta \\
 	\Phi &= \Phi_0 + a_n(t) r^{-n} \cos n \theta \\
-	R &= R_0(t) (1 + \epsilon_n(t) \os n \theta)\\
+	R &= R_0(t) (1 + \epsilon_n(t) \cos n \theta)\\
 	\vec{r} &= R \vec{e_r}\\
 	\vec{z} &= \begin{matrice}{c} \der{R}{\theta} \\ R \end{matrice} \\
 	\vec{N} &= \begin{matrice}{c} \frac{R}{\sqrt{R^2 + R'^2}} \\ - \frac{R'}{\sqrt{R^2 + R'^2}} \end{matrice} \\
 	&= \begin{matrice}{c} 1 \\ - \frac{R_0 \epsilon_n n \sin n\theta}{R_0} \end{matrice} \\
-	\vec{N} \vec{\nabla}\Phi &= \frac{\Phi_0}{R_0} (1 - \epsilon_n \cos n \theta) - n a_n  R_0^{n-1}\os n \theta \\
+	\vec{N} \vec{\nabla}\Phi &= \frac{\Phi_0}{R_0} (1 - \epsilon_n \cos n \theta) - n a_n  R_0^{n-1}\cos n \theta \\
 	&= \dot{R_0} + \dot{R_0} \epsilon_n \cos n \theta + R_0 \dot{\epsilon_n} \cos n \theta \\
 \end{align}
 
