@@ -891,7 +891,7 @@ Aire réelle de la membrane $A$. Aire projetée $A_0$. $\Delta A = A - A_0$ membra
 
 \begin{align}
 	A &= \int_A \ud s = \int_{A_0} \ud x \ud y \sqrt{1 + (\nabla u)^2} \\
-	&= \int \ud x \ud y [1 + \frac{1}{2} (\nablau)^2] \\
+	&= \int \ud x \ud y [1 + \frac{1}{2} (\nabla u)^2] \\
 	\Delta A &= \int \ud x\ud y \frac{1}{2} \moy{(\nabla u)^2} \\
 	&= \int \frac{\ud \vec{q}}{2 (2 \pi)^2} \moy{q^2 |\tilde{u}(\vec{q})|^2} \\
 	\tilde{u}(\vec{q}) &= \int \ud \vec{r} e^{-i \vec{q}\vec{r}} u(\vec{r}) \\
@@ -1176,7 +1176,7 @@ Concentration totale en moteurs
 	K_m &= [(1 + \frac{k_2}{k_3})\frac{k_1}{k_2 + k_{-1}}]^{-1}\\
 \end{align}
 $K_m$ concentration critique en ATP $\rightarrow$
-$$[T] &= K_m \Rightarrow [M] = \frac{[M_t]}{2}$$
+$$[T] = K_m \Rightarrow [M] = \frac{[M_t]}{2}$$
 
 On a donc $$\der{[M]}{t} = \frac{k_1 k_2}{k_2 k_{-1}} \frac{[T][M_t]}{1+ \frac{ [T]}{K_m}}$$
 
@@ -1402,9 +1402,9 @@ friction de stokes : $$6 \pi \eta a \vec{v} = \vec{f}$$
 	i \vec{q}\vec{v} &= 0 \\
 	q^2 \tilde{P} + i \vec{q} \vec{f} &= 0 \\
 	\vec{P} &= \frac{-i \vec{q}\vec{f}}{q^2}\\
-	- \eta q^2 \tilde{v} + \vec{f} - \frac{\vec{q (\vec{q}\vec{f})}}{q^2} &= 0 \\
-	\tilde{v} = \frac{1}{\eta q^2} \left[ \vec{f} - \frac{\vec{q}(\vec{q}\vec{f})}{q^2} \\
-	\vec{v} &= \tilde{G} \vec{f}\\
+	- \eta q^2 \tilde{v} + \vec{f} - \frac{\overrightarrow{q (\vec{q}\vec{f})}}{q^2} &= 0 \\
+	\tilde{v} = \frac{1}{\eta q^2} \left[ \vec{f} - \frac{\vec{q}(\vec{q}\vec{f})}{q^2}\right] \\
+%	\vec{v} &= \tilde{G} \vec{f}\\
 \end{align}
 
 $G$ tenseur d'Oseen. 
