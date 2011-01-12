@@ -173,9 +173,9 @@ $l_p$ est la longueur de persistance : $$l_p \approx \frac{E}{kT}a^4$$
 	\mathcal{S} &= \sum_{\txt{\parbox{1cm}{orientations de $t_i$}}} e^{\frac{l_p}{a}\vec{t}_{i+1}\vec{t}_i} \\
 	&= \int_0^1 \frac{2 \pi \sin \theta \ud \theta}{4 \pi} e^{\frac{l_p}{a} \cos \theta} \\
 	&= \frac{1}{2} \int_{-1}^1 \ud u e^{\frac{l_p}{a}u} \quad u=\cos \theta \\
-	&= \frac{sh(\Xi)}{\xi} \quad \xi = \frac{l_p}{a} \\
+	&= \frac{sh(\xi)}{\xi} \quad \xi = \frac{l_p}{a} \\
 	Z &= \left( \frac{sh \xi}{\xi} \right)^N \\
-\moy{\vec{t}_{i+1}\vec{t}_{i}} &= \moy{\cos \theta} = \derp{}{\ln \xi}{\xi} \\
+\moy{\vec{t}_{i+1}\vec{t}_{i}} &= \moy{\cos \theta} = \derp{}{\ln \xi}{\xi} ?\text{serais-ce } \derp{}{\ln \mathcal S}{\xi}\\
 \moy{\cos \theta} &= \frac{1}{\mathcal{S}} \int_0^{\pi} \frac{2 \pi \sin \theta \ud \theta }{4 \pi} e^{\xi \cos \theta} \cos \theta \\
 \moy{\vec{t}_{i+1}\vec{t}_{i}} &= \derp{}{}{\xi}(\ln sh \xi) - \derp{}{}{\xi}\ln \xi \\
 &= \coth \xi - \frac{1}{\xi} \\
@@ -193,7 +193,7 @@ $l_p$ est la longueur de persistance : $$l_p \approx \frac{E}{kT}a^4$$
 	s \gg l_p \quad \moy{\vec{t}_0 \vec{t}_s} = 0 \txt{ orientation aléatoire} \\
 \end{align}
 
-\subsubsection{Distance entre extrêmités}
+\subsubsection{Distance entre extrémités}
 
 \begin{align}
 	\vec{R} &= \int_0^L \ud s \left( \der{\vec{r}}{s} \right) = \int_0^L \vec{t}(s) \ud s \\ 
@@ -262,7 +262,7 @@ L'Hamiltonien final donne :
 \'Equipartition de l'énergie : on va passer l'intégrale en somme discrète, calculer et repasser en continu (ça sent l'arnaque \dots)
 
 \begin{align}
-	H &= \frac{kTl}{2L} \sum_q |\tilde{t_{\bot}}(q)|^2(q^2 + \frac{f}{kTl}) 
+	H &= \frac{kTl}{2L} \sum_q |\tilde{t_{\bot}}(q)|^2(q^2 + \frac{f}{kTl}) \\
 	& \txt{l'équipartition de l'énergie nous donne : }\\
 	\frac{kTl}{2} \moy{|\tilde{t_{\bot}}|^2(q)} (q^2 + \frac{f}{kTl}) &= kT \\
 	\moy{|\tilde{t_{\bot}}|^2} &= \frac{1}{l} \frac{2L}{q^2 + \frac{f}{kTl}} \\
@@ -273,7 +273,7 @@ L'Hamiltonien final donne :
 	\moy{|t^2_{\bot}|} &= \int \frac{\ud q}{2 \pi} \int \frac{\ud q'}{2 \pi} \moy{\tilde{t_{\bot}}(q)\tilde{t_{\bot}}(q')} e^{iqs-iq's} \\
 	&= \int \frac{\ud q}{2\pi} \int \frac{\ud q'}{2\pi} e^{is(q-q')} 2 \pi \delta (q-q') \frac{2}{q^2 + \frac{f}{kTl}} \\
 	&= \int \frac{\ud q}{\pi} \frac{1}{q^2 + \frac{f}{kTl}} \frac{1}{l} = \sqrt{\frac{kT}{fl}}	
-	\end{align}
+\end{align}
 
 Taille de l'ADN : 
 $$R = L [1 - \frac{1}{2} \sqrt{\frac{kT}{fl}}]$$
@@ -504,7 +504,7 @@ A un instant t, $\vec{r_n}(t)$ et $\vec{p_n}(t)$ .
 Moyenner sur le temps est équivalent à moyenner sur l'espace, car le système est déterministe. 
 
 \begin{align}
-	\moy{A}(t) = \moy{A(\vec{r_n^0},\vec{p_n^0},t)} \\
+	\moy{A}(t) &= \moy{A(\vec{r_n^0},\vec{p_n^0},t)} \\
 	&= \frac{1}{2}\int \ud \vec{r^0_n}\ud \vec{p^0_n} e^{-H \beta} A  = \moy{A}
 \end{align}
 
@@ -516,7 +516,7 @@ On peut par exemple prendre pour $A$ la densité. En fait, comme cela ne doit pas
 Théorême de récression d'Onsager. On prend un Hamiltonien H avec une petite perturbation.  Le système est préparé avec le Hamiltonient $H + \Delta H$ mais évolue avec $H$. 
 
 \begin{align}
-	\moy{A(t)} = \frac{\int \ud \vec{r_n^0} \ud \vec{p_n^0} e^{- \frac{H + \Delta H}{kT}}A(\vec{r_n^0},\vec{p_n^0},t)}{\int \ud \vec{r_n^0} \ud \vec{p_n^0} e^{- \frac{H + \Delta H}{kT}}} \\
+	\moy{A(t)} &= \frac{\int \ud \vec{r_n^0} \ud \vec{p_n^0} e^{- \frac{H + \Delta H}{kT}}A(\vec{r_n^0},\vec{p_n^0},t)}{\int \ud \vec{r_n^0} \ud \vec{p_n^0} e^{- \frac{H + \Delta H}{kT}}} \\
 	&= \moy{A}_0 - \frac{1}{2} \int \ud \vec{r_n^0} \ud \vec{p_n^0} e^{- \frac{H}{kT}} \frac{\Delta H}{kT} A \\
 	&+ \frac{1}{2} (\int \ud \vec{r_n^0} \ud \vec{p_n^0} e^{- \frac{H}{kT}}A) \frac{1}{2} \int \ud \vec{r_n^0} \ud \vec{p_n^0} e^{- \frac{H}{kT}}  \frac{\Delta H}{kT} \\
 	&= \moy{A}_0 - \frac{\moy{\Delta H A}}{kT} + \moy{A}_0 \frac{\Delta H}{kT} \\
